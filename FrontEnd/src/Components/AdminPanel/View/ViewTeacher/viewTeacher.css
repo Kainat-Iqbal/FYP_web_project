@@ -1,0 +1,80 @@
+#mainViewTeacherDiv{
+    width: 80%;
+    height: 100vh;
+    margin-left: 18%;
+    display: flex;
+    /* background-color: aqua; */
+}
+
+#viewTeacherWithoutBar{
+    width: 100%;
+    height: 90%;
+    /* background-color: brown; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10vh;
+}
+
+#viewTeacherTop{
+    height: 20%;
+    width: 100%;
+    /* background-color: blue; */
+    display: flex;
+    justify-content: space-between;
+}
+
+#totalTeacher{
+    height: 100%;
+    width: 21%;
+    background: linear-gradient(to right, palevioletred,rgb(255, 233, 240));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#totalAsisProf{
+    height: 100%;
+    width: 21%;
+    background: linear-gradient(to right, coral,rgb(255, 232, 223));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#totalProf{
+    height: 100%;
+    width: 21%;
+    background: linear-gradient(to right, rgb(163, 68, 252),rgb(244, 236, 252));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#totalLecturer{
+    height: 100%;
+    width: 21%;
+    background: linear-gradient(to right, powderblue,rgb(240, 249, 250));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#viewTeacherBottom{
+    height: auto;
+    width: 100%;
+    /* background-color: chartreuse; */
+    display: flex;
+    justify-content: center;
+}
+
+#viewTeacherTable{
+    width: 95%;
+    margin-top: 1%;
+    border: 2px solid #00304B; 
+
+}
