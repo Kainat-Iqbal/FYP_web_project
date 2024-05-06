@@ -35,9 +35,9 @@ function TeacherValidation(values) {
       }
 
       if (values.adminEmail === "") {
-        error.adminEmail = "Email should not be empty";
+        error.adminEmail = "Admin's email should not be empty";
       } else if (!email_pattern.test(values.email)) {
-        error.adminEmail = "Email did not match the pattern";
+        error.adminEmail = "Admin's email did not match the pattern";
       } else {
         error.adminEmail = "";
       }

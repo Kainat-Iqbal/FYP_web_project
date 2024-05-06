@@ -32,6 +32,7 @@ function LoginPage() {
       .then(res =>{
         console.log(values)
         if(res.data === "success"){
+          localStorage.setItem("user","kainat");
           nav("/home");
         }
         else{

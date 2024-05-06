@@ -5,6 +5,7 @@ import Table from "react-bootstrap/Table";
 import { Edit } from "@mui/icons-material";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function ViewTeacher() {
   const [teacher, setTeacher] = useState([]);
@@ -13,14 +14,14 @@ function ViewTeacher() {
     const fetchTeachers = async () => {
       try {
         const res = await axios.get("http://localhost:8081/teacher/View");
-        setTeacher(res.data.teachers);
-        console.log("Successfuly fetched", res);
+        setTeacher(res.data);
+        console.log("Successfuly fetched", res.data);
         // console.log("first",setTeacher)
       } catch (error) {
         console.log("error", error);
       }
     };
-    
+
     fetchTeachers();
   }, []);
 
@@ -76,157 +77,10 @@ function ViewTeacher() {
             </thead>
 
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Otto</td>
-                <td>
-                  <a href="#">
-                    <Edit />
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-
-            {/* <tbody>
               {teacher.map((teacherData) => {
                 return (
                   <tr key={teacherData.id}>
-                    <td>{teacherData.id}</td>
+                    <td>{teacherData.teacherId}</td>
                     <td>{teacherData.name}</td>
                     <td>{teacherData.email}</td>
                     <td>{teacherData.department}</td>
@@ -239,8 +93,7 @@ function ViewTeacher() {
                   </tr>
                 );
               })}
-            </tbody> */}
-
+            </tbody>
           </Table>
         </div>
       </div>
