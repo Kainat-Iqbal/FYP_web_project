@@ -1,0 +1,46 @@
+#mainLoginDiv{
+    width: 100vw;
+    height: 100vh;
+    background-image: url('bg_image.png');
+    background-size: cover; 
+    background-position: center; 
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#loginForm{
+    width: 45vw;
+    height: 55vh;
+    background-color: #00304B;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4vh;
+}
+
+#loginForm h1{
+    color: white;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10vh;
+    color: white;
+}
+
+#formField{
+    width: 25vw;
+    height: 8vh;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: space-between;
+}
+
+input{
+    height: 5vh;
+    width: 17vw;
+}

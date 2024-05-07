@@ -1,0 +1,97 @@
+#mainDivMainScreen{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#top{
+    height: 9vh;
+    width: 100%;
+    background-color: #00304B;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#dropdown-basic{
+  background-color: #00304B;
+
+}
+
+#middle{
+    height: 100%;
+    width: 100vw;
+    background-image: url('bg_image.png');
+    background-size: cover; 
+    background-position: center; 
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+}
+
+#middle h1{
+    color:#01141f;
+    font-size: 6rem;
+    margin-top: -5vw;
+}
+
+#middle h2{
+    font-size: 2.5rem;
+    color: black;
+}
+
+#bottom{
+    height: 9vh;
+    width: 100%;
+    background-color: #00304B;
+    display: flex;
+}
+
+
+/* For mobile devices */
+@media only screen and (max-width: 600px) {
+    #top {
+      height: auto; /* Adjust height dynamically */
+      flex-wrap: wrap; /* Allow items to wrap */
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    
+    #top p{
+        margin-left: 4vw;
+    }
+
+    #middle h1 {
+      font-size: 4rem; /* Decrease font size for better readability on smaller screens */
+    }
+    
+    #middle h2 {
+      font-size: 1.5rem; /* Decrease font size for better readability on smaller screens */
+    }
+  }
+  
+  /* For tablet devices */
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    #middle h1 {
+      font-size: 5rem; /* Adjust font size for better readability */
+    }
+    
+    #middle h2 {
+      font-size: 2rem; /* Adjust font size for better readability */
+    }
+  }
+  
+  /* For laptop and larger screens */
+  @media only screen and (min-width: 1025px) {
+    #middle h1 {
+      font-size: 6rem; /* Default font size */
+    }
+    
+    #middle h2 {
+      font-size: 2.5rem; /* Default font size */
+    }
+  }
