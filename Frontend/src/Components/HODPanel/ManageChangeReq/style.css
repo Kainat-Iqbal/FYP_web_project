@@ -1,0 +1,56 @@
+#mainChangeReqDiv {
+    width: 80%;
+    height: 100vh;
+    margin-left: 20%;
+    display: flex;
+  }
+  
+#changeReqWithoutBar {
+    width: 100%;
+    height: 85%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10vh;
+  }
+  
+#changeReqTop {
+    height: 16%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+#changeReqBottom {
+    height: auto;
+    width: 100%;
+    margin-right: 2vh;
+    display: flex;
+    justify-content: center;
+  }
+  
+#changeReqTable {
+    width: 95%;
+    margin-top: 1%;
+    border: 2px solid #00304B;
+  }
+  
+#changeReqTable th {
+    background-color: #00304B;
+    color: white;
+    text-align: center;
+  }
+  
+#changeReqTable td {
+    /* text-align: center; */
+    vertical-align: middle;
+  }
+  
+#changeReqTable button {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 7px;
+    display: flex;
+  }
+  

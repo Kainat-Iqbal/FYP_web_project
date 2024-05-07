@@ -1,0 +1,86 @@
+#HomeMainDiv{
+    width: 80%;
+    height: 100vh;
+    margin-left: 18%;
+    display: flex;
+    /* background-color: aqua; */
+}
+
+#HomeWithoutBar{
+    width: 100%;
+    height: 90%;
+    /* background-color: brown; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 31vh;
+}
+
+#homeTeacher{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    margin-left: 4vh;
+    background-color: palevioletred;
+    align-items: center;
+    /* background-color: blueviolet; */
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, rgb(163, 68, 252),white); */
+    /* border: 2px solid #00304B; */
+}
+
+#numImage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+}
+
+#homeStudent{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color: mediumaquamarine;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, palevioletred,white); */
+    /* border: 2px solid #00304B; */
+}
+
+#homePassStudent{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color: powderblue;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, powderblue,white); */
+    /* border: 2px solid #00304B; */
+}
+
+/* #homeFailStudent{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, coral,white); */
+    /* border: 2px solid #00304B; 
+} */
+
+/* #homeCourse{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    background-color: lightblue;
+    /* background: linear-gradient(to right, orchid,white); */
+    /* display: flex; */
+    /* flex-direction: column;
+    align-items: center;
+}   */
