@@ -138,7 +138,7 @@ function ManageChangeReq() {
                     {result.action === null ? (
                       <>
                         <button
-                          style={{ borderColor: "green", color: "black", backgroundColor: "#388E3C", marginLeft:"5px", marginRight: "5px" }}
+                          style={{ borderColor: "#90ee90", color: "black", backgroundColor: "#90ee90", marginLeft:"5px", marginRight: "5px" }}
                           onClick={() => {
                             handleApprove(result.id);
                           }}
@@ -147,7 +147,7 @@ function ManageChangeReq() {
                         </button>
 
                         <button
-                          style={{ borderColor: "red", color: "black", backgroundColor: "#D32F2F", marginLeft:"5px", marginRight: "5px" }}
+                          style={{ borderColor: "#cd5c5c", color: "black", backgroundColor: "#cd5c5c", marginLeft:"5px", marginRight: "5px" }}
                           onClick={() => {
                             handleDisapprove(result.id);
                           }}
