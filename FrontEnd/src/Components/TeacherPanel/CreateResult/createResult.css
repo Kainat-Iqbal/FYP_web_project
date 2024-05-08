@@ -1,0 +1,66 @@
+
+#mainCR{
+    height: 100vh;
+    width: 100vw;
+    /* background-color: blue; */
+}
+
+#sidebarCR{
+    height: 9%;
+}
+#topCR{
+    height: 30%;
+    margin-left: 18vw;
+    /* background-color: yellow */;
+}
+#tophead{
+    height: 25%;
+    display: flex;
+    justify-content: center;
+   /*  background-color: bisque; */
+}
+#resultinfo{
+    height: 75%;
+    /* background-color: green; */
+    display: flex;
+    padding-top: 2%;
+    font-size: 18px;
+    
+}
+#info1{
+    width: 29%;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+
+    /* margin-left: 1%; */
+}
+#facultyCourse{
+    height:70%;
+    /* background-color: brown; */
+    margin-left: 6px;
+    font-size: 18px;
+    
+}
+#classBatch{
+    height: 32%;
+    /* background-color: burlywood; */
+    
+    display: flex;
+}
+#info2{
+    width: 54%;
+   /*  background-color: aqua; */
+}
+#info3{
+    width: 17%;
+    /* background-color: yellow; */
+}
+#bottomCR{
+    height: 61%;
+    margin-left: 18vw;
+   /*  background-color: red; */
+}
+#bb{
+    margin-top: 10px;
+}
