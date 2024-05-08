@@ -12,6 +12,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Auth from './Components/Auth';
 import UpdateTeacher from './Components/AdminPanel/Update/UpdateTeacher';
+import Dashboard from './Components/TeacherPanel/Dashboard';
+import Courses from './Components/TeacherPanel/Courses';
+import CreateResult from './Components/TeacherPanel/CreateResult';
+import ViewResult from './Components/TeacherPanel/ViewResult';
+import HodHomePage from './Components/HODPanel/HODHomePage';
+import ApproveResult from './Components/HODPanel/ApproveResult';
+
+import ManageChangeReq from './Components/HODPanel/ManageChangeReq';
+import HODViewResult from './Components/HODPanel/ApproveResult/ViewResult';
 
 
 function App() {
@@ -37,6 +46,14 @@ function App() {
           <ViewHOD/>
         </Auth>}/>
         <Route path='/updateTeacher/:id' element={<UpdateTeacher/>}></Route>
+        <Route path='/teacherHome' element={<Dashboard/>}></Route>
+        <Route path='/teacherCourses' element={<Courses/>}></Route>
+        <Route path='/createResult' element={<CreateResult/>}></Route>
+        <Route path='/viewResult' element={<ViewResult/>}></Route>
+        <Route path='/hodHome' element={<HodHomePage/>}/>
+        <Route path='/hodApproveResult' element={<ApproveResult/>}/>
+        <Route path='/hodViewResult' element={<HODViewResult/>}/>
+        <Route path='/hodManageChangeReq' element={<ManageChangeReq/>}/>
 
       </Routes>
       </BrowserRouter>

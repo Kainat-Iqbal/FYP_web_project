@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect } from 'react';
+import { useState } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import {
   AccountCircle,
@@ -7,27 +7,15 @@ import {
   Home,
   MenuOutlined,
   TableView,
+  BorderColor,
+  School,
+  Insights,
+  Grading,
   Notifications
 } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 
 function SideBar() {
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    // Function to check if the device width is below a certain threshold (e.g., mobile screen width)
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust the threshold as needed
-    };
-
-    // Call handleResize initially and add event listener for window resize
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    // Clean up event listener on component unmount
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
   const nav = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -61,27 +49,12 @@ function SideBar() {
             alignItems: "center",
           }}
         >
-          {/* <button
+          <button
             onClick={handleToggleSidebar}
             style={{ border: "none", backgroundColor: "#00304B" }}
           >
-            {<MenuOutlined style={{ 
-              fontSize: "2.2rem", 
-              color: "white" 
-              }} />}
-          </button> */}
-         
-         <button
-      onClick={handleToggleSidebar}
-      style={{
-        border: 'none',
-        backgroundColor: '#00304B',
-        display: isMobile ? 'block' : 'none', // Hide on laptops, show on mobile
-      }}
-    >
-      <MenuOutlined style={{ fontSize: '2.2rem', color: 'white' }} />
-    </button>
-
+            {<MenuOutlined style={{ fontSize: "2.2rem", color: "white" }} />}
+          </button>
 
           <img
             src={require("./FYPLogo.png")}
@@ -140,55 +113,25 @@ function SideBar() {
           <MenuItem
             icon={<Home />}
             onClick={() => {
-              nav("/home");
+              nav("/teacherHome");
             }}
           >
             Home
           </MenuItem>
-          <SubMenu icon={<AddCircle />} label="Add">
-            <MenuItem
-              onClick={() => {
-                nav("/addTeacher");
-              }}
-            >
-              Add Teacher
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                nav("/addHOD");
-              }}
-            >
-              Add HOD
-            </MenuItem>
-            <MenuItem> Add Dean</MenuItem>
-            <MenuItem> Add Examination of controller </MenuItem>
-            <MenuItem> Add Student </MenuItem>
-            <MenuItem> Add Course </MenuItem>
-            <MenuItem> Add Degree Program </MenuItem>
-            <MenuItem> Add Session </MenuItem>
-            <MenuItem> Add Batch </MenuItem>
-          </SubMenu>
 
-          <SubMenu icon={<TableView />} label="View">
-            <MenuItem
-              onClick={() => {
-                nav("/viewTeacher");
-              }}
-            >
-              View Teacher
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                nav("/viewHOD");
-              }}
-            >
-              View HOD{" "}
-            </MenuItem>
-            <MenuItem> View Dean</MenuItem>
-            <MenuItem> View Examination of controller </MenuItem>
-            <MenuItem> View Student </MenuItem>
-            <MenuItem> View Course </MenuItem>
-          </SubMenu>
+
+          <MenuItem icon={<School />}
+            onClick={() => {
+              nav("/teacherCourses");
+            }}
+          >
+            View Courses</MenuItem>
+          <MenuItem icon={<Grading />
+          } onClick={() => {
+            nav("/viewResult");
+          }}>View Results</MenuItem>
+          <MenuItem icon={<Insights />}>View Insights</MenuItem>
+          <MenuItem icon={<Notifications />}>Notifications</MenuItem>
         </Menu>
       </Sidebar>
     </>
