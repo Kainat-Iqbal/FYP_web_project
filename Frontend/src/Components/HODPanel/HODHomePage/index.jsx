@@ -2,7 +2,7 @@
 import React from 'react';
 import TopBar from '../TopBar';
 import SideBar from '../SideBar';
-import "./style.css";
+import "./hodHome.css";
 
 function HodHomePage() {
   return (
@@ -11,13 +11,13 @@ function HodHomePage() {
       <TopBar />
       </div>
 
-<div id="HomeMainDiv">
+<div id="HODHomeMainDiv">
   <SideBar />
-  <div id="HomeWithoutBar">
+  <div id="HODHomeWithoutBar">
 
-     <div id="homeTeacher">
+     <div id="HODhomeTeacher">
      <h1 style={{marginTop:"2vh"}}> 60 </h1>
-      <div id="numImage">
+      <div id="HODnumImage">
         <h2>Faculty</h2>
         <img
           src={require("./teacher.png")}
@@ -26,17 +26,17 @@ function HodHomePage() {
       </div>
     </div>
 
-    <div id="homeStudent">
+    <div id="HODhomeStudent">
     <h1 style={{marginTop:"2vh"}} > 14,000 </h1>
-      <div id="numImage">
+      <div id="HODnumImage">
       <h2>Students</h2>
         <img src={require("./student.png")} style={{ width: "6vw", height:"10vh" }} />
       </div>
     </div>
 
-    <div id="homePassStudent">
+    <div id="HODhomePassStudent">
     <h1 style={{marginTop:"2vh"}} > 10,000</h1>
-      <div id="numImage">
+      <div id="HODnumImage">
       <h2>Passed Students</h2>
         <img src={require("./passStudent.png")} style={{ width: "6vw", height:"10vh" }} />
       </div>

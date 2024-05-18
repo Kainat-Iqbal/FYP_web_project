@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import { AccountCircle, AddCircle, Home, MenuOutlined, TableView, Approval, AssignmentInd, ChangeCircle, Equalizer, Insights } from "@mui/icons-material";
+import { AccountCircle, AddCircle, Home, MenuOutlined, TableView, Approval, AssignmentInd, ChangeCircle,  Notifications,Equalizer, Insights } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 
 function SideBar() {
@@ -67,12 +67,20 @@ function SideBar() {
         </div>
 
         <div id="topRight" style={{ width: "auto", marginRight: "2vw" }}>
-          {<AccountCircle
+          <Notifications
             style={{
-              fontSize: "3.2rem",
+              marginTop: "5px",
+              fontSize: "2.6rem",
+              color: "white",
+              marginRight: "12px"
+            }} />
+          <AccountCircle
+            style={{
+              marginTop: "5px",
+              fontSize: "2.8rem",
               color: "white",
             }}
-          /> }
+          />
         </div>
       </div>
       
@@ -93,7 +101,7 @@ function SideBar() {
         <Menu>
           <MenuItem icon={<Home/>}
           onClick={() => {
-              nav("/HODHomePage");
+              nav("/hodHomePage");
             }}>
             Home
           </MenuItem>
@@ -107,16 +115,16 @@ function SideBar() {
           
           <MenuItem  icon={<Approval/>}
             onClick={() => {
-              nav("/ApproveResult");
+              nav("/hodApproveResult");
             }}>
             Approve Result
           </MenuItem>
 
           <MenuItem icon={<ChangeCircle/>}
           onClick={() => {
-              nav("/ManageChangeReq");
+              nav("/hodManageChangeReq");
             }}>
-            Change Request
+            Change Requests
           </MenuItem>
           
           {<SubMenu icon={<Equalizer/>} label="View">

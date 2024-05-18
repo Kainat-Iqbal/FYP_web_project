@@ -4,7 +4,7 @@ import SideBar from "../../SideBar";
 import Table from "react-bootstrap/Table";
 import { Link,useNavigate } from "react-router-dom";
 
-function ViewResult() {
+function HODViewResult() {
     const nav = useNavigate();
     const results = [
         {
@@ -152,7 +152,7 @@ function ViewResult() {
               marginLeft:"1px",
             }}
             onClick={() => {
-              nav("/ApproveResult");
+              nav("/hodApproveResult");
             }}
             >
             &larr; {/* Left arrow character */}
@@ -304,4 +304,4 @@ function ViewResult() {
     </div>
   );
 }
-export default ViewResult;
+export default HODViewResult;

@@ -156,7 +156,7 @@ function ApproveResult() {
                         <button
                           style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", marginLeft:"20px" }}
                           onClick={() => {
-                            nav("/ViewResult");
+                            nav("/hodViewResult");
                           }}
                         >
                           View Result

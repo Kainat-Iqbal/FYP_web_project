@@ -3,9 +3,9 @@ import './App.css';
 
 import MainScreen from './Components/LandingPage/MainScreen';
 import LoginPage from './Components/LandingPage/LoginPage';
-import HodHomePage from './Components/HODPanel/HODHomePage';
+import HodHomePage from './Components/HODPanel/HODHomePage'
 import ApproveResult from './Components/HODPanel/ApproveResult';
-import ViewResult from './Components/HODPanel/ApproveResult/ViewResult';
+import HODViewResult from './Components/HODPanel/ApproveResult/ViewResult';
 import ManageChangeReq from './Components/HODPanel/ManageChangeReq';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -17,14 +17,14 @@ function App() {
     <>
       <BrowserRouter>
       <Routes>
+
         <Route path='/' element={<MainScreen/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/hodHomePage' element={<HodHomePage/>}/>
-        <Route path='/approveResult' element={<ApproveResult/>}/>
-        <Route path='/viewResult' element={<ViewResult/>}/>
-        <Route path='/manageChangeReq' element={<ManageChangeReq/>}/>
+        <Route path='/hodapproveResult' element={<ApproveResult/>}/>
+        <Route path='/hodViewResult' element={<HODViewResult/>}/>
+        <Route path='/hodManageChangeReq' element={<ManageChangeReq/>}/>
 
-        
       </Routes>
       </BrowserRouter>
     </>
