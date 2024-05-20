@@ -1,0 +1,63 @@
+
+#mainVR{
+    height: 100vh;
+    width: 100vw;
+    /* background-color: blue; */
+}
+
+#sidebarVR{
+    height: 9%;
+}
+#topVR{
+    height: 30%;
+    margin-left: 18vw;
+    /* background-color: yellow */;
+}
+#topheadVR{
+    height: 25%;
+    display: flex;
+    justify-content: center;
+   /*  background-color: bisque; */
+}
+#resultinfoVR{
+    height: 75%;
+    /* background-color: green; */
+    display: flex;
+    padding-top: 2%;
+    font-size: 18px;
+    
+}
+#info1VR{
+    width: 29%;
+    /* background-color: pink; */
+    display: flex;
+    flex-direction: column;
+
+    /* margin-left: 1%; */
+}
+#facultyCourse{
+    height:70%;
+    /* background-color: brown; */
+    margin-left: 6px;
+    font-size: 18px;
+    
+}
+#classBatch{
+    height: 32%;
+    /* background-color: burlywood; */
+    
+    display: flex;
+}
+#info2VR{
+    width: 54%;
+   /*  background-color: aqua; */
+}
+#info3VR{
+    width: 17%;
+    /* background-color: yellow; */
+}
+#bottomVR{
+    height: 61%;
+    margin-left: 18vw;
+   /*  background-color: red; */
+}

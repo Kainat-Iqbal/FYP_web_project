@@ -22,7 +22,7 @@ function LoginPage() {
       [event.target.name]: [event.target.value]
     }));
   };
-
+axios.defaults.withCredentials = true;
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,25 +32,14 @@ function LoginPage() {
       .then(res =>{
         console.log(values)
         if(res.data === "success"){
-          console.log("kugju")
+          localStorage.setItem("user","kainat");
           nav("/home");
         }
         else{
-          console.log("FS");
           alert("Invalid Login")
         }
       })
     }
-    // axios
-    //   .post("http://localhost:8081/login", { email, password })
-    //   .then((res) => console.log(res))
-    //   .catch((err) => console.log(err));
-    // // Here, you can access the email and password state variables
-    // console.log("Email:", email);
-    // console.log("Password:", password);
-    // You can perform further actions such as sending the data to the server for authentication
-    // After authentication, navigate to the home page
-    // nav("/home");
   };
 
   return (
