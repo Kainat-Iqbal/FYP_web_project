@@ -78,6 +78,18 @@ function ViewTeacher() {
                   Designation
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                  Qualification
+                </th>
+                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                  CNIC
+                </th>
+                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                  Joining Date
+                </th>
+                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                  Status
+                </th>
+                <th style={{ backgroundColor: "#00304B", color: "white" }}>
                   Edit
                 </th>
               </tr>
@@ -92,10 +104,12 @@ function ViewTeacher() {
                     <td>{teacherData.email}</td>
                     <td>{teacherData.department}</td>
                     <td>{teacherData.designation}</td>
+                    <td>{teacherData.qualification}</td>
+                    <td>{teacherData.CNIC}</td>
+                    <td>{teacherData.JoiningDate}</td>
+                    <td>{teacherData.status}</td>
                     <td>
-                      <a href="#">
-                        <Edit />
-                      </a>
+                      <Link to={`/updateTeacher/${teacherData.teacherId}`}><Edit /></Link>
                     </td>
                   </tr>
                 );

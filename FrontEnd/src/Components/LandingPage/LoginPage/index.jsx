@@ -22,7 +22,7 @@ function LoginPage() {
       [event.target.name]: [event.target.value]
     }));
   };
-
+axios.defaults.withCredentials = true;
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -16,7 +16,7 @@ const addTeacher = async (req, res) => {
         console.log("Admin ID:", adminId);
 
         const queryToAdd =
-          "INSERT INTO `teacher` (`name`, `email`, `password`, `designation`, `department`, `adminId`) VALUES (?)";
+          "INSERT INTO `teacher` (`name`, `email`, `password`, `designation`, `department`, `adminId`, `CNIC`, `status`, `qualification`, `JoiningDate`) VALUES (?)";
         const VALUES = [
           req.body.name,
           req.body.email,
@@ -24,8 +24,12 @@ const addTeacher = async (req, res) => {
           req.body.designation,
           req.body.department,
           adminId, // Use the retrieved admin ID
+          req.body.cnic,
+          req.body.status,
+          req.body.qualification,
+          req.body.joiningDate
         ];
-
+        console.log("values",VALUES)
         DB.query(queryToAdd, [VALUES], (err, data) => {
           if (err) {
             console.error("Error adding teacher:", err);
@@ -37,7 +41,8 @@ const addTeacher = async (req, res) => {
             return res.json("success");
           }
         });
-      } else {
+      } 
+      else {
         console.log("Admin not found for email:", adminEmail);
         return res
           .status(404)
@@ -70,4 +75,49 @@ const viewTeacher = async (req, res) => {
         });
 };
 
-module.exports = { addTeacher,viewTeacher };
+const getTeacher = async (req,res) => {
+  const queryToGet = "SELECT * FROM teacher WHERE teacherId = ?";
+  const id = req.params.id;
+  DB.query(queryToGet,[id],(err,result) =>{
+    if(err){
+      // console.log("first")
+      return res.json({Error: err})
+    }
+    else{
+      // console.log("up",result)
+      return res.json(result);
+    }
+  })  
+}
+
+const updateTeacher = async(req,res) => {
+  const quertToUpdate ="UPDATE `teacher` SET `name`=?,`email`=?,`password`=?,`designation`=?,`department`=?,`adminId`=?,`CNIC`=?,`status`=?,`qualification`=?,`JoiningDate`=? WHERE teacherId = ?";
+  const id = req.params.id;
+  const VALUE = [
+    req.body.name,
+    req.body.email,
+    req.body.password,
+    req.body.designation,
+    req.body.department,
+    req.body.adminId, // Use the retrieved admin ID
+    req.body.CNIC,
+    req.body.status,
+    req.body.qualification,
+    req.body.JoiningDate,
+    req.body.teacherId
+  ];
+  console.log(VALUE)
+  DB.query(quertToUpdate,VALUE,(err,result)=>{
+    if(err){
+      console.log("firsterrr",err)
+      return res.json(err)
+    } 
+    else{
+  console.log("firstsucc")
+      return res.json({updated:true})
+    }
+  })
+
+}
+
+module.exports = { addTeacher,viewTeacher, getTeacher,updateTeacher};
