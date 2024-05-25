@@ -117,7 +117,7 @@ function SideBar() {
             onClick={() => {
               nav("/hodApproveResult");
             }}>
-            Approve Result
+            Result Approval
           </MenuItem>
 
           <MenuItem icon={<ChangeCircle/>}
