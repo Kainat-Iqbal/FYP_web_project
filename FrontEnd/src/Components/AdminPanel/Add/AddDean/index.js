@@ -1,19 +1,19 @@
 import * as React from "react";
-import "./addTeacher.css";
+import "./addDean.css";
 import SideBar from "../../SideBar";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import TeacherValidation from "./teacherValidation";
+import TeacherValidation from "../../Add/AddTeacher/teacherValidation";
 
-function AddTeacher() {
-  const [admin, setAdminEmail] = useState(null);
+function AddDean() {
+  const [admin, setAdminId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8081/session", {
           withCredentials: true,
         });
-        setAdminEmail(response.data.user);
+        setAdminId(response.data.userId);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -22,18 +22,17 @@ function AddTeacher() {
     fetchData();
   }, []);
 
-  console.log("FVFV ", admin);
+   console.log("FVFV ", admin);
   // State variables to hold the input values
   const [values, setValues] = useState({
     name: "",
     email: "",
     password: "User123*",
-    department: "Software Engineering",
-    designation: "Lecturer",
-    cnic: "",
+    faculty: "Science",
+    CNIC: "",
     qualification: "Bachelors",
     status: "Active",
-    adminEmail: "",
+    adminId: "",
     joiningDate: "",
   });
   useEffect(() => {
@@ -41,7 +40,7 @@ function AddTeacher() {
     if (admin !== null) {
       setValues((prev) => ({
         ...prev,
-        adminEmail: admin,
+        adminId: admin,
       }));
     }
   }, [admin]);
@@ -55,10 +54,11 @@ function AddTeacher() {
       [name]: value,
     }));
   };
-
+console.log(values)
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(TeacherValidation(values));
+    console.log("first",errors)
     if (
       errors.email === "" &&
       errors.password === "" &&
@@ -66,11 +66,11 @@ function AddTeacher() {
       errors.date === "" &&
       errors.cnic === ""
     ) {
-      console.log("nhmbkjbhkbhjuu")
-      axios.post("http://localhost:8081/teacher/Add", values).then((res) => {
+      console.log("nhmbkjbhkbhjuu",values)
+      axios.post("http://localhost:8081/dean/Add", values).then((res) => {
         console.log("val",values);
         if (res.data === "success") {
-          alert("teacher is added successfully");
+          alert("dean is added successfully");
         } else {
           console.log("error");
         }
@@ -79,16 +79,16 @@ function AddTeacher() {
   };
 
   return (
-    <div id="mainAddTeacherDiv">
+    <div id="mainAddDeanDiv">
       <SideBar />
-      <div id="teacherWithoutBar">
-        <div id="teacherTop">
-          <h1>Add Teacher</h1>
+      <div id="deanWithoutBar">
+        <div id="deanTop">
+          <h1>Add Dean</h1>
         </div>
 
-        <div id="teacherBottom">
-          <form id="teacherForm" action="" onSubmit={handleSubmit}>
-            <div id="teacherField">
+        <div id="deanBottom">
+          <form id="deanForm" action="" onSubmit={handleSubmit}>
+            <div id="deanField">
               <label>Name</label>
               <input
                 name="name"
@@ -99,7 +99,7 @@ function AddTeacher() {
             </div>
             {errors.name && <span className="text-danger">{errors.name}</span>}
 
-            <div id="teacherField">
+            <div id="deanField">
               <label>Email</label>
               <input
                 name="email"
@@ -112,7 +112,7 @@ function AddTeacher() {
               <span className="text-danger">{errors.email}</span>
             )}
 
-            <div id="teacherField">
+            <div id="deanField">
               <label>Password</label>
               <input
                 name="password"
@@ -125,51 +125,32 @@ function AddTeacher() {
               <span className="text-danger">{errors.password}</span>
             )}
 
-            <div id="teacherField">
-              <label>Department</label>
+            <div id="deanField">
+              <label>Faculty</label>
 
               <select
-                name="department"
+                name="faculty"
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
-                <option value="Software Engineering">
-                  Software Engineering
+                <option value="Science">
+                  Science
                 </option>
-                <option value="Computer Science">Computer Science</option>
+                <option value="Social Science">Social Science</option>
               </select>
             </div>
-            {errors.department && (
-              <span className="text-danger">{errors.department}</span>
-            )}
 
-            <div id="teacherField">
-              <label>Designation</label>
-              <select
-                name="designation"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
-              >
-                <option value="Lecturer">Lecturer</option>
-                <option value="Assistant Professor">Assistant Professor</option>
-                <option value="Professor">Professor</option>
-              </select>
-            </div>
-            {errors.designation && (
-              <span className="text-danger">{errors.designation}</span>
-            )}
-
-            <div id="teacherField">
+            <div id="deanField">
               <label>CNIC</label>
               <input
-                name="cnic"
+                name="CNIC"
                 type="text"
                 placeholder="42204-3452276-3"
                 onChange={handleInput}
               ></input>
             </div>
 
-            <div id="teacherField">
+            <div id="deanField">
               <label>Qualification</label>
 
               <select
@@ -182,7 +163,7 @@ function AddTeacher() {
                 <option value="PhD">PhD</option>
               </select>
             </div>
-            <div id="teacherField">
+            <div id="deanField">
               <label>Status</label>
               <select
                 name="status"
@@ -193,7 +174,7 @@ function AddTeacher() {
                 <option value="Leave">Leave</option>
               </select>
             </div>
-            <div id="teacherField">
+            <div id="deanField">
               <label>Date of Joining</label>
               <input
                 style={{ width: "14.8vw", height: "4.5vh" }}
@@ -203,11 +184,11 @@ function AddTeacher() {
               ></input>
             </div>
 
-            <button>Add Teacher</button>
+            <button>Add Dean</button>
           </form>
         </div>
       </div>
     </div>
   );
 }
-export default AddTeacher;
+export default AddDean;

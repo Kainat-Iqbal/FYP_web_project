@@ -4,9 +4,11 @@ const { loginRouter } = require('./routes/login');
 const app = express();
 const DB = require("./DB/dbConfig");
 const { teacherRouter } = require('./routes/teacher');
+const { deanRouter } = require('./routes/dean');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const { examinationRouter } = require('./routes/examination');
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -26,12 +28,17 @@ app.use(session({
 }));
 app.use("/login",loginRouter)
 app.use("/teacher",teacherRouter)
+app.use("/dean",deanRouter)
+app.use("/examination",examinationRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){
-        return res.json({valid: true, user: req.session.user})
+        // console.log(req.session.user)
+        // console.log(req.session.userId)
+        return res.json({valid: true, user: req.session.user, userId : req.session.userId})
     }
     else{
+        // console.log("CFCFDC")
         return res.json({valid:false})
     }
 })

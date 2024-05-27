@@ -118,7 +118,7 @@ return(
                 name="department"
                 value={DATA.department}
                 onChange={handleInput}
-                style={{ width: "13.9vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "4.5vh" }}
               >
                 <option value="Software Engineering">
                   Software Engineering
@@ -136,7 +136,7 @@ return(
                 name="designation"
                 value={DATA.designation}
                 onChange={handleInput}
-                style={{ width: "13.9vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "4.5vh" }}
               >
                 <option value="Lecturer">Lecturer</option>
                 <option value="Assistant Professor">Assistant Professor</option>
@@ -164,7 +164,7 @@ return(
                 name="qualification"
                 value={DATA.qualification}
                 onChange={handleInput}
-                style={{ width: "13.9vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "4.5vh" }}
               >
                 <option value="Bachelors">Bachelors</option>
                 <option value="Masters">Masters</option>
@@ -177,7 +177,7 @@ return(
                 name="status"
                 value={DATA.status}
                 onChange={handleInput}
-                style={{ width: "13.9vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "4.5vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -186,7 +186,7 @@ return(
             <div id="teacherField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "13.9vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "4.5vh" }}
                 name="JoiningDate"
                 value={DATA.JoiningDate}
                 type="date"

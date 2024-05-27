@@ -36,7 +36,8 @@ const addTeacher = async (req, res) => {
             return res
               .status(500)
               .json({ success: false, message: "Failed to add teacher" });
-          } else {
+          } 
+          else {
             console.log("Teacher added successfully");
             return res.json("success");
           }

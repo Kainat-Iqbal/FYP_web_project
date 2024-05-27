@@ -160,11 +160,11 @@ function SideBar() {
             >
               Add HOD
             </MenuItem>
-            <MenuItem> Add Dean</MenuItem>
-            <MenuItem> Add Examination of controller </MenuItem>
+            <MenuItem onClick={() => {nav("/addDean");}}> Add Dean</MenuItem>
+            <MenuItem onClick={() => {nav("/addExamination");}}> Add Controller of Examination </MenuItem>
             <MenuItem> Add Student </MenuItem>
-            <MenuItem> Add Course </MenuItem>
-            <MenuItem> Add Degree Program </MenuItem>
+            <MenuItem onClick={() => {nav("/addCourse");}}> Add Course </MenuItem>
+            <MenuItem onClick={() => {nav("/addDegreeProgram");}}> Add Degree Program </MenuItem>
             <MenuItem> Add Session </MenuItem>
             <MenuItem> Add Batch </MenuItem>
           </SubMenu>
@@ -177,15 +177,7 @@ function SideBar() {
             >
               View Teacher
             </MenuItem>
-            <MenuItem
-              onClick={() => {
-                nav("/viewHOD");
-              }}
-            >
-              View HOD{" "}
-            </MenuItem>
-            <MenuItem> View Dean</MenuItem>
-            <MenuItem> View Examination of controller </MenuItem>
+            <MenuItem onClick={()=> nav("/viewDean")}> View HOD, Dean, Examination</MenuItem>
             <MenuItem> View Student </MenuItem>
             <MenuItem> View Course </MenuItem>
           </SubMenu>

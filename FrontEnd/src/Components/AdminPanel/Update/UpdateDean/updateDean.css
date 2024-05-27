@@ -1,4 +1,4 @@
-#mainAddTeacherDiv{
+#mainAddDeanDiv{
     width: 80vw;
     height: 100vh;
     margin-left: 18vw;
@@ -6,7 +6,7 @@
     display: flex;
 }
 
-#teacherWithoutBar{
+#deanWithoutBar{
     width: 100%;
     height: 90%;
     /* background-color: brown; */
@@ -18,7 +18,7 @@
     justify-content: space-around;
 }
 
-#teacherTop{
+#deanTop{
     width: 100%;
     height: 10%;
     /* background-color: bisque; */
@@ -27,11 +27,11 @@
     align-items: flex-end;
 }
 
-#teacherTop h1{
+#deanTop h1{
     color: #00304B;
 }
 
-#teacherBottom{
+#deanBottom{
     width: 50%;
     height: 80%;
     /* background-color: blueviolet; */
@@ -42,7 +42,7 @@
     padding-top: 7vh;
 }
 
-#teacherForm{
+#deanForm{
     width: 75%;
     height: 80%;
     /* background-color: green; */
@@ -52,11 +52,11 @@
     align-items: center;
 }
 
-#teacherForm label{
+#deanForm label{
     color: black;
 }
 
-#teacherForm button{
+#deanForm button{
     margin-top: 2vh;
     background-color: #00304B;
     border-radius: 50px;
@@ -65,10 +65,10 @@
     color: white;
 }
 
-#teacherField{
+#deanField{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2vh;
+
     width: 100%;
     /* background-color: aqua; */
 }

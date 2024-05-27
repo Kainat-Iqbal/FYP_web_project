@@ -9,7 +9,8 @@ const Login = async (req,res) => {
         }
         if(data.length > 0){
             req.session.user = data[0].adminEmail;
-            console.log("first",req.session.user);
+            req.session.userId = data[0].adminId;
+            // console.log("first",req.session.userId);
             return res.json("success")
         }
         else{

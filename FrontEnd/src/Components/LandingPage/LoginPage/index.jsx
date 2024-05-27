@@ -46,7 +46,7 @@ axios.defaults.withCredentials = true;
     <div id="mainLoginDiv">
       <div id="loginForm">
         <h1>
-          <i>Academic Accelerator</i>
+          Academic Accelerator
         </h1>
         <form id="loginFormDiv" action="" onSubmit={handleSubmit}>
           <div id="InputFormField">

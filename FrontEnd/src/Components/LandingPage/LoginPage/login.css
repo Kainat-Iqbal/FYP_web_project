@@ -49,3 +49,7 @@
     height: 5vh;
     width: 17vw;
 }
+
+#InputFormField label{
+    font-size: 1.2rem;
+}

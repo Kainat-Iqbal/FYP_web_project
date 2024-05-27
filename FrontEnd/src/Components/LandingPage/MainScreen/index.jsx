@@ -8,12 +8,12 @@ function MainScreen() {
   return (
     <div id="mainDivMainScreen">
       <div id="top">
-        <p style={{ color: "white", marginTop: "2vh", fontSize: "1.3rem" }}>
+        <p style={{ color: "white", marginTop: "2vh", fontSize: "1.5rem" }}>
           Academic Accelerator
         </p>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle id="dropdown-basic" style={{ border: "none" }}>
+          <Dropdown.Toggle id="dropdown-basic" style={{ border: "none",fontSize:"1.3rem" }}>
             Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -37,7 +37,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none" }} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem" }} id="dropdown-basic">
             Social Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -54,7 +54,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none" }} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none" ,fontSize:"1.3rem"}} id="dropdown-basic">
             Allied Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -65,7 +65,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none" }} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem" }} id="dropdown-basic">
             Buisness
           </Dropdown.Toggle>
           <Dropdown.Menu>
