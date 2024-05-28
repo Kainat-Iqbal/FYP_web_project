@@ -116,7 +116,7 @@ function ManageChangeReq() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Course No</th>
+                <th>Course Number</th>
                 <th>Course Name</th>
                 <th>Class</th>
                 <th>Instructor Name</th>
@@ -138,7 +138,7 @@ function ManageChangeReq() {
                     {result.action === null ? (
                       <>
                         <button
-                          style={{ borderColor: "#90ee90", color: "black", backgroundColor: "#90ee90", marginLeft:"5px", marginRight: "5px" }}
+                          style={{textAlign: "center", width: "9vw", borderColor: "#90ee90", color: "white", backgroundColor: "#90ee90", marginLeft:"5px", marginRight: "5px" }}
                           onClick={() => {
                             handleApprove(result.id);
                           }}
@@ -147,7 +147,7 @@ function ManageChangeReq() {
                         </button>
 
                         <button
-                          style={{ borderColor: "#cd5c5c", color: "black", backgroundColor: "#cd5c5c", marginLeft:"5px", marginRight: "5px" }}
+                          style={{textAlign: "center",width: "9vw", borderColor: "#cd5c5c", color: "white", backgroundColor: "#cd5c5c", marginLeft:"5px", marginRight: "5px", textAlign: "center", width: "9vw", }}
                           onClick={() => {
                             handleDisapprove(result.id);
                           }}
@@ -157,7 +157,7 @@ function ManageChangeReq() {
                       </>
                     ) : (
                       <button
-                        style={{ borderColor: result.action === 'approve' ? "green" : "red", color: "white", backgroundColor: result.action === 'approve' ? "#8BC34A" : "#F44336", marginLeft:"5px", marginRight: "5px" }}
+                        style={{ borderColor: result.action === 'approve' ? "green" : "red", color: "white", backgroundColor: result.action === 'approve' ? "#8BC34A" : "#F44336", marginLeft:"5px", marginRight: "5px", textAlign: "center", width: "9vw" }}
                         disabled
                       >
                         {result.action === 'approve' ? "Approved" : "Disapproved"}

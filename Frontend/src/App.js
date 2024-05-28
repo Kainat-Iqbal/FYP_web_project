@@ -7,6 +7,8 @@ import HodHomePage from './Components/HODPanel/HODHomePage'
 import ApproveResult from './Components/HODPanel/ApproveResult';
 import HODViewResult from './Components/HODPanel/ApproveResult/ViewResult';
 import ManageChangeReq from './Components/HODPanel/ManageChangeReq';
+import HODResultFeedback from './Components/HODPanel/ApproveResult/HODResultFeedback';
+import AssignCourse from './Components/HODPanel/AssignCourse';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
@@ -23,7 +25,9 @@ function App() {
         <Route path='/hodHomePage' element={<HodHomePage/>}/>
         <Route path='/hodapproveResult' element={<ApproveResult/>}/>
         <Route path='/hodViewResult' element={<HODViewResult/>}/>
+        <Route path='/hodResultFeedback' element={<HODResultFeedback/>}/>
         <Route path='/hodManageChangeReq' element={<ManageChangeReq/>}/>
+        <Route path='/assignCourse' element={<AssignCourse/>}/>
 
       </Routes>
       </BrowserRouter>

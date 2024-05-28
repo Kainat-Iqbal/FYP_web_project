@@ -1,0 +1,87 @@
+#mainAssignCourseDiv{
+  width: 80vw;
+  height: 100vh;
+  margin-left: 18vw;
+  /* background-color: aqua; */
+  display: flex;
+}
+
+#assignCourseWithoutBar{
+  width: 100%;
+  height: 90%;
+  /* background-color: brown; */
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+#assignCourseTop{
+  height: 12%;
+  /* background-color: beige; */
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;  
+}
+
+#assignCourseTop h1{
+  margin-left: 5vh;
+}
+
+#assignCourseBottom{
+  width: 50%;
+  height: 80%;
+  /* background-color: blueviolet; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background: linear-gradient(#F1C9EC,#AB84CB);
+  /* background: linear-gradient(#055786,white); */
+  padding-top: 7vh;
+}
+
+#assignCourseForm{
+  width: 75%;
+  height: 80%;
+  /* background-color: green; */
+  display: flex;    
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#assignCourseForm label{
+  color: black;
+  font-size: large;
+}
+
+#assignButton{
+  /* background-color: red; */
+  height: 15%;
+  width: 50%;
+}
+
+#assignButton button{
+  margin-top: 2vh;
+  background-color: #6a0f86dc;
+  border-radius: none;
+  width: 100%;
+  height: 70%;
+  color: white;
+  font-size: 20px;
+}
+
+#assignCourseField{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2vh;
+  width: 100%;
+  /* background-color: aqua; */
+}
+
+#assignCourseField input,select{
+  color: black;
+}
