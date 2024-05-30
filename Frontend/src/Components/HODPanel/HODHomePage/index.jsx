@@ -1,10 +1,10 @@
 // HodHomePage.js
 import React from 'react';
-import TopBar from '../TopBar';
+import TopBar from './HODTopBar';
 import SideBar from '../SideBar';
 import "./hodHome.css";
 
-function HodHomePage() {
+function HODHomePage() {
   return (
     <>
     <div>
@@ -15,7 +15,7 @@ function HodHomePage() {
   <SideBar />
   <div id="HODHomeWithoutBar">
 
-     <div id="HODhomeTeacher">
+     <div id="HODHomeTeacher">
      <h1 style={{marginTop:"2vh"}}> 60 </h1>
       <div id="HODnumImage">
         <h2>Faculty</h2>
@@ -26,7 +26,7 @@ function HodHomePage() {
       </div>
     </div>
 
-    <div id="HODhomeStudent">
+    <div id="HODHomeStudent">
     <h1 style={{marginTop:"2vh"}} > 14,000 </h1>
       <div id="HODnumImage">
       <h2>Students</h2>
@@ -34,7 +34,7 @@ function HodHomePage() {
       </div>
     </div>
 
-    <div id="HODhomePassStudent">
+    <div id="HODHomePassStudent">
     <h1 style={{marginTop:"2vh"}} > 10,000</h1>
       <div id="HODnumImage">
       <h2>Passed Students</h2>
@@ -55,9 +55,6 @@ function HodHomePage() {
     <h2>Courses</h2>
             <img src= {require("./course.png")} style={{width:'100%',height:"40vh"}}/>
     </div> */}
-
-    
-
     
   </div>
 </div>
@@ -65,4 +62,4 @@ function HodHomePage() {
   );
 }
 
-export default HodHomePage;
+export default HODHomePage;

@@ -1,10 +1,10 @@
 import * as React from "react";
-import "./hodApproveResult.css";
+import "./hodResultApproval.css";
 import SideBar from "../SideBar";
 import Table from "react-bootstrap/Table";
 import { Link, useNavigate } from "react-router-dom";
 
-function ApproveResult() {
+function HODResultApproval() {
   const nav = useNavigate();
   const [results, setResults] = React.useState([
     {
@@ -126,7 +126,7 @@ function ApproveResult() {
                   ID
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
-                  Course No
+                  Course Number
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center"  }}>
                   Course Name
@@ -157,7 +157,7 @@ function ApproveResult() {
                         <button
                           style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", marginLeft:"20px" }}
                           onClick={() => {
-                            nav("/hodViewResult");
+                            nav("/HODViewResult");
                           }}
                         >
                           View Result
@@ -207,7 +207,7 @@ function ApproveResult() {
   );
 }
 
-export default ApproveResult;
+export default HODResultApproval;
 
 
 

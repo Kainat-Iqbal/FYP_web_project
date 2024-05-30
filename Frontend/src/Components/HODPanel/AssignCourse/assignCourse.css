@@ -81,7 +81,10 @@
   width: 100%;
   /* background-color: aqua; */
 }
-
-#assignCourseField input,select{
-  color: black;
+#assignCourseField label{
+  font-weight: normal;
 }
+
+/* #assignCourseField input,select{
+  color: black;
+} */

@@ -101,7 +101,7 @@ function SideBar() {
         <Menu>
           <MenuItem icon={<Home/>}
           onClick={() => {
-              nav("/hodHomePage");
+              nav("/HODHomePage");
             }}>
             Home
           </MenuItem>
@@ -115,14 +115,14 @@ function SideBar() {
           
           <MenuItem  icon={<Approval/>}
             onClick={() => {
-              nav("/hodApproveResult");
+              nav("/HODResultApproval");
             }}>
             Result Approval
           </MenuItem>
 
           <MenuItem icon={<ChangeCircle/>}
           onClick={() => {
-              nav("/hodManageChangeReq");
+              nav("/HODManageChangeReq");
             }}>
             Change Requests
           </MenuItem>

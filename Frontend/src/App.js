@@ -3,13 +3,12 @@ import './App.css';
 
 import MainScreen from './Components/LandingPage/MainScreen';
 import LoginPage from './Components/LandingPage/LoginPage';
-import HodHomePage from './Components/HODPanel/HODHomePage'
-import ApproveResult from './Components/HODPanel/ApproveResult';
-import HODViewResult from './Components/HODPanel/ApproveResult/ViewResult';
-import ManageChangeReq from './Components/HODPanel/ManageChangeReq';
-import HODResultFeedback from './Components/HODPanel/ApproveResult/HODResultFeedback';
+import HODHomePage from './Components/HODPanel/HODHomePage';
+import HODResultApproval from './Components/HODPanel/HODResultApproval';
+import HODViewResult from './Components/HODPanel/HODResultApproval/HODViewResult';
+import HODResultFeedback from './Components/HODPanel/HODResultApproval/HODResultFeedback';
 import AssignCourse from './Components/HODPanel/AssignCourse';
-
+import HODManageChangeReq from './Components/HODPanel/HODManageChangeReq';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
@@ -21,13 +20,13 @@ function App() {
       <Routes>
 
         <Route path='/' element={<MainScreen/>}/>
-        <Route path='/login' element={<LoginPage/>}/>
-        <Route path='/hodHomePage' element={<HodHomePage/>}/>
-        <Route path='/hodapproveResult' element={<ApproveResult/>}/>
-        <Route path='/hodViewResult' element={<HODViewResult/>}/>
-        <Route path='/hodResultFeedback' element={<HODResultFeedback/>}/>
-        <Route path='/hodManageChangeReq' element={<ManageChangeReq/>}/>
-        <Route path='/assignCourse' element={<AssignCourse/>}/>
+        <Route path='/Login' element={<LoginPage/>}/>
+        <Route path='/HODHomePage' element={<HODHomePage/>}/>
+        <Route path='/HODResultApproval' element={<HODResultApproval/>}/>
+        <Route path='/HODViewResult' element={<HODViewResult/>}/>
+        <Route path='/HODResultFeedback' element={<HODResultFeedback/>}/>
+        <Route path='/HODManageChangeReq' element={<HODManageChangeReq/>}/>
+        <Route path='/AssignCourse' element={<AssignCourse/>}/>
 
       </Routes>
       </BrowserRouter>

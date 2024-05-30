@@ -1,10 +1,10 @@
 import * as React from "react";
-import "./style.css";
+import "./hodmanageChangeReq.css";
 import SideBar from "../SideBar";
 import Table from "react-bootstrap/Table";
 import { Link, useNavigate } from "react-router-dom";
 
-function ManageChangeReq() {
+function HODManageChangeReq() {
   const nav = useNavigate();
   const [results, setResults] = React.useState([
     // your data
@@ -174,7 +174,7 @@ function ManageChangeReq() {
   );
 }
 
-export default ManageChangeReq;
+export default HODManageChangeReq;
 
 
 
