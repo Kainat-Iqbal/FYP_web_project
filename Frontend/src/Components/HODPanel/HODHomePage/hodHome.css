@@ -1,0 +1,145 @@
+/* #PassFail{
+    width: 70%;
+    height: 60%;
+    background-color:red;
+} */
+
+#HODHomeMainDiv {
+    width: 90%;
+    height: 100vh;
+    margin-left: 18%;
+    /* display: flex; */
+    /* height: 100vh;
+    width: 100vw; */
+    /* background-color: yellow; */
+}
+
+#HODTopBar {
+    margin-top: 8vh;
+    background-color: rgba(68, 152, 161, 0.178);
+    height: 20%;
+    width: 93%;
+    display: flex;
+    align-items: center;
+}
+
+#HODprofile {
+    height: 100%;
+    width: 10%;
+    /* background-color: blue; */
+    margin-top: 1%;
+    margin-left: 2%;
+}
+
+#HODinfo{
+    /* background-color: tan; */
+    color: black;
+    margin-left: 0.5%;
+    
+}
+
+#HODHomeWithoutBar {
+    width: 90%;
+    height: 90%;
+    /* background-color: brown; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* margin-top: 31vh; */
+}
+
+#AssignCourseTable{
+    /* background-color: aqua; */
+    height: 60%;
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 8%;
+}
+
+#viewResultBottom {
+    height: auto;
+    width: 100%;
+    margin-right: 1vh;
+    display: flex;
+    justify-content: center;
+    /* background-color: chartreuse; */
+}
+
+#viewResultTable {
+    width: 95%;
+    padding-top: 1%;
+    border: 2px solid #00304B;
+    /* margin-top: 1%; */
+
+}
+
+#HODHomeTeacher {
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    margin-left: 4vh;
+    background-color: palevioletred;
+    align-items: center;
+    /* background-color: blueviolet; */
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, rgb(163, 68, 252),white); */
+    /* border: 2px solid #00304B; */
+}
+
+#HODNumImage {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1.5vw;
+    margin-right: 1.5vw;
+}
+
+#HODHomeStudent {
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color: mediumaquamarine;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, palevioletred,white); */
+    /* border: 2px solid #00304B; */
+}
+
+#HODHomePassStudent {
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color: powderblue;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, powderblue,white); */
+    /* border: 2px solid #00304B; */
+}
+
+
+
+/* #homeFailStudent{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color: cornflowerblue;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, coral,white); */
+/* border: 2px solid #00304B; 
+} */
+
+/* #homeCourse{
+    width: 25%;
+    height: 27%;
+    margin-top: 7vh;
+    background-color: lightblue;
+    /* background: linear-gradient(to right, orchid,white); */
+/* display: flex; */
+/* flex-direction: column;
+    align-items: center;
+}   */
