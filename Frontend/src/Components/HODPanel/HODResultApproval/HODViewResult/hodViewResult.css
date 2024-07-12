@@ -152,3 +152,26 @@
     border: 2px solid #00304B;
     /* margin-top: 1%; */
 }
+
+#btnApprove{
+    height: 4vw;
+    width: 10vw;
+    margin-top: 5vh;
+    margin-left: 25%;
+    border-color: #04AA6D;
+    color: white;
+     background-color: #28a745; /* #90ee90 */
+}
+#btnApprove, #btnDisapprove:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+#btnDisapprove{
+    height: 4vw;
+    width: 10vw;
+    margin-top: 5vh;
+    margin-right: 30%;
+    border-color: #dc3545;
+    color: white;
+    background-color: #dc3545;  /*#cd5c5c)*/
+   
+}

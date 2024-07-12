@@ -320,14 +320,14 @@ function HODViewResult() {
 
         </div>
 
-        <button
-          style={{
-            height: "4vw",
-            width: "10vw",
-            marginTop: "5vh",
-            marginLeft: "25%",
-            borderColor: "#04AA6D", color: "white", backgroundColor: "#28a745" //#90ee90 success#28a745
-          }}
+        <button id="btnApprove"
+          // style={{
+          //   height: "4vw",
+          //   width: "10vw",
+          //   marginTop: "5vh",
+          //   marginLeft: "25%",
+          //   borderColor: "#04AA6D", color: "white", backgroundColor: "#28a745" //#90ee90 success#28a745
+          // }}
           onClick={handleApproveAll}
         // onClick={() => {
         //   handleApprove(results.id);
@@ -339,14 +339,14 @@ function HODViewResult() {
           Approve
         </button>
 
-        <button
-          style={{
-            height: "4vw",
-            width: "10vw",
-            marginTop: "5vh",
-            marginRight: "30%",
-            borderColor: "#dc3545", color: "white", backgroundColor: "#dc3545" //#cd5c5c
-          }}
+        <button id="btnDisapprove"
+          // style={{
+          //   height: "4vw",
+          //   width: "10vw",
+          //   marginTop: "5vh",
+          //   marginRight: "30%",
+          //   borderColor: "#dc3545", color: "white", backgroundColor: "#dc3545" //#cd5c5c
+          // }}
           onClick={handleDisapprove}
         // onClick={() => {
         //   handleDisapprove(results.id);
