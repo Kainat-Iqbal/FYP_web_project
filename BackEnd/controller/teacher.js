@@ -10,7 +10,8 @@ const addTeacher = async (req, res) => {
       return res
         .status(500)
         .json({ success: false, message: "Failed to retrieve admin ID" });
-    } else {
+    } 
+    else {
       if (result.length > 0) {
         const adminId = result[0].adminId;
         console.log("Admin ID:", adminId);

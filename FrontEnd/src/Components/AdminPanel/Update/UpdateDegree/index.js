@@ -1,71 +1,67 @@
 import * as React from "react";
-import "./addDegree.css";
+import "./degree.css";
 import SideBar from "../../SideBar";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function AddDegreeProgram() {
-    const [admin, setAdminId] = useState(null);
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get("http://localhost:8081/session", {
-            withCredentials: true,
-          });
-          setAdminId(response.data.userId);
-        } catch (error) {
-          console.error("Error:", error);
-        }
-      };
+
+function UpdateDegree() {
+    const {id} = useParams();
+    const nav = useNavigate();
   
-      fetchData();
-    }, []);
-  
-     console.log("FVFV ", admin);
-    // State variables to hold the input values
-  const [values, setValues] = useState({
-    adminId:"",
-    type: "BS",
-    degree: "Software Engineerint",
-    total_credit_hours: "128*",
+  // State variables to hold the input values
+  const [DATA, setData] = useState({
+    type: "",
+    degree: "",
+    total_credit_hours: "",
+    adminId:""
   });
-  useEffect(() => {
-    // Update values after admin is set
-    if (admin !== null) {
-      setValues((prev) => ({
-        ...prev,
-        adminId: admin,
-      }));
-    }
-  }, [admin]);
-
+  
+  
   // Function to handle changes in input field
   const handleInput = (event) => {
-    const { name, value } = event.target;
-    setValues((prev) => ({
+    setData((prev) => ({
       ...prev,
-      [name]: value,
+      [event.target.name]: event.target.value,
     }));
   };
-
+  console.log(DATA)
+  
   const handleSubmit = async (event) => {
-    event.preventDefault();
-      axios.post("http://localhost:8081/degree/Add", values).then((res) => {
-        console.log("val",values);
-        if (res.data === "success") {
-          alert("DegreeProgram is added successfully");
-        } else {
-          console.log("error");
-        }
-      });
+  event.preventDefault();
+  axios.put("http://localhost:8081/degree/Update/"+id,DATA)
+  .then(res =>{
+    if(res.data.updated){
+      alert("Degree Program Updated Succesfully")
+      nav("/viewDegree");
+    }
+    else console.log("Wrongggg")
+  })
+  }
+  
+  useEffect(() => {
+  const fetchDegree = async () => {
+    try {
+      const res = await axios.get("http://localhost:8081/degree/Edit/"+id);
+      setData(res.data[0]);
+      console.log("Successfuly fetched", res.data[0]);
+      // console.log("first",setTeacher)
+    } catch (error) {
+      console.log("error", error);
+    }
   };
-
+  
+  fetchDegree();
+  }, []);
+  
   return (
     <div id="mainAddDegreeProgramDiv">
       <SideBar />
       <div id="degreeProgramWithoutBar">
         <div id="degreeProgramTop">
-          <h1>Add Degree Program</h1>
+          <h1>Update Degree Program</h1>
         </div>
 
         <div id="degreeProgramBottom">
@@ -75,6 +71,7 @@ function AddDegreeProgram() {
               <label>Type</label>
               <select
                 name="type"
+                value={DATA.type}
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
@@ -87,6 +84,7 @@ function AddDegreeProgram() {
               <label>Degree</label>
               <select
                 name="degree"
+                value={DATA.degree}
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
@@ -100,6 +98,7 @@ function AddDegreeProgram() {
               <label>Total Credit Hours</label>
               <select
                 name="total_credit_hours"
+                value={DATA.total_credit_hours}
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
@@ -108,11 +107,11 @@ function AddDegreeProgram() {
               </select>
             </div>
         
-            <button>Add Degree Program</button>
+            <button>Update Degree Program</button>
           </form>
         </div>
       </div>
     </div>
   );
 }
-export default AddDegreeProgram;
+export default UpdateDegree;

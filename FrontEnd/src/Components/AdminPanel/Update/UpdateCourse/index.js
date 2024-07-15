@@ -1,83 +1,75 @@
 import * as React from "react";
-import "./addCourse.css";
+import "./updateCourse.css";
 import SideBar from "../../SideBar";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Title } from "@mui/icons-material";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function AddCourse() {
-  const [admin, setAdminId] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8081/session", {
-          withCredentials: true,
-        });
-        setAdminId(response.data.userId);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
+function UpdateCourse() {
+    const {id} = useParams();
+    const nav = useNavigate();
 
-    fetchData();
-  }, []);
-
-   console.log("FVFV ", admin);
-  // State variables to hold the input values
-  const [values, setValues] = useState({
-    code: "",
-    title: "",
-    type: "Compulsary",
-    thHours: 0,
-    labHours: 0,
-    totalMid: "",
-    passingMid:"",
-    totalTerminal: "",
-    passingTerminal: "",
-    totalSessional:"",
-    passingSessional:"",
-    totalLab: "",
-    passingLab:"",
-    totalMarks:"",
+    // State variables to hold the input values
+const [DATA, setData] = useState({
+    course_code: "",
+    course_title: "",
+    course_type: "",
+    th_credit_hr: "",
+    lab_credit_hr: "",
+    max_mid_marks: "",
+    min_mid_marks:"",
+    max_th_marks: "",
+    min_th_marks: "",
+    max_sessional:"",
+    min_sessional:"",
+    max_lab: "",
+    min_lab:"",
+    total_marks:"",
   });
-  useEffect(() => {
-    // Update values after admin is set
-    if (admin !== null) {
-      setValues((prev) => ({
-        ...prev,
-        adminId: admin,
-      }));
-    }
-  }, [admin]);
   
   // Function to handle changes in input field
   const handleInput = (event) => {
-    const { name, value } = event.target;
-    setValues((prev) => ({
+    setData((prev) => ({
       ...prev,
-      [name]: value,
+      [event.target.name]: event.target.value,
     }));
   };
-console.log(values)
+  console.log(DATA)
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
-      console.log("nhmbkjbhkbhjuu",values)
-      axios.post("http://localhost:8081/course/Add", values).then((res) => {
-        console.log("val",values);
-        if (res.data === "success") {
-          alert("Course is added successfully");
-        } else {
-          console.log("error");
-        }
-      });
-  };
-
+    axios.put("http://localhost:8081/course/Update/"+id,DATA)
+    .then(res =>{
+      if(res.data.updated){
+        alert("Course Updated Succesfully")
+        nav("/viewCourse");
+      }
+      else console.log("Wrongggg")
+    })
+    }
+    
+    useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const res = await axios.get("http://localhost:8081/course/Edit/"+id);
+        setData(res.data[0]);
+        console.log("Successfuly fetched", res.data[0]);
+        // console.log("first",setTeacher)
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    
+    fetchCourses();
+    }, []);
+    
   return (
     <div id="mainAddCourseDiv">
       <SideBar />
       <div id="courseWithoutBar">
         <div id="courseTop">
-          <h1>Add Course</h1>
+          <h1>Update Course</h1>
         </div>
 
         <div id="courseBottom">
@@ -85,9 +77,9 @@ console.log(values)
             <div id="courseField">
               <label>Course Code</label>
               <input
-                name="code"
+                name="course_code"
                 type="text"
-                placeholder="CSS 1032"
+                value={DATA.course_code}
                 onChange={handleInput}
               ></input>
             </div>
@@ -95,8 +87,9 @@ console.log(values)
             <div id="courseField">
               <label>Course Title</label>
               <input
-                name="title"
+                name="course_title"
                 type="text"
+                value={DATA.course_title}
                 placeholder="Programming Fundamental"
                 onChange={handleInput}
               ></input>
@@ -105,7 +98,8 @@ console.log(values)
             <div id="courseField">
               <label>Course Type</label>
               <select className="DROPDOWN"
-                name="type"
+                name="course_type"
+                value={DATA.course_type}
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
@@ -118,8 +112,9 @@ console.log(values)
               <label>Theory Credit Hr</label>
 
               <select
-                name="thHours"
+                name="th_credit_hr"
                 onChange={handleInput}
+                value={DATA.th_credit_hr}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
                 <option value="0">0</option>
@@ -135,7 +130,8 @@ console.log(values)
               <label>Lab Credit Hr</label>
 
               <select
-                name="labHours"
+                name="lab_credit_hr"
+                value={DATA.lab_credit_hr}
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
@@ -151,7 +147,8 @@ console.log(values)
             <div id="courseField">
               <label>Total Mid Marks</label>
               <input
-                name="totalMid"
+                name="max_mid_marks"
+                value={DATA.max_mid_marks}
                 type="number"
                 min={0}
                 placeholder="20"
@@ -162,8 +159,9 @@ console.log(values)
             <div id="courseField">
               <label>Passing Mid Marks</label>
               <input
-                name="passingMid"
+                name="min_mid_marks"
                 min={0}
+                value={DATA.min_mid_marks}
                 type="number"
                 placeholder="12"
                 onChange={handleInput}
@@ -173,8 +171,9 @@ console.log(values)
             <div id="courseField">
               <label>Total Terminal Marks</label>
               <input
-                name="totalTerminal"
+                name="max_th_marks"
                 type="number"
+                value={DATA.max_th_marks}
                 min={0}
                 placeholder="40"
                 onChange={handleInput}
@@ -184,8 +183,9 @@ console.log(values)
             <div id="courseField">
               <label>Passing Terminal Marks</label>
               <input
-                name="passingTerminal"
+                name="min_th_marks"
                 min={0}
+                value={DATA.min_th_marks}
                 type="number"
                 placeholder="24"
                 onChange={handleInput}
@@ -195,8 +195,9 @@ console.log(values)
             <div id="courseField">
               <label>Total Sessional Marks</label>
               <input
-                name="totalSessional"
+                name="max_sessional"
                 min={0}
+                value={DATA.max_sessional}
                 type="number"
                 placeholder="10"
                 onChange={handleInput}
@@ -206,7 +207,8 @@ console.log(values)
             <div id="courseField">
               <label>Passing Sessional Marks</label>
               <input
-                name="passingSessional"
+                name="min_sessional"
+                value={DATA.min_sessional}
                 min={0}
                 type="number"
                 placeholder="6"
@@ -217,8 +219,9 @@ console.log(values)
             <div id="courseField">
               <label>Total Lab Marks</label>
               <input
-                name="totalLab"
+                name="max_lab"
                 type="number"
+                value={DATA.max_lab}
                 min={0}
                 placeholder="30"
                 onChange={handleInput}
@@ -228,8 +231,9 @@ console.log(values)
             <div id="courseField">
               <label>Passing Lab Marks</label>
               <input
-                name="passingLab"
+                name="min_lab"
                 min={0}
+                value={DATA.min_lab}
                 type="number"
                 placeholder="18"
                 onChange={handleInput}
@@ -239,7 +243,8 @@ console.log(values)
             <div id="courseField">
               <label>Total Marks</label>
               <input
-                name="totalMarks"
+                name="total_marks"
+                value={DATA.total_marks}
                 min={0}
                 type="number"
                 placeholder="100"
@@ -247,11 +252,11 @@ console.log(values)
               ></input>
             </div>
 
-            <button>Add Course</button>
+            <button>Update Course</button>
           </form>
         </div>
       </div>
     </div>
   );
 }
-export default AddCourse;
+export default UpdateCourse;

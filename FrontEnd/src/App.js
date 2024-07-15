@@ -28,6 +28,11 @@ import AddExamination from './Components/AdminPanel/Add/AddExamination';
 import UpdateExamination from './Components/AdminPanel/Update/UpdateExamination';
 import AddCourse from './Components/AdminPanel/Add/AddCourse';
 import AddDegreeProgram from './Components/AdminPanel/Add/AddDegreeProgram';
+import UpdateHod from './Components/AdminPanel/Update/UpdateHod';
+import ViewCourse from './Components/AdminPanel/View/ViewCourse';
+import UpdateCourse from './Components/AdminPanel/Update/UpdateCourse';
+import ViewDegree from './Components/AdminPanel/View/ViewDegree';
+import UpdateDegree from './Components/AdminPanel/Update/UpdateDegree';
 
 
 function App() {
@@ -53,11 +58,16 @@ function App() {
         <Route path='/viewTeacher' element={<Auth>
           <ViewTeacher/>
         </Auth>}/>
+        <Route path='/viewCourse' element={<ViewCourse/>}></Route>
         <Route path='/viewDean' element={<ViewDeanHodExam/>}></Route>
+        <Route path='/viewDegree' element={<ViewDegree/>}></Route>
         <Route path='/addStudent' element={<AddStudent/>}></Route>
         <Route path='/updateTeacher/:id' element={<UpdateTeacher/>}></Route>
+        <Route path='/updateHod/:id' element={<UpdateHod/>}></Route>
         <Route path='/updateDean/:id' element={<UpdateDean/>}></Route>
         <Route path='/updateExamination/:id' element={<UpdateExamination/>}></Route>
+        <Route path='/updateCourse/:id' element={<UpdateCourse/>}></Route>
+        <Route path='/updateDegree/:id' element={<UpdateDegree/>}></Route>
         <Route path='/teacherHome' element={<Dashboard/>}></Route>
         <Route path='/teacherCourses' element={<Courses/>}></Route>
         <Route path='/createResult' element={<CreateResult/>}></Route>

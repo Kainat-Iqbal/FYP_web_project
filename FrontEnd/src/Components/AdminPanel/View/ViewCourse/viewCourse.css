@@ -1,11 +1,11 @@
-#mainViewTeacherDiv{
+#mainViewCourseDiv{
     width: 82%;
     height: 100vh;
     margin-left: 18%;
     /* background-color: aqua; */
 }
 
-#viewTeacherWithoutBar{
+#viewCourseWithoutBar{
     width: 100%;
     height: 91%;
     /* background-color: brown; */
@@ -14,7 +14,7 @@
 #sidebar{
     height: 9%;
 }
-#viewTeacherTop{
+#viewCourseTop{
     height: 20%;
     width: 100%;
     /* background-color: blue;
@@ -50,7 +50,7 @@
     justify-content: right;
     margin-right: 2.5%;
 }
-#viewTeacherBottom{
+#viewCourseBottom{
     height: auto;
     width: 100%;
     /* background-color: chartreuse; */
@@ -58,7 +58,7 @@
     justify-content: center;
 }
 
-#viewTeacherTable{
+#viewCourseTable{
     width: 95%;
     margin-top: 1%;
     border: 2px solid #00304B; 

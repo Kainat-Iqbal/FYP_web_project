@@ -35,9 +35,9 @@
 #InputFormField{
     width: 25vw;
     height: 8vh;
-    /* background-color: aqua; */
     display: flex;
     justify-content: space-between;
+    margin-bottom: 1vh; /* Add margin for spacing between fields */
 }
 
 #inputError{
@@ -53,3 +53,57 @@
 #InputFormField label{
     font-size: 1.2rem;
 }
+
+#inputButton {
+    border-radius: 15px;
+    width: 17vw;
+    margin-top: 2vh;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    #loginForm {
+      width: 80vw;
+      height: auto; /* Adjust height to fit content */
+      padding-top: 2vh;
+      padding-bottom: 2vh; /* Add padding to the bottom */
+    }
+  
+    #loginFormDiv {
+      margin-top: 5vh;
+    }
+  
+    #InputFormField {
+      width: 70vw;
+      height: auto; /* Adjust height to fit content */
+      flex-direction: column; /* Stack label and input vertically */
+      align-items: flex-start;
+    }
+  
+    #InputFormField input {
+      width: 100%;
+    }
+  
+    #InputFormField label {
+      font-size: 1rem;
+      margin-bottom: 0.5vh; /* Add margin for spacing */
+    }
+  
+    #inputButton {
+      width: 70vw;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #loginForm {
+      width: 90vw;
+    }
+  
+    #InputFormField {
+      width: 80vw;
+    }
+  
+    #inputButton {
+      width: 80vw;
+    }
+  }

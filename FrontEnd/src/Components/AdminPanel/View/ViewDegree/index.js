@@ -1,6 +1,6 @@
 import * as React from "react";
 import SideBar from "../../SideBar";
-import "./dean.css";
+import "./degree.css";
 import Table from "react-bootstrap/Table";
 import { Edit } from "@mui/icons-material";
 import { useState, useEffect } from "react";
@@ -8,21 +8,21 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchIcon from '@mui/icons-material/Search';
 
-function ViewDeanHodExam(){
+function ViewDegree(){
 
-  const [hod, setHod] = useState([]);
+  const [degree, setDegree] = useState([]);
   useEffect(() => {
-    const fetchHod = async () => {
+    const fetchDegree = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/hod/View");
-        setHod(res.data);
+        const res = await axios.get("http://localhost:8081/degree/View");
+        setDegree(res.data);
         // console.log("Successfuly fetched", res.data);
       } catch (error) {
         console.log("error", error);
       }
     };
 
-    fetchHod();
+    fetchDegree();
   }, []);
 
   const [dean, setDean] = useState([]);
@@ -56,48 +56,33 @@ function ViewDeanHodExam(){
     fetchExamination();
   }, []);
 return(
-    <div id="mainViewDeanDiv">
+    <div id="mainViewDegreeDiv">
         <div id="sidebar">
             <SideBar/>
         </div>
-        <div id="viewDeanWithoutBar">
+        <div id="viewDegreeWithoutBar">
         
         <div id="topheading">
             <h1>
-              HOD's Information
+              Degree Program's Information
             </h1>
           </div>
           
-        <div id="viewHODBottom">
-          <Table striped bordered hover id="viewDeanTable">
+        <div id="viewDegreeBottom">
+          <Table striped bordered hover id="viewDegreeTable">
             <thead>
               <tr>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
                   ID
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Name
+                  Type
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Email
+                  Degree
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Designation
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Department
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  CNIC
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Status
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Qualification
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Joining Date
+                  Total Credit Hours
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
                   Edit
@@ -106,20 +91,16 @@ return(
             </thead>
 
             <tbody>
-              {hod.map((hodData) => {
+              {degree.map((degreeData) => {
                 return (
-                  <tr key={hodData.id}>
-                    <td>{hodData.HODId}</td>
-                    <td>{hodData.name}</td>
-                    <td>{hodData.email}</td>
-                    <td>{hodData.designation}</td>
-                    <td>{hodData.department}</td>
-                    <td>{hodData.CNIC}</td>
-                    <td>{hodData.status}</td>
-                    <td>{hodData.qualification}</td>
-                    <td>{hodData.JoiningDate}</td>
+                  <tr key={degreeData.id}>
+                    <td>{degreeData.programId}</td>
+                    <td>{degreeData.type}</td>
+                    <td>{degreeData.degree}</td>
+                    <td>{degreeData.total_credit_hours}</td>
+                   
                     <td>
-                      <Link to={`/updateHod/${hodData.HODId}`}><Edit /></Link>
+                      <Link to={`/updateDegree/${degreeData.programId}`}><Edit /></Link>
                     </td>
                   </tr>
                 );
@@ -254,4 +235,4 @@ return(
 
 }
 
-export default ViewDeanHodExam;
+export default ViewDegree;

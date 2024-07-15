@@ -9,6 +9,9 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { examinationRouter } = require('./routes/examination');
+const { hodRouter } = require('./routes/hod');
+const { courseRouter } = require('./routes/course');
+const { degreeRouter } = require('./routes/degree');
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -30,6 +33,9 @@ app.use("/login",loginRouter)
 app.use("/teacher",teacherRouter)
 app.use("/dean",deanRouter)
 app.use("/examination",examinationRouter)
+app.use("/hod",hodRouter)
+app.use("/course",courseRouter)
+app.use("/degree",degreeRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){

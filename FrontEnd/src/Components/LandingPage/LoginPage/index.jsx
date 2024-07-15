@@ -31,11 +31,16 @@ axios.defaults.withCredentials = true;
       axios.post('http://localhost:8081/login',values)
       .then(res =>{
         console.log(values)
-        if(res.data === "success"){
+        if(res.data === "Admin"){
           localStorage.setItem("user","kainat");
+          console.log("admin")
           nav("/home");
         }
-        else{
+        else if(res.data === "Dean"){
+          console.log("Dena")
+          nav("/addDean")
+        }
+        else if(res.data ==="Failed"){
           alert("Invalid Login")
         }
       })
@@ -74,7 +79,7 @@ axios.defaults.withCredentials = true;
             </div>
           </div>
 
-          <button
+          <button id="inputButton"
             style={{
               borderRadius: "15px",
               width: "17vw",
