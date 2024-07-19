@@ -12,6 +12,10 @@ const { examinationRouter } = require('./routes/examination');
 const { hodRouter } = require('./routes/hod');
 const { courseRouter } = require('./routes/course');
 const { degreeRouter } = require('./routes/degree');
+const { batchRouter } = require('./routes/batch');
+const { SessionRouter } = require('./routes/session');
+const { studentRouter } = require('./routes/student');
+
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -36,6 +40,9 @@ app.use("/examination",examinationRouter)
 app.use("/hod",hodRouter)
 app.use("/course",courseRouter)
 app.use("/degree",degreeRouter)
+app.use("/batch",batchRouter)
+app.use("/sessionUni",SessionRouter)
+app.use("/student",studentRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){

@@ -25,35 +25,35 @@ function ViewDegree(){
     fetchDegree();
   }, []);
 
-  const [dean, setDean] = useState([]);
+  const [batch, setBatch] = useState([]);
   useEffect(() => {
-    const fetchDean = async () => {
+    const fetchBatch = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/dean/View");
-        setDean(res.data);
+        const res = await axios.get("http://localhost:8081/batch/View");
+        setBatch(res.data);
         // console.log("Successfuly fetched", res.data);
       } catch (error) {
         console.log("error", error);
       }
     };
 
-    fetchDean();
+    fetchBatch();
   }, []);
 
-  const [examination, setExamination] = useState([]);
+  const [session, setSession] = useState([]);
 
   useEffect(() => {
-    const fetchExamination = async () => {
+    const fetchSession = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/examination/View");
-        setExamination(res.data);
+        const res = await axios.get("http://localhost:8081/sessionUni/View");
+        setSession(res.data);
         console.log("Successfuly fetched", res.data);
       } catch (error) {
         console.log("error", error);
       }
     };
 
-    fetchExamination();
+    fetchSession();
   }, []);
 return(
     <div id="mainViewDegreeDiv">
@@ -112,7 +112,7 @@ return(
 
         <div id="topheading">
             <h1>
-              Dean's Information
+              Batch's Information
             </h1>
           </div>
           
@@ -124,25 +124,10 @@ return(
                   ID
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Name
+                  Year
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Email
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Faculty
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Qualification
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  CNIC
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Joining Date
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Status
+                  Session
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
                   Edit
@@ -151,19 +136,14 @@ return(
             </thead>
 
             <tbody>
-              {dean.map((deanData) => {
+              {batch.map((batchData) => {
                 return (
-                  <tr key={deanData.id}>
-                    <td>{deanData.deanId}</td>
-                    <td>{deanData.name}</td>
-                    <td>{deanData.email}</td>
-                    <td>{deanData.faculty}</td>
-                    <td>{deanData.qualification}</td>
-                    <td>{deanData.CNIC}</td>
-                    <td>{deanData.JoiningDate}</td>
-                    <td>{deanData.status}</td>
+                  <tr key={batchData.id}>
+                    <td>{batchData.batchId}</td>
+                    <td>{batchData.year}</td>
+                    <td>{batchData.session}</td>
                     <td>
-                      <Link to={`/updateDean/${deanData.deanId}`}><Edit /></Link>
+                      <Link to={`/updateBatch/${batchData.batchId}`}><Edit /></Link>
                     </td>
                   </tr>
                 );
@@ -175,7 +155,7 @@ return(
 
         <div id="topheading">
             <h1>
-              Controller of Examination's Information
+              Session's Information
             </h1>
           </div>
 
@@ -187,19 +167,16 @@ return(
                   ID
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Name
+                  Academic Year
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Email
+                  Semester
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  CNIC
+                  Class
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Joining Date
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Status
+                  Batch
                 </th>
                 <th style={{ backgroundColor: "#00304B", color: "white" }}>
                   Edit
@@ -208,17 +185,16 @@ return(
             </thead>
 
             <tbody>
-              {examination.map((examinationData) => {
+              {session.map((sessionData) => {
                 return (
-                  <tr key={examinationData.id}>
-                    <td>{examinationData.examinationId}</td>
-                    <td>{examinationData.name}</td>
-                    <td>{examinationData.email}</td>
-                    <td>{examinationData.CNIC}</td>
-                    <td>{examinationData.joiningDate}</td>
-                    <td>{examinationData.status}</td>
+                  <tr key={sessionData.id}>
+                    <td>{sessionData.sessionId}</td>
+                    <td>{sessionData.academic_year}</td>
+                    <td>{sessionData.semester}</td>
+                    <td>{sessionData.type+'('+sessionData.degree+')'}</td>
+                    <td>{sessionData.year+'('+sessionData.session+')'}</td>
                     <td>
-                      <Link to={`/updateExamination/${examinationData.examinationId}`}><Edit /></Link>
+                      <Link to={`/updateSession/${sessionData.sessionId}`}><Edit /></Link>
                     </td>
                   </tr>
                 );

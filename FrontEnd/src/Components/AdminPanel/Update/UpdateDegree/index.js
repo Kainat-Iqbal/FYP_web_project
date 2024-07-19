@@ -88,9 +88,9 @@ function UpdateDegree() {
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
-                <option value="Sofware Engineering">Sofware Engineering</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Data Science">Data Science</option>
+                <option value="SE">Sofware Engineering</option>
+                <option value="CS">Computer Science</option>
+                <option value="DS">Data Science</option>
               </select>
             </div>
 

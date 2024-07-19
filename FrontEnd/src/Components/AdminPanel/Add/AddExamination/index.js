@@ -68,6 +68,7 @@ function AddExamination() {
         console.log("val",values);
         if (res.data === "success") {
           alert("examination is added successfully");
+          window.location.reload(); // Refresh the page
         } else {
           console.log("error");
         }

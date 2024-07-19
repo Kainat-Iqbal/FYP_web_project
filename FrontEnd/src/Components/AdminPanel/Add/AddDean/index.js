@@ -71,6 +71,7 @@ console.log(values)
         console.log("val",values);
         if (res.data === "success") {
           alert("dean is added successfully");
+          window.location.reload(); // Refresh the page
         } else {
           console.log("error");
         }

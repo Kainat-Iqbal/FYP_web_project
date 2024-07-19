@@ -26,7 +26,7 @@ function AddDegreeProgram() {
   const [values, setValues] = useState({
     adminId:"",
     type: "BS",
-    degree: "Software Engineerint",
+    degree: "SE",
     total_credit_hours: "128*",
   });
   useEffect(() => {
@@ -54,6 +54,7 @@ function AddDegreeProgram() {
         console.log("val",values);
         if (res.data === "success") {
           alert("DegreeProgram is added successfully");
+          window.location.reload(); // Refresh the page
         } else {
           console.log("error");
         }
@@ -90,9 +91,9 @@ function AddDegreeProgram() {
                 onChange={handleInput}
                 style={{ width: "14.8vw", height: "4.5vh" }}
               >
-                <option value="Sofware Engineering">Sofware Engineering</option>
-                <option value="Computer Science">Computer Science</option>
-                <option value="Data Science">Data Science</option>
+                <option value="SE">Sofware Engineering</option>
+                <option value="CS">Computer Science</option>
+                <option value="DS">Data Science</option>
               </select>
             </div>
 
