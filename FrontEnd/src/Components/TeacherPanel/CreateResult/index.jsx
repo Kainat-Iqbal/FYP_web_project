@@ -1,9 +1,10 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import SideBar from "../Sidebar";
 import './createResult.css';
 import StudentTable from "../../Utilities/StudentTable";
 
 function CreateResult() {
+    
     return (
         <>
             <div id="mainCR">

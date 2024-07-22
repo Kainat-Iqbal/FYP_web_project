@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import './table.css';
 
 const StudentTable = () => {
@@ -46,26 +46,41 @@ const StudentTable = () => {
     }
   ]);
 
+  // Load data from local storage on component mount
+  useEffect(() => {
+    const savedStudents = localStorage.getItem("studentResults");
+    if (savedStudents) {
+      setStudents(JSON.parse(savedStudents));
+    }
+  }, []);
+
+  // Function to save students to local storage
+  const saveToLocalStorage = (students) => {
+    localStorage.setItem("studentResults", JSON.stringify(students));
+  };
+
   // Function to handle input changes
-  const handleInputChange = (e, studentId, fieldName) => {
+  const handleMarksChange = (e, studentId, fieldName) => {
     let { value } = e.target;
     // Ensure marks are within the specified range
     switch (fieldName) {
       case 'midMarks':
-        value = Math.min(Math.max(parseInt(value), 0), 20).toString();
+        value = Math.min(Math.max(parseInt(value, 10), 0), 20).toString();
         break;
       case 'terminalMarks':
-        value = Math.min(Math.max(parseInt(value), 0), 50).toString();
+        value = Math.min(Math.max(parseInt(value, 10), 0), 50).toString();
         break;
       case 'labMarks':
-        value = Math.min(Math.max(parseInt(value), 0), 30).toString();
+        value = Math.min(Math.max(parseInt(value, 10), 0), 30).toString();
         break;
       default:
         break;
     }
-    setStudents(prevStudents => prevStudents.map(student =>
+    const updatedStudents = students.map(student =>
       student.id === studentId ? { ...student, [fieldName]: value } : student
-    ));
+    );
+    setStudents(updatedStudents);
+    saveToLocalStorage(updatedStudents);
   };
 
   // Function to calculate total marks
@@ -75,7 +90,7 @@ const StudentTable = () => {
     const lab = parseFloat(labMarks);
     return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab) ? mid + terminal + lab : '';
   };
-
+  
   // Function to calculate GPA
   const calculateGPA = (totalMarks) => {
     const marks = parseFloat(totalMarks);
@@ -141,9 +156,9 @@ const StudentTable = () => {
               <td>{student.enrollmentNo}</td>
               <td>{student.name}</td>
               <td>{student.fatherName}</td>
-              <td><input type="number" style={{ width: '70px' }} min="0" max="20" value={student.midMarks} onChange={(e) => handleInputChange(e, student.id, 'midMarks')} disabled={student.isLocked} /></td>
-              <td><input type="number" style={{ width: '70px' }} min="0" max="30" value={student.labMarks} onChange={(e) => handleInputChange(e, student.id, 'labMarks')} disabled={student.isLocked} /></td>
-              <td><input type="number" style={{ width: '70px' }} min="0" max="50" value={student.terminalMarks} onChange={(e) => handleInputChange(e, student.id, 'terminalMarks')} disabled={student.isLocked} /></td>
+              <td><input type="number" style={{ width: '70px' }} min="0" max="20" value={student.midMarks} onChange={(e) => handleMarksChange(e, student.id, 'midMarks')} disabled={student.isLocked} /></td>
+              <td><input type="number" style={{ width: '70px' }} min="0" max="30" value={student.labMarks} onChange={(e) => handleMarksChange(e, student.id, 'labMarks')} disabled={student.isLocked} /></td>
+              <td><input type="number" style={{ width: '70px' }} min="0" max="50" value={student.terminalMarks} onChange={(e) => handleMarksChange(e, student.id, 'terminalMarks')} disabled={student.isLocked} /></td>
               <td>{calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks)}</td>
               <td>{calculateGPA(calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks))}</td>
             </tr>
