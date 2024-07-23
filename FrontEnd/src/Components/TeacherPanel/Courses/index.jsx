@@ -10,85 +10,10 @@ import axios from "axios";
 
 function Courses() {
     const [value, setValue] = React.useState(0);
-    const [images, setImages] = useState([]);
-    const [course, setCourse] = useState([]);
-    const [coursesWithImages, setCoursesWithImages] = useState([]);
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
     
-    useEffect(() => {
-      const fetchCourse = async () => {
-        try {
-          const res = await axios.get("http://localhost:8081/course/view");
-          setCourse(res.data);
-           console.log("Successfuly fetched", res.data);
-        } catch (error) {
-          console.log("error", error);
-          
-        }
-      };
-      const fetchImages = async () => {
-        try {
-            const res = await axios.get("http://localhost:8081/images/api");
-            setImages(res.data);
-            console.log("Successfully fetched images", res.data);
-        } catch (error) {
-            console.log("Error fetching images", error);
-        }
-    };
-    
-    fetchCourse();
-    fetchImages();
-    }, []);
-    useEffect(() => {
-        if (course.length && images.length) {
-            // Ensure that we have enough images for the courses
-            const assignedCourses = course.map((course, index) => ({
-                ...course,
-                image: images[index % images.length]?.image
-            }));
-            setCoursesWithImages(assignedCourses);
-        }
-    }, [course, images]);
-    const getRandomImage = () => {
-        const randomIndex = Math.floor(Math.random() * images.length);
-        return images[randomIndex]?.image;
-    };
-     /*
-    const [course, setCourses] = useState([
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }
-    ])
- */
     return (
         <>
             <div id="mainC">
@@ -130,13 +55,14 @@ function Courses() {
                 
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                        {coursesWithImages.map((courseData) => (
+                            <CourseCard/>
+                        {/* {coursesWithImages.map((courseData) => (
                                 <CourseCard
                                     key={courseData.courseId}
                                     image={courseData.image}
                                     name={courseData.course_title}
                                 />
-                            ))}</div>
+                            ))} */}</div>
                             
                     </div>
                 </div>

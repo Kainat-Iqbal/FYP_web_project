@@ -5,39 +5,6 @@ import { useState } from "react";
 import CourseCard from "../../Utilities/CourseCard";
 
 function Dashboard() {
-    const [course, setCourses] = useState([
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }
-    ])
-
     return (
         <>
             <div id="mainD">
@@ -58,14 +25,8 @@ function Dashboard() {
                     </div>
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                            {course.map((course) => {
-                                return (
-                                    <CourseCard image={course.image}
-                                        name={course.name} />
-                                )
-                            }
-
-                            )}</div>
+                            <CourseCard/>
+                            </div>
                     </div>
 
                 </div>

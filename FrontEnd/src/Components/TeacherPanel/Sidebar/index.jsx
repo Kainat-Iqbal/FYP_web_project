@@ -125,12 +125,12 @@ function SideBar() {
               nav("/courses");
             }}
           >
-            View Courses</MenuItem>
-          <MenuItem icon={<Grading />
+           Courses</MenuItem>
+          {/* <MenuItem icon={<Grading />
         } onClick={() => {
           nav("/viewResult");
-        }}>View Results</MenuItem>
-          <MenuItem icon={<Insights />}>View Insights</MenuItem>
+        }}>View Results</MenuItem> */}
+          <MenuItem icon={<Insights />}>Insights</MenuItem>
 
           <MenuItem icon={<Notifications />}>Notifications</MenuItem>
         </Menu>
