@@ -176,10 +176,10 @@ const StudentTable = () => {
 export default StudentTable;
  */
 import React, { useState, useEffect } from 'react';
-import './table.css';
 import axios from 'axios';
+import './table.css';
 
-const StudentTable = ({ batchId }) => {
+const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const [students, setStudents] = useState([]);
   const [isLocked, setIsLocked] = useState(false);
 
@@ -187,8 +187,7 @@ const StudentTable = ({ batchId }) => {
     const fetchStudents = async () => {
       try {
         const response = await axios.get(`http://localhost:8081/course/view?batchId=${batchId}`);
-        console.log("Fetched students data:", response.data);  // Debugging line
-        // Filter out duplicates if needed
+        console.log("Fetched students data:", response.data);
         const uniqueStudents = Array.from(new Map(response.data.map(student => [student.studentId, student])).values());
         setStudents(uniqueStudents);
       } catch (error) {
@@ -201,30 +200,20 @@ const StudentTable = ({ batchId }) => {
     }
   }, [batchId]);
 
-  const saveToLocalStorage = (students) => {
-    localStorage.setItem("studentResults", JSON.stringify(students));
-  };
-
   const handleMarksChange = (e, studentId, fieldName) => {
     let { value } = e.target;
-    switch (fieldName) {
-      case 'midMarks':
-        value = Math.min(Math.max(parseInt(value, 10), 0), 20).toString();
-        break;
-      case 'terminalMarks':
-        value = Math.min(Math.max(parseInt(value, 10), 0), 50).toString();
-        break;
-      case 'labMarks':
-        value = Math.min(Math.max(parseInt(value, 10), 0), 30).toString();
-        break;
-      default:
-        break;
+    if (fieldName === 'midMarks') {
+      value = Math.min(Math.max(parseInt(value, 10), 0), 20).toString();
+    } else if (fieldName === 'terminalMarks') {
+      value = labCreditHours === 1 ? Math.min(Math.max(parseInt(value, 10), 0), 50).toString() : Math.min(Math.max(parseInt(value, 10), 0), 80).toString();
+    } else if (fieldName === 'labMarks') {
+      value = labCreditHours === 1 ? Math.min(Math.max(parseInt(value, 10), 0), 30).toString() : '0';
     }
+
     const updatedStudents = students.map(student =>
       student.studentId === studentId ? { ...student, [fieldName]: value } : student
     );
     setStudents(updatedStudents);
-    saveToLocalStorage(updatedStudents);
   };
 
   const calculateTotalMarks = (midMarks, terminalMarks, labMarks) => {
@@ -236,32 +225,69 @@ const StudentTable = ({ batchId }) => {
 
   const calculateGPA = (totalMarks) => {
     const marks = parseFloat(totalMarks);
-    if (marks >= 85) {
-      return '4.00';
-    } else if (marks >= 80) {
-      return '3.66';
-    } else if (marks >= 75) {
-      return '3.33';
-    } else if (marks >= 70) {
-      return '3.00';
-    } else if (marks >= 65) {
-      return '2.66';
-    } else if (marks >= 60) {
-      return '2.22';
-    } else if (marks < 60) {
-      return '2.00';
-    } else {
-      return '';
+    if (marks >= 85) return '4.00';
+    else if (marks >= 80) return '3.66';
+    else if (marks >= 75) return '3.33';
+    else if (marks >= 70) return '3.00';
+    else if (marks >= 65) return '2.66';
+    else if (marks >= 60) return '2.22';
+    else if (marks < 60) return '2.00';
+    else return '';
+  };
+
+  const handleSave = async (student) => {
+    const isAttempt = [student.midMarks, student.terminalMarks, student.labMarks].every(mark => parseInt(mark, 10) === 0) ? 0 : 1;
+
+    const resultData = {
+      studentId: student.studentId,
+      assignId: student.assignId,
+      terminalSessionalMarks: student.terminalMarks,
+      midMarks: student.midMarks,
+      labMarks: student.labMarks,
+      totalMarks: calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks),
+      isAttempt,
+      GPA: calculateGPA(calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks)),
+      examDate,
+      submissionDate: "", // Add submissionDate if needed
+      resultCode: "" // Add resultCode if needed
+    };
+
+    try {
+      const addResponse = await axios.post('http://localhost:8081/result/Add', resultData);
+      if (addResponse.data.success) {
+        const resultId = addResponse.data.resultId;
+        console.log("rr",(resultId));
+        const getResponse = await axios.get(`http://localhost:8081/result/Get/${resultId}`);
+        if (getResponse.data) {
+          console.log("ss",getResponse.data)
+          console.log("stu",student.studentId)
+          console.log("students",student)
+          // Update only the result-related fields in the corresponding student row
+        const updatedStudents = students.map(s =>
+          s.studentId === student.studentId
+              ? {
+                  ...s,
+                  midMarks: getResponse.data.midMarks,
+                  terminalSessionalMarks: getResponse.data.terminalMarks,
+                  labMarks: getResponse.data.labMarks,
+                  totalMarks: getResponse.data.totalMarks,
+                  GPA: getResponse.data.GPA
+              }
+              : s
+            
+      );
+      console.log('Updated Students:', updatedStudents);
+        setStudents(updatedStudents);
+        }
+      }
+      alert('Result saved and fetched successfully');
+    } catch (error) {
+      alert('Error saving and fetching result:', error);
     }
   };
 
-  const handleLockResult = () => {
-    setIsLocked(true);
-  };
-
-  const handleEnableEditing = () => {
-    setIsLocked(false);
-  };
+  const handleLockResult = () => setIsLocked(true);
+  const handleEnableEditing = () => setIsLocked(false);
 
   return (
     <div>
@@ -278,29 +304,30 @@ const StudentTable = ({ batchId }) => {
             <th className="marks">Assign + Term (50/80)</th>
             <th className="marks">Grand Total</th>
             <th className="marks">GP</th>
+            <th>Edit</th>
+            <th>Save</th>
           </tr>
         </thead>
         <tbody>
           {students.map(student => (
-            <tr key={student.studentId}> {/* Ensure unique key */}
+            <tr key={student.studentId}>
               <td>{student.studentId}</td>
               <td>{student.seatNo}</td>
               <td>{student.enrollment}</td>
               <td>{student.name}</td>
               <td>{student.fatherName}</td>
               <td><input type="number" style={{ width: '70px' }} min="0" max="20" value={student.midMarks || ''} onChange={(e) => handleMarksChange(e, student.studentId, 'midMarks')} disabled={isLocked} /></td>
-              <td><input type="number" style={{ width: '70px' }} min="0" max="30" value={student.labMarks || ''} onChange={(e) => handleMarksChange(e, student.studentId, 'labMarks')} disabled={isLocked} /></td>
-              <td><input type="number" style={{ width: '70px' }} min="0" max="50" value={student.terminalMarks || ''} onChange={(e) => handleMarksChange(e, student.studentId, 'terminalMarks')} disabled={isLocked} /></td>
-              <td>{calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks)}</td>
-              <td>{calculateGPA(calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks))}</td>
+              <td><input type="number" style={{ width: '70px' }} min="0" max="30" value={student.labMarks || ''} onChange={(e) => handleMarksChange(e, student.studentId, 'labMarks')} disabled={labCreditHours === 0 || isLocked} /></td>
+              <td><input type="number" style={{ width: '70px' }} min="0" max={labCreditHours === 1 ? "50" : "80"} value={student.terminalMarks || ''} onChange={(e) => handleMarksChange(e, student.studentId, 'terminalMarks')} disabled={isLocked} /></td>
+              <td><input type="number" style={{ width: '70px' }} value={calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks) || ''} readOnly /></td>
+              <td><input type="text" style={{ width: '70px' }} value={calculateGPA(calculateTotalMarks(student.midMarks, student.terminalMarks, student.labMarks)) || ''} readOnly /></td>
+              <td><button className='btn btn-primary' onClick={handleEnableEditing}>Edit</button></td>
+              <td><button className='btn btn-primary' onClick={() => handleSave(student)}>Save</button></td>
             </tr>
           ))}
         </tbody>
       </table>
-      <div className="buttonContainer">
-        <button onClick={handleLockResult}>Lock Results</button>
-        <button onClick={handleEnableEditing}>Enable Editing</button>
-      </div>
+      <button onClick={handleLockResult}>Lock Result</button>
     </div>
   );
 };

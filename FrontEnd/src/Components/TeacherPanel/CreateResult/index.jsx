@@ -117,7 +117,7 @@ function CreateResult() {
                         
                         </div>
                     </div>
-                    <StudentTable batchId={batchId} />
+                    <StudentTable batchId={batchId} examDate={dateOfExamination} labCreditHours={courseData?.lab_credit_hr} />
                 </div>
             </div>
         </>
