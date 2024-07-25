@@ -35,6 +35,7 @@ function AddTeacher() {
     status: "Active",
     adminEmail: "",
     joiningDate: "",
+    photo:"",
   });
   useEffect(() => {
     // Update values after admin is set
@@ -200,6 +201,15 @@ function AddTeacher() {
                 style={{ width: "14.8vw", height: "4.5vh" }}
                 name="joiningDate"
                 type="date"
+                onChange={handleInput}
+              ></input>
+            </div>
+            <div id="teacherField">
+              <label>Picture</label>
+              <input
+                style={{ width: "14.8vw", height: "4.5vh" }}
+                name="photo"
+                type="file"
                 onChange={handleInput}
               ></input>
             </div>

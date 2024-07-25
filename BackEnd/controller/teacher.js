@@ -17,7 +17,7 @@ const addTeacher = async (req, res) => {
         console.log("Admin ID:", adminId);
 
         const queryToAdd =
-          "INSERT INTO `teacher` (`name`, `email`, `password`, `designation`, `department`, `adminId`, `CNIC`, `status`, `qualification`, `JoiningDate`) VALUES (?)";
+          "INSERT INTO `teacher` (`name`, `email`, `password`, `designation`, `department`, `adminId`, `CNIC`, `status`, `qualification`, `JoiningDate`,`photo`) VALUES (?)";
         const VALUES = [
           req.body.name,
           req.body.email,
@@ -28,7 +28,8 @@ const addTeacher = async (req, res) => {
           req.body.cnic,
           req.body.status,
           req.body.qualification,
-          req.body.joiningDate
+          req.body.joiningDate,
+          req.body.photo
         ];
         console.log("values",VALUES)
         DB.query(queryToAdd, [VALUES], (err, data) => {
