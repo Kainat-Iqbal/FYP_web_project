@@ -117,11 +117,42 @@ function CreateResult() {
                         
                         </div>
                     </div>
-                    <StudentTable batchId={batchId} examDate={dateOfExamination} labCreditHours={courseData?.lab_credit_hr} />
+                    <StudentTable batchId={batchId} courseCode={courseData?.course_code} batch={courseData?.type+courseData?.degree} examDate={dateOfExamination} labCreditHours={courseData?.lab_credit_hr} />
                 </div>
             </div>
         </>
     );
 }
-
-export default CreateResult;
+// Function to handle locking results
+/* const handleLockResult = async () => {
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+    const currentTime = new Date().toISOString().split('T')[1].split('.')[0].replace(/:/g, ''); // Get current time in HHMMSS format
+    const resultCode = `RC${courseCode}${batch}${currentTime}`; // Generate a result code based on course code, batch, and current time with seconds
+    // Update submissionDate and resultCode for each student
+    const updatedStudents = students.map(student => ({
+      ...student,
+      submissionDate: currentDate,
+      resultCode,
+    }));
+  
+    setStudents(updatedStudents);
+    setIsLocked(true);
+  
+    // Send updated results to the server
+    try {
+      await Promise.all(
+        updatedStudents.map(student =>
+          axios.put(`http://localhost:8081/result/Update/${student.resultId}`, {
+            ...student,
+            submissionDate: currentDate,
+            resultCode,
+          })
+        )
+      );
+      alert('Results locked and updated successfully');
+    } catch (error) {
+      console.error('Error locking and updating results:', error);
+    }
+  };
+  
+ */export default CreateResult;

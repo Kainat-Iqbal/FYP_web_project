@@ -1,7 +1,7 @@
 const DB = require("../DB/dbConfig");
 
 const addResult = async (req, res) => {
-    const queryToAddResult = "INSERT INTO `result` (`studentId`, `assignId`, `terminalSessionalMarks`, `midMarks`, `labMarks`, `totalMarks`, `isAttempt`, `GPA`, `examDate`, `submissionDate`, `resultCode`) VALUES (?)";
+    const queryToAddResult = "INSERT INTO `result` (`studentId`, `assignId`, `terminalMarks`, `midMarks`, `labMarks`, `totalMarks`, `isAttempt`, `GPA`, `examDate`, `submissionDate`, `resultCode`) VALUES (?)";
     const VALUES = [
         req.body.studentId,
         req.body.assignId,
@@ -11,38 +11,59 @@ const addResult = async (req, res) => {
         req.body.totalMarks,
         req.body.isAttempt,
         req.body.GPA,
-        req.body.examDate,
-        req.body.submissionDate,
-        req.body.resultCode
+        req.body.examDate=" ",
+        req.body.submissionDate=" ",
+        req.body.resultCode= " "
     ];
-
+console.log(VALUES)
     DB.query(queryToAddResult, [VALUES], (err, result) => {
         if (err) {
             console.error("Error adding result:", err);
             return res.status(500).json({ success: false, message: "Failed to add result" });
         } else {
             const insertedId = result.insertId; // Get the last inserted ID
-            return res.json({ success: true, resultId: insertedId });
+            return res.json("success");
         }
     });
 };
 
 const getResult = async (req, res) => {
-    const queryToGet = `SELECT r.midMarks,r.terminalSessionalMarks,r.labMarks,r.totalMarks,r.s.name,s.enrollement,s.seatNo,s.fatherName FROM result r JOIN s.studentId=r.studentId WHERE resultId = ?`;
-    const id = req.params.id;
-    DB.query(queryToGet, [id], (err, result) => {
+    const queryToGet = `SELECT * 
+FROM result 
+WHERE studentId = ? AND assignId = ?;
+`;
+    const id = req.params.studentId;
+    const assing_id = req.params.assignId;
+
+    DB.query(queryToGet, [id,assing_id], (err, result) => {
         if (err) {
             return res.json({ Error: err });
         } else {
+            console.log("SDC",result)
             return res.json(result[0]);
         }
     });
 };
 
 const updateResult = async (req, res) => {
-    const quertToUpdate = "UPDATE `result` SET `studentId`=?,`assignId`=?,`terminalSessionalMarks`=?,`midMarks`=?,`labMarks`=?,`totalMarks`=?,`isAttempt`=?,`GPA`=?,`examDate`=?,`submissionDate`=?,`resultCode`=? WHERE resultId= ?";
+    const queryToUpdate = 
+       ` UPDATE result
+        SET
+            studentId = ?,
+            assignId = ?,
+            terminalMarks = ?,
+            midMarks = ?,
+            labMarks = ?,
+            totalMarks = ?,
+            isAttempt = ?,
+            GPA = ?,
+            examDate = ?,
+            submissionDate = ?,
+            resultCode = ?
+        WHERE resultId = ?`
+    ;
     const id = req.params.id;
-    const VALUE = [
+    const values = [
         req.body.studentId,
         req.body.assignId,
         req.body.terminalSessionalMarks,
@@ -57,9 +78,10 @@ const updateResult = async (req, res) => {
         id
     ];
 
-    DB.query(quertToUpdate, VALUE, (err, result) => {
+    DB.query(queryToUpdate, values, (err, result) => {
         if (err) {
-            return res.json(err);
+            console.error("Error updating result:", err);
+            return res.status(500).json({ success: false, message: "Failed to update result" });
         } else {
             return res.json({ updated: true });
         }

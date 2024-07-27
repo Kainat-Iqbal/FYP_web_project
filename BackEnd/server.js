@@ -73,7 +73,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { examinationRouter } = require('./routes/examination');
 const { imagesRouter } = require('./routes/images');
-//const { requestRouter } = require('./routes/editRequest');
+const { requestRouter } = require('./routes/editRequest');
 const {resultRouter}=require('./routes/result')
 
 app.use(bodyParser.json())
@@ -98,7 +98,7 @@ app.use("/dean",deanRouter)
 app.use("/examination",examinationRouter)
 app.use("/course",courseRouter)
 app.use("/images",imagesRouter)
-//app.use("/editRequest",requestRouter)
+app.use("/editRequest",requestRouter)
 app.use("/result",resultRouter)
 
 

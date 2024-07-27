@@ -14,15 +14,32 @@ function CourseCard() {
     const [images, setImages] = useState([]);
     const [course, setCourse] = useState([]);
     const [coursesWithImages, setCoursesWithImages] = useState([]);
+    const [teacherId, setteacherId] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/session", {
+          withCredentials: true,
+        });
+        setteacherId(response.data.userId);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log("tt",teacherId)
     useEffect(() => {
         const fetchCourse = async () => {
           try {
-            const res = await axios.get("http://localhost:8081/course/view");
-            // Remove duplicates based on courseId
+            if (teacherId) {
+              const res = await axios.get(`http://localhost:8081/course/view?teacherId=${teacherId}`);
+              // Remove duplicates based on courseId
             const uniqueCourses = Array.from(new Map(res.data.map(item => [item.courseId, item])).values());
             setCourse(uniqueCourses);
-            console.log("Successfully fetched", uniqueCourses);
-          } catch (error) {
+            console.log("Successfully fetched", uniqueCourses);}}
+           catch (error) {
             console.log("error", error);
             
           }
@@ -37,9 +54,11 @@ function CourseCard() {
           }
       };
       
-      fetchCourse();
+      if (teacherId) {
+        fetchCourse();
+    }
       fetchImages();
-      }, []);
+      }, [teacherId]);
       useEffect(() => {
           if (course.length && images.length) {
               // Ensure that we have enough images for the courses
