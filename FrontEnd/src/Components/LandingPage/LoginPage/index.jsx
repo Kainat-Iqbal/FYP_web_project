@@ -1,9 +1,8 @@
 import * as React from "react";
 import "./login.css";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
-import LoginValidation from "./LoginValidation";
+import { useNavigate, Link } from "react-router-dom";
 
 function LoginPage() {
   const nav = useNavigate();
@@ -14,7 +13,6 @@ function LoginPage() {
     password: "",
   });
 
-  const [errors, setErrors] = useState({});
   // Function to handle changes in input field
   const handleInput = (event) => {
     setValues(prev => ({
@@ -22,31 +20,45 @@ function LoginPage() {
       [event.target.name]: [event.target.value]
     }));
   };
-
+  axios.defaults.withCredentials = true;
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-    setErrors(LoginValidation(values));
-    if(errors.email === "" && errors.password===""){
       axios.post('http://localhost:8081/login',values)
       .then(res =>{
         console.log(values)
-        if(res.data === "success"){
+        if(res.data === "Admin"){
           localStorage.setItem("user","kainat");
+          console.log("admin")
           nav("/home");
         }
-        else{
+        else if(res.data === "HOD"){
+          console.log("hod")
+          nav("/HODHomePage")
+        }
+        else if(res.data === "Dean"){
+          console.log("dean")
+          nav("/DeanHomePage")
+        }
+        else if(res.data === "Examination"){
+          console.log("examination")
+          nav("/ControllerOfExaminationHomePage")
+        }
+        else if(res.data === "Teacher"){
+          console.log("teacher")
+          nav("/teacher")
+        }
+        else if(res.data ==="Failed"){
           alert("Invalid Login")
         }
       })
-    }
+        
   };
-
   return (
     <div id="mainLoginDiv">
       <div id="loginForm">
         <h1>
-          <i>Academic Accelerator</i>
+          Academic Accelerator
         </h1>
         <form id="loginFormDiv" action="" onSubmit={handleSubmit}>
           <div id="InputFormField">
@@ -58,7 +70,7 @@ function LoginPage() {
                 placeholder="abc@gmail.com"
                 onChange={handleInput}
               ></input>
-              {errors.email && (<span className="text-danger">{errors.email}</span>)}
+              {/* {errors.email && (<span className="text-danger">{errors.email}</span>)} */}
             </div>
           </div>
 
@@ -70,15 +82,17 @@ function LoginPage() {
                 type="password"
                 onChange={handleInput}
               ></input>
-              {errors.password && (<span className="text-danger">{errors.password}</span>)}
+              {/* {errors.password && (<span className="text-danger">{errors.password}</span>)} */}
             </div>
           </div>
 
-          <button
+          <button id="inputButton"
             style={{
               borderRadius: "15px",
               width: "17vw",
               marginTop: "2vh",
+              backgroundColor:'white',
+              color:'black'
             }}
             type="submit" // Change to type="submit" to enable form submission
           >

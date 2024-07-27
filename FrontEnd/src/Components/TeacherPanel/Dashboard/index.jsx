@@ -1,42 +1,36 @@
 import * as React from "react"
 import "./TeacherStyle.css";
 import SideBar from "../Sidebar";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CourseCard from "../../Utilities/CourseCard";
+import axios from 'axios';
 
 function Dashboard() {
-    const [course, setCourses] = useState([
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
+
+    const [teacherEmail, setTeacherEmail] = useState(null);
+    const [teacherId, setTeacherId] = useState(null);
+    const [teacherName, setTeacherName] = useState(null);
+    const [designation,setDesignation]=useState(null);
+    
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const response = await axios.get("http://localhost:8081/session", {
+            withCredentials: true,
+          });
+          setTeacherEmail(response.data.user);
+          setTeacherId(response.data.userId);
+          setTeacherName(response.data.userName);
+          setDesignation(response.data.userDesignation);
+          console.log("teachetname",teacherName)
+         
+        } catch (error) {
+          console.error("Error:", error);
         }
-    ])
+      };
+  
+      fetchData();
+    }, []);
 
     return (
         <>
@@ -51,21 +45,16 @@ function Dashboard() {
                                 style={{ height: "90%", width: "90%", borderRadius: "50%" }} />
                         </div>
                         <div id="Tinfo">
-                            <h2 style={{ marginTop: "4%" }}>Ms.Faiza</h2>
-                            <h4 style={{ marginTop: "-4%" }}>Lecturer</h4>
-                            <h5 style={{ marginTop: "-4%" }}>Jinnah University For Women</h5>
+                            <h2 style={{ marginTop: "0%" }}>Ms.{teacherName}</h2>
+                            <h4  id="deisgnation" style={{ marginTop: "-2%" ,textDecoration:"none"}}> {designation} </h4>
+                            <h5 style={{ marginTop: "-2%" }}>Computer Science & Software Engineering Department</h5>
+                            <h5 style={{ marginTop: "-2%" }}>Jinnah University For Women</h5>
                         </div>
                     </div>
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                            {course.map((course) => {
-                                return (
-                                    <CourseCard image={course.image}
-                                        name={course.name} />
-                                )
-                            }
-
-                            )}</div>
+                            <CourseCard/>
+                            </div>
                     </div>
 
                 </div>

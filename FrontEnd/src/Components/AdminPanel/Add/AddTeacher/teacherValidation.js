@@ -22,25 +22,17 @@ function TeacherValidation(values) {
       error.password = "";
     }
 
-    if (values.department === "") {
-        error.department = "department should not be empty";
-      } else {
-        error.department = "";
-      }
+    if (values.date === "") {
+      error.date = "Date should not be empty";
+    } else {
+      error.date = "";
+    }
 
-      if (values.designation === "") {
-        error.designation = "designation should not be empty";
-      } else {
-        error.designation = "";
-      }
-
-      if (values.adminEmail === "") {
-        error.adminEmail = "Admin's email should not be empty";
-      } else if (!email_pattern.test(values.email)) {
-        error.adminEmail = "Admin's email did not match the pattern";
-      } else {
-        error.adminEmail = "";
-      }
+    if (values.cnic === "") {
+      error.cnic = "CNIC should not be empty";
+    } else {
+      error.cnic = "";
+    }
     return error;
   }
   export default TeacherValidation;

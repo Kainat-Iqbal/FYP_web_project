@@ -50,47 +50,6 @@
     justify-content: right;
     margin-right: 2.5%;
 }
-/* 
-#totalTeacher{
-    height: 100%;
-    width: 21%;
-    background: linear-gradient(to right, palevioletred,rgb(255, 233, 240));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-#totalAsisProf{
-    height: 100%;
-    width: 21%;
-    background: linear-gradient(to right, coral,rgb(255, 232, 223));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-#totalProf{
-    height: 100%;
-    width: 21%;
-    background: linear-gradient(to right, rgb(163, 68, 252),rgb(244, 236, 252));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
-
-#totalLecturer{
-    height: 100%;
-    width: 21%;
-    background: linear-gradient(to right, powderblue,rgb(240, 249, 250));
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-}
- */
 #viewTeacherBottom{
     height: auto;
     width: 100%;
@@ -103,6 +62,9 @@
     width: 95%;
     margin-top: 1%;
     border: 2px solid #00304B; 
-
-
 }
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+  }

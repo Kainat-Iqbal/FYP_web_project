@@ -1,10 +1,25 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { AccountCircle, AddCircle, Home, MenuOutlined, TableView, Approval, AssignmentInd, ChangeCircle,  Notifications,Equalizer, Insights } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 
 function SideBar() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    // Function to check if the device width is below a certain threshold (e.g., mobile screen width)
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust the threshold as needed
+    };
+
+    // Call handleResize initially and add event listener for window resize
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Clean up event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   const nav = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
 
@@ -38,10 +53,16 @@ function SideBar() {
             alignItems: "center",
           }}
         >
-          <button
-            onClick={handleToggleSidebar}
-            style={{ border: "none", backgroundColor: "#00304B" }}
-          >
+          
+         
+         <button
+      onClick={handleToggleSidebar}
+      style={{
+        border: 'none',
+        backgroundColor: '#00304B',
+        display: isMobile ? 'block' : 'none', // Hide on laptops, show on mobile
+      }}
+    >
            {<MenuOutlined style={{ fontSize: "2.2rem", color: "white" }} />}
           </button>
 
@@ -66,7 +87,7 @@ function SideBar() {
           </p>
         </div>
 
-        <div id="topRight" style={{ width: "auto", marginRight: "2vw" }}>
+        <div id="HODSideBarTopRight" style={{ width: "auto", marginRight: "2vw" }}>
           <Notifications
             style={{
               marginTop: "5px",
@@ -101,7 +122,7 @@ function SideBar() {
         <Menu>
           <MenuItem icon={<Home/>}
           onClick={() => {
-              nav("/hodHome");
+              nav("/HODHomePage");
             }}>
             Home
           </MenuItem>
@@ -115,16 +136,16 @@ function SideBar() {
           
           <MenuItem  icon={<Approval/>}
             onClick={() => {
-              nav("/hodApproveResult");
+              nav("/HODResultApproval");
             }}>
-            Approve Result
+            Result Approval
           </MenuItem>
 
           <MenuItem icon={<ChangeCircle/>}
           onClick={() => {
-              nav("/hodManageChangeReq");
+              nav("/HODManageChangeReq");
             }}>
-            Change Request
+            Change Requests
           </MenuItem>
           
           {<SubMenu icon={<Equalizer/>} label="View">

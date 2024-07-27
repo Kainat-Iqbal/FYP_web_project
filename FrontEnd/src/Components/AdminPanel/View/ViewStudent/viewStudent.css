@@ -1,0 +1,70 @@
+#mainViewStudentDiv{
+    width: 82%;
+    height: 100vh;
+    margin-left: 18%;
+    /* background-color: aqua; */
+}
+
+#viewStudentWithoutBar{
+    width: 100%;
+    height: 91%;
+    /* background-color: brown; */
+
+}
+#sidebar{
+    height: 9%;
+}
+#viewStudentTop{
+    height: 20%;
+    width: 100%;
+    /* background-color: blue;
+    */
+}
+#topheading {
+    height: 50%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+
+}
+
+#topMenu {
+    height: 50%;
+    /* background-color: yellowgreen; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2%;
+}
+
+#leftM {
+    width: 50%;
+    margin-left: 2.5%;
+    display: flex;
+    margin-top: 12px;
+}
+#right {
+    width: 50%;
+    height: 80%;
+    display: flex;
+    justify-content: right;
+    margin-right: 2.5%;
+}
+#viewStudentBottom{
+    height: auto;
+    width: 100%;
+    /* background-color: chartreuse; */
+    display: flex;
+    justify-content: center;
+}
+
+#viewStudentTable{
+    width: 95%;
+    margin-top: 1%;
+    border: 2px solid #00304B; 
+}
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+  }

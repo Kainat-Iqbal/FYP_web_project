@@ -2,47 +2,83 @@ import * as React from "react";
 import "./addTeacher.css";
 import SideBar from "../../SideBar";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import TeacherValidation from "./teacherValidation";
 
 function AddTeacher() {
+  const [admin, setAdminEmail] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/session", {
+          withCredentials: true,
+        });
+        setAdminEmail(response.data.user);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  console.log("FVFV ", admin);
   // State variables to hold the input values
   const [values, setValues] = useState({
     name: "",
     email: "",
-    password: "",
-    designation: "",
-    department: "",
-    adminEmail:""
+    password: "User123*",
+    department: "Software Engineering",
+    designation: "Lecturer",
+    cnic: "",
+    qualification: "Bachelors",
+    status: "Active",
+    adminEmail: "",
+    joiningDate: "",
+    photo:"",
   });
-
+  useEffect(() => {
+    // Update values after admin is set
+    if (admin !== null) {
+      setValues((prev) => ({
+        ...prev,
+        adminEmail: admin,
+      }));
+    }
+  }, [admin]);
   const [errors, setErrors] = useState({});
 
   // Function to handle changes in input field
   const handleInput = (event) => {
+    const { name, value } = event.target;
     setValues((prev) => ({
       ...prev,
-      [event.target.name]: [event.target.value],
+      [name]: value,
     }));
   };
-console.log(values)
 
-const handleSubmit = async (event) => {
-  event.preventDefault()
-  setErrors(TeacherValidation(values));
-  if(errors.email === "" && errors.password==="" && errors.name==="" && errors.department==="" && errors.designation==="" && errors.adminEmail===""){
-    axios.post('http://localhost:8081/teacher/Add',values)
-    .then(res =>{
-      console.log(values)
-      if(res.data === "success"){
-        alert("teacher is added successfully")
-      }
-      else{
-        console.log("error")
-      }
-    })
-  }
-}
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setErrors(TeacherValidation(values));
+    if (
+      errors.email === "" &&
+      errors.password === "" &&
+      errors.name === "" &&
+      errors.date === "" &&
+      errors.cnic === ""
+    ) {
+      console.log("nhmbkjbhkbhjuu")
+      axios.post("http://localhost:8081/teacher/Add", values).then((res) => {
+        console.log("val",values);
+        if (res.data === "success") {
+          alert("teacher is added successfully");
+          window.location.reload(); // Refresh the page
+        } else {
+          console.log("error");
+        }
+      });
+    }
+  };
 
   return (
     <div id="mainAddTeacherDiv">
@@ -63,7 +99,7 @@ const handleSubmit = async (event) => {
                 onChange={handleInput}
               ></input>
             </div>
-            {errors.name && (<span className="text-danger">{errors.name}</span>)}
+            {errors.name && <span className="text-danger">{errors.name}</span>}
 
             <div id="teacherField">
               <label>Email</label>
@@ -74,50 +110,109 @@ const handleSubmit = async (event) => {
                 onChange={handleInput}
               ></input>
             </div>
-            {errors.email && (<span className="text-danger">{errors.email}</span>)}
+            {errors.email && (
+              <span className="text-danger">{errors.email}</span>
+            )}
 
             <div id="teacherField">
               <label>Password</label>
               <input
                 name="password"
-                type="password"
+                type="text"
                 onChange={handleInput}
+                value={"User123*"}
               ></input>
             </div>
-            {errors.password && (<span className="text-danger">{errors.password}</span>)}
+            {errors.password && (
+              <span className="text-danger">{errors.password}</span>
+            )}
 
             <div id="teacherField">
               <label>Department</label>
-              <input
+
+              <select
                 name="department"
-                type="text"
-                placeholder="Software Engineering"
                 onChange={handleInput}
-              ></input>
+                style={{ width: "14.8vw", height: "4.5vh" }}
+              >
+                <option value="Software Engineering">
+                  Software Engineering
+                </option>
+                <option value="Computer Science">Computer Science</option>
+              </select>
             </div>
-            {errors.department && (<span className="text-danger">{errors.department}</span>)}
+            {errors.department && (
+              <span className="text-danger">{errors.department}</span>
+            )}
 
             <div id="teacherField">
               <label>Designation</label>
-              <input
+              <select
                 name="designation"
-                type="text"
-                placeholder="Lecturer"
                 onChange={handleInput}
-              ></input>
+                style={{ width: "14.8vw", height: "4.5vh" }}
+              >
+                <option value="Lecturer">Lecturer</option>
+                <option value="Assistant Professor">Assistant Professor</option>
+                <option value="Professor">Professor</option>
+              </select>
             </div>
-            {errors.designation && (<span className="text-danger">{errors.designation}</span>)}
+            {errors.designation && (
+              <span className="text-danger">{errors.designation}</span>
+            )}
 
             <div id="teacherField">
-            <label>Admin Email</label>
+              <label>CNIC</label>
               <input
-                name="adminEmail"
+                name="cnic"
                 type="text"
-                placeholder="Admin's email"
+                placeholder="42204-3452276-3"
                 onChange={handleInput}
               ></input>
             </div>
-            {errors.adminEmail && (<span className="text-danger">{errors.adminEmail}</span>)}
+
+            <div id="teacherField">
+              <label>Qualification</label>
+
+              <select
+                name="qualification"
+                onChange={handleInput}
+                style={{ width: "14.8vw", height: "4.5vh" }}
+              >
+                <option value="Bachelors">Bachelors</option>
+                <option value="Masters">Masters</option>
+                <option value="PhD">PhD</option>
+              </select>
+            </div>
+            <div id="teacherField">
+              <label>Status</label>
+              <select
+                name="status"
+                onChange={handleInput}
+                style={{ width: "14.8vw", height: "4.5vh" }}
+              >
+                <option value="Active">Active</option>
+                <option value="Leave">Leave</option>
+              </select>
+            </div>
+            <div id="teacherField">
+              <label>Date of Joining</label>
+              <input
+                style={{ width: "14.8vw", height: "4.5vh" }}
+                name="joiningDate"
+                type="date"
+                onChange={handleInput}
+              ></input>
+            </div>
+            <div id="teacherField">
+              <label>Picture</label>
+              <input
+                style={{ width: "14.8vw", height: "4.5vh" }}
+                name="photo"
+                type="file"
+                onChange={handleInput}
+              ></input>
+            </div>
 
             <button>Add Teacher</button>
           </form>

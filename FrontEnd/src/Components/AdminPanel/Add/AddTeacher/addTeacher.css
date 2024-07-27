@@ -38,6 +38,8 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    background: linear-gradient(#055786,white);
+    padding-top: 7vh;
 }
 
 #teacherForm{
@@ -66,7 +68,7 @@
 #teacherField{
     display: flex;
     justify-content: space-between;
-
+    margin-bottom: 2vh;
     width: 100%;
     /* background-color: aqua; */
 }

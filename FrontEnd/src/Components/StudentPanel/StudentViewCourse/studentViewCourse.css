@@ -1,0 +1,86 @@
+#StudentViewCourseMainDiv {
+    height: 100%;
+    width: 100vw;
+    /* background-color: blue; */
+}
+
+#StudentViewCourseTopBar {
+    height: 20%;
+    margin-top: 12vh;
+    margin-left: 20vw;
+    /* background-color: burlywood; */
+}
+
+#StudentViewCourseMainHeading {
+    height: 16%;
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    /* height: 50%;
+    background-color: yellow;
+    display: flex;
+    /* justify-content: center; */
+}
+
+#StudentViewCourseTopMenu {
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: centers;
+    column-gap: 5%;
+    /* background-color: yellowgreen; */
+}
+
+#StudentViewCourseSearchBar {
+    width: 30%;
+    /* height: auto; */
+    margin-left: 1%;
+    display: flex;
+    margin-top: 12px;
+    /* background-color: aliceblue; */
+}
+#sbutton{
+    background-color: rgb(182, 178, 178);
+    width: 20%;
+}
+#StudentViewCourseCenter {
+    width: 30%;
+    height: auto;
+    /* background-color: antiquewhite; */
+}
+
+#StudentViewCourseSort {
+    width: 30%;
+    height: auto;
+    display: flex;
+    justify-content: right;
+    margin-right: 6%;
+    /* background-color: aqua; */
+}
+
+#StudentViewCourseBottom {
+    height: 71%;
+    width: 82%;
+    margin-left: 18vw;
+}
+
+#StudentViewCourseCardDiv {
+    width: 100%;
+    height: auto;
+    display: flex;
+    /* background-color: pink; */
+}
+
+.StudentViewCourseCardWrapper {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-left: 2.5%;
+    padding: 1%;
+    margin-top: 1%;
+    column-gap: 60px;
+    row-gap: 20px;
+    /* background-color: yellow; */
+}

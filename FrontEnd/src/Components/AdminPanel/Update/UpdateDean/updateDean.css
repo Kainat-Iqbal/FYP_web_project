@@ -1,0 +1,74 @@
+#mainAddDeanDiv{
+    width: 80vw;
+    height: 100vh;
+    margin-left: 18vw;
+    /* background-color: aqua; */
+    display: flex;
+}
+
+#deanWithoutBar{
+    width: 100%;
+    height: 90%;
+    /* background-color: brown; */
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10vh;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#deanTop{
+    width: 100%;
+    height: 10%;
+    /* background-color: bisque; */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#deanTop h1{
+    color: #00304B;
+}
+
+#deanBottom{
+    width: 50%;
+    height: 80%;
+    /* background-color: blueviolet; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: linear-gradient(#055786,white);
+    padding-top: 7vh;
+}
+
+#deanForm{
+    width: 75%;
+    height: 80%;
+    /* background-color: green; */
+    display: flex;    
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#deanForm label{
+    color: black;
+}
+
+#deanForm button{
+    margin-top: 2vh;
+    background-color: #00304B;
+    border-radius: 50px;
+    width: 50%;
+    height: 12%;
+    color: white;
+}
+
+#deanField{
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    /* background-color: aqua; */
+}
