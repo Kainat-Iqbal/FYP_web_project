@@ -8,6 +8,32 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const [isLocked, setIsLocked] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [editStudentId, setEditStudentId] = useState(null); // Track the student being edited
+  const location = useLocation();
+  const courseData = location.state?.course;
+  const courseName = courseData?.course_title;
+  const courseCode = courseData?.course_code;
+
+  const [teacherEmail, setTeacherEmail] = useState(null);
+  const [teacherId, setTeacherId] = useState(null);
+  const [teacherName, setTeacherName] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/session", {
+          withCredentials: true,
+        });
+        setTeacherEmail(response.data.user);
+        setTeacherId(response.data.userId);
+        setTeacherName(response.data.userName);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -74,7 +100,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
         value = '0';
       } else {
         value = Math.min(Math.max(parseInt(value, 10), 0), 30).toString();
-      }}
+      }
+    }
 
     const updatedStudents = students.map(student =>
       student.studentId === studentId ? { ...student, [fieldName]: value } : student
@@ -86,7 +113,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     const mid = parseFloat(midMarks);
     const terminal = parseFloat(terminalMarks);
     const lab = parseFloat(labMarks);
-    return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab) ? mid + terminal + lab : '' ;
+    return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab) ? mid + terminal + lab : '';
   };
 
   const calculateGPA = (totalMarks) => {
@@ -195,6 +222,17 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
 
       const allSuccess = responses.every(res => res.data.updated);
       if (allSuccess) {
+        await Promise.all(
+          updatedStudents.map(student =>
+            axios.post('http://localhost:8081/status/Add', {
+              resultId: student.resultId,
+              teacherID: teacherId, // Assuming you have teacherId from session
+              lockResult: true,
+              currentStatus: 'Locked by Teacher',
+              Department: 'Computer Science and Software Engineering'
+            })
+          )
+        );
         alert("All results locked successfully");
         setStudents(updatedStudents);
         setIsLocked(true); // Lock fields after locking results
@@ -210,31 +248,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     setIsLocked(false); // Unlock fields for editing
     setEditStudentId(studentId);
   };
-  const location = useLocation();
-  const courseData = location.state?.course;
-  const courseName = courseData?.course_title;
-  const courseCode = courseData?.course_code;
-
-  const [teacherEmail, setTeacherEmail] = useState(null);
-  const [teacherId, setTeacherId] = useState(null);
-  const [teacherName, setTeacherName] = useState(null);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8081/session", {
-          withCredentials: true,
-        });
-        setTeacherEmail(response.data.user);
-        setTeacherId(response.data.userId);
-        setTeacherName(response.data.userName);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  
   const getCurrentDate = () => {
     const currentDate = new Date();
     const day = String(currentDate.getDate()).padStart(2, "0");
@@ -264,7 +278,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     description: "i want to update",
     dateCreated: date,
     dateUpdated: date,
-    currentHandle:"teacher",
+    currentHandle: "teacher",
     status: "createdByTeacher",
   });
   useEffect(() => {
@@ -282,7 +296,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const handleEditRequest = async (event) => {
     event.preventDefault();
     axios.post("http://localhost:8081/editRequest/Add", values).then((res) => {
-      
+
       if (res.data === "success") {
         alert("request is added successfully");
         window.location.reload(); // Refresh the page
@@ -391,7 +405,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                   </>
                 ) : (
                   <button
-                  id='buttons123'
+                    id='buttons123'
                     onClick={() => handleSave(student)}
                     disabled={isLocked}
                   >
@@ -404,11 +418,11 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
         </tbody>
       </table>
       <div className="buttonContainer">
-      <button onClick={handleLockResult} disabled={isLocked}>
-  Lock Results
-</button>
-<button onClick={handleEditRequest}>Request for Editing</button>
-</div>
+        <button onClick={handleLockResult} disabled={isLocked}>
+          Lock Results
+        </button>
+        <button onClick={handleEditRequest}>Request for Editing</button>
+      </div>
     </div>
   );
 };

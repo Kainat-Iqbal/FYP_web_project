@@ -53,6 +53,8 @@ tr:hover {
 }
 
 #buttons123{
-  background-color: rgb(40, 136, 153);
+  background-color:lightblue;
+  color: black;
+  border: 2px lightblue;
   
 }

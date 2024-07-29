@@ -138,6 +138,16 @@ const Login = async (req, res) => {
     };
   });
 }
-  
+/* const Logout = (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.log("LogotFailed")
+      return res.status(500).json({ message: "Logout failed" });
+    }
+    res.clearCookie('connect.sid');
+    return res.json({ message: "Logout successful" });
+  });
+} */;
 
-    module.exports = Login;
+
+ module.exports = {Login/* ,Logout */};

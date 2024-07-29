@@ -19,7 +19,7 @@ const { imagesRouter } = require('./routes/images');
 const { requestRouter } = require('./routes/editRequest');
 const {resultRouter}=require('./routes/result')
 const {teacherCourseRouter}= require('./routes/teacherCourse');
-
+const { statusRouter } = require('./routes/status');
 
 const { assignCourseRouter } = require('./routes/assignCourse');
 const { changeReqRouter } = require('./routes/changeReq');
@@ -55,6 +55,7 @@ app.use("/student",studentRouter)
 app.use("/teachercourse",teacherCourseRouter)
 app.use("/images",imagesRouter)
 app.use("/editRequest",requestRouter)
+app.use("/status",statusRouter)
 app.use("/result",resultRouter)
 app.use("/assignCourse",assignCourseRouter)
 app.use("/changeReq",changeReqRouter)

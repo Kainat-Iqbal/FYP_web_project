@@ -54,6 +54,24 @@ function LoginPage() {
       })
         
   };
+   const handleLogout = () => {
+    axios.post('http://localhost:8081/login/logout')
+      .then(res => {
+        if (res.data.message === "Logout successful") {
+          localStorage.removeItem("user");
+          nav("/");
+        } else {
+          alert("Logout failed");
+        }
+      })
+      .catch(err => {
+        console.error("Logout error:", err);
+        alert("Logout failed");
+      });
+  };
+  
+
+
   return (
     <div id="mainLoginDiv">
       <div id="loginForm">
@@ -103,5 +121,24 @@ function LoginPage() {
     </div>
   );
 }
+
+
+/* export const handleLogout = () => {
+  axios.post('http://localhost:8081/login/logout')
+    .then(res => {
+      if (res.data.message === "Logout successful") {
+        localStorage.removeItem("user"); // Clear user data from local storage
+        const nav = useNavigate();
+        nav("/login"); // Redirect to the login page
+      } else {
+        alert("Logout failed");
+      }
+    })
+    .catch(err => {
+      console.error("Logout error:", err);
+      alert("Logout failed");
+    });
+};
+ */
 
 export default LoginPage;
