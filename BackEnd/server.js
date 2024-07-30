@@ -15,7 +15,18 @@ const { degreeRouter } = require('./routes/degree');
 const { batchRouter } = require('./routes/batch');
 const { SessionRouter } = require('./routes/session');
 const { studentRouter } = require('./routes/student');
+const { imagesRouter } = require('./routes/images');
+const { requestRouter } = require('./routes/editRequest');
+const {resultRouter}=require('./routes/result')
+const {teacherCourseRouter}= require('./routes/teacherCourse');
+const { statusRouter } = require('./routes/status');
 
+const { assignCourseRouter } = require('./routes/assignCourse');
+const { changeReqRouter } = require('./routes/changeReq');
+const { deanChangeReqRouter } = require('./routes/deanChangeReq')
+const { COEchangeReqRouter } = require('./routes/COEchangeReq');
+const { lockResultRouter } = require('./routes/lockResult');
+const { logoutRouter } = require('./routes/logout');
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -34,6 +45,7 @@ app.use(session({
      } // Set to true if using HTTPS
 }));
 app.use("/login",loginRouter)
+app.use("/logout",logoutRouter)
 app.use("/teacher",teacherRouter)
 app.use("/dean",deanRouter)
 app.use("/examination",examinationRouter)
@@ -43,12 +55,22 @@ app.use("/degree",degreeRouter)
 app.use("/batch",batchRouter)
 app.use("/sessionUni",SessionRouter)
 app.use("/student",studentRouter)
+app.use("/teachercourse",teacherCourseRouter)
+app.use("/images",imagesRouter)
+app.use("/editRequest",requestRouter)
+app.use("/status",statusRouter)
+app.use("/result",resultRouter)
+app.use("/assignCourse",assignCourseRouter)
+app.use("/changeReq",changeReqRouter)
+app.use("/deanChangeReq", deanChangeReqRouter)
+app.use("/COEchangeReq", COEchangeReqRouter)
+app.use("/lockResult",lockResultRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){
-        // console.log(req.session.user)
-        // console.log(req.session.userId)
-        return res.json({valid: true, user: req.session.user, userId : req.session.userId})
+        console.log(req.session.user)
+        console.log(req.session.userId)
+        return res.json({valid: true, user: req.session.user, userId : req.session.userId,userName : req.session.userName,userDesignation:req.session.userDesignation})
     }
     else{
         // console.log("CFCFDC")

@@ -61,15 +61,7 @@ function SideBar() {
             alignItems: "center",
           }}
         >
-          {/* <button
-            onClick={handleToggleSidebar}
-            style={{ border: "none", backgroundColor: "#00304B" }}
-          >
-            {<MenuOutlined style={{ 
-              fontSize: "2.2rem", 
-              color: "white" 
-              }} />}
-          </button> */}
+          
          
          <button
       onClick={handleToggleSidebar}
@@ -117,7 +109,7 @@ function SideBar() {
             style={{
               marginTop: "5px",
               fontSize: "2.8rem",
-              color: "white",
+              color: "pink",
             }}
           />
         </div>

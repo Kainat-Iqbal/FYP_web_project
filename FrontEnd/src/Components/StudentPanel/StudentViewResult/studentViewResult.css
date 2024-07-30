@@ -1,0 +1,129 @@
+#StudentViewResultMainDiv {
+    width: 80%;
+    height: auto;
+    margin-left: 20%;
+    display: flex;
+    /* background-color: aqua; */
+}
+
+#StudentViewResultWithoutBar {
+    width: 100%;
+    height: 79%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 6vh;
+    /* background-color: brown; */
+}
+
+#StudentViewResultTop {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: blue; */
+}
+
+#StudentViewResultTopBar {
+    height: 40%;
+    width: 100%;
+    /* background-color: blueviolet; */
+}
+
+#StudentViewResultMainHeading {
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    /* padding-top: 2%; */
+    /* background-color: yellow;
+    height: 30%;
+    width: 100%;
+    display: flex;
+    font-size: 0.5rem;
+    align-content: center;
+    margin-left: 35%; */
+}
+
+#StudentViewResultArrowButton {
+    height: 30%;
+    width: 10%;
+    align-content: center;
+    /* background-color: green;  */
+}
+
+#StudentViewResultInfo {
+    height: 60%;
+    width: 100%;
+    margin-left: 1px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2%;
+    font-size: 18px;
+    /* background-color: khaki; */
+}
+
+#StudentViewResultLeftDiv {
+    height: 100%;
+    width: 29%;
+    /* background-color: yellow; 
+    display: flex;
+    flex-direction: column; 
+    background-color: palevioletred; 
+    display: flex;
+     flex-direction: column; 
+     align-items: center; 
+     justify-content: space-around;    */
+}
+
+#StudentViewResultFacultyCourse {
+    height: 70%;
+    margin-left: 6px;
+    font-size: 18px;
+    /* background-color: brown; */
+}
+
+#HODViewResultClassBatch {
+    height: 32%;
+    display: flex;
+    /* background-color: burlywood; */
+}
+
+#StudentViewResultCenterDiv {
+    height: 100%;
+    width: 54%;
+    /* background-color: paleturquoise; 
+     display: flex;
+    flex-direction: column;
+     align-items: center;
+    justify-content: space-around;  */
+}
+
+#StudentViewResultRightDiv {
+    height: 100%;
+    width: 17%;
+    /* background-color: palegreen; 
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;  */
+}
+
+#StudentViewResultBottom {
+    height: auto;
+    width: 100%;
+    margin-right: 4vh;
+    margin-top: 3%;
+
+    display: flex;
+    justify-content: center;
+    /* background-color: chartreuse; */
+}
+
+#StudentViewResultTable {
+    width: 97%;
+    padding-top: 1%;
+    border: 2px solid #00304B;
+    /* margin-top: 1%; */
+}

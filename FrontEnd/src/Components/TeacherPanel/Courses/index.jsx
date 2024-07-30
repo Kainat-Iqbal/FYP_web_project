@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Box from '@mui/material/Box';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -6,46 +6,14 @@ import SideBar from "../Sidebar";
 import SearchIcon from '@mui/icons-material/Search';
 import "./courseStyle.css";
 import CourseCard from "../../Utilities/CourseCard";
+import axios from "axios";
 
 function Courses() {
     const [value, setValue] = React.useState(0);
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    const [course, setCourses] = useState([
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }, {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        },
-        {
-            image: require("./SQE.jpg"),
-            name: "Software Engineering"
-        }
-    ])
-
+    
     return (
         <>
             <div id="mainC">
@@ -60,8 +28,8 @@ function Courses() {
                     </div>
                     <div id="topMenu">
                         <div id="leftM">
-                            <input type="text" placeholder="Search..." />
-                            <button style={{ height: '63%' }}
+                            <input id="sinput" type="text" placeholder="Search..." />
+                            <button id="searchbutton" style={{ height: '63%' }}
                             ><SearchIcon />
                             </button>
                         </div>
@@ -84,16 +52,18 @@ function Courses() {
                     </div>
                 </div>
                 <div id="bottomC">
+                
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                            {course.map((course) => {
-                                return (
-                                    <CourseCard image={course.image}
-                                        name={course.name} />
-                                )
-                            }
-
-                            )}</div>
+                            <CourseCard/>
+                        {/* {coursesWithImages.map((courseData) => (
+                                <CourseCard
+                                    key={courseData.courseId}
+                                    image={courseData.image}
+                                    name={courseData.course_title}
+                                />
+                            ))} */}</div>
+                            
                     </div>
                 </div>
             </div >

@@ -15,10 +15,10 @@ import Dashboard from './Components/TeacherPanel/Dashboard';
 import Courses from './Components/TeacherPanel/Courses';
 import CreateResult from './Components/TeacherPanel/CreateResult';
 import ViewResult from './Components/TeacherPanel/ViewResult';
-import HodHomePage from './Components/HODPanel/HODHomePage';
-import ApproveResult from './Components/HODPanel/ApproveResult';
-import ManageChangeReq from './Components/HODPanel/ManageChangeReq';
-import HODViewResult from './Components/HODPanel/ApproveResult/ViewResult';
+//import HodHomePage from './Components/HODPanel/HODHomePage';
+//import ApproveResult from './Components/HODPanel/ApproveResult';
+//import ManageChangeReq from './Components/HODPanel/ManageChangeReq';
+//import HODViewResult from './Components/HODPanel/ApproveResult/ViewResult';
 import AddDean from './Components/AdminPanel/Add/AddDean';
 import ViewDeanHodExam from './Components/AdminPanel/View/ViewDeanHodExam';
 import UpdateDean from './Components/AdminPanel/Update/UpdateDean';
@@ -37,7 +37,32 @@ import AddSession from './Components/AdminPanel/Add/AddSession';
 import UpdateSession from './Components/AdminPanel/Update/UpdateSession';
 import AddStudent from './Components/AdminPanel/Add/AddStudent';
 import ViewStudent from './Components/AdminPanel/View/ViewStudent';
+import StudentTable from './Components/Utilities/StudentTable';
+//HOD Pages
+import HODHomePage from './Components/HODPanel/HODHomePage';
+import AssignCourse from './Components/HODPanel/AssignCourse';
+import HODResultApproval from './Components/HODPanel/HODResultApproval';
+import HODViewResult from './Components/HODPanel/HODResultApproval/HODViewResult';
+import HODResultFeedback from './Components/HODPanel/HODResultApproval/HODResultFeedback';
+import HODManageChangeReq from './Components/HODPanel/HODManageChangeReq';
 
+//Dean Pages
+import DeanHomePage from './Components/DeanPanel/DeanHomePage';
+import DeanResultApproval from './Components/DeanPanel/DeanResultApproval';
+import DeanViewResult from './Components/DeanPanel/DeanResultApproval/DeanViewResult';
+import DeanManageChangeReq from './Components/DeanPanel/DeanManageChangeReq';
+
+//Controller Of Examination Pages
+import ControllerOfExaminationHomePage from './Components/ControllerOfExaminationPanel/ControllerOfExaminationHomePage';
+import ControllerOfExaminationResultApproval from './Components/ControllerOfExaminationPanel/ControllerOfExaminationResultApproval';
+import ControllerOfExaminationViewResult from './Components/ControllerOfExaminationPanel/ControllerOfExaminationResultApproval/ControllerOfExaminationViewResult';
+import ControllerOfExaminationManageChangeReq from './Components/ControllerOfExaminationPanel/ControllerOfExaminationManageChangeReq';
+
+//Student Pages
+import StudentHomePage from './Components/StudentPanel/StudentHomePage';
+import StudentViewCourse from './Components/StudentPanel/StudentViewCourse';
+import StudentViewResult from './Components/StudentPanel/StudentViewResult';
+import StudentViewProforma from './Components/StudentPanel/StudentViewProforma';
 
 function App() {
 
@@ -82,11 +107,36 @@ function App() {
         <Route path='/teacherCourses' element={<Courses/>}></Route>
         <Route path='/createResult' element={<CreateResult/>}></Route>
         <Route path='/viewResult' element={<ViewResult/>}></Route>
-        <Route path='/hodHome' element={<HodHomePage/>}/>
-        <Route path='/hodApproveResult' element={<ApproveResult/>}/>
-        <Route path='/hodViewResult' element={<HODViewResult/>}/>
-        <Route path='/hodManageChangeReq' element={<ManageChangeReq/>}/>
+        
+        {/* Teacher */}
+        <Route path='/courses' element={<Courses />} />
+        <Route path='/teacher' element={<Dashboard />} />
+        <Route path='/student' element={<StudentTable />} />
+        <Route path='/createResult' element={<CreateResult />} />
+        <Route path='/HODHomePage' element={<HODHomePage />} />
 
+          <Route path='/AssignCourse' element={<AssignCourse />} />
+          <Route path='/HODResultApproval' element={<HODResultApproval />} />
+          <Route path='/HODViewResult' element={<HODViewResult />} />
+          <Route path='/HODResultFeedback' element={<HODResultFeedback />} />
+          <Route path='/HODManageChangeReq' element={<HODManageChangeReq />} />
+
+          <Route path='/DeanHomePage' element={<DeanHomePage/>}/>
+          <Route path='/DeanResultApproval' element={<DeanResultApproval />} />
+          <Route path='/DeanViewResult' element={<DeanViewResult />} />
+          <Route path='/DeanManageChangeReq' element={<DeanManageChangeReq />} />
+          
+          <Route path='/ControllerOfExaminationHomePage' element={<ControllerOfExaminationHomePage/>} />
+          <Route path='/ControllerOfExaminationResultApproval' element={<ControllerOfExaminationResultApproval/>} />
+          <Route path='/ControllerOfExaminationViewResult' element={<ControllerOfExaminationViewResult/>} />
+          <Route path='/ControllerOfExaminationManageChangeReq' element={<ControllerOfExaminationManageChangeReq/>} />
+
+          <Route path='/StudentHomePage' element={<StudentHomePage/>}/>
+          <Route path='/StudentViewCourse' element={<StudentViewCourse/>} />
+          <Route path='/StudentViewResult' element={<StudentViewResult/>} />
+          <Route path='/StudentViewProforma' element={<StudentViewProforma/>} />
+
+       
       </Routes>
       </BrowserRouter>
 
