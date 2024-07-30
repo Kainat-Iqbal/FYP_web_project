@@ -93,6 +93,7 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Name</label>
               <input
+              id="inp"
                 name="name"
                 type="text"
                 placeholder="Sara Ahmed"
@@ -117,6 +118,7 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Password</label>
               <input
+              id="inp"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -164,6 +166,7 @@ function AddTeacher() {
             <div id="teacherField">
               <label>CNIC</label>
               <input
+              id="inp"
                 name="cnic"
                 type="text"
                 placeholder="42204-3452276-3"

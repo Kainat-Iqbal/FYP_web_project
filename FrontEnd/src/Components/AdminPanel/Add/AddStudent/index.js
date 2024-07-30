@@ -113,6 +113,7 @@ console.log(values)
             <div id="studentField">
               <label>Name</label>
               <input
+              id="st_input"
                 name="name"
                 type="text"
                 placeholder="Sara"
@@ -123,6 +124,7 @@ console.log(values)
             <div id="studentField">
               <label>Father Name</label>
               <input
+               id="st_input"
                 name="fatherName"
                 type="text"
                 placeholder="Ahmed"
@@ -143,6 +145,7 @@ console.log(values)
             <div id="studentField">
               <label>CNIC</label>
               <input
+               id="st_input"
                 name="CNIC"
                 type="text"
                 placeholder="43301-4521161-6"
@@ -153,6 +156,7 @@ console.log(values)
             <div id="studentField">
               <label>Phone Number</label>
               <input
+               id="st_input"
                 name="phoneNo"
                 type="text"
                 placeholder="0322-7744342"
@@ -163,6 +167,7 @@ console.log(values)
             <div id="studentField">
               <label>Address</label>
               <input
+               id="st_input"
                 name="address"
                 type="text"
                 placeholder="phase7, defence, karachi"
@@ -194,6 +199,7 @@ console.log(values)
             <div id="studentField">
               <label>JUW ID</label>
               <input
+               id="st_input"
                 name="juwId"
                 type="text"
                 placeholder="juw11649"
@@ -204,6 +210,7 @@ console.log(values)
             <div id="studentField">
               <label>Password</label>
               <input
+               id="st_input"
                 name="password"
                 type="text"
                 value={"User123*"}
@@ -214,6 +221,7 @@ console.log(values)
             <div id="studentField">
               <label>Enrollment Number</label>
               <input
+               id="st_input"
                 name="enrollment"
                 type="text"
                 placeholder="2021/comp/BS(SE)/27039"

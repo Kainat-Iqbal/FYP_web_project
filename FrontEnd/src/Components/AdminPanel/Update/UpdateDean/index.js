@@ -77,6 +77,7 @@ return(
             <div id="deanField">
               <label>Name</label>
               <input
+              id="updatedean_input"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -101,6 +102,7 @@ return(
             <div id="deanField">
               <label>Password</label>
               <input
+               id="updatedean_input"
                 name="password"
                 type="text"
                 value={DATA.password}
@@ -130,6 +132,7 @@ return(
             <div id="deanField">
               <label>CNIC</label>
               <input
+               id="updatedean_input"
                 name="CNIC"
                 value={DATA.CNIC}
                 type="text"

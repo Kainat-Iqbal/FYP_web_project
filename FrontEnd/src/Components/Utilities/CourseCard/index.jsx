@@ -40,7 +40,7 @@ function CourseCard() {
             setCourse(uniqueCourses);
             console.log("Successfully fetched", uniqueCourses);}}
            catch (error) {
-            console.log("error", error);
+            console.log("errordfv", error);
             
           }
         };
@@ -59,6 +59,7 @@ function CourseCard() {
     }
       fetchImages();
       }, [teacherId]);
+      
       useEffect(() => {
           if (course.length && images.length) {
               // Ensure that we have enough images for the courses

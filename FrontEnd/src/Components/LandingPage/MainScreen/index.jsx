@@ -37,7 +37,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem" }} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem",marginRight:"20px" }} id="dropdown-basic">
             Social Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -54,7 +54,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none" ,fontSize:"1.3rem"}} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none" ,fontSize:"1.3rem",marginLeft:"30px"}} id="dropdown-basic">
             Allied Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -65,7 +65,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem" }} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem",marginLeft:"45px" }} id="dropdown-basic">
             Buisness
           </Dropdown.Toggle>
           <Dropdown.Menu>

@@ -15,7 +15,7 @@ const addResult = async (req, res) => {
         req.body.submissionDate=" ",
         req.body.resultCode= " "
     ];
-console.log(VALUES)
+// console.log(VALUES)
     DB.query(queryToAddResult, [VALUES], (err, result) => {
         if (err) {
             console.error("Error adding result:", err);
@@ -39,7 +39,7 @@ WHERE studentId = ? AND assignId = ?;
         if (err) {
             return res.json({ Error: err });
         } else {
-            console.log("SDC",result)
+            // console.log("SDC",result)
             return res.json(result[0]);
         }
     });

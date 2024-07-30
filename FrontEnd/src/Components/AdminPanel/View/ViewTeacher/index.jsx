@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { lightBlue } from "@mui/material/colors";
 
 function ViewTeacher() {
   const [teacher, setTeacher] = useState([]);
@@ -98,9 +99,9 @@ useEffect(() => {
               <input
                 type="text"
                 placeholder="Search..."
-                style={{ width: "80%" }}
+                style={{ width: "70%" }}
               />
-              <button style={{ height: "63%" }}>
+              <button style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%" }}>
                 <SearchIcon />
               </button>
             </div>

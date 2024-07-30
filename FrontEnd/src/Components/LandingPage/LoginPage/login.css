@@ -37,6 +37,7 @@
     height: 8vh;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 1vh; /* Add margin for spacing between fields */
 }
 
@@ -48,16 +49,25 @@
 #InputFormField input{
     height: 5vh;
     width: 17vw;
+ 
 }
 
 #InputFormField label{
     font-size: 1.2rem;
 }
 
-#inputButton {
-    border-radius: 15px;
-    width: 17vw;
+#inputButtonLogin {
+    border-radius: 200px;
+    width: 18vw;
     margin-top: 2vh;
+    height: 5vh;
+    background-color:white;
+    color: black;
+    font-size: large;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+    
   }
   
   /* Responsive adjustments */
@@ -89,7 +99,7 @@
       margin-bottom: 0.5vh; /* Add margin for spacing */
     }
   
-    #inputButton {
+    #inputButtonLogin {
       width: 70vw;
     }
   }
@@ -103,7 +113,7 @@
       width: 80vw;
     }
   
-    #inputButton {
+    #inputButtonLogin {
       width: 80vw;
     }
   }

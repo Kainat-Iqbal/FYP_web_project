@@ -156,7 +156,7 @@ function DeanResultApproval() {
                     {result.action === null && (
                       <>
                         <button
-                          style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", marginLeft: "20px" }}
+                          style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", /* marginLeft: "20px" */ width:"70%"}}
                           onClick={() => {
                             nav("/DeanViewResult");
                           }} >

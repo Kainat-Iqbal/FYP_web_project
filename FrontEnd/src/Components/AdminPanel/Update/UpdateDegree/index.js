@@ -107,7 +107,7 @@ function UpdateDegree() {
               </select>
             </div>
         
-            <button>Update Degree Program</button>
+            <button id="update_DP_button">Update Degree Program</button>
           </form>
         </div>
       </div>

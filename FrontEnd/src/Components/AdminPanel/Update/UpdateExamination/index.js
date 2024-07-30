@@ -76,6 +76,7 @@ fetchExamination();
             <div id="ExaminationField">
               <label>Name</label>
               <input
+              id="examinp"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -100,6 +101,7 @@ fetchExamination();
             <div id="ExaminationField">
               <label>Password</label>
               <input
+               id="examinp"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -113,6 +115,7 @@ fetchExamination();
             <div id="ExaminationField">
               <label>CNIC</label>
               <input
+               id="examinp"
                 name="CNIC"
                 type="text"
                 value={DATA.CNIC}
@@ -143,7 +146,7 @@ fetchExamination();
               ></input>
             </div>
 
-            <button>Update Controller of Examination</button>
+            <button id="COEbuttonupdate">Update Controller of Examination</button>
           </form>
         </div>
       </div>

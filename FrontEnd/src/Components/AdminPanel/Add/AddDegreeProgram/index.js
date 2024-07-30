@@ -109,7 +109,7 @@ function AddDegreeProgram() {
               </select>
             </div>
         
-            <button>Add Degree Program</button>
+            <button id="DPbutton">Add Degree Program</button>
           </form>
         </div>
       </div>

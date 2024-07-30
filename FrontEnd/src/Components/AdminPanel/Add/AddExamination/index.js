@@ -89,6 +89,7 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>Name</label>
               <input
+              id="examinp"
                 name="name"
                 type="text"
                 placeholder="Sara Ahmed"
@@ -113,6 +114,7 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>Password</label>
               <input
+              id="examinp"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -126,6 +128,7 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>CNIC</label>
               <input
+              id="examinp"
                 name="CNIC"
                 type="text"
                 placeholder="42204-3452276-3"
@@ -154,7 +157,7 @@ function AddExamination() {
               ></input>
             </div>
 
-            <button>Add Controller of Examination</button>
+            <button id="COEbutton">Add Controller of Examination</button>
           </form>
         </div>
       </div>

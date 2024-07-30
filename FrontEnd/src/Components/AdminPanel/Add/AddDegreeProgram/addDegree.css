@@ -73,3 +73,12 @@
     width: 100%;
     /* background-color: aqua; */
 }
+#DPbutton{
+    
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 50%;
+
+   
+}

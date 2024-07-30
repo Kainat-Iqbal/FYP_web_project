@@ -31,6 +31,7 @@ const viewTeacherCourse = async (req, res) => {
             return res.status(500).json("Failed to fetch data");
         } else {
             if (results.length > 0) {
+                // console.log("firstcvcv",results)
                 return res.json(results);
             } else {
                 return res.json("No data found");

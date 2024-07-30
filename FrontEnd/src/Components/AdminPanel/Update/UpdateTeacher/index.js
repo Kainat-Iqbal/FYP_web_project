@@ -77,6 +77,7 @@ return(
             <div id="teacherField">
               <label>Name</label>
               <input
+             id="updatet_input"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -101,6 +102,7 @@ return(
             <div id="teacherField">
               <label>Password</label>
               <input
+               id="updatet_input"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -150,6 +152,7 @@ return(
             <div id="teacherField">
               <label>CNIC</label>
               <input
+               id="updatet_input"
                 name="CNIC"
                 type="text"
                 value={DATA.CNIC}

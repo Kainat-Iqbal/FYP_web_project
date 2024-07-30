@@ -73,3 +73,11 @@
     width: 100%;
     /* background-color: aqua; */
 }
+#seesionbtn{
+     
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 40%;
+
+}

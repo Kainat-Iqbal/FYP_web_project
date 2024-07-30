@@ -77,7 +77,8 @@ return(
           <form id="hodForm" action="" onSubmit={handleSubmit}>
             <div id="hodField">
               <label>Name</label>
-              <input
+              <input 
+               id="updatehod_input"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -102,6 +103,7 @@ return(
             <div id="hodField">
               <label>Password</label>
               <input
+               id="updatehod_input"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -151,6 +153,7 @@ return(
             <div id="hodField">
               <label>CNIC</label>
               <input
+               id="updatehod_input"
                 name="CNIC"
                 type="text"
                 value={DATA.CNIC}

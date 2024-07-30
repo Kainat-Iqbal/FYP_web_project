@@ -192,7 +192,7 @@ function AddSession() {
               </select>
             </div>
 
-            <button>Add Session</button>
+            <button id="seesionbtn">Add Session</button>
           </form>
         </div>
       </div>

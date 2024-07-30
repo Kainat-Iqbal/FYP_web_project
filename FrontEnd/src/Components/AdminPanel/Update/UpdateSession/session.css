@@ -63,7 +63,11 @@
     background-color: #00304B;
     border-radius: 50px;
     height: 15%;
+    width: 40%;
     color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
 }
 
 #sessionField{

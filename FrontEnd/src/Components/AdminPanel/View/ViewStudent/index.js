@@ -39,9 +39,9 @@ function ViewStudent() {
               <input
                 type="text"
                 placeholder="Search..."
-                style={{ width: "80%" }}
+                style={{ width: "70%" }}
               />
-              <button style={{ height: "63%" }}>
+              <button style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%"  }}>
                 <SearchIcon />
               </button>
             </div>

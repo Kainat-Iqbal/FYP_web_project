@@ -203,7 +203,7 @@ function ControllerOfExaminationViewResult() {
                   <span style={{ textAlign: "center", marginLeft: "16%", borderBottom: '1px solid black', width: '60%', display: 'inline-block', fontWeight: 'normal' }}>Science</span>
                 </b>
                 <b>Course Number
-                  <span style={{ textAlign: "center", marginLeft: "5%", borderBottom: '1px solid black', width: '47%', display: 'inline-block', fontWeight: 'normal' }}>CSS 1345</span>
+                  <span style={{ textAlign: "center", marginLeft: "5%", borderBottom: '1px solid black', width: '49%', display: 'inline-block', fontWeight: 'normal' }}>CSS 1345</span>
                 </b>
 
                 <div id="COEviewResultClassBatch">
@@ -223,7 +223,7 @@ function ControllerOfExaminationViewResult() {
                 <span style={{ textAlign: "center", marginLeft: "14%", borderBottom: '1px solid black', width: '65%', display: 'inline-block', fontWeight: 'normal' }}>Computer Science and Software Engineering</span>
               </b>
               <b>Course Title
-                <span style={{ textAlign: "center", marginLeft: "14.5%", borderBottom: '1px solid black', width: '65%', display: 'inline-block', fontWeight: 'normal' }}>Business Process Engineering</span>
+                <span style={{ textAlign: "center", marginLeft: "13.8%", borderBottom: '1px solid black', width: '65%', display: 'inline-block', fontWeight: 'normal' }}>Business Process Engineering</span>
               </b>
               <b>Date Of Examination
                 <span style={{ textAlign: "center", marginLeft: "2%", borderBottom: '1px solid black', width: '65%', display: 'inline-block', fontWeight: 'normal' }}>18-04-2024</span>
@@ -238,7 +238,7 @@ function ControllerOfExaminationViewResult() {
                 <span style={{ textAlign: "center", marginLeft: "4.5%", borderBottom: '1px solid black', width: '30%', display: 'inline-block', fontWeight: 'normal' }}>2+1</span>
               </b>
               <b>Semester
-                <span style={{ textAlign: "center", marginLeft: "8.5%", borderBottom: '1px solid black', width: '30%', display: 'inline-block', fontWeight: 'normal' }}>II</span>
+                <span style={{ textAlign: "center", marginLeft: "11%", borderBottom: '1px solid black', width: '30%', display: 'inline-block', fontWeight: 'normal' }}>II</span>
               </b>
             </div>
 

@@ -24,7 +24,9 @@ const { statusRouter } = require('./routes/status');
 const { assignCourseRouter } = require('./routes/assignCourse');
 const { changeReqRouter } = require('./routes/changeReq');
 const { deanChangeReqRouter } = require('./routes/deanChangeReq')
-const { COEchangeReqRouter } = require('./routes/COEchangeReq')
+const { COEchangeReqRouter } = require('./routes/COEchangeReq');
+const { lockResultRouter } = require('./routes/lockResult');
+const { logoutRouter } = require('./routes/logout');
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -43,6 +45,7 @@ app.use(session({
      } // Set to true if using HTTPS
 }));
 app.use("/login",loginRouter)
+app.use("/logout",logoutRouter)
 app.use("/teacher",teacherRouter)
 app.use("/dean",deanRouter)
 app.use("/examination",examinationRouter)
@@ -61,6 +64,7 @@ app.use("/assignCourse",assignCourseRouter)
 app.use("/changeReq",changeReqRouter)
 app.use("/deanChangeReq", deanChangeReqRouter)
 app.use("/COEchangeReq", COEchangeReqRouter)
+app.use("/lockResult",lockResultRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){

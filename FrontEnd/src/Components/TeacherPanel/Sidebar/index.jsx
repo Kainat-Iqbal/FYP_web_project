@@ -17,6 +17,7 @@ import {
 } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 
+
 function SideBar() {
   const [isMobile, setIsMobile] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -39,6 +40,18 @@ function SideBar() {
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
   };
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8081/logout'); // Replace with your actual logout endpoint
+      // Optionally, handle successful logout (e.g., redirect to login page, clear local state)
+      window.location.href = '/login'; // Redirect to login page
+    } catch (error) {
+      console.error('Error logging out:', error);
+      // Optionally, handle errors (e.g., show a message to the user)
+    }
+  };
+
   return (
     <>
       <div
@@ -144,7 +157,7 @@ function SideBar() {
                   padding: "10px 20px",
                   cursor: "pointer",
                 }}
-                /* onClick={handleLogout} */
+                onClick={handleLogout} // Call handleLogout on click
               >
                 Logout
               </div>
