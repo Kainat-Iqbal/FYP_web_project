@@ -9,7 +9,12 @@ const getAll = (req, res) => {
     WHERE ac.courseId IS NULL;
   `;
     const queryToGetBatch = "SELECT * FROM batch";
-    const queryToGetSession = "SELECT * FROM session";
+    const queryToGetSession = `
+    SELECT s.sessionId, s.academic_year, s.semester, s.programId, s.batchId, dp.type,dp.degree, b.year,b.session
+    FROM session s
+    JOIN degree_program dp ON s.programId = dp.programId
+    JOIN batch b ON s.batchId = b.batchId
+  `;
     const queryToGetclass = "SELECT * FROM degree_program";
 
     let results = {};
@@ -76,10 +81,9 @@ const getAll = (req, res) => {
 };
 
 const addAssignCourse = async (req, res) => {
-    const HODId = 40;
     const queryToAdd = "INSERT INTO `assign_course`(`HODId`, `teacherId`, `courseId`, `sessionId`, `assignDate`) VALUES (?)";
     const VALUES = [
-        HODId,
+        req.body.hodId,
         req.body.teacherId,
         req.body.courseId,
         req.body.selectedSessionId,

@@ -2,8 +2,8 @@ const DB = require("../DB/dbConfig");
 
 const viewTeacherCourse = async (req, res) => {
     const { teacherId, batchId } = req.query; // Get both query parameters
-    console.log("teacherId",teacherId)
-    console.log("batchId",batchId)
+    // console.log("teacherId",teacherId)
+    // console.log("batchId",batchId)
 
     let queryToViewCourse = `
         SELECT ac.*, c.*, t.*, s.*, dp.*, b.*, st.* 
@@ -20,11 +20,18 @@ const viewTeacherCourse = async (req, res) => {
     if (teacherId) {
         queryToViewCourse += ' WHERE t.teacherId = ?';
         queryParams.push(teacherId);
-    } else if (batchId) {
-        queryToViewCourse += ' WHERE b.batchId = ?';
-        queryParams.push(batchId);
     }
 
+    if (batchId) {
+        if (queryParams.length > 0) {
+            queryToViewCourse += ' AND b.batchId = ?';
+        } else {
+            queryToViewCourse += ' WHERE b.batchId = ?';
+        }
+        queryParams.push(batchId);
+    }
+    // console.log("Query:", queryToViewCourse);
+    // console.log("Query Params:", queryParams);
     DB.query(queryToViewCourse, queryParams, (err, results) => {
         if (err) {
             console.error("Error fetching data:", err);

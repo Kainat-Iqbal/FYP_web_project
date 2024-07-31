@@ -3,135 +3,31 @@ import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
 import "./hodViewResult.css";
 import SideBar from "../../SideBar";
+import { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import axios from "axios";
+
 
 function HODViewResult() {
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const assignId = queryParams.get('assignId');
   const nav = useNavigate();
-  const [results, setResults] = React.useState([
-    {
-      SNo: 1,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66',
-      action: null,
-      reason: ''
-    },
-    {
-      SNo: 2,
-      SeatNo: '2126412',
-      EnrollmentNo: '2021/Comp/BS(SE)/24035',
-      StdName: 'Ali Ahmed',
-      FatherName: 'Ahmed Khan',
-      Mid: '20',
-      Lab: '27',
-      AT: '35',
-      Total: '82',
-      GP: '3.00',
-      action: null,
-      reason: ''
-    },
-    {
-      SNo: 3,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 4,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 5,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 6,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 7,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 8,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 9,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 10,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-  ]);
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8081/resultApprovalHod/Get/${assignId}`);
+        setResults(res.data);
+      } catch (error) {
+        console.log("Error fetching requests", error);
+      }
+    };
+
+    fetchResult();
+  }, []);
+console.log("first,,,",results)
 
   const [showPopup, setShowPopup] = React.useState(false);
   const [disapproveReason, setDisapproveReason] = React.useState("");
@@ -259,37 +155,22 @@ function HODViewResult() {
                 <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Assign+Term (50/80)</th>
                 <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Grand Total (100)</th>
                 <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>GP</th>
-                {/* <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Action</th> */}
               </tr>
             </thead>
 
             <tbody>
               {results.map((result) => (
                 <tr key={result.SNo}>
-                  <td style={{ textAlign: "center" }}>{result.SNo}</td>
-                  <td style={{ textAlign: "center" }}>{result.SeatNo}</td>
-                  <td style={{ textAlign: "center" }}>{result.EnrollmentNo}</td>
-                  <td style={{ textAlign: "center" }}>{result.StdName}</td>
-                  <td style={{ textAlign: "center" }}>{result.FatherName}</td>
-                  <td style={{ textAlign: "center" }}>{result.Mid}</td>
-                  <td style={{ textAlign: "center" }}>{result.Lab}</td>
-                  <td style={{ textAlign: "center" }}>{result.AT}</td>
-                  <td style={{ textAlign: "center" }}>{result.Total}</td>
-                  <td style={{ textAlign: "center" }}>{result.GP}</td>
-
-                  {/* <td style={{ textAlign: "center" }}>
-                    {result.action === 'Approved' ? (
-                      <span style={{ color: 'green', fontWeight: 'bold' }}>Approved</span>
-                    ) : result.action === 'Disapproved' ? (
-                      <>
-                        <span style={{ color: 'red', fontWeight: 'bold' }}>Disapproved</span>
-                        <br />
-                        <span>{result.reason}</span>
-                      </>
-                    ) : (
-                      <span>Pending</span>
-                    )}
-                  </td> */}
+                  <td style={{ textAlign: "center" }}>{result.resultId}</td>
+                  <td style={{ textAlign: "center" }}>{result.seatNo}</td>
+                  <td style={{ textAlign: "center" }}>{result.enrollment}</td>
+                  <td style={{ textAlign: "center" }}>{result.name}</td>
+                  <td style={{ textAlign: "center" }}>{result.fatherName}</td>
+                  <td style={{ textAlign: "center" }}>{result.midMarks}</td>
+                  <td style={{ textAlign: "center" }}>{result.labMarks}</td>
+                  <td style={{ textAlign: "center" }}>{result.terminalMarks}</td>
+                  <td style={{ textAlign: "center" }}>{result.totalMarks}</td>
+                  <td style={{ textAlign: "center" }}>{result.GPA}</td>
 
                 </tr>
               ))}

@@ -14,14 +14,14 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const courseData = location.state?.course;
   const courseName = courseData?.course_title;
   const courseCode = courseData?.course_code;
-
+  const assignId = courseData?.assignId;
   const [teacherEmail, setTeacherEmail] = useState(null);
   const [teacherId, setTeacherId] = useState(null);
   const [teacherName, setTeacherName] = useState(null);
-  const [assignId, setAssignId] = useState(null);
-
+  // console.log("COURSE DATA",courseData)
+  // setAssignId(courseData.assignId)
   const [showDialog, setShowDialog] = useState(false); // State to control dialog visibility
-
+  console.log("firstASSIGN.....", assignId);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -45,7 +45,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
         const response = await axios.get(
           `http://localhost:8081/teachercourse/view?batchId=${batchId}`
         );
-        // console.log("Fetched students data:", response.data);
+        console.log("Fetched students data:", response.data);
         const uniqueStudents = Array.from(
           new Map(
             response.data.map((student) => [student.studentId, student])
@@ -71,7 +71,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
             students.map((student) =>
               axios
                 .get(
-                  `http://localhost:8081/result/Get/${student.studentId}/${student.assignId}`
+                  `http://localhost:8081/result/Get/${student.studentId}/${assignId}`
                 )
                 .then((res) => ({
                   studentId: student.studentId,
@@ -83,7 +83,6 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
             const result =
               results.find((r) => r.studentId === student.studentId)?.result ||
               {};
-            setAssignId(result.assignId);
             return {
               ...student,
               resultId: result.resultId, // Ensure resultId is included
@@ -106,6 +105,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       fetchResultData();
     }
   }, [batchId, students, dataFetched]);
+
+  console.log("ASSIGNID Is:", assignId);
 
   const handleMarksChange = (e, studentId, fieldName) => {
     let { value } = e.target;
@@ -164,7 +165,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
 
     const resultData = {
       studentId: student.studentId,
-      assignId: student.assignId,
+      assignId: assignId,
       terminalSessionalMarks: student.terminalMarks,
       midMarks: student.midMarks,
       labMarks: student.labMarks,
@@ -185,16 +186,16 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       submissionDate: " ", // Placeholder, modify as needed
       resultCode: " ", // Placeholder, modify as needed
     };
-    // console.log("Sending result data:", resultData);
+   
 
     try {
       const postRes = await axios.post(
         "http://localhost:8081/result/Add",
         resultData
       );
+      console.log("Sending result data:", resultData);
       // console.log("Response from server:", postRes.data);
       if (postRes.data === "success") {
-        alert("Result is added successfully");
         window.location.reload(); // Refresh the page
         setIsLocked(true); // Lock fields after saving
         setEditStudentId(null); // Reset editing state
@@ -266,17 +267,6 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   };
 
   const date = getCurrentDate();
-
-  // console.log(
-  //   "first",
-  //   teacherEmail,
-  //   teacherId,
-  //   teacherName,
-  //   courseCode,
-  //   courseName,
-  //   assignId,
-  //   Date
-  // );
 
   // State variables to hold the input values
   const [values, setValues] = useState({
@@ -364,6 +354,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       console.log("Response from server:", postRes.data);
       if (postRes.data === "success") {
         alert("Result is locked");
+        window.location.reload(); // Refresh the page
       } else {
         console.log("Error sending edit request");
       }
@@ -373,35 +364,50 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   };
 
   const [lockResultAssignId, setLockResultAssignId] = useState(null);
+
   useEffect(() => {
     const fetchLockedResults = async () => {
       try {
         const res = await axios.get("http://localhost:8081/lockResult/View");
-        // Assuming res.data is an array of results
         const lockedResults = res.data; // List of all locked results
-  console.log("ghbjn",assignId,res.data.assignId,teacherId,res.data.teacherId)
-        // Find if there's a result that matches both assignId and teacherId
-        const isLocked = lockedResults.some(
-          (result) => result.assignId === assignId && result.teacherId === teacherId
-        );
-  
-        // Update the state based on the check
-        if (isLocked) {
-          setLockResultAssignId(assignId); // Set assignId if it and teacherId match a locked result
+
+        console.log("Fetched locked results:", lockedResults);
+        console.log("assignId:", assignId, "teacherId:", teacherId);
+
+        // Check if lockedResults is an array
+        if (Array.isArray(lockedResults)) {
+          // Find if there's a result that matches both assignId and teacherId
+          const matchedResult = lockedResults.find(
+            (result) =>
+              result.assignId === assignId && result.teacherId === teacherId
+          );
+
+          // Update the state based on the matched result
+          if (matchedResult) {
+            console.log(
+              "Matched Result:",
+              matchedResult.assignId,
+              matchedResult.teacherId
+            );
+            setLockResultAssignId(assignId); // Set assignId if it and teacherId match a locked result
+          } else {
+            setLockResultAssignId(null); // Clear the state if no match found
+          }
         } else {
-          setLockResultAssignId(null); // Clear the state if no match found
+          console.warn("Expected an array but found:", lockedResults);
+          setLockResultAssignId(null);
         }
       } catch (error) {
         console.error("Error fetching locked results:", error);
       }
     };
-  
+
     if (assignId && teacherId) {
       fetchLockedResults();
     }
-  }, [assignId, teacherId]); // Include both assignId and teacherId in the dependency array
-  
-  console.log("first",lockResultAssignId)
+  }, [assignId, teacherId]);
+
+  console.log("first,,,,,", lockResultAssignId);
 
   return (
     <div>
@@ -519,8 +525,12 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                         onClick={() => handleEnableEditing(student.studentId)}
                         disabled={!!lockResultAssignId}
                         style={{
-                          backgroundColor: !!lockResultAssignId ? "grey" : "lightBlue", // Change 'blue' to your desired enabled color
-                          cursor: !!lockResultAssignId ? "not-allowed" : "pointer",
+                          backgroundColor: !!lockResultAssignId
+                            ? "grey"
+                            : "lightBlue", // Change 'blue' to your desired enabled color
+                          cursor: !!lockResultAssignId
+                            ? "not-allowed"
+                            : "pointer",
                           color: "black", // Button text color
                         }}
                       >
@@ -562,7 +572,17 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
         >
           Lock Results
         </button>
-        <button onClick={handleEditRequestClick}>Request for Editing</button>
+        <button
+          disabled={!lockResultAssignId}
+          style={{
+            backgroundColor: !lockResultAssignId ? "grey" : "#4c90af", // Change 'blue' to your desired enabled color
+            cursor: !lockResultAssignId ? "not-allowed" : "pointer",
+            color: "white", // Button text color
+          }}
+          onClick={handleEditRequestClick}
+        >
+          Request for Editing
+        </button>
       </div>
     </div>
   );

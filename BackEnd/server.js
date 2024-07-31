@@ -27,6 +27,7 @@ const { deanChangeReqRouter } = require('./routes/deanChangeReq')
 const { COEchangeReqRouter } = require('./routes/COEchangeReq');
 const { lockResultRouter } = require('./routes/lockResult');
 const { logoutRouter } = require('./routes/logout');
+const { resultApprovalHodRouter } = require('./routes/hodResultApproval');
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -65,6 +66,7 @@ app.use("/changeReq",changeReqRouter)
 app.use("/deanChangeReq", deanChangeReqRouter)
 app.use("/COEchangeReq", COEchangeReqRouter)
 app.use("/lockResult",lockResultRouter)
+app.use("/resultApprovalHod",resultApprovalHodRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){

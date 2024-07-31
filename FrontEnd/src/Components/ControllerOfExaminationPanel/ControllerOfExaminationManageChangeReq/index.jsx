@@ -7,7 +7,6 @@ import SideBar from "../SideBar";
 import ControllerOfExaminationDialogue from "../ControllerOfExaminationDialogue";
 
 function ControllerOfExaminationManageChangeReq() {
-  
   const [examinationId, setexaminationId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +31,9 @@ function ControllerOfExaminationManageChangeReq() {
   useEffect(() => {
     const fetchRequest = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/COEchangeReq/COEview");
+        const res = await axios.get(
+          "http://localhost:8081/COEchangeReq/COEview"
+        );
         setRequest(res.data);
       } catch (error) {
         console.log("Error fetching requests", error);
@@ -45,9 +46,11 @@ function ControllerOfExaminationManageChangeReq() {
   useEffect(() => {
     const fetchDisapproveRequest = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/COEchangeReq/COEviewDisapprove");
+        const res = await axios.get(
+          "http://localhost:8081/COEchangeReq/COEviewDisapprove"
+        );
         setDisapproveReq(res.data);
-        console.log("COE",res.data)
+        console.log("COE", res.data);
       } catch (error) {
         console.log("Error fetching requests", error);
       }
@@ -78,11 +81,14 @@ function ControllerOfExaminationManageChangeReq() {
 
   const handleSend = async (reason) => {
     try {
-      const res =await axios.put(`http://localhost:8081/COEchangeReq/COEdisapprove/${currentRequestId}`, { reason ,examinationId,date});
-      
-      if(res.data.updated){
+      const res = await axios.put(
+        `http://localhost:8081/COEchangeReq/COEdisapprove/${currentRequestId}`,
+        { reason, examinationId, date }
+      );
+
+      if (res.data.updated) {
         setDisapprovedRequests((prev) => new Set(prev).add(currentRequestId)); // Mark as disapproved
-        alert("Request Disapproved")
+        alert("Request Disapproved");
         window.location.reload(); // Refresh the page
       }
     } catch (error) {
@@ -96,7 +102,10 @@ function ControllerOfExaminationManageChangeReq() {
   const handleApprove = async (requestId) => {
     console.log(`Approving request ${requestId}`);
     try {
-      const res = await axios.put(`http://localhost:8081/COEchangeReq/COEapprove/${requestId}`, { examinationId, date });
+      const res = await axios.put(
+        `http://localhost:8081/COEchangeReq/COEapprove/${requestId}`,
+        { examinationId, date }
+      );
 
       if (res.data.updated) {
         alert("Request Approved");
@@ -132,63 +141,74 @@ function ControllerOfExaminationManageChangeReq() {
             </thead>
 
             <tbody>
-            {request.map((result) => (
-                <tr key={result.requestId}>
-                <td>{result.requestId}</td>
-                <td>{result.course_code}</td>
-                <td>{result.course_name}</td>
-                <td>{"Ms. " + result.name}</td>
-                <td style={{ whiteSpace: 'pre-wrap' }}>{result.description}</td>
-                <td>
-                {!disapprovedRequests.has(result.requestId) ? (
-                    <>
-                        <button
-                          style={{
-                            borderColor: "#90ee90",
-                            backgroundColor: "#90ee90",
-                            // textAlign: "center",
-                            // width: "9vw",
-                            // borderColor: "#90ee90",
-                            // color: "white",
-                            // backgroundColor: "#90ee90",
-                            // marginLeft:"5px",
-                            // marginRight: "5px"
-                          }}
-                          onClick={() => handleApprove(result.requestId)}
+              {Array.isArray(request) && request.length > 0 ? (
+                request.map((result) => (
+                  <tr key={result.requestId}>
+                    <td>{result.requestId}</td>
+                    <td>{result.course_code}</td>
+                    <td>{result.course_name}</td>
+                    <td>{"Ms. " + result.name}</td>
+                    <td style={{ whiteSpace: "pre-wrap" }}>
+                      {result.description}
+                    </td>
+                    <td>
+                      {!disapprovedRequests.has(result.requestId) ? (
+                        <>
+                          <button
+                            style={{
+                              borderColor: "#90ee90",
+                              backgroundColor: "#90ee90",
+                              // textAlign: "center",
+                              // width: "9vw",
+                              // borderColor: "#90ee90",
+                              // color: "white",
+                              // backgroundColor: "#90ee90",
+                              // marginLeft:"5px",
+                              // marginRight: "5px"
+                            }}
+                            onClick={() => handleApprove(result.requestId)}
                           >
-                          Approve
-                        </button>
+                            Approve
+                          </button>
 
-                        <button
-                          style={{
-                            borderColor: "#cd5c5c",
-                            backgroundColor: "#cd5c5c",
-                            // textAlign: "center",
-                            // width: "9vw",
-                            // borderColor: "#cd5c5c",
-                            // color: "white",
-                            // backgroundColor: "#cd5c5c",
-                            // marginLeft:"5px",
-                            // marginRight: "5px"
-                          }}
-                          
-                          onClick={() => handleDisapproveClick(result.requestId)}
-                        >
-                          Disapprove
-                        </button>
-                      </>
-                    ) : (
-                      <span>Disapproved</span>
-                    )}
+                          <button
+                            style={{
+                              borderColor: "#cd5c5c",
+                              backgroundColor: "#cd5c5c",
+                              // textAlign: "center",
+                              // width: "9vw",
+                              // borderColor: "#cd5c5c",
+                              // color: "white",
+                              // backgroundColor: "#cd5c5c",
+                              // marginLeft:"5px",
+                              // marginRight: "5px"
+                            }}
+                            onClick={() =>
+                              handleDisapproveClick(result.requestId)
+                            }
+                          >
+                            Disapprove
+                          </button>
+                        </>
+                      ) : (
+                        <span>Disapproved</span>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center" }}>
+                    No requests available
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </Table>
-        </div>  
+        </div>
 
         {/* //Disapproved table */}
-      <div id="COEmanageChangeReqTop">
+        <div id="COEmanageChangeReqTop">
           <h1 style={{ color: "#00304B" }}> Disapproved Request </h1>
         </div>
 
@@ -207,20 +227,30 @@ function ControllerOfExaminationManageChangeReq() {
             </thead>
 
             <tbody>
-              {disapproveReq.map((results) => (
-                <tr key={results.requestId}>
-                  <td>{results.requestId}</td>
-                  <td>{results.course_code}</td>
-                  <td>{results.course_name}</td>
-                  <td>{"Ms. " + results.name}</td>
-                  {console.log("njnk",results.name)}
-                  <td style={{ whiteSpace: 'pre-wrap' }}>{results.description}</td>
-                  <td>{results.disapproveReason}</td>
-                  <td>
+              {Array.isArray(disapproveReq) && disapproveReq.length > 0 ? (
+                disapproveReq.map((results) => (
+                  <tr key={results.requestId}>
+                    <td>{results.requestId}</td>
+                    <td>{results.course_code}</td>
+                    <td>{results.course_name}</td>
+                    <td>{"Ms. " + results.name}</td>
+                    {console.log("njnk", results.name)}
+                    <td style={{ whiteSpace: "pre-wrap" }}>
+                      {results.description}
+                    </td>
+                    <td>{results.disapproveReason}</td>
+                    <td>
                       <span>Disapproved</span>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center" }}>
+                    No requests available
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </Table>
         </div>
@@ -236,32 +266,6 @@ function ControllerOfExaminationManageChangeReq() {
 }
 
 export default ControllerOfExaminationManageChangeReq;
-
-
-
-
-    
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import * as React from "react";
 // import "./style.css";
@@ -344,14 +348,14 @@ export default ControllerOfExaminationManageChangeReq;
 //         reason: 'Enter wrong seat no.',
 //         action: null
 //     },
-    
+
 //   ]);
 
 //   const handleApprove = (id) => {
 //     setResults(prevResults =>
-//       prevResults.map(result => 
-//         result.id === id 
-//         ? { ...result, action: 'approve' } 
+//       prevResults.map(result =>
+//         result.id === id
+//         ? { ...result, action: 'approve' }
 //         : result
 //       )
 //     );
@@ -359,9 +363,9 @@ export default ControllerOfExaminationManageChangeReq;
 
 //   const handleDisapprove = (id) => {
 //     setResults(prevResults =>
-//       prevResults.map(result => 
-//         result.id === id 
-//         ? { ...result, action: 'disapprove' } 
+//       prevResults.map(result =>
+//         result.id === id
+//         ? { ...result, action: 'disapprove' }
 //         : result
 //       )
 //     );
@@ -423,7 +427,7 @@ export default ControllerOfExaminationManageChangeReq;
 //                         >
 //                           View Result
 //                         </button> */}
-                        
+
 //                         <button
 //                           style={{ borderColor: "green", color: "black", backgroundColor: "#388E3C",marginLeft:"7px" }}
 //                           onClick={() => {

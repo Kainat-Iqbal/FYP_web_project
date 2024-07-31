@@ -1,13 +1,12 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
-import './hodmanageChangeReq.css';
+import "./hodmanageChangeReq.css";
 import SideBar from "../SideBar";
 import axios from "axios";
-import Dialogue from "../Dialogue";  // Import the Dialogue component
+import Dialogue from "../Dialogue"; // Import the Dialogue component
 
 function HODManageChangeReq() {
-
   const [hodId, setHodId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
@@ -23,7 +22,7 @@ function HODManageChangeReq() {
 
     fetchData();
   }, []);
-  console.log("HOD",hodId)
+  console.log("HOD", hodId);
 
   const [request, setRequest] = useState([]);
   const [showDialog, setShowDialog] = useState(false);
@@ -47,9 +46,11 @@ function HODManageChangeReq() {
   useEffect(() => {
     const fetchDisapproveRequest = async () => {
       try {
-        const res = await axios.get("http://localhost:8081/changeReq/ViewDisapprove");
+        const res = await axios.get(
+          "http://localhost:8081/changeReq/ViewDisapprove"
+        );
         setDisapproveReq(res.data);
-        console.log("na,e",res.data)
+        console.log("na,e", res.data);
       } catch (error) {
         console.log("Error fetching requests", error);
       }
@@ -79,14 +80,16 @@ function HODManageChangeReq() {
 
   const date = getCurrentDate();
 
-
   const handleSend = async (reason) => {
     try {
-      const res =await axios.put(`http://localhost:8081/changeReq/Disapprove/${currentRequestId}`, { reason ,hodId,date});
-      
-      if(res.data.updated){
+      const res = await axios.put(
+        `http://localhost:8081/changeReq/Disapprove/${currentRequestId}`,
+        { reason, hodId, date }
+      );
+
+      if (res.data.updated) {
         setDisapprovedRequests((prev) => new Set(prev).add(currentRequestId)); // Mark as disapproved
-        alert("Request Disapproved")
+        alert("Request Disapproved");
         window.location.reload(); // Refresh the page
       }
     } catch (error) {
@@ -100,7 +103,10 @@ function HODManageChangeReq() {
   const handleApprove = async (requestId) => {
     console.log(`Approving request ${requestId}`);
     try {
-      const res = await axios.put(`http://localhost:8081/changeReq/Approve/${requestId}`, { hodId, date });
+      const res = await axios.put(
+        `http://localhost:8081/changeReq/Approve/${requestId}`,
+        { hodId, date }
+      );
 
       if (res.data.updated) {
         alert("Request Approved");
@@ -112,7 +118,6 @@ function HODManageChangeReq() {
       console.log("Error approving request", error);
     }
   };
-
 
   return (
     <div id="HODManageChangeReqMainDiv">
@@ -137,41 +142,52 @@ function HODManageChangeReq() {
             </thead>
 
             <tbody>
-              {request.map((result) => (
-                <tr key={result.requestId}>
-                  <td>{result.requestId}</td>
-                  <td>{result.course_code}</td>
-                  <td>{result.course_name}</td>
-                  <td>{"Ms. " + result.name}</td>
-                  <td style={{ whiteSpace: 'pre-wrap' }}>{result.description}</td>
-                  <td id="action">
-                    {!disapprovedRequests.has(result.requestId) ? (
-                      <>
-                        <button
-                        id="approveButtonHOD"
-                         
-                          onClick={() => handleApprove(result.requestId)}
+              {Array.isArray(request) && request.length > 0 ?(
+                request.map((result) => (
+                  <tr key={result.requestId}>
+                    <td>{result.requestId}</td>
+                    <td>{result.course_code}</td>
+                    <td>{result.course_name}</td>
+                    <td>{"Ms. " + result.name}</td>
+                    <td style={{ whiteSpace: "pre-wrap" }}>
+                      {result.description}
+                    </td>
+                    <td id="action">
+                      {!disapprovedRequests.has(result.requestId) ? (
+                        <>
+                          <button
+                            id="approveButtonHOD"
+                            onClick={() => handleApprove(result.requestId)}
                           >
-                          Approve
-                        </button>
+                            Approve
+                          </button>
 
-                        <button
-                        id="disapproveButtonHOD"
-                          style={{
-                            borderColor: "#cd5c5c",
-                            backgroundColor: "#cd5c5c",
-                          }}
-                          onClick={() => handleDisapproveClick(result.requestId)}
-                        >
-                          Disapprove
-                        </button>
-                      </>
-                    ) : (
-                      <span>Disapproved</span>
-                    )}
+                          <button
+                            id="disapproveButtonHOD"
+                            style={{
+                              borderColor: "#cd5c5c",
+                              backgroundColor: "#cd5c5c",
+                            }}
+                            onClick={() =>
+                              handleDisapproveClick(result.requestId)
+                            }
+                          >
+                            Disapprove
+                          </button>
+                        </>
+                      ) : (
+                        <span>Disapproved</span>
+                      )}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center" }}>
+                    No requests found
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </Table>
         </div>
@@ -195,20 +211,30 @@ function HODManageChangeReq() {
             </thead>
 
             <tbody>
-              {disapproveReq.map((results) => (
+              {Array.isArray(disapproveReq) && disapproveReq.length > 0 ?(
+              disapproveReq.map((results) => (
                 <tr key={results.requestId}>
                   <td>{results.requestId}</td>
                   <td>{results.course_code}</td>
                   <td>{results.course_name}</td>
                   <td>{"Ms. " + results.name}</td>
-                  {console.log("njnk",results.name)}
-                  <td style={{ whiteSpace: 'pre-wrap' }}>{results.description}</td>
+                  {console.log("njnk", results.name)}
+                  <td style={{ whiteSpace: "pre-wrap" }}>
+                    {results.description}
+                  </td>
                   <td>{results.disapproveReason}</td>
                   <td>
-                      <span>Disapproved</span>
+                    <span>Disapproved</span>
                   </td>
                 </tr>
-              ))}
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" style={{ textAlign: "center" }}>
+                      No requests found
+                    </td>
+                  </tr>
+              )}
             </tbody>
           </Table>
         </div>
@@ -224,29 +250,6 @@ function HODManageChangeReq() {
 }
 
 export default HODManageChangeReq;
-
-    
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import * as React from "react";
 // import "./style.css";
@@ -329,14 +332,14 @@ export default HODManageChangeReq;
 //         reason: 'Enter wrong seat no.',
 //         action: null
 //     },
-    
+
 //   ]);
 
 //   const handleApprove = (id) => {
 //     setResults(prevResults =>
-//       prevResults.map(result => 
-//         result.id === id 
-//         ? { ...result, action: 'approve' } 
+//       prevResults.map(result =>
+//         result.id === id
+//         ? { ...result, action: 'approve' }
 //         : result
 //       )
 //     );
@@ -344,9 +347,9 @@ export default HODManageChangeReq;
 
 //   const handleDisapprove = (id) => {
 //     setResults(prevResults =>
-//       prevResults.map(result => 
-//         result.id === id 
-//         ? { ...result, action: 'disapprove' } 
+//       prevResults.map(result =>
+//         result.id === id
+//         ? { ...result, action: 'disapprove' }
 //         : result
 //       )
 //     );
@@ -408,7 +411,7 @@ export default HODManageChangeReq;
 //                         >
 //                           View Result
 //                         </button> */}
-                        
+
 //                         <button
 //                           style={{ borderColor: "green", color: "black", backgroundColor: "#388E3C",marginLeft:"7px" }}
 //                           onClick={() => {

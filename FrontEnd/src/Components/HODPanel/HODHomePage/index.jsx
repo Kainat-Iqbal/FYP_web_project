@@ -25,54 +25,11 @@ function HODHomePage() {
 
     fetchData();
   }, []);
-  console.log("HOD",hodId,hodName)
+  console.log("HOD",hodId)
 
   
   
   const nav = useNavigate();
-  const [results, setResults] = React.useState([
-    {
-      CourseCode: 'CSS 1347',
-      CourseName: 'Programming Fundamentals',
-      Class: 'BS(CS)',
-      Batch: '2024',
-      Status: null,
-      AssignedTeacher: 'Ms. Zara'
-    },
-    {
-      CourseCode: 'CSS 1347',
-      CourseName: 'Programming Fundamentals',
-      Class: 'BS(CS)',
-      Batch: '2024',
-      Status: null,
-      AssignedTeacher: 'Ms. Zara'
-    },
-    {
-      CourseCode: 'CSS 1347',
-      CourseName: 'Programming Fundamentals',
-      Class: 'BS(CS)',
-      Batch: '2024',
-      Status: null,
-      AssignedTeacher: 'Ms. Zara'
-    },
-    {
-      CourseCode: 'CSS 1347',
-      CourseName: 'Programming Fundamentals',
-      Class: 'BS(CS)',
-      Batch: '2024',
-      Status: null,
-      AssignedTeacher: 'Ms. Zara'
-    },
-    {
-      CourseCode: 'CSS 1347',
-      CourseName: 'Programming Fundamentals',
-      Class: 'BS(CS)',
-      Batch: '2024',
-      Status: null,
-      AssignedTeacher: 'Ms. Zara'
-    },
-    // Add more data as needed
-  ]);
 
   const [courses, setCourses] = useState([]);
   useEffect(() => {
@@ -111,29 +68,29 @@ function HODHomePage() {
         <div id="HODHomePageWithoutBar">
 
           <div id="HODHomePageTeacher">
-            <h1 style={{ marginTop: "2vh" }}> 60 </h1>
+            <h2 style={{ marginTop: "2vh" }}> 60 </h2>
 
             <div id="HODHomePageNumImage">
-              <h2>Faculty</h2>
+              <h3>Faculty</h3>
               <img
                 src={require("./teacher.png")}
-                style={{ width: "6vw", height: "10vh" }} />
+                style={{ width: "6vw", height: "10vh",paddingBottom:'2vh' }} />
             </div>
           </div>
 
           <div id="HODHomePageStudent">
-            <h1 style={{ marginTop: "2vh" }} > 14,000 </h1>
+            <h2 style={{ marginTop: "2vh" }} > 14,000 </h2>
             <div id="HODHomePageNumImage">
-              <h2>Students</h2>
-              <img src={require("./student.png")} style={{ width: "6vw", height: "10vh" }} />
+              <h3>Students</h3>
+              <img src={require("./student.png")} style={{ width: "6vw", height: "10vh",paddingBottom:'2vh' }} />
             </div>
           </div>
 
           <div id="HODHomePagePassStudent">
-            <h1 style={{ marginTop: "2vh" }} > 10,000 </h1>
+            <h2 style={{ marginTop: "2vh" }} > 10,000 </h2>
             <div id="HODHomePageNumImage">
-              <h2>Passed Students</h2>
-              <img src={require("./passStudent.png")} style={{ width: "6vw", height: "10vh" }} />
+              <h3 style={{marginTop:'-2vh'}}>Passed Students</h3>
+              <img src={require("./passStudent.png")} style={{ width: "6vw", height: "10vh",paddingBottom:'2vh' }} />
             </div>
           </div>
 
