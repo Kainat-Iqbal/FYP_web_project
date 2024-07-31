@@ -74,6 +74,11 @@
     /* background-color: aqua; */
 }
 
+#c_inp{
+    width: 49%;
+    height: 80%;
+    border-radius: 0px;
+}
 /* Responsive adjustments */
 @media (max-width: 1024px) {
     #mainAddCourseDiv {

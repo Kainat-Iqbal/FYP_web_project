@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from 'react';
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import axios from "axios";
 import {
   AccountCircle,
   AddCircle,
@@ -14,7 +15,7 @@ import { useNavigate, Link } from "react-router-dom";
 function SideBar() {
 
   const [isMobile, setIsMobile] = useState(false);
-
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   useEffect(() => {
     // Function to check if the device width is below a certain threshold (e.g., mobile screen width)
     const handleResize = () => {
@@ -33,6 +34,16 @@ function SideBar() {
 
   const handleToggleSidebar = () => {
     setCollapsed(!collapsed);
+  };
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8081/logout'); // Replace with your actual logout endpoint
+      // Optionally, handle successful logout (e.g., redirect to login page, clear local state)
+      window.location.href = '/login'; // Redirect to login page
+    } catch (error) {
+      console.error('Error logging out:', error);
+      // Optionally, handle errors (e.g., show a message to the user)
+    }
   };
   return (
     <>
@@ -109,9 +120,40 @@ function SideBar() {
             style={{
               marginTop: "5px",
               fontSize: "2.8rem",
-              color: "pink",
-            }}
-          />
+              color: "white",
+            }}onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            />
+            {isDropdownOpen && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "100%",
+                  right: "0",
+                  backgroundColor: "white",
+                  boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+                  borderRadius: "4px",
+                  zIndex: "1000",
+                }}
+              >
+                <div
+                  style={{
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                  }}
+                   // Assuming "/profile" is the route for the profile page
+                >
+                  View Profile
+                </div>
+                <div
+                  style={{
+                    padding: "10px 20px",
+                    cursor: "pointer",
+                  }}
+                  onClick={handleLogout} // Call handleLogout on click
+                >
+                  Logout
+                </div>
+              </div>)}
         </div>
       </div>
       <Sidebar

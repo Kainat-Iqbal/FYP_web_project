@@ -519,9 +519,9 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                         onClick={() => handleEnableEditing(student.studentId)}
                         disabled={!!lockResultAssignId}
                         style={{
-                          backgroundColor: !!lockResultAssignId ? "grey" : "blue", // Change 'blue' to your desired enabled color
+                          backgroundColor: !!lockResultAssignId ? "grey" : "lightBlue", // Change 'blue' to your desired enabled color
                           cursor: !!lockResultAssignId ? "not-allowed" : "pointer",
-                          color: "white", // Button text color
+                          color: "black", // Button text color
                         }}
                       >
                         Edit
@@ -555,7 +555,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
           onClick={handleLockResult}
           disabled={!!lockResultAssignId}
           style={{
-            backgroundColor: !!lockResultAssignId ? "grey" : "blue", // Change 'blue' to your desired enabled color
+            backgroundColor: !!lockResultAssignId ? "grey" : "#4c90af", // Change 'blue' to your desired enabled color
             cursor: !!lockResultAssignId ? "not-allowed" : "pointer",
             color: "white", // Button text color
           }}

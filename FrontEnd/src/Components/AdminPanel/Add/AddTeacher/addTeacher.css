@@ -72,3 +72,11 @@
     width: 100%;
     /* background-color: aqua; */
 }
+
+#inp{
+    /* background-color: red; */
+    width: 49%;
+    height: 88%;
+    border-radius: 0px;
+    /* border-color: black; */
+}

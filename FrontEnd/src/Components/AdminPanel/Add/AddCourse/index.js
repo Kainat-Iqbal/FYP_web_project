@@ -86,6 +86,7 @@ console.log(values)
             <div id="courseField">
               <label>Course Code</label>
               <input
+              id="c_inp"
                 name="code"
                 type="text"
                 placeholder="CSS 1032"
@@ -96,6 +97,7 @@ console.log(values)
             <div id="courseField">
               <label>Course Title</label>
               <input
+              id="c_inp"
                 name="title"
                 type="text"
                 placeholder="Programming Fundamental"

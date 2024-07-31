@@ -64,6 +64,10 @@
     border-radius: 50px;
     height: 15%;
     color: white;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    width: 40%;
 }
 
 #batchField{

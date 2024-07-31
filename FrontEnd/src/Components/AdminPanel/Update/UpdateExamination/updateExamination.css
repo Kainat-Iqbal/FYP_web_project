@@ -71,3 +71,11 @@
     width: 100%;
     /* background-color: aqua; */
 }
+#examinp{
+    width: 49%;
+    height: 85%;
+    border-radius: 0px;
+}
+#COEbuttonupdate{
+    width: 70%;
+}

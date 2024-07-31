@@ -70,3 +70,8 @@
     width: 100%;
     /* background-color: aqua; */
 }
+#updatet_input{
+    width: 49%;
+    height: 88%;
+    border-radius: 0px;
+}

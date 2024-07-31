@@ -48,10 +48,11 @@
 }
 
 #HODManageChangeReqTable button {
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 30px;
+  margin-right: -10px;
   margin-bottom: 7px;
   display: flex;
+  
 }
 
 #HODManageChangeReqBtnStatusContainer {
@@ -91,8 +92,27 @@
   height: 100px;
   margin-bottom: 10px;
 }
-
-button{
+#approveButtonHOD{
+  border-color: #90ee90;
+  background-color: #90ee90;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#disapproveButtonHOD{
+  border-color: #cd5c5c;
+  background-color: #cd5c5c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* #action{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+} */
+/* button{
   width: 8vw;
   color: white;
-}
+} */

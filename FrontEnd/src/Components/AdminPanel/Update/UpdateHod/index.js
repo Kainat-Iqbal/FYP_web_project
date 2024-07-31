@@ -15,7 +15,6 @@ function UpdateHod(){
   const [DATA, setData] = useState({
     name: "",
     email: "",
-    password: "",
     department: "",
     designation: "",
     CNIC: "",
@@ -77,7 +76,8 @@ return(
           <form id="hodForm" action="" onSubmit={handleSubmit}>
             <div id="hodField">
               <label>Name</label>
-              <input
+              <input 
+               id="updatehod_input"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -97,19 +97,6 @@ return(
             </div>
             {errors.email && (
               <span className="text-danger">{errors.email}</span>
-            )}
-
-            <div id="hodField">
-              <label>Password</label>
-              <input
-                name="password"
-                type="text"
-                onChange={handleInput}
-                value={DATA.password}
-              ></input>
-            </div>
-            {errors.password && (
-              <span className="text-danger">{errors.password}</span>
             )}
 
             <div id="hodField">
@@ -151,6 +138,7 @@ return(
             <div id="hodField">
               <label>CNIC</label>
               <input
+               id="updatehod_input"
                 name="CNIC"
                 type="text"
                 value={DATA.CNIC}

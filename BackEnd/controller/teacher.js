@@ -14,23 +14,41 @@ const hashPassword = async (password) => {
 };
 
 const addTeacher = async (req, res) => {
-  try {
-    // Query for Admin ID
-    const queryForAdminId = "SELECT adminId FROM admin WHERE adminEmail = ?";
-    const adminEmail = req.body.adminEmail;
-    let adminId;
+  const adminId = req.body.adminId;
+  const email = req.body.email;
 
-    // Make the callback function async
-    DB.query(queryForAdminId, [adminEmail], async (err, result) => {
+  console.log("adminId", adminId);
+
+  // Query to check if the email exists in any table
+  const checkEmailQuery = `
+      SELECT 'exists' 
+      FROM (
+          SELECT email FROM dean WHERE email = ? 
+          UNION
+          SELECT adminEmail FROM admin WHERE adminEmail = ? 
+          UNION
+          SELECT email FROM examination_controller WHERE email = ?
+          UNION
+          SELECT email FROM parents WHERE email = ?
+          UNION
+          SELECT email FROM teacher WHERE email = ? 
+          UNION
+          SELECT email FROM student WHERE email = ?
+      ) AS email_check
+      LIMIT 1
+  `;
+
+  // Execute the email check query
+  DB.query(checkEmailQuery, [email, email, email, email,email, email], async (err, result) => {
       if (err) {
-        console.error("Error retrieving admin ID:", err);
-        return res.status(500).json({ success: false, message: "Failed to retrieve admin ID" });
+          console.error("Error checking email:", err);
+          return res.status(500).json({ success: false, message: "Failed to check email" });
       }
 
       if (result.length > 0) {
-        adminId = result[0].adminId;
-        console.log("Admin ID:", adminId);
-
+          // Email already exists
+          return res.json("emailAlreadyExist");
+      } else {
         // Encrypt the password
         const hashedPassword = await hashPassword(req.body.password);
 
@@ -51,23 +69,79 @@ const addTeacher = async (req, res) => {
           req.body.JoiningDate,
           req.body.photo
         ];
+          
+          console.log(VALUES);
 
-        DB.query(queryToAdd, VALUES, (err, result) => {
-          if (err) {
-            console.error("Error adding teacher:", err);
-            return res.status(500).json({ success: false, message: "Failed to add teacher" });
-          }
-          return res.json("success");
-        });
-      } else {
-        return res.status(404).json({ success: false, message: "Admin not found" });
+          // Execute the insert query
+          DB.query(queryToAdd, VALUES, (err, data) => {
+              if (err) {
+                  console.error("Error adding dean:", err);
+                  return res.status(500).json({ success: false, message: "Failed to add dean" });
+              } else {
+                  console.log("Dean added successfully");
+                  return res.json("success");
+              }
+          });
       }
-    });
-  } catch (error) {
-    console.error("Error in addTeacher:", error);
-    return res.status(500).json({ success: false, message: "Internal Server Error" });
-  }
+  });
 };
+
+
+// const addTeacher = async (req, res) => {
+//   try {
+//     // Query for Admin ID
+//     const queryForAdminId = "SELECT adminId FROM admin WHERE adminEmail = ?";
+//     const adminEmail = req.body.adminEmail;
+//     let adminId;
+
+//     // Make the callback function async
+//     DB.query(queryForAdminId, [adminEmail], async (err, result) => {
+//       if (err) {
+//         console.error("Error retrieving admin ID:", err);
+//         return res.status(500).json({ success: false, message: "Failed to retrieve admin ID" });
+//       }
+
+//       if (result.length > 0) {
+//         adminId = result[0].adminId;
+//         console.log("Admin ID:", adminId);
+
+//         // Encrypt the password
+//         const hashedPassword = await hashPassword(req.body.password);
+
+//         const queryToAdd = `
+//           INSERT INTO teacher (name, email, password, designation, department, adminId, CNIC, status, qualification, JoiningDate, photo)
+//           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+//         `;
+//         const VALUES = [
+//           req.body.name,
+//           req.body.email,
+//           hashedPassword, // Use hashed password
+//           req.body.designation,
+//           req.body.department,
+//           adminId,
+//           req.body.CNIC,
+//           req.body.status,
+//           req.body.qualification,
+//           req.body.JoiningDate,
+//           req.body.photo
+//         ];
+
+//         DB.query(queryToAdd, VALUES, (err, result) => {
+//           if (err) {
+//             console.error("Error adding teacher:", err);
+//             return res.status(500).json({ success: false, message: "Failed to add teacher" });
+//           }
+//           return res.json("success");
+//         });
+//       } else {
+//         return res.status(404).json({ success: false, message: "Admin not found" });
+//       }
+//     });
+//   } catch (error) {
+//     console.error("Error in addTeacher:", error);
+//     return res.status(500).json({ success: false, message: "Internal Server Error" });
+//   }
+// };
 
 
 
@@ -110,12 +184,12 @@ const getTeacher = async (req,res) => {
 }
 
 const updateTeacher = async(req,res) => {
-  const quertToUpdate ="UPDATE `teacher` SET `name`=?,`email`=?,`password`=?,`designation`=?,`department`=?,`adminId`=?,`CNIC`=?,`status`=?,`qualification`=?,`JoiningDate`=? WHERE teacherId = ?";
+
+  const quertToUpdate ="UPDATE `teacher` SET `name`=?,`email`=?,`designation`=?,`department`=?,`adminId`=?,`CNIC`=?,`status`=?,`qualification`=?,`JoiningDate`=? WHERE teacherId = ?";
   const id = req.params.id;
   const VALUE = [
     req.body.name,
     req.body.email,
-    req.body.password,
     req.body.designation,
     req.body.department,
     req.body.adminId, // Use the retrieved admin ID

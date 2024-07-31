@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
+import { lightBlue } from "@mui/material/colors";
 
 function ViewTeacher() {
   const [teacher, setTeacher] = useState([]);
@@ -51,6 +52,7 @@ function ViewTeacher() {
           const res = await axios.post("http://localhost:8081/hod/Add", data);
           if (res.data === "success") {
             alert("HOD is added successfully");
+            window.location.reload(); // Refresh the page
           } else {
             console.log("Error adding HOD");
           }
@@ -98,9 +100,9 @@ useEffect(() => {
               <input
                 type="text"
                 placeholder="Search..."
-                style={{ width: "80%" }}
+                style={{ width: "70%" }}
               />
-              <button style={{ height: "63%" }}>
+              <button style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%" }}>
                 <SearchIcon />
               </button>
             </div>

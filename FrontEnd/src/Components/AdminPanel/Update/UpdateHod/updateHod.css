@@ -50,6 +50,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    row-gap: 4px;
 }
 
 #hodForm label{
@@ -71,4 +72,9 @@
 
     width: 100%;
     /* background-color: aqua; */
+}
+#updatehod_input{
+    width: 49%;
+    height: 82%;
+    border-radius: 0px;
 }

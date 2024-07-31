@@ -73,7 +73,12 @@
     width: 100%;
     /* background-color: aqua; */
 }
-
+#st_input{
+    width: 49%;
+    height: 85%;
+    border-radius: 0px;
+    border: 2px black;
+}
 /* Responsive adjustments */
 @media (max-width: 1024px) {
     #mainAddstudentDiv {

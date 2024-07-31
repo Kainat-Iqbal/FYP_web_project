@@ -77,6 +77,7 @@ const [DATA, setData] = useState({
             <div id="courseField">
               <label>Course Code</label>
               <input
+              id="c_update_inp"
                 name="course_code"
                 type="text"
                 value={DATA.course_code}
@@ -87,6 +88,7 @@ const [DATA, setData] = useState({
             <div id="courseField">
               <label>Course Title</label>
               <input
+              id="c_update_inp"
                 name="course_title"
                 type="text"
                 value={DATA.course_title}

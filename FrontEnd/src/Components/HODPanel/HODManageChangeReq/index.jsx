@@ -144,20 +144,19 @@ function HODManageChangeReq() {
                   <td>{result.course_name}</td>
                   <td>{"Ms. " + result.name}</td>
                   <td style={{ whiteSpace: 'pre-wrap' }}>{result.description}</td>
-                  <td>
+                  <td id="action">
                     {!disapprovedRequests.has(result.requestId) ? (
                       <>
                         <button
-                          style={{
-                            borderColor: "#90ee90",
-                            backgroundColor: "#90ee90",
-                          }}
+                        id="approveButtonHOD"
+                         
                           onClick={() => handleApprove(result.requestId)}
                           >
                           Approve
                         </button>
 
                         <button
+                        id="disapproveButtonHOD"
                           style={{
                             borderColor: "#cd5c5c",
                             backgroundColor: "#cd5c5c",

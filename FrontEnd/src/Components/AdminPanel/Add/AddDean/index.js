@@ -96,6 +96,7 @@ console.log(values)
             <div id="deanField">
               <label>Name</label>
               <input
+              id="deaninp"
                 name="name"
                 type="text"
                 placeholder="Sara Ahmed"
@@ -120,6 +121,7 @@ console.log(values)
             <div id="deanField">
               <label>Password</label>
               <input
+               id="deaninp"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -148,6 +150,7 @@ console.log(values)
             <div id="deanField">
               <label>CNIC</label>
               <input
+               id="deaninp"
                 name="CNIC"
                 type="text"
                 placeholder="42204-3452276-3"

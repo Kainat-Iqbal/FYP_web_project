@@ -54,21 +54,7 @@ function LoginPage() {
       })
         
   };
-   const handleLogout = () => {
-    axios.post('http://localhost:8081/login/logout')
-      .then(res => {
-        if (res.data.message === "Logout successful") {
-          localStorage.removeItem("user");
-          nav("/");
-        } else {
-          alert("Logout failed");
-        }
-      })
-      .catch(err => {
-        console.error("Logout error:", err);
-        alert("Logout failed");
-      });
-  };
+   
   
 
 
@@ -80,9 +66,10 @@ function LoginPage() {
         </h1>
         <form id="loginFormDiv" action="" onSubmit={handleSubmit}>
           <div id="InputFormField">
-            <label htmlFor="email">Email</label>
+            <label id="loginLabel" htmlFor="email">Email</label>
             <div id="inputError">
               <input
+              id="loginInput"
                 name="email"
                 type="email"
                 placeholder="abc@gmail.com"
@@ -93,9 +80,10 @@ function LoginPage() {
           </div>
 
           <div id="InputFormField">
-            <label htmlFor="password">Password</label>
+            <label  id="loginLabel" htmlFor="password">Password</label>
             <div id="inputError">
               <input
+              id="loginInput"
                 name="password"
                 type="password"
                 onChange={handleInput}
@@ -104,13 +92,13 @@ function LoginPage() {
             </div>
           </div>
 
-          <button id="inputButton"
+          <button id="inputButtonLogin"
             style={{
-              borderRadius: "15px",
+              /* borderRadius: "15px",
               width: "17vw",
               marginTop: "2vh",
               backgroundColor:'white',
-              color:'black'
+              color:'black' */
             }}
             type="submit" // Change to type="submit" to enable form submission
           >
@@ -123,22 +111,5 @@ function LoginPage() {
 }
 
 
-/* export const handleLogout = () => {
-  axios.post('http://localhost:8081/login/logout')
-    .then(res => {
-      if (res.data.message === "Logout successful") {
-        localStorage.removeItem("user"); // Clear user data from local storage
-        const nav = useNavigate();
-        nav("/login"); // Redirect to the login page
-      } else {
-        alert("Logout failed");
-      }
-    })
-    .catch(err => {
-      console.error("Logout error:", err);
-      alert("Logout failed");
-    });
-};
- */
 
 export default LoginPage;

@@ -15,7 +15,6 @@ function UpdateDean(){
 const [DATA, setData] = useState({
   name: "",
   email: "",
-  password: "",
   faculty: "",
   CNIC: "",
   qualification: "",
@@ -77,6 +76,7 @@ return(
             <div id="deanField">
               <label>Name</label>
               <input
+              id="updatedean_input"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -99,19 +99,6 @@ return(
             )}
 
             <div id="deanField">
-              <label>Password</label>
-              <input
-                name="password"
-                type="text"
-                value={DATA.password}
-                onChange={handleInput}
-              ></input>
-            </div>
-            {errors.password && (
-              <span className="text-danger">{errors.password}</span>
-            )}
-
-            <div id="deanField">
               <label>Faculty</label>
 
               <select
@@ -130,6 +117,7 @@ return(
             <div id="deanField">
               <label>CNIC</label>
               <input
+               id="updatedean_input"
                 name="CNIC"
                 value={DATA.CNIC}
                 type="text"

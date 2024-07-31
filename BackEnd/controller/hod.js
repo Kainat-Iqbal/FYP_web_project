@@ -1,4 +1,16 @@
 const DB = require("../DB/dbConfig");
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
+const hashPassword = async (password) => {
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    return hash;
+  } catch (error) {
+    console.error("Hashing error:", error);
+    return null;
+  }
+};
 
 const addHod = async (req, res) => {
   const teacherID = req.body.teacherId;
@@ -6,23 +18,25 @@ const addHod = async (req, res) => {
   // console.log("adminId", adminId, teacherID);
 
   const queryForTeacher = "SELECT * FROM teacher WHERE teacherId = ?";
-  DB.query(queryForTeacher, [teacherID], (err, result) => {
+  DB.query(queryForTeacher, [teacherID], async (err, result) => {
     if (err) {
       console.error("Error retrieving teacher for hod:", err);
       return res
         .status(500)
         .json({ success: false, message: "Failed to retrieve teacher for hod" });
     } else {
+              // Encrypt the password
+              const hashedPassword = await hashPassword("hodUser123*");
+
       if (result.length > 0) {
         // console.log(result);
-
         const teacherData = result[0];
         const values = [
           adminId,
           teacherID,
           teacherData.name,
           teacherData.email,
-          teacherData.password, // Assuming password is stored and retrieved
+          hashedPassword,
           teacherData.designation,
           teacherData.department,
           teacherData.CNIC,
