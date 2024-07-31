@@ -69,7 +69,11 @@ function AddExamination() {
         if (res.data === "success") {
           alert("examination is added successfully");
           window.location.reload(); // Refresh the page
-        } else {
+        } 
+        else if(res.data === "emailAlreadyExist"){
+          alert("This Email already associate with another account")
+        }
+        else {
           console.log("error");
         }
       });

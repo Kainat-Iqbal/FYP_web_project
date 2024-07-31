@@ -15,7 +15,6 @@ function UpdateTeacher(){
   const [DATA, setData] = useState({
     name: "",
     email: "",
-    password: "",
     department: "",
     designation: "",
     CNIC: "",
@@ -97,20 +96,6 @@ return(
             </div>
             {errors.email && (
               <span className="text-danger">{errors.email}</span>
-            )}
-
-            <div id="teacherField">
-              <label>Password</label>
-              <input
-               id="updatet_input"
-                name="password"
-                type="text"
-                onChange={handleInput}
-                value={DATA.password}
-              ></input>
-            </div>
-            {errors.password && (
-              <span className="text-danger">{errors.password}</span>
             )}
 
             <div id="teacherField">

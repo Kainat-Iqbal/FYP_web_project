@@ -1,15 +1,60 @@
 const DB = require("../DB/dbConfig");
 
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
+const hashPassword = async (password) => {
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    return hash;
+  } catch (error) {
+    console.error("Hashing error:", error);
+    return null;
+  }
+};
+
 const addExamination = async (req, res) => {
     // Query to fetch all teachers from the database
     const adminId = req.body.adminId;
     console.log("adminId",adminId)
+  // Query to check if the email exists in any table
+  const checkEmailQuery = `
+      SELECT 'exists' 
+      FROM (
+          SELECT email FROM dean WHERE email = ? 
+          UNION
+          SELECT adminEmail FROM admin WHERE adminEmail = ? 
+          UNION
+          SELECT email FROM examination_controller WHERE email = ?
+          UNION
+          SELECT email FROM parents WHERE email = ? 
+          UNION
+          SELECT email FROM student WHERE email = ?
+      ) AS email_check
+      LIMIT 1
+  `;
+
+  // Execute the email check query
+  DB.query(checkEmailQuery, [email, email, email, email, email], async (err, result) => {
+      if (err) {
+          console.error("Error checking email:", err);
+          return res.status(500).json({ success: false, message: "Failed to check email" });
+      }
+
+      if (result.length > 0) {
+          // Email already exists
+          return res.json("emailAlreadyExist");
+      } else {
+
+    // Encrypt the password
+        const hashedPassword = await hashPassword(req.body.password);
+
     const queryToAddDean = "INSERT INTO `examination_controller`(`adminId`, `name`, `email`, `password`, `CNIC`, `status`, `joiningDate`) VALUES (?)";
     const VALUES = [
         adminId,
         req.body.name,
         req.body.email,
-        req.body.password,
+        hashedPassword,
         req.body.CNIC,
         req.body.status,
         req.body.joiningDate
@@ -27,7 +72,9 @@ const addExamination = async (req, res) => {
             console.log("Examination added successfully");
             return res.json("success");
           }
-    });
+        });
+    }
+});
 };
 
 const viewExamination = async (req, res) => {

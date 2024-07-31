@@ -20,18 +20,25 @@ const viewTeacherCourse = async (req, res) => {
     if (teacherId) {
         queryToViewCourse += ' WHERE t.teacherId = ?';
         queryParams.push(teacherId);
-    } else if (batchId) {
-        queryToViewCourse += ' WHERE b.batchId = ?';
-        queryParams.push(batchId);
     }
 
+    if (batchId) {
+        if (queryParams.length > 0) {
+            queryToViewCourse += ' AND b.batchId = ?';
+        } else {
+            queryToViewCourse += ' WHERE b.batchId = ?';
+        }
+        queryParams.push(batchId);
+    }
+    console.log("Query:", queryToViewCourse);
+    console.log("Query Params:", queryParams);
     DB.query(queryToViewCourse, queryParams, (err, results) => {
         if (err) {
             console.error("Error fetching data:", err);
             return res.status(500).json("Failed to fetch data");
         } else {
             if (results.length > 0) {
-                // console.log("firstcvcv",results)
+                console.log("firstcvcv",results)
                 return res.json(results);
             } else {
                 return res.json("No data found");

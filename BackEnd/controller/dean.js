@@ -1,5 +1,18 @@
 const DB = require("../DB/dbConfig");
 
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
+const hashPassword = async (password) => {
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    return hash;
+  } catch (error) {
+    console.error("Hashing error:", error);
+    return null;
+  }
+};
+
 const addDean = async (req, res) => {
   const adminId = req.body.adminId;
   const email = req.body.email;
@@ -24,7 +37,7 @@ const addDean = async (req, res) => {
   `;
 
   // Execute the email check query
-  DB.query(checkEmailQuery, [email, email, email, email, email], (err, result) => {
+  DB.query(checkEmailQuery, [email, email, email, email, email], async (err, result) => {
       if (err) {
           console.error("Error checking email:", err);
           return res.status(500).json({ success: false, message: "Failed to check email" });
@@ -34,7 +47,10 @@ const addDean = async (req, res) => {
           // Email already exists
           return res.json("emailAlreadyExist");
       } else {
-          // Email does not exist, proceed with inserting the dean
+        // Encrypt the password
+        const hashedPassword = await hashPassword(req.body.password);
+
+        // Email does not exist, proceed with inserting the dean
           const queryToAddDean = `
               INSERT INTO dean (adminId, name, email, password, faculty, CNIC, status, qualification, JoiningDate)
               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -43,7 +59,7 @@ const addDean = async (req, res) => {
               adminId,
               req.body.name,
               email,
-              req.body.password,
+              hashedPassword,
               req.body.faculty,
               req.body.CNIC,
               req.body.status,
@@ -67,39 +83,6 @@ const addDean = async (req, res) => {
   });
 };
 
-
-// const addDean = async (req, res) => {
-//     // Query to fetch all teachers from the database
-//     const adminId = req.body.adminId;
-//     console.log("adminId",adminId)
-//     const queryToAddDean = "INSERT INTO `dean` (`adminId`, `name`, `email`, `password`, `faculty`, `CNIC`, `status`, `qualification`, `JoiningDate`) VALUES (?)";
-//     const VALUES = [
-//         adminId,
-//         req.body.name,
-//         req.body.email,
-//         req.body.password,
-//         req.body.faculty,
-//          // Use the retrieved admin ID
-//         req.body.CNIC,
-//         req.body.status,
-//         req.body.qualification,
-//         req.body.joiningDate
-//       ];
-//       console.log(VALUES)
-//     // Execute the query
-//     DB.query(queryToAddDean, [VALUES], (err, data) => {
-//         if (err) {
-//             console.error("Error adding dean:", err);
-//             return res
-//               .status(500)
-//               .json({ success: false, message: "Failed to add dean" });
-//           } 
-//           else {
-//             console.log("Dean added successfully");
-//             return res.json("success");
-//           }
-//     });
-// };
 
 const viewDean = async (req, res) => {
   // Query to fetch all teachers from the database

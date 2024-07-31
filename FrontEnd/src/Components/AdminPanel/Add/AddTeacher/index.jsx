@@ -6,14 +6,14 @@ import { useState, useEffect } from "react";
 import TeacherValidation from "./teacherValidation";
 
 function AddTeacher() {
-  const [admin, setAdminEmail] = useState(null);
+  const [admin, setAdminId] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:8081/session", {
           withCredentials: true,
         });
-        setAdminEmail(response.data.user);
+        setAdminId(response.data.userId);
       } catch (error) {
         console.error("Error:", error);
       }
@@ -22,7 +22,7 @@ function AddTeacher() {
     fetchData();
   }, []);
 
-  console.log("FVFV ", admin);
+   console.log("FVFV ", admin);
   // State variables to hold the input values
   const [values, setValues] = useState({
     name: "",
@@ -36,13 +36,14 @@ function AddTeacher() {
     adminEmail: "",
     joiningDate: "",
     photo:"",
+    adminId: "",
   });
   useEffect(() => {
     // Update values after admin is set
     if (admin !== null) {
       setValues((prev) => ({
         ...prev,
-        adminEmail: admin,
+        adminId: admin,
       }));
     }
   }, [admin]);
@@ -73,7 +74,10 @@ function AddTeacher() {
         if (res.data === "success") {
           alert("teacher is added successfully");
           window.location.reload(); // Refresh the page
-        } else {
+        } 
+        else if(res.data === "emailAlreadyExist"){
+          alert("This Email already associate with another account")
+        }else {
           console.log("error");
         }
       });
@@ -173,6 +177,7 @@ function AddTeacher() {
                 onChange={handleInput}
               ></input>
             </div>
+            <span className="text-danger">{errors.cnic}</span>
 
             <div id="teacherField">
               <label>Qualification</label>
@@ -207,6 +212,8 @@ function AddTeacher() {
                 onChange={handleInput}
               ></input>
             </div>
+            <span className="text-danger">{errors.date}</span>
+
             <div id="teacherField">
               <label>Picture</label>
               <input

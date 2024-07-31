@@ -52,6 +52,7 @@ function ViewTeacher() {
           const res = await axios.post("http://localhost:8081/hod/Add", data);
           if (res.data === "success") {
             alert("HOD is added successfully");
+            window.location.reload(); // Refresh the page
           } else {
             console.log("Error adding HOD");
           }

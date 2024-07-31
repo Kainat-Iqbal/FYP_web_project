@@ -1,5 +1,18 @@
 const DB = require("../DB/dbConfig");
 
+const bcrypt = require('bcryptjs');
+const saltRounds = 10;
+
+const hashPassword = async (password) => {
+  try {
+    const hash = await bcrypt.hash(password, saltRounds);
+    return hash;
+  } catch (error) {
+    console.error("Hashing error:", error);
+    return null;
+  }
+};
+
 const addStudent = async (req, res) => {
     const adminId = req.body.adminId;
     const email = req.body.email;
@@ -28,7 +41,7 @@ const addStudent = async (req, res) => {
     `;
   
     // Execute the email check query
-    DB.query(checkEmailQuery, [email, email, email, email, email, email, email], (err, result) => {
+    DB.query(checkEmailQuery, [email, email, email, email, email, email, email], async (err, result) => {
       if (err) {
         console.error("Error checking email:", err);
         return res.status(500).json({ success: false, message: "Failed to check email" });
@@ -46,13 +59,16 @@ const addStudent = async (req, res) => {
             interPercentage, position, status, degreeAwarded, transcriptIssued, phoneNo
           ) VALUES (?)
         `;
+                // Encrypt the password
+                const hashedPassword = await hashPassword(req.body.password);
+
         const VALUES = [
           req.body.batchId,
           req.body.name,
           req.body.juwId,
           req.body.fatherName,
           req.body.email,
-          req.body.password,
+          hashedPassword,
           req.body.CNIC,
           req.body.address,
           req.body.enrollment,

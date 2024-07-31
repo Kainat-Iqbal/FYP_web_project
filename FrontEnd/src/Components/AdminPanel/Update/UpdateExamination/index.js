@@ -16,7 +16,6 @@ function UpdateExamination() {
 const [DATA, setData] = useState({
   name: "",
   email: "",
-  password: "",
   CNIC: "",
   status: "",
   joiningDate: "",
@@ -96,20 +95,6 @@ fetchExamination();
             </div>
             {errors.email && (
               <span className="text-danger">{errors.email}</span>
-            )}
-
-            <div id="ExaminationField">
-              <label>Password</label>
-              <input
-               id="examinp"
-                name="password"
-                type="text"
-                onChange={handleInput}
-                value={DATA.password}
-              ></input>
-            </div>
-            {errors.password && (
-              <span className="text-danger">{errors.password}</span>
             )}
 
             <div id="ExaminationField">

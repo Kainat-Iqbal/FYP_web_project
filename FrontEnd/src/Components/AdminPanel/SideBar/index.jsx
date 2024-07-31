@@ -120,7 +120,7 @@ function SideBar() {
             style={{
               marginTop: "5px",
               fontSize: "2.8rem",
-              color: "pink",
+              color: "white",
             }}onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             />
             {isDropdownOpen && (
