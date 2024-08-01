@@ -3,144 +3,71 @@ import Table from "react-bootstrap/Table";
 import { useNavigate } from "react-router-dom";
 import "./deanViewResult.css";
 import SideBar from "../../SideBar";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+
 
 function DeanViewResult() {
+  const { search } = useLocation();
+  const queryParams = new URLSearchParams(search);
+  const assignId = queryParams.get("assignId");
   const nav = useNavigate();
-  const [results, setResults] = React.useState([
-    {
-      SNo: 1,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66',
-      action: null,
-      reason: ''
-    },
-    {
-      SNo: 2,
-      SeatNo: '2126412',
-      EnrollmentNo: '2021/Comp/BS(SE)/24035',
-      StdName: 'Ali Ahmed',
-      FatherName: 'Ahmed Khan',
-      Mid: '20',
-      Lab: '27',
-      AT: '35',
-      Total: '82',
-      GP: '3.00',
-      action: null,
-      reason: ''
-    },
-    {
-      SNo: 3,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 4,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 5,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 6,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 7,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 8,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 9,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-    {
-      SNo: 10,
-      SeatNo: '2126411',
-      EnrollmentNo: '2021/Comp/BS(SE)/24034',
-      StdName: 'Sana Shahid',
-      FatherName: 'Mohammad Shahid',
-      Mid: '18',
-      Lab: '25',
-      AT: '38',
-      Total: '81',
-      GP: '3.66'
-    },
-  ]);
+  const [results, setResults] = useState([]);
+
+  const [deanId, setDeanId] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/session", {
+          withCredentials: true,
+        });
+        setDeanId(response.data.userId);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log("DEAN", deanId);
+
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8081/resultApprovalDean/Get/${assignId}`
+        );
+        setResults(res.data);
+      } catch (error) {
+        console.log("Error fetching requests", error);
+      }
+    };
+
+    fetchResult();
+  }, []);
+  console.log("first,,,", results);
 
   const [showPopup, setShowPopup] = React.useState(false);
   const [disapproveReason, setDisapproveReason] = React.useState("");
 
-  const handleApproveAll = () => {
-    setResults(prevResults =>
-      prevResults.map(result => ({ ...result, action: 'Approved' }))
-    );
-    nav("/DeanResultApproval");
+  const handleApprove = async (assignId) => {
+    console.log(`Approving request ${assignId}`);
+    try {
+      const res = await axios.put(
+        `http://localhost:8081/resultApprovalDean/Approve/${assignId}`,
+        { deanId }
+      );
+
+      if (res.data.updated) {
+        alert("Result Approved By Dean");
+        nav("/DeanResultApproval");
+      } else {
+        console.log("Approval failed:", res.data);
+      }
+    } catch (error) {
+      console.log("Error approving request", error);
+    }
   };
 
   const handleDisapprove = () => {
@@ -264,41 +191,32 @@ function DeanViewResult() {
             </thead>
 
             <tbody>
-              {results.map((result) => (
+              {Array.isArray(results) && results.length > 0 ?(
+              results.map((result,index) => (
                 <tr key={result.SNo}>
-                  <td style={{ textAlign: "center" }}>{result.SNo}</td>
-                  <td style={{ textAlign: "center" }}>{result.SeatNo}</td>
-                  <td style={{ textAlign: "center" }}>{result.EnrollmentNo}</td>
-                  <td style={{ textAlign: "center" }}>{result.StdName}</td>
-                  <td style={{ textAlign: "center" }}>{result.FatherName}</td>
-                  <td style={{ textAlign: "center" }}>{result.Mid}</td>
-                  <td style={{ textAlign: "center" }}>{result.Lab}</td>
-                  <td style={{ textAlign: "center" }}>{result.AT}</td>
-                  <td style={{ textAlign: "center" }}>{result.Total}</td>
-                  <td style={{ textAlign: "center" }}>{result.GP}</td>
-                  {/* <td style={{ textAlign: "center" }}>
-                    {result.action === 'Approved' ? (
-                      <span style={{ color: 'green', fontWeight: 'bold' }}>Approved</span>
-                    ) : result.action === 'Disapproved' ? (
-                      <>
-                        <span style={{ color: 'red', fontWeight: 'bold' }}>Disapproved</span>
-                        <br />
-                        <span>{result.reason}</span>
-                      </>
-                    ) : (
-                      <span>Pending</span>
-                    )}
-                  </td> */}
-
+                  <td style={{ textAlign: "center" }}>{index+1}</td>
+                  <td style={{ textAlign: "center" }}>{result.seatNo}</td>
+                  <td style={{ textAlign: "center" }}>{result.enrollment}</td>
+                  <td style={{ textAlign: "center" }}>{result.name}</td>
+                  <td style={{ textAlign: "center" }}>{result.fatherName}</td>
+                  <td style={{ textAlign: "center" }}>{result.midMarks}</td>
+                  <td style={{ textAlign: "center" }}>{result.labMarks}</td>
+                  <td style={{ textAlign: "center" }}>
+                    {result.terminalMarks}
+                  </td>
+                  <td style={{ textAlign: "center" }}>{result.totalMarks}</td>
+                  <td style={{ textAlign: "center" }}>{result.GPA}</td>
                 </tr>
-              ))}
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No Result is on pending
+                </td>
+              </tr>
+            )}
             </tbody>
           </Table>
-
-          {/* <div style={{ textAlign: 'center', margin: '20px' }}>
-            <button onClick={handleApproveAll} style={buttonStyle}>Approve</button>
-            <button onClick={handleDisapprove} style={buttonStyle}>Disapprove</button>
-          </div> */}
 
           {showPopup && (
             <div id="DeanViewResultPopup">
@@ -318,23 +236,7 @@ function DeanViewResult() {
         </div>
 
         <button id="DeanViewResultBtnApprove"
-          // style={{
-          //   height: "4vw",
-          //   width: "10vw",
-          //   marginTop: "5vh",
-          //   marginLeft: "25%",
-          //   borderColor: "#04AA6D", color: "white", backgroundColor: "#28a745" //#90ee90 success#28a745
-          // }}
-
-          onClick={handleApproveAll}
-
-        // onClick={() => {
-        //   handleApprove(results.id);
-        // }}
-        // onClick={() => {
-        //   nav("/ApproveResult");
-        // }}
-
+          onClick={() => handleApprove(assignId)}
         > Approve
         </button>
 

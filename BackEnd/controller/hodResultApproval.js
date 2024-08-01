@@ -76,4 +76,33 @@ WHERE
   });
 };
 
-module.exports = { viewResultApproval,viewSelectedResult };
+const approveResult = async (req, res) => {
+  const { id } = req.params;
+  const {hodId} = req.body;
+
+  const queryToUpdateApproveRequest =
+    "UPDATE `status` SET `HODId`=?, `approvedHod`=? WHERE assignId = ?";
+
+  // Directly use the values without unnecessary variable assignments
+  const values = [
+    hodId,
+    "Yes", // currentHandle
+    id, // requestId
+  ];
+
+  DB.query(queryToUpdateApproveRequest, values, (err, results) => {
+    if (err) {
+      console.error("Error updating status:", err);
+      return res.status(500).json("Failed to update status");
+    } else {
+      if (results.affectedRows > 0) {
+        // console.log("approve",id);
+        return res.json({ updated: true });
+      } else {
+        return res.status(404).json("Request not found");
+      }
+    }
+  });
+};
+
+module.exports = { viewResultApproval,viewSelectedResult,approveResult };

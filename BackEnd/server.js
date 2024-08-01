@@ -28,6 +28,8 @@ const { COEchangeReqRouter } = require('./routes/COEchangeReq');
 const { lockResultRouter } = require('./routes/lockResult');
 const { logoutRouter } = require('./routes/logout');
 const { resultApprovalHodRouter } = require('./routes/hodResultApproval');
+const { resultApprovalDeanRouter } = require('./routes/deanResultApproval');
+const { resultApprovalExaminationRouter } = require('./routes/examinationResultApproval');
 
 app.use(bodyParser.json())
 app.use(express.json());
@@ -67,6 +69,8 @@ app.use("/deanChangeReq", deanChangeReqRouter)
 app.use("/COEchangeReq", COEchangeReqRouter)
 app.use("/lockResult",lockResultRouter)
 app.use("/resultApprovalHod",resultApprovalHodRouter)
+app.use("/resultApprovalDean",resultApprovalDeanRouter)
+app.use("/resultApprovalExamination",resultApprovalExaminationRouter)
 
 app.get('/session', (req,res) => {
     if(req.session.user){

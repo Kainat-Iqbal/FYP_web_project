@@ -208,6 +208,13 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   };
 
   const handleUpdate = async (student) => {
+    const isAttempt = [
+      student.midMarks,
+      student.terminalMarks,
+      student.labMarks,
+    ].every((mark) => parseInt(mark, 10) === 0)
+      ? 0
+      : 1;
     const resultData = {
       studentId: student.studentId,
       assignId: student.assignId,
@@ -219,6 +226,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
         student.terminalMarks,
         student.labMarks
       ),
+      isAttempt,
       GPA: calculateGPA(
         calculateTotalMarks(
           student.midMarks,
