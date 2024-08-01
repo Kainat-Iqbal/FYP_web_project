@@ -77,7 +77,7 @@ const updateResult = async (req, res) => {
         req.body.resultCode,
         id
     ];
-
+console.log("UPDATE,,",values)
     DB.query(queryToUpdate, values, (err, result) => {
         if (err) {
             console.error("Error updating result:", err);

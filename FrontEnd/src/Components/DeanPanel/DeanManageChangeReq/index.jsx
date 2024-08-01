@@ -134,7 +134,8 @@ function DeanManageChangeReq() {
             </thead>
 
             <tbody>
-            {request.map((result) => (
+            {Array.isArray(request) && request.length > 0 ?(
+            request.map((result) => (
                 <tr key={result.requestId}>
                   <td>{result.requestId}</td>
                   <td>{result.course_code}</td>
@@ -184,7 +185,14 @@ function DeanManageChangeReq() {
                     )}
                   </td>
                 </tr>
-              ))}
+             ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No requests available
+                </td>
+              </tr>  
+            )}
             </tbody>
           </Table>
         </div>            
@@ -209,7 +217,8 @@ function DeanManageChangeReq() {
             </thead>
 
             <tbody>
-              {disapproveReq.map((results) => (
+              {Array.isArray(disapproveReq) && disapproveReq.length > 0 ?(
+              disapproveReq.map((results) => (
                 <tr key={results.requestId}>
                   <td>{results.requestId}</td>
                   <td>{results.course_code}</td>
@@ -222,7 +231,14 @@ function DeanManageChangeReq() {
                       <span>Disapproved</span>
                   </td>
                 </tr>
-              ))}
+                 ))
+                ) : (
+                  <tr>
+                    <td colSpan="6" style={{ textAlign: "center" }}>
+                      No requests available
+                    </td>
+                  </tr>
+              )}
             </tbody>
           </Table>
         </div>

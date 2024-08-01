@@ -2,8 +2,8 @@ const DB = require("../DB/dbConfig");
 
 const viewTeacherCourse = async (req, res) => {
     const { teacherId, batchId } = req.query; // Get both query parameters
-    console.log("teacherId",teacherId)
-    console.log("batchId",batchId)
+    // console.log("teacherId",teacherId)
+    // console.log("batchId",batchId)
 
     let queryToViewCourse = `
         SELECT ac.*, c.*, t.*, s.*, dp.*, b.*, st.* 
@@ -30,15 +30,15 @@ const viewTeacherCourse = async (req, res) => {
         }
         queryParams.push(batchId);
     }
-    console.log("Query:", queryToViewCourse);
-    console.log("Query Params:", queryParams);
+    // console.log("Query:", queryToViewCourse);
+    // console.log("Query Params:", queryParams);
     DB.query(queryToViewCourse, queryParams, (err, results) => {
         if (err) {
             console.error("Error fetching data:", err);
             return res.status(500).json("Failed to fetch data");
         } else {
             if (results.length > 0) {
-                console.log("firstcvcv",results)
+                // console.log("firstcvcv",results)
                 return res.json(results);
             } else {
                 return res.json("No data found");

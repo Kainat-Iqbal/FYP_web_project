@@ -6,10 +6,25 @@ import SideBar from "../SideBar";
 function AssignCourse() {
   const [teacher, setTeacher] = useState([]);
   const [course, setCourse] = useState([]);
-  const [batch, setBatch] = useState([]);
   const [session, setSession] = useState([]);
-  const [degree, setDegree] = useState([]);
   const [errors, setErrors] = useState({});
+  const [hodId, setHodId] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/session", {
+          withCredentials: true,
+        });
+        setHodId(response.data.userId);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  console.log("HOD",hodId)
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -37,18 +52,6 @@ function AssignCourse() {
     fetchCourse();
   }, []);
 
-  useEffect(() => {
-    const fetchBatch = async () => {
-      try {
-        const res = await axios.get("http://localhost:8081/assignCourse/Get");
-        setBatch(res.data.batch);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-
-    fetchBatch();
-  }, []);
 
   useEffect(() => {
     const fetchSession = async () => {
@@ -61,19 +64,6 @@ function AssignCourse() {
     };
 
     fetchSession();
-  }, []);
-
-  useEffect(() => {
-    const fetchDegree = async () => {
-      try {
-        const res = await axios.get("http://localhost:8081/assignCourse/Get");
-        setDegree(res.data.degree_program);
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-
-    fetchDegree();
   }, []);
 
   const [selectedTeacher, setSelectedTeacher] = useState("");
@@ -114,18 +104,6 @@ function AssignCourse() {
     setSelectedSessionId(selectedId);
   };
 
-  const [batchId, setBatchId] = useState("");
-  const handleBatchChange = (event) => {
-    const selectedId = event.target.value;
-    setBatchId(selectedId);
-  };
-
-  const [classId, setClassId] = useState("");
-  const handleClassChange = (event) => {
-    const selectedId = event.target.value;
-    setClassId(selectedId);
-  };
-
   const getCurrentDate = () => {
     const currentDate = new Date();
     const day = String(currentDate.getDate()).padStart(2, "0");
@@ -137,7 +115,7 @@ function AssignCourse() {
 
   const date = getCurrentDate();
 
-  const data = { teacherId, courseId, selectedSessionId, batchId, classId, date };
+  const data = { teacherId, courseId, selectedSessionId, date ,hodId};
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -146,8 +124,6 @@ function AssignCourse() {
     if (!selectedTeacher) newErrors.teacher = "Instructor Name is required";
     if (!selectedCourseCode) newErrors.course = "Course Code is required";
     if (!selectedSessionId) newErrors.session = "Session is required";
-    if (!batchId) newErrors.batch = "Batch is required";
-    if (!classId) newErrors.class = "Class is required";
 
     setErrors(newErrors);
 
@@ -249,50 +225,6 @@ function AssignCourse() {
 
             <div id="assignCourseField">
               <div id="fieldContainer">
-                <label>Class</label>
-                <select
-                  name="department"
-                  style={{ height: "6vh" }}
-                  value={classId}
-                  onChange={handleClassChange}
-                >
-                  <option value="" disabled>
-                    Select Class
-                  </option>
-                  {degree.map((degreeData) => (
-                    <option key={degreeData.programId} value={degreeData.programId}>
-                      {degreeData.type + "(" + degreeData.degree + ")"}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {errors.class && <span className="error">{errors.class}</span>}
-            </div>
-
-            <div id="assignCourseField">
-              <div id="fieldContainer">
-                <label>Batch</label>
-                <select
-                  name="designation"
-                  style={{ height: "6vh" }}
-                  value={batchId}
-                  onChange={handleBatchChange}
-                >
-                  <option value="" disabled>
-                    Select Batch
-                  </option>
-                  {batch.map((batchData) => (
-                    <option key={batchData.batchId} value={batchData.batchId}>
-                      {batchData.year + "  " + batchData.session}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              {errors.batch && <span className="error">{errors.batch}</span>}
-            </div>
-
-            <div id="assignCourseField">
-              <div id="fieldContainer">
                 <label>Academic Year</label>
                 <select
                   name="session"
@@ -305,7 +237,7 @@ function AssignCourse() {
                   </option>
                   {session.map((sessionData) => (
                     <option key={sessionData.sessionId} value={sessionData.sessionId}>
-                      {sessionData.academic_year + " " + sessionData.semester}
+                      {sessionData.academic_year + "(" + sessionData.semester+ ") Class:"+sessionData.type+"("+sessionData.degree+") Batch:"+sessionData.year+"("+sessionData.session+")" }
                     </option>
                   ))}
                 </select>

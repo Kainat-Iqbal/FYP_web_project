@@ -66,8 +66,8 @@
 }
 
 #HODHomePageTeacher {
-    width: 25%;
-    height: 27%;
+    width: 20%;
+    height: 20%;
     margin-top: 7vh;
     margin-left: 4vh;
     background-color: palevioletred;
@@ -88,8 +88,8 @@
 }
 
 #HODHomePageStudent {
-    width: 25%;
-    height: 27%;
+    width: 20%;
+    height: 20%;
     margin-top: 7vh;
     align-items: center;
     background-color: mediumaquamarine;
@@ -100,8 +100,8 @@
 }
 
 #HODHomePagePassStudent {
-    width: 25%;
-    height: 27%;
+    width: 20%;
+    height: 20%;
     margin-top: 7vh;
     align-items: center;
     background-color: powderblue;

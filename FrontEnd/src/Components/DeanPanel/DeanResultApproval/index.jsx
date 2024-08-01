@@ -3,91 +3,29 @@ import Table from "react-bootstrap/Table";
 import { Link, useNavigate } from "react-router-dom";
 import "./deanResultApproval.css";
 import SideBar from '../SideBar';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function DeanResultApproval() {
   const nav = useNavigate();
-  const [results, setResults] = React.useState([
-    {
-      id: 1,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Data Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Javeria Imran',
-      action: null
-    },
-    {
-      id: 2,
-      courseNo: 'CSE105',
-      courseName: 'Web Engineering',
-      class: 'CS-20',
-      instructorName: 'Ms. Surraiya Obaid',
-      action: null
-    },
-    {
-      id: 3,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shah',
-      action: null
-    },
-    {
-      id: 4,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'CS-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-    {
-      id: 5,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-    {
-      id: 6,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-    {
-      id: 7,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-    {
-      id: 8,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-    {
-      id: 9,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-    {
-      id: 10,
-      courseNo: 'CSE101',
-      courseName: 'Introduction to Computer Science',
-      class: 'SE-21',
-      instructorName: 'Ms. Ayesha Shamim',
-      action: null
-    },
-  ]);
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        const res = await axios.get("http://localhost:8081/resultApprovalDean/View");
+        setResults(res.data);
+      } catch (error) {
+        console.log("Error fetching requests", error);
+      }
+    };
+
+    fetchResult();
+  }, []);
+
+  const handleViewResultClick = (assignId) => {
+    nav(`/DeanViewResult?assignId=${assignId}`);
+  };
 
   const handleApprove = (id) => {
     setResults(prevResults =>
@@ -144,66 +82,32 @@ function DeanResultApproval() {
               </tr>
             </thead>
 
-            <tbody>
-              {results.map((result) => (
-                <tr key={result.id}>
-                  <td>{result.id}</td>
-                  <td>{result.courseNo}</td>
-                  <td>{result.courseName}</td>
-                  <td>{result.class}</td>
-                  <td>{result.instructorName}</td>
+            {Array.isArray(results) && results.length > 0 ?(
+              results.map((result) => (
+                <tr key={result.assignId}>
+                  <td>{result.assignId}</td>
+                  <td>{result.course_code}</td>
+                  <td>{result.courseTitle}</td>
+                  <td>{result.year+"("+result.session+")"}</td>
+                  <td>{result.teacherName}</td>
                   <td>
-                    {result.action === null && (
-                      <>
-                        <button
-                          style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", /* marginLeft: "20px" */ width:"70%"}}
-                          onClick={() => {
-                            nav("/DeanViewResult");
-                          }} >
+                  <button
+        style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", width: "70%" }}
+        onClick={() => handleViewResultClick(result.assignId)}
+      >
                           View Result
                         </button>
-
-                        {/* <button
-                          style={{ borderColor: "#90ee90", color: "black", backgroundColor: "#90ee90",marginLeft:"7px" }}
-                          onClick={() => {
-                            handleApprove(result.id);
-                          }}
-                        >
-                          Approve
-                        </button>
-                        <button
-                          style={{ borderColor: "#cd5c5c", color: "black", backgroundColor: "#cd5c5c", marginLeft:"7px" }}
-                          onClick={() => {
-                            handleDisapprove(result.id);
-                          }}
-                        >
-                          Disapprove
-                        </button> */}
-                      
-                      </>
-                    )}
-
-                    {/* {result.action === 'approve' && (
-                      <button
-                        style={{ borderColor: "green", color: "white", backgroundColor: "#8BC34A" }}
-                        disabled
-                      >
-                        Approved
-                      </button>
-                    )}
-                    {result.action === 'disapprove' && (
-                      <button
-                        style={{ borderColor: "red", color: "white", backgroundColor: "#F44336" }}
-                        disabled
-                      >
-                        Disapproved
-                      </button>
-                    )} */}
-                    
+ 
                   </td>
                 </tr>
-              ))}
-            </tbody>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center" }}>
+                  No Result is on pending
+                </td>
+              </tr>
+            )}
           </Table>
         </div>
 

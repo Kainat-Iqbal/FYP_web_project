@@ -38,7 +38,7 @@ function CourseCard() {
               // Remove duplicates based on courseId
             const uniqueCourses = Array.from(new Map(res.data.map(item => [item.courseId, item])).values());
             setCourse(uniqueCourses);
-            console.log("Successfully fetched courses", uniqueCourses);}}
+            console.log("Successfully fetched", uniqueCourses);}}
            catch (error) {
             console.log("errordfv", error);
             
