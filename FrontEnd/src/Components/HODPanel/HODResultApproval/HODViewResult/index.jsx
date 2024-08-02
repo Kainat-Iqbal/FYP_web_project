@@ -121,68 +121,13 @@ function HODViewResult() {
           <div id="HODViewResultInfo">
             <div id="HODViewResultLeftDiv">
               <div id="HODViewResultFacultyCourse">
-                <b style={{ marginTop: "2%" }}>
-                  Faculty
-                  <span
-                    style={{
-                      textAlign: "center",
-                      marginLeft: "16%",
-                      borderBottom: "1px solid black",
-                      width: "60%",
-                      display: "inline-block",
-                      fontWeight: "normal",
-                    }}
-                  >
-                    Science
-                  </span>
-                </b>
-                <b>
-                  Course Number
-                  <span
-                    style={{
-                      textAlign: "center",
-                      marginLeft: "5%",
-                      borderBottom: "1px solid black",
-                      width: "49%",
-                      display: "inline-block",
-                      fontWeight: "normal",
-                    }}
-                  >
-                    CSS 1345
-                  </span>
-                </b>
+                
 
+                <b >Faculty<span style={{ marginLeft: "15%", borderBottom: '1px solid black', width: '60%', display: 'inline-block', fontWeight: 'normal' }}>Sceince</span></b>
+                <b>Course No.<span style={{ marginLeft: "6%", borderBottom: '1px solid black', width: '60%', display: 'inline-block', fontWeight: 'normal' }}>CSS 1345</span></b>
                 <div id="HODViewResultClassBatch">
-                  <b>
-                    Class
-                    <span
-                      style={{
-                        textAlign: "center",
-                        marginLeft: "60px",
-                        borderBottom: "1px solid black",
-                        width: "66px",
-                        display: "inline-block",
-                        fontWeight: "normal",
-                      }}
-                    >
-                      BS(SE)
-                    </span>
-                  </b>
-                  <b style={{ marginLeft: "1%" }}>
-                    Batch
-                    <span
-                      style={{
-                        textAlign: "center",
-                        marginLeft: "8px",
-                        borderBottom: "1px solid black",
-                        width: "66px",
-                        display: "inline-block",
-                        fontWeight: "normal",
-                      }}
-                    >
-                      2021
-                    </span>
-                  </b>
+                  <b>Class<span style={{ marginLeft: "63px", borderBottom: '1px solid black', width: '66px', display: 'inline-block', fontWeight: 'normal' }}>BS(SE)</span></b>
+                  <b style={{ marginLeft: "1%" }}>Batch<span style={{ marginLeft: "8px", borderBottom: '1px solid black', width: '66px', display: 'inline-block', fontWeight: 'normal' }}>2021</span></b>
                 </div>
               </div>
             </div>
@@ -192,7 +137,7 @@ function HODViewResult() {
                 Department
                 <span
                   style={{
-                    textAlign: "center",
+                    
                     marginLeft: "14%",
                     borderBottom: "1px solid black",
                     width: "65%",
@@ -207,7 +152,7 @@ function HODViewResult() {
                 Course Title
                 <span
                   style={{
-                    textAlign: "center",
+                   /*  textAlign: "center", */
                     marginLeft: "13.8%",
                     borderBottom: "1px solid black",
                     width: "65%",
@@ -222,7 +167,7 @@ function HODViewResult() {
                 Date Of Examination
                 <span
                   style={{
-                    textAlign: "center",
+                   /*  textAlign: "center", */
                     marginLeft: "2%",
                     borderBottom: "1px solid black",
                     width: "65%",
@@ -240,7 +185,7 @@ function HODViewResult() {
                 Acd. Year
                 <span
                   style={{
-                    textAlign: "center",
+                  /*   textAlign: "center", */
                     marginLeft: "8%",
                     borderBottom: "1px solid black",
                     width: "30%",
@@ -255,7 +200,7 @@ function HODViewResult() {
                 Credit Hrs
                 <span
                   style={{
-                    textAlign: "center",
+                    /* textAlign: "center", */
                     marginLeft: "4.5%",
                     borderBottom: "1px solid black",
                     width: "30%",
@@ -270,8 +215,8 @@ function HODViewResult() {
                 Semester
                 <span
                   style={{
-                    textAlign: "center",
-                    marginLeft: "11%",
+                    /* textAlign: "center", */
+                    marginLeft: "11.5%",
                     borderBottom: "1px solid black",
                     width: "30%",
                     display: "inline-block",

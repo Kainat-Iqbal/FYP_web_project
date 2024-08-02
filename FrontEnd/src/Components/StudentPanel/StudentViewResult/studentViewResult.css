@@ -1,18 +1,18 @@
 #StudentViewResultMainDiv {
     width: 80%;
-    height: auto;
-    margin-left: 20%;
+    height: 100%;
+    margin-left: 19%;
     display: flex;
     /* background-color: aqua; */
 }
 
 #StudentViewResultWithoutBar {
     width: 100%;
-    height: 79%;
+    height:82%;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 6vh;
+    margin-top: 10vh;
     /* background-color: brown; */
 }
 
@@ -30,12 +30,15 @@
     height: 40%;
     width: 100%;
     /* background-color: blueviolet; */
+    display: flex;
 }
 
 #StudentViewResultMainHeading {
     height: 40%;
     display: flex;
     justify-content: center;
+    margin-left:1.8%;
+    padding-top: 2%;
     /* padding-top: 2%; */
     /* background-color: yellow;
     height: 30%;
@@ -56,7 +59,7 @@
 #StudentViewResultInfo {
     height: 60%;
     width: 100%;
-    margin-left: 1px;
+    margin-left: 10px;
     display: flex;
     flex-wrap: wrap;
     padding-top: 2%;
@@ -111,11 +114,11 @@
 }
 
 #StudentViewResultBottom {
-    height: auto;
+    /* height: auto; */
     width: 100%;
-    margin-right: 4vh;
-    margin-top: 3%;
-
+    margin-right: 1vh;
+    margin-left: 1vh;
+    padding-top: 4%;
     display: flex;
     justify-content: center;
     /* background-color: chartreuse; */
