@@ -68,16 +68,15 @@ return(
 <div id="mainAddHodDiv">
       <SideBar />
       <div id="hodWithoutBar">
-        <div id="hodTop">
-          <h1>Update HOD</h1>
-        </div>
-
         <div id="hodBottom">
+        <div id="hodTop">
+        <h1>U<span className="smaller-text">PDATE</span> H<span className="smaller-text">OD</span></h1>
+        </div>
           <form id="hodForm" action="" onSubmit={handleSubmit}>
             <div id="hodField">
               <label>Name</label>
               <input 
-               id="updatehod_input"
+               id="hodinp"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -89,10 +88,12 @@ return(
             <div id="hodField">
               <label>Email</label>
               <input
+               id="hodinp"
                 name="email"
                 type="email"
                 value={DATA.email}
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
             {errors.email && (
@@ -103,10 +104,11 @@ return(
               <label>Department</label>
 
               <select
+               id="hodinp"
                 name="department"
                 value={DATA.department}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Software Engineering">
                   Software Engineering
@@ -121,10 +123,11 @@ return(
             <div id="hodField">
               <label>Designation</label>
               <select
+               id="hodinp"
                 name="designation"
                 value={DATA.designation}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Lecturer">Lecturer</option>
                 <option value="Assistant Professor">Assistant Professor</option>
@@ -138,7 +141,7 @@ return(
             <div id="hodField">
               <label>CNIC</label>
               <input
-               id="updatehod_input"
+               id="hodinp"
                 name="CNIC"
                 type="text"
                 value={DATA.CNIC}
@@ -150,10 +153,11 @@ return(
               <label>Qualification</label>
 
               <select
+               id="hodinp"
                 name="qualification"
                 value={DATA.qualification}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Bachelors">Bachelors</option>
                 <option value="Masters">Masters</option>
@@ -163,10 +167,11 @@ return(
             <div id="hodField">
               <label>Status</label>
               <select
+               id="hodinp"
                 name="status"
                 value={DATA.status}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -175,7 +180,8 @@ return(
             <div id="hodField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+               id="hodinp"
+                style={{ width: "14.8vw", height: "5.8vh" }}
                 name="JoiningDate"
                 value={DATA.JoiningDate}
                 type="date"

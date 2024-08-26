@@ -26,10 +26,11 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    margin-bottom: 2%;
 }
 
 #studentTop h1{
-    color: #00304B;
+    color: linear-gradient(to bottom, #93C098, #8CE0DB);
 }
 
 #studentBottom{
@@ -39,8 +40,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    background: linear-gradient(#055786,white);
-    padding-top: 7vh;
+    background-color: white;
+    background-image: url('formBglarge.png');
+   background-size: cover;
+    padding-top: 2%;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow effect to the form */
+    border-radius: 10px; /* Optional: Add rounded corners to the form */
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 #studentForm{
@@ -56,101 +63,39 @@
 #studentForm label{
     color: black;
 }
-
+#studentField{
+    margin-bottom: 2%;
+}
 #studentForm button{
-    margin-top: 2vh;
-    background-color: #00304B;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    background:linear-gradient(to right, #93C098, #8CE0DB);;
     border-radius: 50px;
     width: 50%;
     height: 12%;
     color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 #studentField{
     display: flex;
     justify-content: space-between;
-    margin-bottom: 2vh;
+
     width: 100%;
     /* background-color: aqua; */
 }
-#st_input{
+#studentField label{
+    display: flex;
+    align-items: center;
+font-weight: 500;
+}
+#studentinp{
     width: 49%;
     height: 85%;
     border-radius: 0px;
-    border: 2px black;
+    border:1px solid lightgray;
 }
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-    #mainAddstudentDiv {
-        width:auto;
-        margin-left: 5vw;
-        margin-top: 8vh;
-    }
-
-    #studentBottom {
-        width: auto;
-        padding-top: 5vh;
-        margin-left: 22vw;
-    }
-
-}
-
-@media (max-width: 768px) {
-    #mainAddstudentDiv {
-        width: 100vw;
-        margin-left: 0;
-    }
-
-    #studentBottom {
-        width: 100%;
-        padding-top: 5vh;
-    }
-
-    #studentForm {
-        width: 95%;
-    }
-
-    #studentField {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #studentForm button {
-        width: 80%;
-        height: auto;
-        padding: 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    #mainAddstudentDiv {
-        margin-left: 0;
-    }
-
-    #studentBottom {
-        width: 100%;
-        padding-top: 5vh;
-    }
-
-    #studentForm {
-        width: 100%;
-    }
-
-    #studentField {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    #studentForm button {
-        width: 90%;
-        height: auto;
-        padding: 10px;
-    }
-}
-
-/* Hide arrows in Chrome, Safari, Edge, and Opera */
-input[type=number]::-webkit-outer-spin-button,
-input[type=number]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+.smaller-text {
+    font-size: 0.7em; /* Adjust this value to control the size of the smaller text */
+    vertical-align: text-bottom; /* Keeps the smaller text aligned with the top of the larger text */
 }

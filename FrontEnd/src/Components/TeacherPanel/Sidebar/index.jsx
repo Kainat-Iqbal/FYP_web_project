@@ -199,7 +199,9 @@ function SideBar() {
         } onClick={() => {
           nav("/viewResult");
         }}>View Results</MenuItem> */}
-          <MenuItem icon={<Insights />}>Insights</MenuItem>
+          <MenuItem icon={<Insights />} onClick={() => {
+              nav("/insights");
+            }}>Insights</MenuItem>
 
           <MenuItem icon={<Notifications />}>Notifications</MenuItem>
         </Menu>

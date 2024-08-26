@@ -154,7 +154,6 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     else return "";
   };
 
-
   const handleSave = async (student) => {
     const isAttempt = [
       student.midMarks,
@@ -353,73 +352,9 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     lockResult: "Yes",
   });
 
-  function getDate() {
-    const today = new Date();
-    const year = today.getFullYear();
-    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
-    const day = String(today.getDate()).padStart(2, '0');
-    return `${year}-${month}-${day}`;
-}
-function generateResultCode() {
-  const prefix = "JUWRC|";
-  const formattedDate = new Date().toLocaleDateString("en-GB"); // Format date as dd/mm/yyyy
-  const formattedTime = new Date().toLocaleTimeString("en-GB", { hour12: false }); // Format time as HH:mm:ss
-
-  const resultCode = `${prefix}|${courseData?.type+courseData?.degree}|${formattedDate}|${formattedTime}`;
-  return resultCode;
-}
   const handleLockResult = async () => {
-    if (!window.confirm("Are you sure you want to lock the results?")) {
-      return;
-    }
-
-    const updatedStudents = students.map((student) => ({
-      ...student,
-      submissionDate: getDate(),
-      resultCode: generateResultCode(),
-    })); 
-  
-    try {
-       // Update all students' results with submissionDate and resultCode
-       await Promise.all(
-        updatedStudents.map((student) => {
-          const isAttempt = [
-            student.midMarks,
-            student.terminalMarks,
-            student.labMarks,
-          ].every((mark) => parseInt(mark, 10) === 0)
-            ? 0
-            : 1;
-
-          return axios.put(`http://localhost:8081/result/Update/${student.resultId}`, {
-            studentId: student.studentId,
-            assignId: student.assignId,
-            terminalSessionalMarks: student.terminalMarks,
-            midMarks: student.midMarks,
-            labMarks: student.labMarks,
-            totalMarks: calculateTotalMarks(
-              student.midMarks,
-              student.terminalMarks,
-              student.labMarks
-            ),
-            isAttempt,
-            GPA: calculateGPA(
-              calculateTotalMarks(
-                student.midMarks,
-                student.terminalMarks,
-                student.labMarks
-              )
-            ),
-            examDate,
-            submissionDate:getDate(),
-            resultCode: generateResultCode(),
-          })
-    })
-      ); 
-  
-
     console.log("Sending lock result request data:", lockResultValues);
-   
+    try {
       const postRes = await axios.post(
         "http://localhost:8081/lockResult/Add",
         lockResultValues
@@ -437,8 +372,6 @@ function generateResultCode() {
   };
 
   const [lockResultAssignId, setLockResultAssignId] = useState(null);
-
-
 
   useEffect(() => {
     const fetchLockedResults = async () => {

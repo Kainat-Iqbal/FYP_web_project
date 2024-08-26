@@ -87,26 +87,26 @@ useEffect(() => {
  
   return (
     <div id="mainViewTeacherDiv">
-      <div id="sidebar">
+      <div id="viewTeacherSidebar">
         <SideBar />
       </div>
       <div id="viewTeacherWithoutBar">
         <div id="viewTeacherTop">
-          <div id="topheading">
+          <div id="viewTeacherTopheading">
             <h1>Teacher's Information</h1>
           </div>
-          <div id="topMenu">
-            <div id="leftM">
+          <div id="viewTeacherTopMenu">
+            <div id="viewTeacherLeftM">
               <input
                 type="text"
                 placeholder="Search..."
                 style={{ width: "70%" }}
               />
-              <button style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%" }}>
+              <button id="btnsearch" style={{ height: "63%",  color:"black",width:"18%" }}>
                 <SearchIcon />
               </button>
             </div>
-            <div id="right">
+            <div id="viewTeacherRight">
               {/* Sort By Dropdown */}
               <select style={{ width: "40%" }}>
                 <option value="id">Sort by ID</option>
@@ -120,50 +120,50 @@ useEffect(() => {
         </div>
 
         <div id="viewTeacherBottom">
-          <Table striped bordered hover id="viewTeacherTable">
+          <table id="viewTeacherTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th>
                   ID
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Email
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Department
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Designation
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Qualification
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   CNIC
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Joining Date
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Status
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Set HOD
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th >
                   Edit
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {teacher.map((teacherData) => {
+              {teacher.map((teacherData,index) => {
                 return (
                   <tr key={teacherData.id}>
-                    <td>{teacherData.teacherId}</td>
+                    <td>{index+1}</td>
                     <td>{teacherData.name}</td>
                     <td>{teacherData.email}</td>
                     <td>{teacherData.department}</td>
@@ -174,6 +174,7 @@ useEffect(() => {
                     <td>{teacherData.status}</td>
                     <td>
                     <input
+                    id="chk"
                         type="checkbox"
                         checked={selectedHOD === teacherData.teacherId}
                         onChange={(e) =>
@@ -202,7 +203,7 @@ useEffect(() => {
                 );
               })}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
     </div>

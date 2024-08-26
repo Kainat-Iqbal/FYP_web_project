@@ -52,7 +52,7 @@ function SideBar() {
         style={{
           height: "9vh",
           width: "100vw",
-          backgroundColor: "#00304B",
+          background: "linear-gradient(to top left,  #93C098, #8CE0DB)",
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-between",
@@ -160,7 +160,7 @@ function SideBar() {
         style={{
           display: "flex",
           flexDirection: "column",
-          backgroundColor: "#00304B",
+          background: "linear-gradient(to bottom right, green, #8CE0DB)",
           height: "91vh",
           marginTop: "9vh",
           position: "fixed" /* Fix the position */,

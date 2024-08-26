@@ -72,11 +72,10 @@ function UpdateBatch() {
     <div id="mainAddBatchDiv">
       <SideBar />
       <div id="batchWithoutBar">
-        <div id="batchTop">
-          <h1>Update Batch</h1>
-        </div>
-
         <div id="batchBottom">
+        <div id="batchTop">
+          <h1>U<span className="smaller-text">PDATE</span> B<span className="smaller-text">ATCH</span></h1>
+        </div>
           <form id="batchForm" action="" onSubmit={handleSubmit}>
             <div id="batchField">
               <label>Year</label>
@@ -84,7 +83,7 @@ function UpdateBatch() {
                 name="year"
                 onChange={handleInput}
                 value={DATA.year}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="" disabled>Select year</option>
                     {years.map((year) => (
@@ -101,7 +100,7 @@ function UpdateBatch() {
                 name="session"
                 value={DATA.session}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray'}}
               >
                 <option value="Spring">Spring</option>
                 <option value="Fall">Fall</option>

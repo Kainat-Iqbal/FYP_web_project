@@ -14,7 +14,6 @@ function CreateResult() {
         // Perform any validation if needed
         setDateOfExamination(selectedDate);
     };
-
     console.log("date,,,",dateOfExamination)
     // Assuming batchId is available in courseData
     const batchId = courseData?.batchId;
@@ -54,7 +53,7 @@ function CreateResult() {
                         
                         </div>
                     </div>
-                    <StudentTable batchId={batchId} courseCode={courseData?.course_code} batch={courseData?.type+courseData?.degree} examDate={dateOfExamination} labCreditHours={courseData?.lab_credit_hr} year={courseData?.year}/>
+                    <StudentTable batchId={batchId} courseCode={courseData?.course_code} batch={courseData?.type+courseData?.degree} examDate={dateOfExamination} labCreditHours={courseData?.lab_credit_hr} />
                 </div>
             </div>
         </>

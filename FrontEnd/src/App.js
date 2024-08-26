@@ -63,6 +63,8 @@ import StudentHomePage from './Components/StudentPanel/StudentHomePage';
 import StudentViewCourse from './Components/StudentPanel/StudentViewCourse';
 import StudentViewResult from './Components/StudentPanel/StudentViewResult';
 import StudentViewProforma from './Components/StudentPanel/StudentViewProforma';
+import Insights from './Components/TeacherPanel/Insights';
+import ViewInsights from './Components/TeacherPanel/ViewInsights';
 
 function App() {
 
@@ -107,9 +109,11 @@ function App() {
         <Route path='/teacherCourses' element={<Courses/>}></Route>
         <Route path='/createResult' element={<CreateResult/>}></Route>
         <Route path='/viewResult' element={<ViewResult/>}></Route>
+        <Route path='/viewInsights' element={<ViewInsights/>}></Route>
         
         {/* Teacher */}
         <Route path='/courses' element={<Courses />} />
+        <Route path='/insights' element={<Insights/>}/>
         <Route path='/teacher' element={<Dashboard />} />
         <Route path='/student' element={<StudentTable />} />
         <Route path='/createResult' element={<CreateResult />} />

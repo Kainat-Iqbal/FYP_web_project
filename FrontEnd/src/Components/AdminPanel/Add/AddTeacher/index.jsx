@@ -88,16 +88,17 @@ function AddTeacher() {
     <div id="mainAddTeacherDiv">
       <SideBar />
       <div id="teacherWithoutBar">
-        <div id="teacherTop">
-          <h1>Add Teacher</h1>
-        </div>
+      
 
         <div id="teacherBottom">
+        <div id="teacherTop">
+        <h1>A<span className="smaller-text">DD</span> T<span className="smaller-text">EACHER</span></h1>
+        </div>
           <form id="teacherForm" action="" onSubmit={handleSubmit}>
             <div id="teacherField">
               <label>Name</label>
               <input
-              id="inp"
+              id="teacherinp"
                 name="name"
                 type="text"
                 placeholder="Sara Ahmed"
@@ -109,10 +110,12 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Email</label>
               <input
+               id="teacherinp"
                 name="email"
                 type="email"
                 placeholder="abc@gmail.com"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
             {errors.email && (
@@ -122,7 +125,7 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Password</label>
               <input
-              id="inp"
+               id="teacherinp"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -137,9 +140,10 @@ function AddTeacher() {
               <label>Department</label>
 
               <select
+               id="teacherinp"
                 name="department"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Software Engineering">
                   Software Engineering
@@ -154,9 +158,10 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Designation</label>
               <select
+               id="teacherinp"
                 name="designation"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Lecturer">Lecturer</option>
                 <option value="Assistant Professor">Assistant Professor</option>
@@ -170,7 +175,7 @@ function AddTeacher() {
             <div id="teacherField">
               <label>CNIC</label>
               <input
-              id="inp"
+               id="teacherinp"
                 name="cnic"
                 type="text"
                 placeholder="42204-3452276-3"
@@ -183,9 +188,10 @@ function AddTeacher() {
               <label>Qualification</label>
 
               <select
+               id="teacherinp"
                 name="qualification"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Bachelors">Bachelors</option>
                 <option value="Masters">Masters</option>
@@ -195,9 +201,10 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Status</label>
               <select
+               id="teacherinp"
                 name="status"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -206,7 +213,8 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+               id="teacherinp"
+                style={{ width: "14.8vw", height: "5.8vh" }}
                 name="joiningDate"
                 type="date"
                 onChange={handleInput}
@@ -217,7 +225,8 @@ function AddTeacher() {
             <div id="teacherField">
               <label>Picture</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+               
+                style={{ width: "14.8vw", height: "5.8vh" }}
                 name="photo"
                 type="file"
                 onChange={handleInput}

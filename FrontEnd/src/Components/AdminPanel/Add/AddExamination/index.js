@@ -83,17 +83,17 @@ function AddExamination() {
   return (
     <div id="mainAddExaminationDiv">
       <SideBar />
-      <div id="examinationWithoutBar">
-        <div id="examinationTop">
-          <h1>Add Controller of Examination</h1>
-        </div>
-
+      <div id="ExaminationWithoutBar">
         <div id="ExaminationBottom">
+        <div id="ExaminationTop">
+        <h1>A<span className="smaller-text">DD</span> C<span className="smaller-text">ONTROLLER</span> O<span className="smaller-text">F</span> E<span className="smaller-text">XAMINATION</span></h1>
+        
+        </div>
           <form id="ExaminationForm" action="" onSubmit={handleSubmit}>
             <div id="ExaminationField">
               <label>Name</label>
               <input
-              id="examinp"
+              id="Examinationinp"
                 name="name"
                 type="text"
                 placeholder="Sara Ahmed"
@@ -105,10 +105,12 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>Email</label>
               <input
+              id="Examinationinp"
                 name="email"
                 type="email"
                 placeholder="abc@gmail.com"
                 onChange={handleInput}
+                style={{height:'5.8vh'}}
               ></input>
             </div>
             {errors.email && (
@@ -118,7 +120,7 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>Password</label>
               <input
-              id="examinp"
+             id="Examinationinp"
                 name="password"
                 type="text"
                 onChange={handleInput}
@@ -132,7 +134,7 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>CNIC</label>
               <input
-              id="examinp"
+             id="Examinationinp"
                 name="CNIC"
                 type="text"
                 placeholder="42204-3452276-3"
@@ -143,9 +145,10 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>Status</label>
               <select
+              id="Examinationinp"
                 name="status"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "16.7vw", height: "5.8vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -154,7 +157,8 @@ function AddExamination() {
             <div id="ExaminationField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+              id="Examinationinp"
+                style={{ width: "16.7vw", height: "5.8vh" }}
                 name="joiningDate"
                 type="date"
                 onChange={handleInput}

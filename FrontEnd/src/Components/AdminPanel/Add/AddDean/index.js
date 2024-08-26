@@ -87,11 +87,12 @@ console.log(values)
     <div id="mainAddDeanDiv">
       <SideBar />
       <div id="deanWithoutBar">
-        <div id="deanTop">
-          <h1>Add Dean</h1>
-        </div>
+       
 
         <div id="deanBottom">
+        <div id="deanTop">
+          <h1>A<span className="smaller-text">DD</span> D<span className="smaller-text">EAN</span></h1>
+        </div>
           <form id="deanForm" action="" onSubmit={handleSubmit}>
             <div id="deanField">
               <label>Name</label>
@@ -105,13 +106,16 @@ console.log(values)
             </div>
             {errors.name && <span className="text-danger">{errors.name}</span>}
 
-            <div id="deanField">
+            <div id="deanField"  >
               <label>Email</label>
               <input
+             id="deaninp"
                 name="email"
                 type="email"
                 placeholder="abc@gmail.com"
                 onChange={handleInput}
+                style={{height:'2.7vw'}}
+               
               ></input>
             </div>
             {errors.email && (
@@ -136,9 +140,10 @@ console.log(values)
               <label>Faculty</label>
 
               <select
+              id="deaninp"
                 name="faculty"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{height: "5.8vh" }}
               >
                 <option value="Science">
                   Science
@@ -162,9 +167,10 @@ console.log(values)
               <label>Qualification</label>
 
               <select
+              id="deaninp"
                 name="qualification"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{height: "5.8vh" }}
               >
                 <option value="Bachelors">Bachelors</option>
                 <option value="Masters">Masters</option>
@@ -174,9 +180,10 @@ console.log(values)
             <div id="deanField">
               <label>Status</label>
               <select
+              id="deaninp"
                 name="status"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{height: "5.8vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -185,11 +192,13 @@ console.log(values)
             <div id="deanField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+              id="deaninp"
                 name="joiningDate"
                 type="date"
                 onChange={handleInput}
-              ></input>
+                style={{height: "5.8vh" }}
+
+></input>
             </div>
 
             <button>Add Dean</button>

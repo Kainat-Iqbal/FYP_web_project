@@ -1,11 +1,14 @@
 import * as React from "react";
 import "./login.css";
 import axios from "axios";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 function LoginPage() {
   const nav = useNavigate();
+  const textStyle = {
+    fontFamily: 'Poppins',
+  };
 
   // State variables to hold the input values
   const [values, setValues] = useState({
@@ -24,87 +27,74 @@ function LoginPage() {
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
-      axios.post('http://localhost:8081/login',values)
-      .then(res =>{
+    axios.post('http://localhost:8081/login', values)
+      .then(res => {
         console.log(values)
-        if(res.data === "Admin"){
-          localStorage.setItem("user","kainat");
+        if (res.data === "Admin") {
+          localStorage.setItem("user", "kainat");
           console.log("admin")
           nav("/home");
         }
-        else if(res.data === "HOD"){
+        else if (res.data === "HOD") {
           console.log("hod")
           nav("/HODHomePage")
         }
-        else if(res.data === "Dean"){
+        else if (res.data === "Dean") {
           console.log("dean")
           nav("/DeanHomePage")
         }
-        else if(res.data === "Examination"){
+        else if (res.data === "Examination") {
           console.log("examination")
           nav("/ControllerOfExaminationHomePage")
         }
-        else if(res.data === "Teacher"){
+        else if (res.data === "Teacher") {
           console.log("teacher")
           nav("/teacher")
         }
-        else if(res.data ==="Failed"){
+        else if (res.data === "Failed") {
           alert("Invalid Login")
         }
       })
-        
+
   };
-   
-  
 
 
   return (
-    <div id="mainLoginDiv">
-      <div id="loginForm">
-        <h1>
-          Academic Accelerator
-        </h1>
-        <form id="loginFormDiv" action="" onSubmit={handleSubmit}>
-          <div id="InputFormField">
-            <label id="loginLabel" htmlFor="email">Email</label>
-            <div id="inputError">
-              <input
-              id="loginInput"
-                name="email"
-                type="email"
-                placeholder="abc@gmail.com"
-                onChange={handleInput}
-              ></input>
-              {/* {errors.email && (<span className="text-danger">{errors.email}</span>)} */}
+    <div id="mainLoginDiv" style={textStyle}>
+      <div id="newbg">
+        <div id="formbg">
+          <div id="leftSection">
+            <div id="logoSection">
+              <img src={require("./FYPLogo.png")} alt="logo" id="logo" />
+              <h5>Academic Accelerator</h5>
+            </div>
+            <div id="loginSection">
+              <div id="loginform">
+                <h1>Login</h1>
+                <form id="mainlogin" action="" onSubmit={handleSubmit}>
+                  <div class="inputGroup">
+
+                    <input type="email" id="email" name="email"
+            placeholder="Enter your email"
+               onChange={handleInput}  />
+                  </div>
+                  <div class="inputGroup">
+
+                    <input type="password" id="password" name="password" placeholder="Enter your password"   onChange={handleInput} />
+                  </div>
+                  <button type="submit">Login</button>
+
+                </form>
+              </div>
             </div>
           </div>
-
-          <div id="InputFormField">
-            <label  id="loginLabel" htmlFor="password">Password</label>
-            <div id="inputError">
-              <input
-              id="loginInput"
-                name="password"
-                type="password"
-                onChange={handleInput}
-              ></input>
-              {/* {errors.password && (<span className="text-danger">{errors.password}</span>)} */}
-            </div>
+          <div id="rightSection">
+            {/*  <img src={require("./CapwithBooks.png")} alt="Some Image" /> */}
+            <h1>Welcome Back</h1>
+            <div id="rightpara">
+              <p> Log in to access your personalized dashboard and manage your responsibilities.</p></div>
           </div>
-
-          <button id="inputButtonLogin"
-            style={{
-              /* borderRadius: "15px",
-              width: "17vw",
-              marginTop: "2vh",
-              backgroundColor:'white',
-              color:'black' */
-            }}
-            type="submit" // Change to type="submit" to enable form submission
-          >
-            Login
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );

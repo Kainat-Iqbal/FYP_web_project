@@ -111,11 +111,10 @@ function AddSession() {
     <div id="mainAddSessionDiv">
       <SideBar />
       <div id="sessionWithoutBar">
-        <div id="sessionTop">
-          <h1>Add Session</h1>
-        </div>
-
         <div id="sessionBottom">
+        <div id="sessionTop">
+        <h1>A<span className="smaller-text">DD</span> S<span className="smaller-text">ESSION</span></h1>
+        </div>
           <form id="sessionForm" action="" onSubmit={handleSubmit}>
             <div id="sessionField">
               <label>Class</label>
@@ -123,7 +122,7 @@ function AddSession() {
                 name="programId"
                 value={values.programId}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="" disabled>
                   Select Class
@@ -147,7 +146,7 @@ function AddSession() {
                 name="batchId"
                 onChange={handleInput}
                 value={values.batchId}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
               >
                 <option value="" disabled>
                   Select Batch
@@ -167,7 +166,7 @@ function AddSession() {
               <select
                 name="total_credit_hours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="" disabled>
                   Select year
@@ -185,7 +184,7 @@ function AddSession() {
               <select
                 name="semester"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
               >
                 <option value="I">I</option>
                 <option value="II">II</option>
