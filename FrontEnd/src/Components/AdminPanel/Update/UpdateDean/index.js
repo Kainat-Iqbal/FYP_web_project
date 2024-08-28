@@ -67,16 +67,17 @@ return(
     <div id="mainAddDeanDiv">
       <SideBar />
       <div id="deanWithoutBar">
+       
+        <div id="deanBottom">
         <div id="deanTop">
-          <h1>Update Dean</h1>
+        <h1>U<span className="smaller-text">PDATE</span> D<span className="smaller-text">EAN</span></h1>
         </div>
 
-        <div id="deanBottom">
           <form id="deanForm" action="" onSubmit={handleSubmit}> 
             <div id="deanField">
               <label>Name</label>
               <input
-              id="updatedean_input"
+               id="deaninp"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -85,13 +86,15 @@ return(
             </div>
             {errors.name && <span className="text-danger">{errors.name}</span>}
 
-            <div id="deanField">
+            <div id="deanField" >
               <label>Email</label>
               <input
+               id="deaninp"
                 name="email"
                 type="email"
                 value={DATA.email}
                 onChange={handleInput}
+                style={{height:'2.7vw'}}
               ></input>
             </div>
             {errors.email && (
@@ -102,10 +105,11 @@ return(
               <label>Faculty</label>
 
               <select
+                id="deaninp"
                 name="faculty"
                 onChange={handleInput}
                 value={DATA.faculty}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{height: "6vh" }}
               >
                 <option value="Science">
                   Science
@@ -117,7 +121,7 @@ return(
             <div id="deanField">
               <label>CNIC</label>
               <input
-               id="updatedean_input"
+                id="deaninp"
                 name="CNIC"
                 value={DATA.CNIC}
                 type="text"
@@ -130,10 +134,11 @@ return(
               <label>Qualification</label>
 
               <select
+                id="deaninp"
                 name="qualification"
                 value={DATA.qualification}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{height: "5.8vh" }}
               >
                 <option value="Bachelors">Bachelors</option>
                 <option value="Masters">Masters</option>
@@ -143,10 +148,11 @@ return(
             <div id="deanField">
               <label>Status</label>
               <select
+                id="deaninp"
               value={DATA.status}
                 name="status"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{height: "5.8vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -155,7 +161,8 @@ return(
             <div id="deanField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+               style={{height: "5.8vh" }}
+                id="deaninp"
                 name="joiningDate"
                 type="date"
                 value={DATA.JoiningDate}

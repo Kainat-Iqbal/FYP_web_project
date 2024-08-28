@@ -1,0 +1,27 @@
+/* Ensure the Sidebar itself has no unexpected background */
+#sideebar, .pro-sidebar {
+    background-color: transparent !important; /* Ensure no background color */
+    box-shadow: none !important; /* Remove any box shadow */
+  }
+  
+  /* Remove any additional overlays */
+  .pro-sidebar-inner {
+    background-color: transparent !important; /* Make sure the inner part is also transparent */
+  }
+  
+  /* Override any possible grey backgrounds or overlays */
+  .pro-sidebar > * {
+    background-color: transparent !important; /* Ensure all child elements are transparent */
+  }
+  
+  /* If there is any opacity issue */
+  .pro-sidebar {
+    opacity: 0 !important;
+  }
+  
+  /* Remove grey overlays on individual MenuItems if necessary */
+  .pro-menu-item {
+    background-color: transparent !important;
+    box-shadow: none !important;
+  }
+  

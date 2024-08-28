@@ -1,0 +1,17 @@
+#mainDivGraph {
+    height: 100vh;
+    width: 100vw;
+    /* background-color: blue; */
+}
+
+#GraphDivTop {
+    height: 9%;
+    /* background-color: aquamarine;*/
+}
+
+#GraphDivBottom {
+    height: 91%;
+    width: 82%;
+    margin-left: 18vw;
+    /* background-color: aqua; */
+}

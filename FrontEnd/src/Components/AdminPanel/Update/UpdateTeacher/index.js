@@ -67,16 +67,15 @@ return(
 <div id="mainAddTeacherDiv">
       <SideBar />
       <div id="teacherWithoutBar">
-        <div id="teacherTop">
-          <h1>Update Teacher</h1>
-        </div>
-
         <div id="teacherBottom">
+        <div id="teacherTop">
+        <h1>U<span className="smaller-text">PDATE</span> T<span className="smaller-text">EACHER</span></h1>
+        </div>
           <form id="teacherForm" action="" onSubmit={handleSubmit}>
             <div id="teacherField">
               <label>Name</label>
               <input
-             id="updatet_input"
+             id="teacherinp"
                 name="name"
                 type="text"
                 value={DATA.name}
@@ -88,10 +87,12 @@ return(
             <div id="teacherField">
               <label>Email</label>
               <input
+               id="teacherinp"
                 name="email"
                 type="email"
                 value={DATA.email}
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
             {errors.email && (
@@ -102,10 +103,11 @@ return(
               <label>Department</label>
 
               <select
+               id="teacherinp"
                 name="department"
                 value={DATA.department}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Software Engineering">
                   Software Engineering
@@ -120,10 +122,11 @@ return(
             <div id="teacherField">
               <label>Designation</label>
               <select
+               id="teacherinp"
                 name="designation"
                 value={DATA.designation}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Lecturer">Lecturer</option>
                 <option value="Assistant Professor">Assistant Professor</option>
@@ -137,7 +140,7 @@ return(
             <div id="teacherField">
               <label>CNIC</label>
               <input
-               id="updatet_input"
+               id="teacherinp"
                 name="CNIC"
                 type="text"
                 value={DATA.CNIC}
@@ -149,10 +152,11 @@ return(
               <label>Qualification</label>
 
               <select
+               id="teacherinp"
                 name="qualification"
                 value={DATA.qualification}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Bachelors">Bachelors</option>
                 <option value="Masters">Masters</option>
@@ -162,10 +166,11 @@ return(
             <div id="teacherField">
               <label>Status</label>
               <select
+               id="teacherinp"
                 name="status"
                 value={DATA.status}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Active">Active</option>
                 <option value="Leave">Leave</option>
@@ -174,7 +179,8 @@ return(
             <div id="teacherField">
               <label>Date of Joining</label>
               <input
-                style={{ width: "14.8vw", height: "4.5vh" }}
+               id="teacherinp"
+                style={{ width: "14.8vw", height: "5.8vh" }}
                 name="JoiningDate"
                 value={DATA.JoiningDate}
                 type="date"

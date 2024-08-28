@@ -231,96 +231,56 @@ function HODViewResult() {
         </div>
 
         <div id="HODViewResultBottom">
-          <Table striped bordered hover id="HODViewResultTable">
+          <table id="HODViewResultTable">
             <thead>
               <tr>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   S. Number
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Seat Number
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Enrollment Number
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Student's Name
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Father's Name
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Mid (20)
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Lab (30/100)
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Assign+Term (50/80)
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   Grand Total (100)
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                   
                 >
                   GP
                 </th>
@@ -353,7 +313,7 @@ function HODViewResult() {
               </tr>
             )}
             </tbody>
-          </Table>
+          </table>
 
           {showPopup && (
             <div id="HODViewResultPopup">

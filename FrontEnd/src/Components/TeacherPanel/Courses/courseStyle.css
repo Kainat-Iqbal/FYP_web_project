@@ -55,8 +55,9 @@
     width: 70%;
 }
 #searchbutton{
-    background-color: rgb(182, 178, 178);
+    background: linear-gradient(to top left,  #93C098, #8CE0DB);
     width: 20%;
+
 }
 
 #bottomC {

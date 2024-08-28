@@ -39,60 +39,36 @@ function HODResultApproval() {
         </div>
 
         <div id="HODResultApprovalBottom">
-          <Table striped bordered hover id="HODResultApprovalTable">
+          <table id="HODResultApprovalTable">
             <thead>
               <tr>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   ID
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Course Number
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Course Name
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Batch
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Instructor Name
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Action
                 </th>
@@ -113,7 +89,7 @@ function HODResultApproval() {
                         style={{
                           borderColor: "#add8e6",
                           color: "black",
-                          backgroundColor: "#add8e6",
+                          background:'linear-gradient(to right, #93C098, #8CE0DB)',
                           width: "70%",
                         }}
                         onClick={() => handleViewResultClick(result.assignId)}
@@ -131,7 +107,7 @@ function HODResultApproval() {
                 </tr>
               )}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
     </div>

@@ -1,119 +1,182 @@
-#mainLoginDiv{
-    width: 100vw;
-    height: 100vh;
-    background-image: url('bg_image.png');
-    background-size: cover; 
-    background-position: center; 
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/* Main container with background image */
 
-#loginForm{
-    width: 45vw;
-    height: 55vh;
-    background-color: #00304B;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 4vh;
-}
-
-#loginForm h1{
-    color: white;
-}
-
-#loginFormDiv{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10vh;
-    color: white;
-}
-
-#InputFormField{
-    width: 25vw;
-    height: 8vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1vh; /* Add margin for spacing between fields */
-}
-
-#inputError{
-    display: flex;
-    flex-direction: column;
-}
-
-#InputFormField input{
-    height: 5vh;
-    width: 17vw;
+#mainLoginDiv {
+  width: 100vw;
+  height: 100vh;
+ /*  background-image: url('newloginbg.png'); */
+  background-image: url('newlogin4.png');
+  background-size: cover;
+  background-position: center;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+   /*  position: relative; 
+    overflow: hidden; */ }
+  
  
+ 
+#newbg {
+  width: 70%;
+  height: 88%;
+  /* background-color: burlywood; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ /*  position: relative; 
+  z-index: 1;  */
 }
 
-#InputFormField label{
-    font-size: 1.2rem;
+#formbg {
+ /*  background-image: url('loginFormBg.png'); */
+ /* background-image: url('greenlogin.png');
+  background-size: 100% 100%; */
+  /* Adjust as needed (contain, cover, etc.) */
+  /* background-repeat: no-repeat; */
+  /* Prevents the image from repeating */
+ /*  background-position: center; */
+  /* Centers the second image */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* Adds a subtle shadow effect */
 }
 
-#inputButtonLogin {
-    border-radius: 200px;
-    width: 18vw;
-    margin-top: 2vh;
-    height: 5vh;
-    background-color:white;
-    color: black;
-    font-size: large;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-    
+#leftSection {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  /* background-color: azure; */
+}
+
+#logoSection {
+  height: 10%;
+  /* background-color: aqua; */
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+}
+
+#logoSection h4 {
+  text-decoration: none;
+}
+
+#logo {
+  width: 8.5%;
+  height: 88%;
+  /* background-color: antiquewhite; */
+}
+
+#loginSection {
+  height: 90%;
+ /*  background-color: rgb(88, 138, 138); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ /*  background: linear-gradient(to bottom right, #93C098, #8CE0DB); */
+}
+
+#loginform {
+  /* background-color: aquamarine; */
+  height: 85%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#loginform h1 {
+  height: 20%;
+  color: linear-gradient(to right, #93C098, #8CE0DB);
+  /* background-color: cadetblue; */
+}
+
+#mainlogin {
+  height: 80%;
+  width: 80%;
+  /* background-color: bisque; */
+}
+.inputGroup {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.inputGroup input {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border 0.3s ease;
+  color: black;
+}
+.inputGroup input:focus {
+  border: 1px solid #4781A0;
+  outline: none;
+}
+
+#loginSection button {
+  width: 100%;
+  height: 15%;
+  padding: 12px;
+  background: linear-gradient(to right, #93C098, #8CE0DB);
+ /*  background-color: #424680; */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#loginSection button:hover {
+  background-color: #4781A0;
+}
+
+#rightSection {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  background: linear-gradient(to bottom, #93C098, #8CE0DB);
+}
+#rightSection h1,p{
+  color: white;
+}
+#rightpara{
+ width: 74%;
+ text-align: center;
+
+}
+#rightSection img {
+  max-width: 100%;
+  max-height: 50%;
+  border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  #loginForm {
+    width: 90vw;
   }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    #loginForm {
-      width: 80vw;
-      height: auto; /* Adjust height to fit content */
-      padding-top: 2vh;
-      padding-bottom: 2vh; /* Add padding to the bottom */
-    }
-  
-    #loginFormDiv {
-      margin-top: 5vh;
-    }
-  
-    #InputFormField {
-      width: 70vw;
-      height: auto; /* Adjust height to fit content */
-      flex-direction: column; /* Stack label and input vertically */
-      align-items: flex-start;
-    }
-  
-    #InputFormField input {
-      width: 100%;
-    }
-  
-    #InputFormField label {
-      font-size: 1rem;
-      margin-bottom: 0.5vh; /* Add margin for spacing */
-    }
-  
-    #inputButtonLogin {
-      width: 70vw;
-    }
+
+  #InputFormField {
+    width: 80vw;
   }
-  
-  @media (max-width: 480px) {
-    #loginForm {
-      width: 90vw;
-    }
-  
-    #InputFormField {
-      width: 80vw;
-    }
-  
-    #inputButtonLogin {
-      width: 80vw;
-    }
+
+  #inputButtonLogin {
+    width: 80vw;
   }
+}
+
+input:-webkit-autofill {
+  -webkit-text-fill-color: black !important;
+  box-shadow: 0 0 0px 1000px white inset !important;
+  transition: background-color 5000s ease-in-out 0s;
+}

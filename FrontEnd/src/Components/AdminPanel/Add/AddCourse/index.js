@@ -77,40 +77,44 @@ console.log(values)
     <div id="mainAddCourseDiv">
       <SideBar />
       <div id="courseWithoutBar">
+        
+        <div id="courseBottom">
         <div id="courseTop">
-          <h1>Add Course</h1>
+        <h1>A<span className="smaller-text">DD</span> C<span className="smaller-text">OURSE</span></h1>
         </div>
 
-        <div id="courseBottom">
           <form id="courseForm" action="" onSubmit={handleSubmit}>
             <div id="courseField">
               <label>Course Code</label>
               <input
-              id="c_inp"
+              id="courseinp"
                 name="code"
                 type="text"
                 placeholder="CSS 1032"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Course Title</label>
               <input
-              id="c_inp"
+             id="courseinp"
                 name="title"
                 type="text"
                 placeholder="Programming Fundamental"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Course Type</label>
               <select className="DROPDOWN"
+               id="courseinp"
                 name="type"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Compulsory">Compulsory</option>
                 <option value="Elective">Elective</option>
@@ -121,9 +125,10 @@ console.log(values)
               <label>Theory Credit Hr</label>
 
               <select
+               id="courseinp"
                 name="thHours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -138,9 +143,10 @@ console.log(values)
               <label>Lab Credit Hr</label>
 
               <select
+               id="courseinp"
                 name="labHours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -154,99 +160,117 @@ console.log(values)
             <div id="courseField">
               <label>Total Mid Marks</label>
               <input
+               id="courseinp"
                 name="totalMid"
                 type="number"
                 min={0}
                 placeholder="20"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Mid Marks</label>
               <input
+               id="courseinp"
                 name="passingMid"
                 min={0}
                 type="number"
                 placeholder="12"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Terminal Marks</label>
               <input
+               id="courseinp"
                 name="totalTerminal"
                 type="number"
                 min={0}
                 placeholder="40"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Terminal Marks</label>
               <input
+               id="courseinp"
                 name="passingTerminal"
                 min={0}
                 type="number"
                 placeholder="24"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Sessional Marks</label>
               <input
+               id="courseinp"
                 name="totalSessional"
                 min={0}
                 type="number"
                 placeholder="10"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Sessional Marks</label>
               <input
+               id="courseinp"
                 name="passingSessional"
                 min={0}
                 type="number"
                 placeholder="6"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Lab Marks</label>
               <input
+               id="courseinp"
                 name="totalLab"
                 type="number"
                 min={0}
                 placeholder="30"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Lab Marks</label>
               <input
+               id="courseinp"
                 name="passingLab"
                 min={0}
                 type="number"
                 placeholder="18"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Marks</label>
               <input
+               id="courseinp"
                 name="totalMarks"
                 min={0}
                 type="number"
                 placeholder="100"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 

@@ -65,11 +65,12 @@ function AddDegreeProgram() {
     <div id="mainAddDegreeProgramDiv">
       <SideBar />
       <div id="degreeProgramWithoutBar">
-        <div id="degreeProgramTop">
-          <h1>Add Degree Program</h1>
-        </div>
+       
 
         <div id="degreeProgramBottom">
+        <div id="degreeProgramTop">
+        <h1>A<span className="smaller-text">DD</span> D<span className="smaller-text">EGREE</span> P<span className="smaller-text">ROGRAM</span></h1>
+        </div>
           <form id="degreeProgramForm" action="" onSubmit={handleSubmit}>
 
             <div id="degreeProgramField">
@@ -77,7 +78,7 @@ function AddDegreeProgram() {
               <select
                 name="type"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
               >
                 <option value="BS">BS</option>
                 <option value="MS">MS</option>
@@ -89,7 +90,7 @@ function AddDegreeProgram() {
               <select
                 name="degree"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="SE">Sofware Engineering</option>
                 <option value="CS">Computer Science</option>
@@ -102,7 +103,7 @@ function AddDegreeProgram() {
               <select
                 name="total_credit_hours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="128">128</option>
                 <option value="130">130</option>

@@ -63,15 +63,28 @@ import StudentHomePage from './Components/StudentPanel/StudentHomePage';
 import StudentViewCourse from './Components/StudentPanel/StudentViewCourse';
 import StudentViewResult from './Components/StudentPanel/StudentViewResult';
 import StudentViewProforma from './Components/StudentPanel/StudentViewProforma';
+import GPAGraph from './Components/TeacherPanel/GPAGraph';
+import Insights from './Components/TeacherPanel/Insights';
+
+//LandingPage
+import React from 'react'
+import { Helmet } from "react-helmet";
+import Landing from "././screens/Landing.jsx";
+
 
 function App() {
 
   return (
     <>
+    <Helmet>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;600;800&display=swap" rel="stylesheet" />
+      </Helmet>
       <BrowserRouter>
       <Routes>
 
-        <Route path='/' element={<MainScreen/>}/>
+        <Route path='/' element={<Landing/>}/>
         <Route path='/login' element={<LoginPage/>}/>
         <Route path='/home' element={<Auth>
           <Home/>
@@ -114,6 +127,8 @@ function App() {
         <Route path='/student' element={<StudentTable />} />
         <Route path='/createResult' element={<CreateResult />} />
         <Route path='/HODHomePage' element={<HODHomePage />} />
+        <Route path='insightCourse' element={<Insights/>}/>
+        <Route path='/GPAGraph' element={<GPAGraph/>}/>
 
           <Route path='/AssignCourse' element={<AssignCourse />} />
           <Route path='/HODResultApproval' element={<HODResultApproval />} />

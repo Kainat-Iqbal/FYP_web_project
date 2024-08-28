@@ -9,6 +9,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const [isLocked, setIsLocked] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [editStudentId, setEditStudentId] = useState(null); // Track the student being edited
+  const [selectedStudents, setSelectedStudents] = useState(new Set()); // Manage selected students
+
 
   const location = useLocation();
   const courseData = location.state?.course;
@@ -150,8 +152,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     else if (marks >= 70) return "3.00";
     else if (marks >= 65) return "2.66";
     else if (marks >= 60) return "2.22";
-    else if (marks < 60) return "2.00";
-    else return "";
+    else if (marks >= 55) return "2.00";
+    else return "0";
   };
 
   const handleSave = async (student) => {
@@ -185,6 +187,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       examDate,
       submissionDate: " ", // Placeholder, modify as needed
       resultCode: " ", // Placeholder, modify as needed
+      selectedStudent: "False"
     };
    
 
@@ -417,12 +420,87 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
 
   console.log("first,,,,,", lockResultAssignId);
 
+
+
+  // Function to handle the selection of students
+
+  const handleSelectStudent = async (studentId) => {
+    const isSelected = !selectedStudents.has(studentId); // Determine new selection status
+
+    // Update the local state
+    setSelectedStudents((prev) => {
+        const updatedSelection = new Set(prev);
+        if (isSelected) {
+            updatedSelection.add(studentId);
+        } else {
+            updatedSelection.delete(studentId);
+        }
+        return updatedSelection;
+    });
+
+    // Prepare data to send to the server
+    const selectedStatus = isSelected ? 'True' : 'False'; // Example: 1 for selected, 0 for not selected
+    const resultData = {
+      studentId: studentId,
+      assignId: assignId,
+      terminalSessionalMarks: '-',
+      midMarks: '-',
+      labMarks: '-',
+      totalMarks: '-',
+      isAttempt: '-',
+      GPA: '-',
+      examDate,
+      submissionDate:'-', // Placeholder, modify as needed
+      resultCode: '-', // Placeholder, modify as needed
+      selectedStudent: selectedStatus
+    };
+    try {
+      const postRes = await axios.post(
+        "http://localhost:8081/result/Add",
+        resultData
+      );
+      console.log("Sending result data:", resultData);
+      // console.log("Response from server:", postRes.data);
+      if (postRes.data === "success") {
+        window.location.reload(); // Refresh the page
+        setIsLocked(true); // Lock fields after saving
+        setEditStudentId(null); // Reset editing state
+      } else {
+        console.log("Error adding result");
+      }
+    }  catch (error) {
+        console.log("Error updating student selection status:", error);
+    }
+};
+
+
+const fetchSelectedResults = async (assignId, setSelectedStudents) => {
+  try {
+    const response = await axios.get(`http://localhost:8081/result/GetSelected`, {
+      params: { assignId }
+    });
+
+    if (response.data.success) {
+      const selectedResults = response.data.data;
+      const selectedStudentIds = new Set(selectedResults.map(result => result.studentId));
+      setSelectedStudents(selectedStudentIds);
+    } else {
+      console.log("No results found or error fetching results");
+    }
+  } catch (error) {
+    console.log("Error fetching selected results:", error);
+  }
+};
+
+
+console.log("DCD CF ",selectedStudents)
   return (
     <div>
-      <table>
+      <table  id="createResultTable">
         <thead>
           <tr>
             <th>S#</th>
+            <th>Select</th>
             <th>Seat No.</th>
             <th>Enrollment No.</th>
             <th className="name">Student's Name</th>
@@ -436,128 +514,139 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.studentId}>
-              <td>{student.studentId}</td>
-              <td>{student.seatNo}</td>
-              <td>{student.enrollment}</td>
-              <td>{student.name}</td>
-              <td>{student.fatherName}</td>
-              <td>
+          {students.map((student,index) => {
+            const isRowDisabled = selectedStudents.has(student.studentId);
+            return (
+              <tr key={student.studentId}>
+<td>{index+1}</td>
+                <td>
                 <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max="20"
-                  value={student.midMarks || ""}
-                  onChange={(e) =>
-                    handleMarksChange(e, student.studentId, "midMarks")
-                  }
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max="30"
-                  value={student.labMarks || ""}
-                  onChange={(e) =>
-                    handleMarksChange(e, student.studentId, "labMarks")
-                  }
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max={labCreditHours === 1 ? "50" : "80"}
-                  value={student.terminalMarks || ""}
-                  onChange={(e) =>
-                    handleMarksChange(e, student.studentId, "terminalMarks")
-                  }
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max="100"
-                  value={
-                    calculateTotalMarks(
-                      student.midMarks,
-                      student.terminalMarks,
-                      student.labMarks
-                    ) || ""
-                  }
-                  readOnly
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  style={{ width: "70px" }}
-                  value={
-                    calculateGPA(
+    type="checkbox"
+    checked={selectedStudents.has(student.studentId)}
+    onChange={() => handleSelectStudent(student.studentId)}
+    disabled={isLocked || isRowDisabled}
+/>
+                </td>
+                <td>{student.seatNo}</td>
+                <td>{student.enrollment}</td>
+                <td>{student.name}</td>
+                <td>{student.fatherName}</td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="20"
+                    value={student.midMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "midMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="30"
+                    value={student.labMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "labMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max={labCreditHours === 1 ? "50" : "80"}
+                    value={student.terminalMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "terminalMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="100"
+                    value={
                       calculateTotalMarks(
                         student.midMarks,
                         student.terminalMarks,
                         student.labMarks
-                      )
-                    ) || ""
-                  }
-                  readOnly
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                {student.resultId ? (
-                  <>
-                    {editStudentId === student.studentId ? (
-                      <button
-                        id="buttons123"
-                        onClick={() => handleUpdate(student)}
-                        disabled={isLocked}
-                      >
-                        Update
-                      </button>
-                    ) : (
-                      <button
-                        id="buttons123"
-                        onClick={() => handleEnableEditing(student.studentId)}
-                        disabled={!!lockResultAssignId}
-                        style={{
-                          backgroundColor: !!lockResultAssignId
-                            ? "grey"
-                            : "lightBlue", // Change 'blue' to your desired enabled color
-                          cursor: !!lockResultAssignId
-                            ? "not-allowed"
-                            : "pointer",
-                          color: "black", // Button text color
-                        }}
-                      >
-                        Edit
-                      </button>
-                    )}
-                  </>
-                ) : (
-                  <button
-                    id="buttons123"
-                    onClick={() => handleSave(student)}
-                    disabled={isLocked}
-                  >
-                    Save
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
+                      ) || ""
+                    }
+                    readOnly
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style={{ width: "70px" }}
+                    value={
+                      calculateGPA(
+                        calculateTotalMarks(
+                          student.midMarks,
+                          student.terminalMarks,
+                          student.labMarks
+                        )
+                      ) || ""
+                    }
+                    readOnly
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  {student.resultId ? (
+                    <>
+                      {editStudentId === student.studentId ? (
+                        <button
+                          id="buttons123"
+                          onClick={() => handleUpdate(student)}
+                          disabled={isLocked || isRowDisabled}
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        <button
+                          id="buttons123"
+                          onClick={() => handleEnableEditing(student.studentId)}
+                          disabled={!!lockResultAssignId || isRowDisabled}
+                          style={{
+                            backgroundColor: !!lockResultAssignId || isRowDisabled
+                              ? "grey"
+                              : "lightBlue",
+                            cursor: !!lockResultAssignId || isRowDisabled
+                              ? "not-allowed"
+                              : "pointer",
+                            color: "black",
+                          }}
+                        >
+                          Edit
+                        </button>
+                      )}
+                    </>
+                  ) : (
+                    <button
+                      id="buttons123"
+                      onClick={() => handleSave(student)}
+                      disabled={isLocked || isRowDisabled}
+                    >
+                      Save
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <Dialogue

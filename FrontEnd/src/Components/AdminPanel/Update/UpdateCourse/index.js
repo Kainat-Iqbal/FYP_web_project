@@ -68,16 +68,18 @@ const [DATA, setData] = useState({
     <div id="mainAddCourseDiv">
       <SideBar />
       <div id="courseWithoutBar">
-        <div id="courseTop">
-          <h1>Update Course</h1>
-        </div>
+        
 
         <div id="courseBottom">
+        <div id="courseTop">
+        <h1>U<span className="smaller-text">PDATE</span> C<span className="smaller-text">OURSE</span></h1>
+        </div>
+
           <form id="courseForm" action="" onSubmit={handleSubmit}>
             <div id="courseField">
               <label>Course Code</label>
               <input
-              id="c_update_inp"
+              id="courseinp"
                 name="course_code"
                 type="text"
                 value={DATA.course_code}
@@ -88,7 +90,7 @@ const [DATA, setData] = useState({
             <div id="courseField">
               <label>Course Title</label>
               <input
-              id="c_update_inp"
+               id="courseinp"
                 name="course_title"
                 type="text"
                 value={DATA.course_title}
@@ -100,10 +102,11 @@ const [DATA, setData] = useState({
             <div id="courseField">
               <label>Course Type</label>
               <select className="DROPDOWN"
+                 id="courseinp"
                 name="course_type"
                 value={DATA.course_type}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="Compulsory">Compulsory</option>
                 <option value="Elective">Elective</option>
@@ -114,10 +117,11 @@ const [DATA, setData] = useState({
               <label>Theory Credit Hr</label>
 
               <select
+               id="courseinp"
                 name="th_credit_hr"
                 onChange={handleInput}
                 value={DATA.th_credit_hr}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -132,10 +136,11 @@ const [DATA, setData] = useState({
               <label>Lab Credit Hr</label>
 
               <select
+               id="courseinp"
                 name="lab_credit_hr"
                 value={DATA.lab_credit_hr}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -149,108 +154,126 @@ const [DATA, setData] = useState({
             <div id="courseField">
               <label>Total Mid Marks</label>
               <input
+               id="courseinp"
                 name="max_mid_marks"
                 value={DATA.max_mid_marks}
                 type="number"
                 min={0}
                 placeholder="20"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Mid Marks</label>
               <input
+               id="courseinp"
                 name="min_mid_marks"
                 min={0}
                 value={DATA.min_mid_marks}
                 type="number"
                 placeholder="12"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Terminal Marks</label>
               <input
+               id="courseinp"
                 name="max_th_marks"
                 type="number"
                 value={DATA.max_th_marks}
                 min={0}
                 placeholder="40"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Terminal Marks</label>
               <input
+               id="courseinp"
                 name="min_th_marks"
                 min={0}
                 value={DATA.min_th_marks}
                 type="number"
                 placeholder="24"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Sessional Marks</label>
               <input
+               id="courseinp"
                 name="max_sessional"
                 min={0}
                 value={DATA.max_sessional}
                 type="number"
                 placeholder="10"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Sessional Marks</label>
               <input
+               id="courseinp"
                 name="min_sessional"
                 value={DATA.min_sessional}
                 min={0}
                 type="number"
                 placeholder="6"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Lab Marks</label>
               <input
+               id="courseinp"
                 name="max_lab"
                 type="number"
                 value={DATA.max_lab}
                 min={0}
                 placeholder="30"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Passing Lab Marks</label>
               <input
+               id="courseinp"
                 name="min_lab"
                 min={0}
                 value={DATA.min_lab}
                 type="number"
                 placeholder="18"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 
             <div id="courseField">
               <label>Total Marks</label>
               <input
+               id="courseinp"
                 name="total_marks"
                 value={DATA.total_marks}
                 min={0}
                 type="number"
                 placeholder="100"
                 onChange={handleInput}
+                style={{ width: "14.8vw", height: "5.8vh" }}
               ></input>
             </div>
 

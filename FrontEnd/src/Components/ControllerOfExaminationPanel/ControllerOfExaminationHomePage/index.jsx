@@ -43,19 +43,18 @@ function ControllerOfExaminationHomePage() {
           <div id="COEhomePageInfo">
             <h2 style={{ marginTop: "4.3%" }}>Ms. {examinationName} </h2>
 
-            <h5 style={{ marginTop: "1%" }}>Controller of Examination</h5>
+            <h5 style={{ marginTop: "1%" ,fontSize:'1.1rem'}}>Controller of Examination</h5>
             {/* <h5 style={{ marginTop: "-2%" }}>Computer and Software Engineering</h5> */}
-            <h5 style={{ marginTop: "-2%" }}>Jinnah University For Women</h5>
+            <h5 style={{ marginTop: "-2%",fontSize:'1.1rem' }}>Jinnah University For Women</h5>
           </div>
 
         </div>
 
         <div id="COEhomePageWithoutBar">
-
-          <div id="COEhomePageFaculty">
-            <h1 style={{ marginTop: "2vh" }}> 60 </h1>
+        <div id="COEhomePageFaculty">
+            <h2 style={{ marginTop: "1vh" }}> 60 </h2>
             <div id="COEhomePageNumImage">
-              <h2>Faculty</h2>
+              <h3>Faculty</h3>
               <img
                 src={require("./teacher.png")}
                 style={{ width: "6vw", height: "10vh" }} />
@@ -63,43 +62,41 @@ function ControllerOfExaminationHomePage() {
           </div>
 
           <div id="COEhomePageStudent">
-            <h1 style={{ marginTop: "2vh" }} > 16,000 </h1>
+            <h2 style={{ marginTop: "1vh" }} > 16,000 </h2>
             <div id="COEhomePageNumImage">
-              <h2>Students</h2>
+              <h3>Students</h3>
               <img src={require("./student.png")} style={{ width: "6vw", height: "10vh" }} />
             </div>
           </div>
 
           <div id="COEhomePagePassStudent">
-            <h1 style={{ marginTop: "2vh" }} > 15,000 </h1>
+            <h2 style={{ marginTop: "1vh" }} > 15,000 </h2>
             <div id="COEhomePageNumImage">
-              <h2>Passed Students</h2>
+              <h3>Passed Students</h3>
               <img src={require("./passStudent.png")} style={{ width: "6vw", height: "10vh" }} />
             </div>
           </div>
 
-          <div id="COEhomePageFailStudent">
-            <h1 style={{ marginTop: "2vh" }} > 1000 </h1>
+          <div id="COEhomePageTotalCourses">
+            <h2 style={{ marginTop: "1vh" }} > 1000 </h2>
             <div id="COEhomePageNumImage">
-              <h2>Total Fail Students</h2>
-              <img src={require("./fail.png")} style={{ width: "6vw", height: "10vh" }} />
+              <h3>Courses</h3>
+              <img src={require("./graduation.png")} style={{ marginLeft:'10px',width: "4.5vw", height: "10vh" }} />
             </div>
           </div>
 
           <div id="COEhomePagePassFailGraph">
             <img
-              src={require("./barGraph.png")}
+              src={require("./graph2.jpg")}
               style={{ width: "100%", height: "100%" }} />
           </div>
 
-          <div id="COEhomePageTotalCourses">
-            <h2 style={{ marginTop: "2vh" }} > 350 </h2>
-            <h3>Total Courses</h3>
-            <img src={require("./course.png")} style={{ width: '100%', height: "40vh" }} />
+          <div id="COEhomePageGraphs">
+          <img src= {require("./course.png")} style={{width:'100%',height:"35vh" ,boxShadow:'2px 2px 15px rgba(0, 0, 0, 0.2)',marginTop:"-6vh"}}/>
+          <img src= {require("./piechart3.jpg")} style={{width:'100%',height:"30vh",boxShadow:'2px 2px 15px rgba(0, 0, 0, 0.2)',marginTop:'2vh'}}/>
           </div>
 
-        </div>
-      </div>
+        </div>      </div>
     </>
   );
 }

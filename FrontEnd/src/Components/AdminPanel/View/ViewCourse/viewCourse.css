@@ -11,7 +11,7 @@
     /* background-color: brown; */
 
 }
-#sidebar{
+#viewCourseSidebar{
     height: 9%;
 }
 #viewCourseTop{
@@ -20,7 +20,8 @@
     /* background-color: blue;
     */
 }
-#topheading {
+#viewCourseTopheading {
+    margin-top: 1%;
     height: 50%;
     /* background-color: yellow; */
     display: flex;
@@ -28,22 +29,23 @@
 
 }
 
-#topMenu {
+#viewCourseTopMenu {
     height: 50%;
     /* background-color: yellowgreen; */
     display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 2%;
+    margin-top: 1%;
 }
 
-#leftM {
+#viewCourseLeftM {
     width: 50%;
     margin-left: 2.5%;
     display: flex;
     margin-top: 12px;
 }
-#right {
+#viewCourseRight {
     width: 50%;
     height: 80%;
     display: flex;
@@ -56,15 +58,56 @@
     /* background-color: chartreuse; */
     display: flex;
     justify-content: center;
+    margin-top: 2%;
+    
+   
 }
 
 #viewCourseTable{
     width: 95%;
     margin-top: 1%;
-    border: 2px solid #00304B; 
+    border-collapse: collapse;
+    margin-bottom: 1%;
+    background-color: white;
+    border: 1px solid #00304B; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+    margin-left: 33%;
 }
+#viewCourseTable th, 
+#viewCourseTable td {
+    padding: 12px 15px; /* More padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* Light border between rows */
+    font-size: 14px; /* Slightly increase font size */
+    color: #333; /* Darker text for better readability */
+    text-align: center;
+}
+#viewCourseTable th {
+    background-color:#20796d;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase; /* Capitalize headers */
+    text-align: center;
+    align-items: center;
+}
+#viewCourseTable tbody tr:hover {
+    background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+}
+
 
 .disabled-link {
     pointer-events: none;
     opacity: 0.5;
   }
+
+  #btnsearch{
+    background: linear-gradient(to right, #93C098, #8CE0DB);
+  }
+  #viewCourseTable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light grey for odd rows */
+}
+
+#viewCourseTable tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}

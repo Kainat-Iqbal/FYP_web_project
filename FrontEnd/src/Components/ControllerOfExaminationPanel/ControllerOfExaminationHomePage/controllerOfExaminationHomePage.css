@@ -51,69 +51,73 @@
 
 #COEhomePageFaculty {
   width: 22%;
-  height: 27%;
-  margin-top: 7vh;
+  height: 22%;
+  margin-top: 4vh;
   margin-left: 4vh;
   align-items: center;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right, rgb(163, 68, 252), white);
+  background-color: plum;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
   /* background-color: palevioletred; */
   /* border: 2px solid #00304B; */
 }
 
 #COEhomePageStudent {
   width: 22%;
-  height: 27%;
-  margin-top: 7vh;
+  height: 22%;
+  margin-top: 4vh;
   align-items: center;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right, palevioletred, white);
-  /* background-color: mediumaquamarine; */
-  /* border: 2px solid #00304B; */
-}
+  background-color: pink;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+border-radius: 10px;}
 
 #COEhomePagePassStudent {
   width: 22%;
-  height: 27%;
-  margin-top: 7vh;
+  height: 22%;
+  margin-top: 4vh;
   align-items: center;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right, powderblue, white);
+  background-color: powderblue;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
   /* background-color: powderblue; */
   /* border: 2px solid #00304B; */
 }
 
-#COEhomePageFailStudent {
+#COEhomePageTotalCourses {
   width: 22%;
-  height: 27%;
-  margin-top: 7vh;
+  height: 22%;
+  margin-top: 4vh;
   align-items: center;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(to right, coral, white);
+  background-color: palegoldenrod;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+border-radius: 10px;
   /* background-color: blueviolet; */
   /* border: 2px solid #00304B; */
 }
 
 #COEhomePagePassFailGraph {
-  width: 70%;
+  width: 60%;
   height: 60%;
   margin-top: 7vh;
   margin-left: 4vh;
   background-color: bisque;
-  border: 1px solid #00304B;
+  box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
 }
 
-#COEhomePageTotalCourses {
+#COEhomePageGraphs {
   width: 22%;
-  height: 60%;
-  align-items: center;
-  margin-top: 7vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(to right, orchid, white);
+    height: 60%;
+   /*  background: linear-gradient(to right, orchid,white); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 8vh; 
 }
-

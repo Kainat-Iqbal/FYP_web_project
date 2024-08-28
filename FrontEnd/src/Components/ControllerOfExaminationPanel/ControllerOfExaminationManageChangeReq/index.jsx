@@ -128,7 +128,7 @@ function ControllerOfExaminationManageChangeReq() {
         </div>
 
         <div id="COEmanageChangeReqBottom">
-          <Table striped bordered hover id="COEmanageChangeReqTable">
+          <table id="COEmanageChangeReqTable">
             <thead>
               <tr>
                 <th>ID</th>
@@ -142,9 +142,9 @@ function ControllerOfExaminationManageChangeReq() {
 
             <tbody>
               {Array.isArray(request) && request.length > 0 ? (
-                request.map((result) => (
+                request.map((result,index) => (
                   <tr key={result.requestId}>
-                    <td>{result.requestId}</td>
+                    <td>{index+1}</td>
                     <td>{result.course_code}</td>
                     <td>{result.course_name}</td>
                     <td>{"Ms. " + result.name}</td>
@@ -155,34 +155,14 @@ function ControllerOfExaminationManageChangeReq() {
                       {!disapprovedRequests.has(result.requestId) ? (
                         <>
                           <button
-                            style={{
-                              borderColor: "#90ee90",
-                              backgroundColor: "#90ee90",
-                              // textAlign: "center",
-                              // width: "9vw",
-                              // borderColor: "#90ee90",
-                              // color: "white",
-                              // backgroundColor: "#90ee90",
-                              // marginLeft:"5px",
-                              // marginRight: "5px"
-                            }}
+                          id="approveButtonCOE"
                             onClick={() => handleApprove(result.requestId)}
                           >
                             Approve
                           </button>
 
-                          <button
-                            style={{
-                              borderColor: "#cd5c5c",
-                              backgroundColor: "#cd5c5c",
-                              // textAlign: "center",
-                              // width: "9vw",
-                              // borderColor: "#cd5c5c",
-                              // color: "white",
-                              // backgroundColor: "#cd5c5c",
-                              // marginLeft:"5px",
-                              // marginRight: "5px"
-                            }}
+                          <button id='disapproveButtonCOE'
+                            
                             onClick={() =>
                               handleDisapproveClick(result.requestId)
                             }
@@ -204,7 +184,7 @@ function ControllerOfExaminationManageChangeReq() {
                 </tr>
               )}
             </tbody>
-          </Table>
+          </table>
         </div>
 
         {/* //Disapproved table */}
@@ -213,7 +193,7 @@ function ControllerOfExaminationManageChangeReq() {
         </div>
 
         <div id="COEmanageChangeReqBottom">
-          <Table striped bordered hover id="COEmanageChangeReqTable">
+          <table striped bordered hover id="COEmanageChangeReqTable">
             <thead>
               <tr>
                 <th>ID</th>
@@ -228,9 +208,9 @@ function ControllerOfExaminationManageChangeReq() {
 
             <tbody>
               {Array.isArray(disapproveReq) && disapproveReq.length > 0 ? (
-                disapproveReq.map((results) => (
+                disapproveReq.map((results,index) => (
                   <tr key={results.requestId}>
-                    <td>{results.requestId}</td>
+                    <td>{index+1}</td>
                     <td>{results.course_code}</td>
                     <td>{results.course_name}</td>
                     <td>{"Ms. " + results.name}</td>
@@ -252,7 +232,7 @@ function ControllerOfExaminationManageChangeReq() {
                 </tr>
               )}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
 

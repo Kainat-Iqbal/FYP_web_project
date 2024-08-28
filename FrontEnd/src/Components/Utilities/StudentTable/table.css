@@ -1,6 +1,7 @@
 table {
   border-collapse: collapse;
   width: 100%;
+  
 }
 
 th,
@@ -56,6 +57,7 @@ tr:hover {
   background-color:lightblue;
   color: black;
   border: 2px lightblue;
+  width: 80px;
   
 }
 

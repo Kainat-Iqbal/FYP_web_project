@@ -44,7 +44,7 @@
 #AssignCourseTable {
     height: 60%;
     width: 90%;
-    margin-top: 5%;
+    margin-top: 1%;
     margin-left: 8%;
     /* background-color: aqua; */
 }
@@ -60,9 +60,40 @@
 
 #viewAssignCourseTable {
     width: 95%;
-    padding-top: 1%;
-    border: 2px solid #00304B;
-    /* margin-top: 1%; */
+    margin-top: 1%;
+    border-collapse: collapse;
+    margin-bottom: 1%;
+    background-color: white;
+    border: 1px solid #00304B; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+}#viewAssignCourseTable th, 
+#viewAssignCourseTable td {
+    padding: 12px 15px; /* More padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* Light border between rows */
+    font-size: 14px; /* Slightly increase font size */
+    color: #333; /* Darker text for better readability */
+    text-align: center;
+}
+#viewAssignCourseTable th {
+    background-color:#20796d;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase; /* Capitalize headers */
+    text-align: center;
+    align-items: center;
+}
+#viewAssignCourseTable tbody tr:hover {
+    background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+}
+
+  #viewAssignCourseTable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light grey for odd rows */
+}
+
+#viewAssignCourseTable tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
 }
 
 #HODHomePageTeacher {
@@ -70,13 +101,15 @@
     height: 20%;
     margin-top: 7vh;
     margin-left: 4vh;
-    background-color: palevioletred;
+    background-color: pink;
     align-items: center;
     display: flex;
     flex-direction: column;
     /* background-color: blueviolet; */
     /* background: linear-gradient(to right, rgb(163, 68, 252),white); */
     /* border: 2px solid #00304B; */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 #HODHomePageNumImage {
@@ -92,13 +125,28 @@
     height: 20%;
     margin-top: 7vh;
     align-items: center;
-    background-color: mediumaquamarine;
+    background-color: rgb(142, 207, 186);
     display: flex;
     flex-direction: column;
     /* background: linear-gradient(to right, palevioletred,white); */
     /* border: 2px solid #00304B; */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
+#HODHomePageCourse {
+    width: 20%;
+    height: 20%;
+    margin-top: 7vh;
+    align-items: center;
+    background-color:palegoldenrod;
+    display: flex;
+    flex-direction: column;
+    /* background: linear-gradient(to right, palevioletred,white); */
+    /* border: 2px solid #00304B; */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
 #HODHomePagePassStudent {
     width: 20%;
     height: 20%;
@@ -109,6 +157,8 @@
     flex-direction: column;
     /* background: linear-gradient(to right, powderblue,white); */
     /* border: 2px solid #00304B; */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
 }
 
 

@@ -60,11 +60,10 @@ function UpdateDegree() {
     <div id="mainAddDegreeProgramDiv">
       <SideBar />
       <div id="degreeProgramWithoutBar">
-        <div id="degreeProgramTop">
-          <h1>Update Degree Program</h1>
-        </div>
-
         <div id="degreeProgramBottom">
+        <div id="degreeProgramTop">
+        <h1>U<span className="smaller-text">PDATE</span> D<span className="smaller-text">EGREE</span> P<span className="smaller-text">ROGRAM</span></h1>
+        </div>
           <form id="degreeProgramForm" action="" onSubmit={handleSubmit}>
 
             <div id="degreeProgramField">
@@ -73,7 +72,7 @@ function UpdateDegree() {
                 name="type"
                 value={DATA.type}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="BS">BS</option>
                 <option value="MS">MS</option>
@@ -86,7 +85,7 @@ function UpdateDegree() {
                 name="degree"
                 value={DATA.degree}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
               >
                 <option value="SE">Sofware Engineering</option>
                 <option value="CS">Computer Science</option>
@@ -100,7 +99,7 @@ function UpdateDegree() {
                 name="total_credit_hours"
                 value={DATA.total_credit_hours}
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "4.5vh" }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
               >
                 <option value="128">128</option>
                 <option value="130">130</option>

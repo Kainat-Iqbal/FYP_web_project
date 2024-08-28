@@ -31,21 +31,21 @@ function ViewCourse() {
       </div>
       <div id="viewCourseWithoutBar">
         <div id="viewCourseTop">
-          <div id="topheading">
+          <div id="viewCourseTopheading">
             <h1>Course's Information</h1>
           </div>
-          <div id="topMenu">
-            <div id="leftM">
+          <div id="viewCourseTopMenu">
+            <div id="viewCourseLeftM">
               <input
                 type="text"
                 placeholder="Search..."
                 style={{width: "70%" }}
               />
-              <button style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%"  }}>
+              <button id="btnsearch" style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%"  }}>
                 <SearchIcon />
               </button>
             </div>
-            <div id="right">
+            <div id="viewCourseRight">
               {/* Sort By Dropdown */}
               <select style={{ width: "40%" }}>
                 <option value="id">Sort by ID</option>
@@ -59,55 +59,55 @@ function ViewCourse() {
         </div>
 
         <div id="viewCourseBottom">
-          <Table striped bordered hover id="viewCourseTable">
+          <table id="viewCourseTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
+                <th  >
+                S#
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Course Code
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Course Title
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Course Type
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   TH-credit-Hr
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Lab-credit-Hr
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Total Mid Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Passing Mid Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Total Theory Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Passing Theory Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Total Sessional Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Passing Sessional Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Total Lab Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Passing Lab Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Total Marks
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Edit
                 </th>
 
@@ -115,10 +115,10 @@ function ViewCourse() {
             </thead>
 
             <tbody>
-              {course.map((courseData) => {
+              {course.map((courseData,index) => {
                 return (
                   <tr key={courseData.id}>
-                    <td>{courseData.courseId}</td>
+                    <td>{index+1}</td>
                     <td>{courseData.course_code}</td>
                     <td>{courseData.course_title}</td>
                     <td>{courseData.course_type}</td>
@@ -142,7 +142,7 @@ function ViewCourse() {
                 );
               })}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
     </div>

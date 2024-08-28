@@ -43,9 +43,9 @@ function DeanHomePage() {
           <div id="DeanHomePageInfo">
             <h2 style={{ marginTop: "4.3%" }}>Ms. {deanName} </h2>
 
-            <h5 style={{ marginTop: "1%" }}>Dean Faculty Of Science</h5>
+            <h5 style={{ marginTop: "1%",fontSize:'1.1rem' }}>Dean Faculty Of Science</h5>
             {/* <h5 style={{ marginTop: "-2%" }}>Faculty Of Science</h5> */}
-            <h5 style={{ marginTop: "-2%" }}>Jinnah University For Women</h5>
+            <h5 style={{ marginTop: "-2%" ,fontSize:'1.1rem'}}>Jinnah University For Women</h5>
           </div>
 
         </div>
@@ -53,9 +53,9 @@ function DeanHomePage() {
         <div id="DeanHomePageWithoutBar">
 
           <div id="DeanHomePageFaculty">
-            <h1 style={{ marginTop: "2vh" }}> 60 </h1>
+            <h2 style={{ marginTop: "1vh" }}> 60 </h2>
             <div id="DeanHomePageNumImage">
-              <h2>Faculty</h2>
+              <h3>Faculty</h3>
               <img
                 src={require("./teacher.png")}
                 style={{ width: "6vw", height: "10vh" }} />
@@ -63,39 +63,38 @@ function DeanHomePage() {
           </div>
 
           <div id="DeanHomePageStudent">
-            <h1 style={{ marginTop: "2vh" }} > 16,000 </h1>
+            <h2 style={{ marginTop: "1vh" }} > 16,000 </h2>
             <div id="DeanHomePageNumImage">
-              <h2>Students</h2>
+              <h3>Students</h3>
               <img src={require("./student.png")} style={{ width: "6vw", height: "10vh" }} />
             </div>
           </div>
 
           <div id="DeanHomePagePassStudent">
-            <h1 style={{ marginTop: "2vh" }} > 15,000 </h1>
+            <h2 style={{ marginTop: "1vh" }} > 15,000 </h2>
             <div id="DeanHomePageNumImage">
-              <h2>Passed Students</h2>
+              <h3>Passed Students</h3>
               <img src={require("./passStudent.png")} style={{ width: "6vw", height: "10vh" }} />
             </div>
           </div>
 
-          <div id="DeanHomePageFailStudent">
-            <h1 style={{ marginTop: "2vh" }} > 1000 </h1>
+          <div id="DeanHomePageTotalCourses">
+            <h2 style={{ marginTop: "1vh" }} > 1000 </h2>
             <div id="DeanHomePageNumImage">
-              <h2>Total Fail Students</h2>
-              <img src={require("./fail.png")} style={{ width: "6vw", height: "10vh" }} />
+              <h3>Courses</h3>
+              <img src={require("./graduation.png")} style={{ marginLeft:'10px',width: "4.5vw", height: "10vh" }} />
             </div>
           </div>
 
           <div id="DeanHomePagePassFailGraph">
             <img
-              src={require("./barGraph.png")}
+              src={require("./graph2.jpg")}
               style={{ width: "100%", height: "100%" }} />
           </div>
 
-          <div id="DeanHomePageTotalCourses">
-            <h2 style={{ marginTop: "2vh" }} > 350 </h2>
-            <h3>Total Courses</h3>
-            <img src={require("./course.png")} style={{ width: '100%', height: "40vh" }} />
+          <div id="DeanHomePageGraphs">
+          <img src= {require("./course.png")} style={{width:'100%',height:"35vh" ,boxShadow:'2px 2px 15px rgba(0, 0, 0, 0.2)',marginTop:"-6vh"}}/>
+          <img src= {require("./piechart3.jpg")} style={{width:'100%',height:"30vh",boxShadow:'2px 2px 15px rgba(0, 0, 0, 0.2)',marginTop:'2vh'}}/>
           </div>
 
         </div>
