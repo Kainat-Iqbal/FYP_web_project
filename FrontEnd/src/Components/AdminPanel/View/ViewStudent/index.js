@@ -121,7 +121,7 @@ function ViewStudent() {
                     <td>{studentData.fatherName}</td>
                     <td>{studentData.email}</td>
                     <td>{studentData.CNIC}</td>
-                    <td>{studentData.th_credit_hr}</td>
+                    <td>{studentData.enrollment}</td>
                     <td>{studentData.lab_credit_hr}</td>
                     <td>{studentData.max_mid_marks}</td>
                     <td>{studentData.min_mid_marks}</td>

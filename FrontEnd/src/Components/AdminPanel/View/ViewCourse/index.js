@@ -63,9 +63,6 @@ function ViewCourse() {
             <thead>
               <tr>
                 <th  >
-                S#
-                </th>
-                <th  >
                   Course Code
                 </th>
                 <th  >
@@ -115,10 +112,9 @@ function ViewCourse() {
             </thead>
 
             <tbody>
-              {course.map((courseData,index) => {
+              {course.map((courseData) => {
                 return (
                   <tr key={courseData.id}>
-                    <td>{index+1}</td>
                     <td>{courseData.course_code}</td>
                     <td>{courseData.course_title}</td>
                     <td>{courseData.course_type}</td>
