@@ -1,0 +1,103 @@
+#COEmanageChangeReqMainDiv {
+  width: 80%;
+  height: 100vh;
+  margin-left: 20%;
+  display: flex;
+}
+
+#COEmanageChangeReqWithoutBar {
+  width: 100%;
+  height: 85%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 10vh;
+}
+
+#COEmanageChangeReqTop {
+  height: 16%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+#COEmanageChangeReqBottom {
+  height: auto;
+  width: 100%;
+  margin-right: 2vh;
+  display: flex;
+  justify-content: center;
+}
+
+#COEmanageChangeReqTable {
+  width: 95%;
+  margin-top: 1%;
+  border-collapse: collapse;
+  margin-bottom: 1%;
+  background-color: white;
+  border: 1px solid #00304B; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  border-radius: 8px; /* Rounded corners */
+
+}
+#COEmanageChangeReqTable th, 
+#COEmanageChangeReqTable td {
+  padding: 12px 15px; /* More padding for better spacing */
+  text-align: left;
+  border-bottom: 1px solid #dee2e6; /* Light border between rows */
+  font-size: 14px; /* Slightly increase font size */
+  color: #333; /* Darker text for better readability */
+  text-align: center;
+}
+#COEmanageChangeReqTable th {
+  background-color:#20796d;
+  color:white;
+  font-weight: bold;
+  text-transform: uppercase; /* Capitalize headers */
+  text-align: center;
+  align-items: center;
+}
+#COEmanageChangeReqTable tbody tr:hover {
+  background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+}
+
+
+#COEmanageChangeReqTable tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Light grey for odd rows */
+}
+
+#COEmanageChangeReqTable tbody tr:nth-child(even) {
+  background-color: #ffffff; /* White for even rows */
+}
+
+
+#COEmanageChangeReqTable button {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 7px;
+  display: flex;
+}
+
+button{
+  width: 8vw;
+  color: white;
+}
+#approveButtonCOE{
+  border-color: #7ece7e;
+  background-color:#7ece7e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#approveButtonCOE:hover{
+box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);}
+#disapproveButtonCOE:hover{
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);}
+#disapproveButtonCOE{
+  border-color: #cd5c5c;
+  background-color:#cd5c5c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,42 @@
+#viewResultTable {
+  width: 95%;
+margin-top: 1%;
+border-collapse: collapse;
+margin-bottom: 1%;
+background-color: white;
+border: 1px solid #00304B; 
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+border-radius: 8px; /* Rounded corners */
+
+}
+#viewResultTable th, 
+#viewResultTable td {
+padding: 12px 15px; /* More padding for better spacing */
+text-align: left;
+border-bottom: 1px solid #dee2e6; /* Light border between rows */
+font-size: 14px; /* Slightly increase font size */
+color: #333; /* Darker text for better readability */
+text-align: center;
+}
+#viewResultTable th {
+background-color:#20796d;
+color:white;
+font-weight: bold;
+text-transform: uppercase; /* Capitalize headers */
+text-align: center;
+align-items: center;
+}
+#viewResultTable tbody tr:hover {
+background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+}
+
+
+
+#viewResultTable tbody tr:nth-child(odd) {
+background-color: #f2f2f2; /* Light grey for odd rows */
+}
+
+#viewResultTable tbody tr:nth-child(even) {
+background-color: #ffffff; /* White for even rows */
+}
+

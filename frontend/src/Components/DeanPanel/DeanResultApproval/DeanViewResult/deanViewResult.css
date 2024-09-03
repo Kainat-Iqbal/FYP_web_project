@@ -1,0 +1,227 @@
+#DeanViewResultMainDiv {
+    width: 80%;
+    height: 100%;
+    margin-left: 19%;
+    display: flex;
+    /* background-color: aqua; */
+}
+
+#DeanViewResultWithoutBar {
+    width: 100%;
+    height:82%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10vh;
+    /* background-color: brown; */
+}
+
+#DeanViewResultTop {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: blue; */
+}
+
+#DeanViewResultTopBar {
+    height: 40%;
+    width: 100%;
+    /* background-color: blueviolet; */
+    display: flex;
+}
+
+#DeanViewResultMainHeading {
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    margin-left:1.8%;
+    padding-top: 2%;
+    /* background-color: yellow;
+    height: 30%;
+    width: 100%;
+    display: flex;
+    font-size: 0.5rem;
+    align-content: center;
+    margin-left: 35%; */
+}
+
+#DeanViewResultArrowButton {
+    height: 30%;
+    width: 10%;
+    align-content: center;
+    /* background-color: green;  */
+}
+
+#DeanViewResultInfo {
+    height: 60%;
+    width: 100%;
+    margin-left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2%;
+    font-size: 18px;
+    /* background-color: khaki; */
+}
+
+#DeanViewResultLeftDiv {
+    height: 100%;
+    width: 29%;
+    /* background-color: yellow; 
+    display: flex;
+    flex-direction: column; 
+    background-color: palevioletred; 
+    display: flex;
+     flex-direction: column; 
+     align-items: center; 
+     justify-content: space-around;    */
+}
+
+#DeanViewResultFacultyCourse {
+    height: 70%;
+    margin-left: 6px;
+    font-size: 18px;
+    /* background-color: brown; */
+}
+
+#DeanViewResultClassBatch {
+    height: 32%;
+    display: flex;
+    /* background-color: burlywood; */
+}
+
+#DeanViewResultCenterDiv {
+    height: 100%;
+    width: 54%;
+    /* background-color: paleturquoise; 
+     display: flex;
+    flex-direction: column;
+     align-items: center;
+    justify-content: space-around;  */
+}
+
+#DeanViewResultRightDiv {
+    height: 100%;
+    width: 17%;
+    /* background-color: palegreen; 
+     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;  */
+}
+
+#DeanViewResultBottom {
+    /* height: auto; */
+    width: 100%;
+    margin-right: 1vh;
+    margin-left: 1vh;
+    padding-top: 4%;
+    display: flex;
+    justify-content: center;
+    /* background-color: chartreuse; */
+}
+
+#DeanViewResultTable {
+    width: 95%;
+    margin-top: 1%;
+    border-collapse: collapse;
+    margin-bottom: 1%;
+    background-color: white;
+    border: 1px solid #00304B; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+  
+  }
+  #DeanViewResultTable th, 
+  #DeanViewResultTable td {
+    padding: 12px 15px; /* More padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* Light border between rows */
+    font-size: 14px; /* Slightly increase font size */
+    color: #333; /* Darker text for better readability */
+    text-align: center;
+  }
+  #DeanViewResultTable th {
+    background-color:#20796d;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase; /* Capitalize headers */
+    text-align: center;
+    align-items: center;
+  }
+  #DeanViewResultTable tbody tr:hover {
+    background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+  }
+  
+  
+  .disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  #DeanViewResultTable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light grey for odd rows */
+  }
+  
+  #DeanViewResultTable tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+  }
+  
+
+#DeanViewResultBtnApprove {
+    height: 4vw;
+    width: 10vw;
+    margin-top: 5vh;
+    margin-left: 25%;
+    border-color:#7ece7e;
+    color: white;
+    background-color: #7ece7e
+    /* #90ee90 */
+}
+
+#DeanViewResultBtnDisapprove {
+    height: 4vw;
+    width: 10vw;
+    margin-top: 5vh;
+    margin-right: 30%;
+    border-color: #cd5c5c;
+    color: white;
+    background-color: #cd5c5c;
+    /*#cd5c5c)*/
+}
+
+#DeanViewResultBtnApprove:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+#DeanViewResultBtnDisapprove:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+#DeanViewResultPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#DeanViewResultPopupInner {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 50%;
+}
+
+#DeanViewResultPopup textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}

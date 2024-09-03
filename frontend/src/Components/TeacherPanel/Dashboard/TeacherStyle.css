@@ -1,0 +1,58 @@
+#mainD {
+    height: 100vh;
+    width: 100vw;
+    /* background-color: blue; */
+}
+
+#topD {
+    height: 9%;
+    /* background-color: aquamarine;*/
+}
+
+#bottomD {
+    height: 91%;
+    width: 82%;
+    margin-left: 18vw;
+    /* background-color: aqua; */
+}
+
+#teacherD {
+    height: 20%;
+    background-color: rgba(68, 152, 161, 0.178);
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#imgT {
+    height: 100%;
+    width: 10%;
+    /* background-color: blue; */
+    margin-top: 1%;
+    margin-left: 1%;
+}
+#Tinfo{
+    
+    height:100%;
+   /*  background-color: blanchedalmond; */
+}
+
+#carddiv {
+    width: 100%;
+    height: auto;
+    /* background-color: pink; */
+    display: flex;
+}
+
+.card-wrapper {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-left: 2.5%;
+    padding: 1%;
+    margin-top: 1%;
+    column-gap: 60px;
+    row-gap: 20px;
+    /* background-color: yellow; */
+}

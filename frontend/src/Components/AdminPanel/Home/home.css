@@ -1,0 +1,158 @@
+#HomeMainDiv{
+    width: 80%;
+    height: 100vh;
+    margin-left: 18%;
+    display: flex;
+    /* background-color: aqua; */
+    flex-direction: column; /* Adjusted for better stacking on smaller screens */
+}
+
+#HomeWithoutBar{
+    width: 100%;
+    height: 90%;
+    /* background-color: brown; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 10vh;
+}
+
+#homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent {
+    width: 22%;
+    height: 22%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    /* background: linear-gradient(to right, rgb(163, 68, 252), white); */
+    margin-bottom: 2vh; /* Added margin for better spacing */
+    margin-top: 2vh;
+    margin-left: 2vw;
+   
+  }
+  #homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent h5{
+    padding-top: 10px;
+    padding-left: 10px;
+  }
+  #homeTeacher {
+    background-color:plum;
+    /* background: linear-gradient(to right, rgb(163, 68, 252), white); */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  #homeStudent {
+    background-color:pink ;
+    /* background: linear-gradient(to right, palevioletred, white); */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  #homePassStudent {
+    background-color:powderblue ;
+    /* background: linear-gradient(to right, powderblue, white); */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  #homeFailStudent {
+   /*  background: linear-gradient(to right, coral, white); */
+   background-color: palegoldenrod;
+   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+  }
+
+#numImage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 1.5vw;
+    /* background-color: blue; */
+    margin-right: 1.5vw;
+}
+
+#PassFail{
+    width: 60%;
+    height: 60%;
+    background-color: bisque;
+    margin-top: 2vh; /* Added margin for spacing */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
+}
+
+#homeCourse{
+    width: 22%;
+    height: 60%;
+   /*  background: linear-gradient(to right, orchid,white); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2vh; /* Added margin for spacing */
+   /*  background-color: lightgreen; */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    #HomeMainDiv {
+      margin-left: 18%;
+      width: 90%;
+      margin-top: 8%;
+    }
+  
+    #homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent {
+      width: 45%;
+      height: 25%;
+      align-items: center;
+      justify-content: space-around;
+    }
+
+    #homeTeacher img{
+        display: none;
+    }
+
+    #homeStudent img{
+        display: none;
+    }
+
+    #homePassStudent img{
+        display: none;
+    }
+
+    #homeFailStudent img{
+        display: none;
+    }
+  
+    #PassFail {
+      width: 90%;
+      height: 50%;
+    }
+  
+    #homeCourse {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    #HomeWithoutBar {
+      margin-top: 5vh;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    #homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent {
+      width: 80%;
+      height: 15%;
+    }
+  
+    #PassFail, #homeCourse {
+      width: 80%;
+      height: 30%;
+      margin-top: 2vh;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent {
+      width: 90%;
+      height: 15%;
+    }
+  
+    #PassFail, #homeCourse {
+      width: 90%;
+      height: 25%;
+    }
+  }

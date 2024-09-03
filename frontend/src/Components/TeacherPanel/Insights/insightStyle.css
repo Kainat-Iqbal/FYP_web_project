@@ -1,0 +1,86 @@
+#mainC {
+    height: 100vh;
+    width: 100vw;
+    /* background-color: blue; */
+}
+
+#sidebarD {
+    height: 9%;
+}
+
+#topC {
+    height: 20%;
+    margin-left: 18vw;
+    /*  background-color: burlywood; */
+}
+
+#topheading {
+    height: 50%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+
+}
+
+#topMenu {
+    height: 50%;
+    /* background-color: yellowgreen; */
+    display: flex;
+    justify-content: center;
+    align-items: centers;
+    column-gap: 5%;
+}
+
+#leftM {
+    width: 30%;
+    margin-left: 1%;
+    display: flex;
+    margin-top: 12px;
+    /* background-color: yellow; */
+}
+
+#centerM {
+
+    width: 30%;
+}
+
+#right {
+    width: 30%;
+    height: 80%;
+    display: flex;
+    justify-content: right;
+    margin-right: 2%;
+}
+#sinput{
+    width: 70%;
+}
+#searchbutton{
+    background-color: rgb(182, 178, 178);
+    width: 20%;
+}
+
+#bottomC {
+    height: 71%;
+    width: 82%;
+    margin-left: 18vw;
+}
+
+#carddiv {
+    width: 100%;
+    height: auto;
+    /* background-color: pink; */
+    display: flex;
+}
+
+.card-wrapper {
+    width: 95%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    margin-left: 2.5%;
+    padding: 1%;
+    margin-top: 1%;
+    column-gap: 60px;
+    row-gap: 20px;
+    /* background-color: yellow; */
+}

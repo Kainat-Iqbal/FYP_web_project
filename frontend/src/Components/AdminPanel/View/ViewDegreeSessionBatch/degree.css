@@ -1,0 +1,121 @@
+#mainViewDegreeDiv{
+    width: 82%;
+    height: 100vh;
+    margin-left: 18%;
+    /* background-color: aqua; */
+}
+
+#viewDegreeWithoutBar{
+    width: 100%;
+    height: 91%;
+    /* background-color: brown; */
+
+}
+#sidebar{
+    height: 9%;
+}
+#topheading {
+    height: 50%;
+    /* background-color: yellow; */
+    display: flex;
+    justify-content: center;
+
+}
+
+#topMenu {
+    height: 50%;
+    /* background-color: yellowgreen; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2%;
+}
+
+#leftM {
+    width: 50%;
+    margin-left: 2.5%;
+    display: flex;
+    margin-top: 12px;
+}
+#right {
+    width: 50%;
+    height: 80%;
+    display: flex;
+    justify-content: right;
+    margin-right: 2.5%;
+}
+
+#viewDegreeBottom{
+    height: auto;
+    width: 100%;
+    /* background-color: chartreuse; */
+    display: flex;
+    justify-content: center;
+    margin-top: -35vh;
+}
+
+#viewDeanBottom{
+    height: auto;
+    width: 100%;
+    /* background-color: chartreuse; */
+    display: flex;
+    justify-content: center;
+    margin-top: -35vh;
+}
+
+#viewDegreeSessionBatchTable{
+    width: 95%;
+    margin-top: 1%;
+    border-collapse: collapse;
+    margin-bottom: 1%;
+    background-color: white;
+    border: 1px solid #00304B; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+ 
+}
+#viewDegreeSessionBatchTable th, 
+#viewDegreeSessionBatchTable td {
+    padding: 12px 15px; /* More padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* Light border between rows */
+    font-size: 14px; /* Slightly increase font size */
+    color: #333; /* Darker text for better readability */
+    text-align: center;
+}
+#viewDegreeSessionBatchTable th {
+    background-color:#20796d;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase; /* Capitalize headers */
+    text-align: center;
+    align-items: center;
+}
+#viewDegreeSessionBatchTable tbody tr:hover {
+    background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+}
+
+
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+ 
+  #viewDegreeSessionBatchTable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light grey for odd rows */
+}
+
+#viewDegreeSessionBatchTable tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+}
+
+
+#viewExaminationBottom{
+    height: auto;
+    width: 100%;
+    /* background-color: chartreuse; */
+    display: flex;
+    justify-content: center;
+    margin-top: -35vh;
+}

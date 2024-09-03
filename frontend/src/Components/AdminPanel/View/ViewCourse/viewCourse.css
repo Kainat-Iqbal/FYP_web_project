@@ -1,0 +1,107 @@
+#mainViewCourseDiv {
+    width: 100%; /* Adjust width to fit the screen */
+    height: 100vh;
+    margin-left: 0; /* Remove left margin to use full width */
+    padding-left: 18%; /* Add padding to leave space for the sidebar */
+}
+
+#viewCourseWithoutBar {
+    width: 100%;
+    height: 91%;
+}
+
+#viewCourseSidebar {
+    height: 9%;
+}
+
+#viewCourseTop {
+    height: 20%;
+    width: 100%;
+}
+
+#viewCourseTopheading {
+    margin-top: 1%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+#viewCourseTopMenu {
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 2%;
+    margin-top: 1%;
+}
+
+#viewCourseLeftM {
+    width: 50%;
+    margin-left: 2.5%;
+    display: flex;
+    margin-top: 12px;
+}
+
+#viewCourseRight {
+    width: 50%;
+    height: 80%;
+    display: flex;
+    justify-content: right;
+    margin-right: 2.5%;
+}
+
+#viewCourseBottom {
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+#viewCourseTable {
+    width: 100%; /* Adjust to full width */
+    margin-top: 1%;
+    border-collapse: collapse;
+    margin-bottom: 1%;
+    background-color: white;
+    border: 1px solid #00304B;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+}
+
+#viewCourseTable th, 
+#viewCourseTable td {
+    padding: 8px 10px; /* Reduce padding to fit more columns */
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 12px; /* Decrease font size to fit content */
+    color: #333;
+}
+
+#viewCourseTable th {
+    background-color: #20796d;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#viewCourseTable tbody tr:hover {
+    background-color: #ece6e6 !important;
+}
+
+.disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+#btnsearch {
+    background: linear-gradient(to right, #93C098, #8CE0DB);
+}
+
+#viewCourseTable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#viewCourseTable tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
