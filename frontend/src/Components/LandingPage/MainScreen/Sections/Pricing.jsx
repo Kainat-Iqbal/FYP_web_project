@@ -11,7 +11,7 @@ export default function Pricing() {
           <HeaderInfo>
             <h1 className="font40 extraBold" style={{textAlign:"center", color:"#00304B"}}>Check Our Pricing</h1>
             <h2 className="font13" style={{color:"#00304B", fontSize:"19px", textAlign:"center", marginTop:"24px"}}> 
-            Explore our competitive pricing options right here! We’ve crafted three distinct packages Starter, Basic, and Golden to suit a variety of needs. Whether you're just starting out, need more robust features, or want the full suite of premium services, you'll find the perfect fit for your budget below.
+            Explore our competitive pricing options right here! We’ve crafted three distinct packages Starter, Basic, and Premium to suit a variety of needs. Whether you're just starting out, need more robust features, or want the full suite of premium services, you'll find the perfect fit for your budget below.
             </h2>
             {/* <p className="font13"Style={{color:"black"}}> 
               Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut

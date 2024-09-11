@@ -34,32 +34,32 @@ export default function PricingTable({ icon, rate, title, des, ser, action }) {
     <Wrapper className="whiteBg radius8 shadow" style={{marginTop:"-7px"}}>
       <div className="flexSpaceCenter" style={{}}>
         <h1 style={{marginTop:"8px"}}>{getIcon}</h1>
-        <p className="font30 extraBold" style={{color:"#00304B", marginTop:"11px"}}>{rate}</p>
+        <p className="font25" style={{color:"#00304B", marginTop:"11px"}}>{rate}</p>
       </div>
       
       <div style={{ margin: "30px 0" }}>
-        <h4 className="font30 extraBold" style={{color:"#00304B"}}>{title}</h4>
-        <p className="font13 semiBold" style={{color:"#00304B", marginTop:"11px",fontSize:"19px", alignItems:"justify"}}>{des}</p>
+        <h4 className="font25 extraBold" style={{color:"#00304B",marginTop:'-3vh'}}>{title}</h4>
+        <p className="font13" style={{color:"#00304B", marginTop:"11px",fontSize:"19px", alignItems:"justify"}}>{des}</p>
       </div>
       <div>
         {ser
           ? ser.map((item, index) => (    
               <div className="flexNullCenter" style={{ margin: "15px 0"}} key={index}>
-                <div style={{ position: "relative", top: "-1px", marginRight: "15px", color:"#00304B" }}>
+                <div style={{ position: "relative", top: "-1px", marginRight: "15px", color:"#00304B",marginTop:'-3vh' }}>
                   {item.cheked ? (
-                    <div style={{ minWidth: "20px"}}>
+                    <div style={{ minWidth: "20px",marginTop:'-3vh'}}>
                       <CheckMark />
                     </div>
                   ) : (
-                    <div style={{ minWidth: "20px" }}></div>
+                    <div style={{ minWidth: "20px",marginTop:'-3vh'}}></div>
                   )}
                 </div>
-                <p className="font20 extraBold" style={{color:"#00304B"}}>{item.name}</p>
+                <p className="font20 semiBold" style={{color:"#00304B",marginTop:'-3vh'}}>{item.name}</p>
               </div>
             ))
           : null}
       </div>
-      <div  style={{ maxWidth: "120px", margin: "30px auto 0 auto" }}>
+      <div  style={{ maxWidth: "120px", margin: "30px auto 0 auto" ,marginTop:'-3vh'}}>
         <FullButton  title="Buy" action={action}  />
       </div>
     </Wrapper>

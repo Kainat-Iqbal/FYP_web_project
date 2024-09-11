@@ -14,7 +14,7 @@ export default function Header() {
     <Wrapper id="home" className="container flexSpaceCenter">
       <LeftSide className="flexCenter">
         <div>
-          <h1 className="extraBold font60" style={{ color: "#00304B" , marginTop:"-90px"}}>Accelerate your Academic Journey with Us.</h1>
+          <h1 className="semiBold font50" style={{ color: "#00304B" , marginTop:"-90px"}}>Accelerate your Academic Journey with Us.</h1>
           <HeaderP className="font13 " style={{color:"#00304B", fontSize:"19px", textAlign:"justify"}}>
           Academic Accelerator Pro is designed to revolutionize educational management by digitizing and centralizing academic result processes. It streamlines tasks for Administrators, Head of Departments, Deans, Controller of Examiantion, Teachers, Students, and Parents, enhancing overall efficiency within educational institutions.
           </HeaderP>
