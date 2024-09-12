@@ -11,7 +11,6 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const [editStudentId, setEditStudentId] = useState(null); // Track the student being edited
   const [selectedStudents, setSelectedStudents] = useState(new Set()); // Manage selected students
 
-
   const location = useLocation();
   const courseData = location.state?.course;
   const courseName = courseData?.course_title;
@@ -187,9 +186,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       examDate,
       submissionDate: " ", // Placeholder, modify as needed
       resultCode: " ", // Placeholder, modify as needed
-      selectedStudent: "False"
+      selectedStudent: "False",
     };
-   
 
     try {
       const postRes = await axios.post(
@@ -420,8 +418,6 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
 
   console.log("first,,,,,", lockResultAssignId);
 
-
-
   // Function to handle the selection of students
 
   const handleSelectStudent = async (studentId) => {
@@ -429,30 +425,30 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
 
     // Update the local state
     setSelectedStudents((prev) => {
-        const updatedSelection = new Set(prev);
-        if (isSelected) {
-            updatedSelection.add(studentId);
-        } else {
-            updatedSelection.delete(studentId);
-        }
-        return updatedSelection;
+      const updatedSelection = new Set(prev);
+      if (isSelected) {
+        updatedSelection.add(studentId);
+      } else {
+        updatedSelection.delete(studentId);
+      }
+      return updatedSelection;
     });
 
     // Prepare data to send to the server
-    const selectedStatus = isSelected ? 'True' : 'False'; // Example: 1 for selected, 0 for not selected
+    const selectedStatus = isSelected ? "True" : "False"; // Example: 1 for selected, 0 for not selected
     const resultData = {
       studentId: studentId,
       assignId: assignId,
-      terminalSessionalMarks: '-',
-      midMarks: '-',
-      labMarks: '-',
-      totalMarks: '-',
-      isAttempt: '-',
-      GPA: '-',
+      terminalSessionalMarks: "-",
+      midMarks: "-",
+      labMarks: "-",
+      totalMarks: "-",
+      isAttempt: "-",
+      GPA: "-",
       examDate,
-      submissionDate:'-', // Placeholder, modify as needed
-      resultCode: '-', // Placeholder, modify as needed
-      selectedStudent: selectedStatus
+      submissionDate: "-", // Placeholder, modify as needed
+      resultCode: "-", // Placeholder, modify as needed
+      selectedStudent: selectedStatus,
     };
     try {
       const postRes = await axios.post(
@@ -468,39 +464,45 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       } else {
         console.log("Error adding result");
       }
-    }  catch (error) {
-        console.log("Error updating student selection status:", error);
+    } catch (error) {
+      console.log("Error updating student selection status:", error);
     }
-};
+  };
 
+  const fetchSelectedResults = async (assignId, setSelectedStudents) => {
+    try {
+      const response = await axios.get(`http://localhost:8081/result/GetSelected`, {
+        params: { assignId }
+      });
 
-const fetchSelectedResults = async (assignId, setSelectedStudents) => {
-  try {
-    const response = await axios.get(`http://localhost:8081/result/GetSelected`, {
-      params: { assignId }
-    });
-
-    if (response.data.success) {
-      const selectedResults = response.data.data;
-      const selectedStudentIds = new Set(selectedResults.map(result => result.studentId));
-      setSelectedStudents(selectedStudentIds);
-    } else {
-      console.log("No results found or error fetching results");
+      if (response.data.success) {
+        const selectedResults = response.data.data;
+        const selectedStudentIds = new Set(selectedResults.map(result => result.studentId));
+        setSelectedStudents(selectedStudentIds);
+      } else {
+        console.log("No results found or error fetching results");
+      }
+    } catch (error) {
+      console.log("Error fetching selected results:", error);
     }
-  } catch (error) {
-    console.log("Error fetching selected results:", error);
-  }
-};
+  };
 
+  useEffect(() => {
+    if (assignId) {
+      fetchSelectedResults(assignId, setSelectedStudents);
+    }
+  }, [assignId]);
 
-console.log("DCD CF ",selectedStudents)
+  console.log("DCD CF ", selectedStudents);
+  console.log("first",assignId)
+
   return (
     <div>
-      <table  id="createResultTable">
+      <table id="createResultTable">
         <thead>
           <tr>
             <th>S#</th>
-            <th>Select</th>
+            <th>Remove Student</th>
             <th>Seat No.</th>
             <th>Enrollment No.</th>
             <th className="name">Student's Name</th>
@@ -514,18 +516,18 @@ console.log("DCD CF ",selectedStudents)
           </tr>
         </thead>
         <tbody>
-          {students.map((student,index) => {
+          {students.map((student, index) => {
             const isRowDisabled = selectedStudents.has(student.studentId);
             return (
               <tr key={student.studentId}>
-<td>{index+1}</td>
+                <td>{index + 1}</td>
                 <td>
-                <input
-    type="checkbox"
-    checked={selectedStudents.has(student.studentId)}
-    onChange={() => handleSelectStudent(student.studentId)}
-    disabled={isLocked || isRowDisabled}
-/>
+                  <input
+                    type="checkbox"
+                    checked={selectedStudents.has(student.studentId)}
+                    onChange={() => handleSelectStudent(student.studentId)}
+                    disabled={isLocked || isRowDisabled}
+                  />
                 </td>
                 <td>{student.seatNo}</td>
                 <td>{student.enrollment}</td>
@@ -573,7 +575,7 @@ console.log("DCD CF ",selectedStudents)
                 <td>
                   <input
                     type="number"
-                    style={{ width: "70px" }}
+                    style={{ width: "60px" }}
                     min="0"
                     max="100"
                     value={
@@ -590,7 +592,7 @@ console.log("DCD CF ",selectedStudents)
                 <td>
                   <input
                     type="text"
-                    style={{ width: "70px" }}
+                    style={{ width: "60px",height:'5vh' }}
                     value={
                       calculateGPA(
                         calculateTotalMarks(
@@ -621,12 +623,14 @@ console.log("DCD CF ",selectedStudents)
                           onClick={() => handleEnableEditing(student.studentId)}
                           disabled={!!lockResultAssignId || isRowDisabled}
                           style={{
-                            backgroundColor: !!lockResultAssignId || isRowDisabled
-                              ? "grey"
-                              : "lightBlue",
-                            cursor: !!lockResultAssignId || isRowDisabled
-                              ? "not-allowed"
-                              : "pointer",
+                            backgroundColor:
+                              !!lockResultAssignId || isRowDisabled
+                                ? "grey"
+                                : "lightBlue",
+                            cursor:
+                              !!lockResultAssignId || isRowDisabled
+                                ? "not-allowed"
+                                : "pointer",
                             color: "black",
                           }}
                         >

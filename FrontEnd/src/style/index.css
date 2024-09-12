@@ -104,9 +104,13 @@ body {
   width: 100%;
 }
 .active {
-  border-bottom: 3px solid #93C098;
   color: #8CE0DB;
 }
+
+.mainClassLink:hover {
+  background-color: 8CE0DB;
+}
+
 .tag {
   padding: 5px 10px;
   margin: 10px 0;

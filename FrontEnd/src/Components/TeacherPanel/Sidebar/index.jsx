@@ -183,14 +183,7 @@ function SideBar() {
             }}
           >
            Courses</MenuItem>
-          {/* <MenuItem icon={<Grading />
-        } onClick={() => {
-          nav("/viewResult");
-        }}>View Results</MenuItem> */}
-          <MenuItem icon={<Insights />}  onClick={() => {
-              nav("/insightCourse");
-            }}>View Result & Insights</MenuItem>
-
+         
           <MenuItem icon={<Notifications />}>Notifications</MenuItem>
         </Menu>
       </Sidebar>

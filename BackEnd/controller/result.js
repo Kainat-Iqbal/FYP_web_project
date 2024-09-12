@@ -113,7 +113,7 @@ const getSelectedResults = (req, res) => {
     // Define the SQL query
     const query = `
         SELECT * FROM result
-        WHERE assignId = ? AND selectedStudent = true
+        WHERE assignId = ? AND selectedStudent = "True"
     `;
 
     // Execute the query
@@ -132,8 +132,8 @@ const getSelectedResults = (req, res) => {
         }
 
         // Send the results back to the client with success status
-        console.log("SD",assignId)
-        console.log(results)
+        // console.log("SD",assignId)
+        // console.log(",,dfd",results)
         res.json({ success: true, data: results });
     });
 };

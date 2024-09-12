@@ -38,27 +38,27 @@ function TopNavbar() {
           </BurderWrapper>
           <UlWrapper className="flexNullCenter">
             <li className="semiBold font15 pointer">
-              <ScrollLink activeClass="active" style={{ padding: "10px 15px", fontSize: "19px" }} to="home" spy={true} smooth={true} offset={-80}>
+              <ScrollLink activeClass="active" style={{ color: '#93C098',padding: "10px 15px", fontSize: "19px" }} to="home" spy={true} smooth={true} offset={-80}>
                 Home
               </ScrollLink>
             </li>
             <li className="semiBold font15 pointer">
-              <ScrollLink activeClass="active" style={{ padding: "10px 15px", fontSize: "19px" }} to="services" spy={true} smooth={true} offset={-80}>
+              <ScrollLink activeClass="active" style={{ color: '#93C098',padding: "10px 15px", fontSize: "19px" }} to="services" spy={true} smooth={true} offset={-80}>
                 Services
               </ScrollLink>
             </li>
             <li className="semiBold font15 pointer">
-              <ScrollLink activeClass="active" style={{ padding: "10px 15px", fontSize: "19px" }} to="projects" spy={true} smooth={true} offset={-80}>
+              <ScrollLink activeClass="active" style={{color: '#93C098', padding: "10px 15px", fontSize: "19px" }} to="projects" spy={true} smooth={true} offset={-80}>
                 About Us
               </ScrollLink>
             </li>
             <li className="semiBold font15 pointer">
-              <ScrollLink activeClass="active" style={{ padding: "10px 15px", fontSize: "19px" }} to="pricing" spy={true} smooth={true} offset={-80}>
+              <ScrollLink activeClass="active" style={{color: '#93C098',padding: "10px 15px", fontSize: "19px" }} to="pricing" spy={true} smooth={true} offset={-80}>
                 Pricing
               </ScrollLink>
             </li>
             <li className="semiBold font15 pointer">
-              <ScrollLink activeClass="active" style={{ padding: "10px 15px", fontSize: "19px" }} to="contact" spy={true} smooth={true} offset={-80}>
+              <ScrollLink activeClass="active" style={{color: '#93C098', padding: "10px 15px", fontSize: "19px" }} to="contact" spy={true} smooth={true} offset={-80}>
                 Contact
               </ScrollLink>
             </li>

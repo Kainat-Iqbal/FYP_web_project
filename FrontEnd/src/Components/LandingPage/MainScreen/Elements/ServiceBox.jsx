@@ -9,25 +9,6 @@ import PrinterIcon from "../../../../assets/svg/Services/PrinterIcon";
 export default function ServiceBox({icon, title, subtitle}) {
   let getIcon;
 
-  // switch (icon) {
-  //   case "roller":
-  //     getIcon = <RollerIcon />;
-  //     break;
-  //   case "monitor":
-  //     getIcon = <MonitorIcon />;
-  //     break;
-  //   case "browser":
-  //     getIcon = <BrowserIcon />;
-  //     break;
-  //   case "printer":
-  //     getIcon = <PrinterIcon />;
-  //     break;
-  //   default:
-  //     getIcon = <RollerIcon />;
-  //     break;
-  // }
-
-
   return (
     <Wrapper className="flex flexColumn">
       <IconStyle>{getIcon}</IconStyle>
