@@ -47,7 +47,7 @@ function ViewResult() {
         </div>
         <div id="bottomVR">
           <div id="resultTableVR">
-            <ViewTable />
+            <ViewTable labCreditHours={courseData?.lab_credit_hr} />
           </div>
         </div>
       </div>

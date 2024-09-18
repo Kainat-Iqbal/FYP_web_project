@@ -1,13 +1,14 @@
 const DB = require("../DB/dbConfig");
 
 const addResult = async (req, res) => {
-    const queryToAddResult = "INSERT INTO `result` (`studentId`, `assignId`, `terminalMarks`, `midMarks`, `labMarks`, `totalMarks`, `isAttempt`, `GPA`, `examDate`, `submissionDate`, `resultCode`,`selectedStudent`) VALUES (?)";
+    const queryToAddResult = "INSERT INTO `result` (`studentId`, `assignId`, `terminalMarks`, `midMarks`, `labMarks`,`sessionalMarks`, `totalMarks`, `isAttempt`, `GPA`, `examDate`, `submissionDate`, `resultCode`,`selectedStudent`) VALUES (?)";
     const VALUES = [
         req.body.studentId,
         req.body.assignId,
         req.body.terminalSessionalMarks,
         req.body.midMarks,
         req.body.labMarks,
+        req.body.sessionalMarks,
         req.body.totalMarks,
         req.body.isAttempt,
         req.body.GPA,
@@ -72,6 +73,7 @@ const updateResult = async (req, res) => {
             terminalMarks = ?,
             midMarks = ?,
             labMarks = ?,
+            sessionalMarks=?,
             totalMarks = ?,
             isAttempt = ?,
             GPA = ?,
@@ -87,6 +89,7 @@ const updateResult = async (req, res) => {
         req.body.terminalSessionalMarks,
         req.body.midMarks,
         req.body.labMarks,
+        req.body.sessionalMarks,
         req.body.totalMarks,
         req.body.isAttempt,
         req.body.GPA,

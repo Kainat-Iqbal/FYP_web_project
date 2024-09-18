@@ -90,6 +90,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
               midMarks: result.midMarks || "",
               terminalMarks: result.terminalMarks || "",
               labMarks: result.labMarks || "0",
+              sessionalMarks: result.sessionalMarks || "",
             };
           });
 
@@ -116,9 +117,16 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     } else if (fieldName === "terminalMarks") {
       value =
         labCreditHours === 1
-          ? Math.min(Math.max(parseInt(value, 10), 0), 50).toString()
-          : Math.min(Math.max(parseInt(value, 10), 0), 80).toString();
-    } else if (fieldName === "labMarks") {
+          ? Math.min(Math.max(parseInt(value, 10), 0), 40).toString()
+          : Math.min(Math.max(parseInt(value, 10), 0), 50).toString();
+    }
+    else if (fieldName === "sessionalMarks") {
+      value =
+        labCreditHours === 1
+          ? Math.min(Math.max(parseInt(value, 10), 0), 10).toString()
+          : Math.min(Math.max(parseInt(value, 10), 0), 30).toString();
+    }
+     else if (fieldName === "labMarks") {
       if (labCreditHours === 0) {
         value = "0";
       } else {
@@ -134,12 +142,13 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     setStudents(updatedStudents);
   };
 
-  const calculateTotalMarks = (midMarks, terminalMarks, labMarks) => {
+  const calculateTotalMarks = (midMarks, terminalMarks, labMarks,sessionalMarks) => {
     const mid = parseFloat(midMarks);
     const terminal = parseFloat(terminalMarks);
     const lab = parseFloat(labMarks);
-    return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab)
-      ? mid + terminal + lab
+    const sessional = parseFloat(sessionalMarks);
+    return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab) && !isNaN(sessional)
+      ? mid + terminal + lab+sessional
       : "";
   };
 
@@ -160,6 +169,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       student.midMarks,
       student.terminalMarks,
       student.labMarks,
+      student.sessionalMarks
     ].every((mark) => parseInt(mark, 10) === 0)
       ? 0
       : 1;
@@ -170,17 +180,20 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       terminalSessionalMarks: student.terminalMarks,
       midMarks: student.midMarks,
       labMarks: student.labMarks,
+      sessionalMarks:student.sessionalMarks,
       totalMarks: calculateTotalMarks(
         student.midMarks,
         student.terminalMarks,
-        student.labMarks
+        student.labMarks,
+        student.sessionalMarks
       ),
       isAttempt,
       GPA: calculateGPA(
         calculateTotalMarks(
           student.midMarks,
           student.terminalMarks,
-          student.labMarks
+          student.labMarks,
+          student.sessionalMarks
         )
       ),
       examDate,
@@ -213,6 +226,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       student.midMarks,
       student.terminalMarks,
       student.labMarks,
+      student.sessionalMarks,
     ].every((mark) => parseInt(mark, 10) === 0)
       ? 0
       : 1;
@@ -222,17 +236,20 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       terminalSessionalMarks: student.terminalMarks,
       midMarks: student.midMarks,
       labMarks: student.labMarks,
+      sessionalMarks:student.sessionalMarks,
       totalMarks: calculateTotalMarks(
         student.midMarks,
         student.terminalMarks,
-        student.labMarks
+        student.labMarks,
+        student.sessionalMarks
       ),
       isAttempt,
       GPA: calculateGPA(
         calculateTotalMarks(
           student.midMarks,
           student.terminalMarks,
-          student.labMarks
+          student.labMarks,
+          student.sessionalMarks,
         )
       ),
       examDate,
@@ -442,6 +459,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       terminalSessionalMarks: "-",
       midMarks: "-",
       labMarks: "-",
+      sessionalMarks: "-",
       totalMarks: "-",
       isAttempt: "-",
       GPA: "-",
@@ -508,8 +526,9 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
             <th className="name">Student's Name</th>
             <th className="name">Father's Name</th>
             <th className="marks">Mid (20)</th>
-            <th className="marks">Lab (30)</th>
-            <th className="marks">Assign + Term (50/80)</th>
+            {labCreditHours !== 0 && <th className="marks">Lab (30)</th>}
+            <th className="marks">Sessional ({labCreditHours !== 1 && (30)}{labCreditHours !== 0 && (10)})</th>
+            <th className="marks">Terminal ({labCreditHours !== 1 && (50)}{labCreditHours !== 0 && (40)})</th>
             <th className="marks">Grand Total</th>
             <th className="marks">GP</th>
             <th>Actions</th>
@@ -546,6 +565,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                     disabled={!!lockResultAssignId || isRowDisabled}
                   />
                 </td>
+                {labCreditHours !== 0 && (
                 <td>
                   <input
                     type="number"
@@ -558,13 +578,26 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                     }
                     disabled={!!lockResultAssignId || isRowDisabled}
                   />
+                </td>)}
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="30"
+                    value={student.sessionalMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "sessionalMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
                 </td>
                 <td>
                   <input
                     type="number"
                     style={{ width: "70px" }}
                     min="0"
-                    max={labCreditHours === 1 ? "50" : "80"}
+                    max={labCreditHours === 1 ? "40" : "50"}
                     value={student.terminalMarks || ""}
                     onChange={(e) =>
                       handleMarksChange(e, student.studentId, "terminalMarks")
@@ -582,7 +615,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                       calculateTotalMarks(
                         student.midMarks,
                         student.terminalMarks,
-                        student.labMarks
+                        student.labMarks,
+                        student.sessionalMarks
                       ) || ""
                     }
                     readOnly
@@ -598,7 +632,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
                         calculateTotalMarks(
                           student.midMarks,
                           student.terminalMarks,
-                          student.labMarks
+                          student.labMarks,
+                          student.sessionalMarks
                         )
                       ) || ""
                     }

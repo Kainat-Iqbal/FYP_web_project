@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-const ViewTable = () => {
+const ViewTable = ({labCreditHours}) => {
   const location = useLocation();
   const courseData = location.state?.course;
   const assignId = courseData?.assignId;
@@ -37,7 +37,7 @@ const ViewTable = () => {
             <th className="name">Student's Name</th>
             <th className="name">Father's Name</th>
             <th className="marks">Mid (20)</th>
-            <th className="marks">Lab (30)</th>
+            {labCreditHours !== 0 && <th className="marks">Lab (30)</th>}
             <th className="marks">Assign + Term (50/80)</th>
             <th className="marks">Grand Total</th>
             <th className="marks">GP</th>
@@ -53,9 +53,9 @@ const ViewTable = () => {
                   <td style={{ textAlign: "center" }}>{result.name}</td>
                   <td style={{ textAlign: "center" }}>{result.fatherName}</td>
                   <td style={{ textAlign: "center" }}>{result.midMarks}</td>
-                  <td style={{ textAlign: "center" }}>{result.labMarks}</td>
+                  {labCreditHours !== 0 && <td style={{ textAlign: "center" }}>{result.labMarks}</td>}
                   <td style={{ textAlign: "center" }}>
-                    {result.terminalMarks}
+                    {result.terminalMarks+result.sessionalMarks}
                   </td>
                   <td style={{ textAlign: "center" }}>{result.totalMarks}</td>
                   <td style={{ textAlign: "center" }}>{Number.isInteger(result.GPA) ? `${result.GPA}.00` : result.GPA.toFixed(2)}</td>

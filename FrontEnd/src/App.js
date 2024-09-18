@@ -127,7 +127,7 @@ function App() {
         <Route path='/student' element={<StudentTable />} />
         <Route path='/createResult' element={<CreateResult />} />
         <Route path='/HODHomePage' element={<HODHomePage />} />
-        <Route path='insightCourse' element={<Insights/>}/>
+        <Route path='/insightCourse' element={<Insights/>}/>
         <Route path='/GPAGraph' element={<GPAGraph/>}/>
 
           <Route path='/AssignCourse' element={<AssignCourse />} />

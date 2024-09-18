@@ -1,5 +1,5 @@
 const DB = require("../DB/dbConfig");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 // Helper function to verify hashed passwords
 const verifyPassword = async (password, hashedPassword) => {
