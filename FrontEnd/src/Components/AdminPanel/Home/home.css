@@ -18,28 +18,43 @@
 }
 
 #homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent {
-    width: 20%;
-    height: 20%;
+    width: 22%;
+    height: 22%;
     display: flex;
     flex-direction: column;
-    background: linear-gradient(to right, rgb(163, 68, 252), white);
+    border-radius: 10px;
+    /* background: linear-gradient(to right, rgb(163, 68, 252), white); */
     margin-bottom: 2vh; /* Added margin for better spacing */
+    margin-top: 2vh;
+    margin-left: 2vw;
+   
   }
-  
+  #homeTeacher, #homeStudent, #homePassStudent, #homeFailStudent h5{
+    padding-top: 10px;
+    padding-left: 10px;
+  }
   #homeTeacher {
-    background: linear-gradient(to right, rgb(163, 68, 252), white);
+    background-color:plum;
+    /* background: linear-gradient(to right, rgb(163, 68, 252), white); */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
   }
   
   #homeStudent {
-    background: linear-gradient(to right, palevioletred, white);
+    background-color:pink ;
+    /* background: linear-gradient(to right, palevioletred, white); */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
   }
   
   #homePassStudent {
-    background: linear-gradient(to right, powderblue, white);
+    background-color:powderblue ;
+    /* background: linear-gradient(to right, powderblue, white); */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
   }
   
   #homeFailStudent {
-    background: linear-gradient(to right, coral, white);
+   /*  background: linear-gradient(to right, coral, white); */
+   background-color: palegoldenrod;
+   box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
   }
 
 #numImage{
@@ -52,20 +67,22 @@
 }
 
 #PassFail{
-    width: 70%;
+    width: 60%;
     height: 60%;
     background-color: bisque;
     margin-top: 2vh; /* Added margin for spacing */
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2);
 }
 
 #homeCourse{
     width: 22%;
     height: 60%;
-    background: linear-gradient(to right, orchid,white);
+   /*  background: linear-gradient(to right, orchid,white); */
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 2vh; /* Added margin for spacing */
+   /*  background-color: lightgreen; */
 }
 
 /* Responsive adjustments */

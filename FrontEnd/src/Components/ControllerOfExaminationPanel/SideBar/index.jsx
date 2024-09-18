@@ -53,6 +53,7 @@ function SideBar() {
           top: "0" /* Position it at the top */,
           left: " 0" /* Position it at the left */,
           zIndex: "999",
+          background: "linear-gradient(to top left,  #93C098, #8CE0DB)",
         }}
       >
         <div
@@ -67,24 +68,13 @@ function SideBar() {
         >
           
          
-         <button
-      onClick={handleToggleSidebar}
-      style={{
-        border: 'none',
-        backgroundColor: '#00304B',
-        display: isMobile ? 'block' : 'none', // Hide on laptops, show on mobile
-      }}
-    >
-           {<MenuOutlined style={{ fontSize: "2.2rem", color: "white" }} />}
-          </button>
-
           <img
             src={require("./FYPLogo.png")}
             style={{
-              width: "10vw",
-              height: "17vh",
-              marginTop: "2vh",
-              marginLeft: "-2vw",
+              width: "9vw",
+              height: "14vh",
+              marginTop: "1vh",
+              marginLeft: "-3.5vw",
             }}
           />
 
@@ -95,7 +85,7 @@ function SideBar() {
               marginLeft: "-2vw",
               marginTop: "2vh",
             }}>
-            Academic Accelerator
+            Academic Accelerator Pro
           </p>
         </div>
 
@@ -159,6 +149,7 @@ function SideBar() {
           top: "0" /* Position it at the top */,
           left: " 0" /* Position it at the left */,
           zIndex: "999",
+          background: "linear-gradient(to bottom right, green, #8CE0DB)",
         }}
         collapsed={collapsed}
       >

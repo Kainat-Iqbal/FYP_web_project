@@ -14,7 +14,7 @@ function MainScreen() {
         </p> */}
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle id="dropdown-basic" style={{ border: "none",fontSize:"1.3rem",marginLeft:'190px' }}>
+          <Dropdown.Toggle id="dropdown-basic" style={{ border: "none",fontSize:"1.3rem", marginLeft: "160px" }}>
             Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -53,7 +53,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none" ,fontSize:"1.3rem",marginLeft:"80px"}} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none" ,fontSize:"1.3rem",marginLeft:"65px"}} id="dropdown-basic">
             Allied Science
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -64,7 +64,7 @@ function MainScreen() {
         </Dropdown>
 
         <Dropdown class="dropDown">
-          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem",marginLeft:"70px" }} id="dropdown-basic">
+          <Dropdown.Toggle style={{ border: "none",fontSize:"1.3rem",marginLeft:"67px" }} id="dropdown-basic">
             Buisness
           </Dropdown.Toggle>
           <Dropdown.Menu>
@@ -79,9 +79,9 @@ function MainScreen() {
 
       <div id="middle">
         {/* <img src={require("./FYPLogo.png")} style={{ width: "25vw" }} /> */}
-        <h1 style={{fontSize:'4rem'}} > Academic Accelerator</h1>
-       {/*  <h1 style={{marginTop: "-2vw",marginLeft: "67px"}} >Accelerator</h1> */}
-        <h2 style={{fontSize:'1.8rem'}}>Faculty and Student Academic Guide</h2>
+        <h1 style= {{fontSize:'4.4rem'}}> Academic Accelerator </h1>
+        {/* <h1 style={{marginTop: "-2vw",marginLeft: "67px"}} >Accelerator</h1> */}
+        <h2 style= {{fontSize:'2rem'}} >Faculty and Student Academic Guide</h2>
       </div>
 
       {/* <div id="bottom"></div> */}

@@ -39,60 +39,36 @@ function ControllerOfExaminationResultApproval() {
         </div>
 
         <div id="COEresultApprovalBottom">
-          <Table striped bordered hover id="COEresultApprovalTable">
+          <table id="COEresultApprovalTable">
             <thead>
               <tr>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   ID
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Course Number
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Course Name
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Class
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Instructor Name
                 </th>
                 <th
-                  style={{
-                    backgroundColor: "#00304B",
-                    color: "white",
-                    textAlign: "center",
-                  }}
+                  
                 >
                   Action
                 </th>
@@ -100,9 +76,9 @@ function ControllerOfExaminationResultApproval() {
             </thead>
             <tbody>
               {Array.isArray(results) && results.length > 0 ? (
-                results.map((result) => (
+                results.map((result,index) => (
                   <tr key={result.assignId}>
-                    <td>{result.assignId}</td>
+                    <td>{index+1}</td>
                     <td>{result.course_code}</td>
                     <td>{result.courseTitle}</td>
                     <td>{result.year + "(" + result.session + ")"}</td>
@@ -112,8 +88,8 @@ function ControllerOfExaminationResultApproval() {
                         style={{
                           borderColor: "#add8e6",
                           color: "black",
-                          backgroundColor: "#add8e6",
-                          width: "70%",
+                          background:'linear-gradient(to right, #93C098, #8CE0DB)',
+                          width: "80%",
                         }}
                         onClick={() => handleViewResultClick(result.assignId)}
                       >
@@ -130,7 +106,7 @@ function ControllerOfExaminationResultApproval() {
                 </tr>
               )}
             </tbody>{" "}
-          </Table>
+          </table>
         </div>
       </div>
     </div>

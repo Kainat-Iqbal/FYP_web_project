@@ -4,10 +4,9 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import SideBar from "../Sidebar";
 import SearchIcon from '@mui/icons-material/Search';
-import "./courseStyle.css";
+import "./insightStyle.css";
 import CourseCard from "../../Utilities/CourseCard";
-import axios from "axios";
-import InsightsCourseCard from "../../Utilities/InsightsCourseCard";
+import InsightsCard from "../../Utilities/InsightsCard";
 
 function Insights() {
     const [value, setValue] = React.useState(0);
@@ -24,7 +23,7 @@ function Insights() {
                 <div id="topC">
                     <div id="topheading">
                         <h1>
-                            Insights
+                            Courses
                         </h1>
                     </div>
                     <div id="topMenu">
@@ -56,7 +55,7 @@ function Insights() {
                 
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                            <InsightsCourseCard/>
+                            <InsightsCard/>
                         {/* {coursesWithImages.map((courseData) => (
                                 <CourseCard
                                     key={courseData.courseId}

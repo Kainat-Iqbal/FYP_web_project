@@ -9,7 +9,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "axios";
 
-function InsightsCourseCard() {
+
+function InsightsCard() {
     const nav = useNavigate();
     const [images, setImages] = useState([]);
     const [course, setCourse] = useState([]);
@@ -84,12 +85,12 @@ function InsightsCourseCard() {
                     </Typography>
                 </CardContent>
                 <CardActions >
-                    <Button size="small"  style={{width:'100%'}} onClick={()=>{nav("/viewInsights") }}>View Insights</Button>
-                    {/* <Button size="small"  style={{width:'50%'}} onClick={()=>{nav("/viewResult", { state: { course: courseData } }) }}>View Result</Button> */}
+                    <Button size="small"  style={{width:'50%'}} onClick={()=>{nav("/GPAGraph", { state: { course: courseData } }) }}>View Insights</Button>
+                    <Button size="small"  style={{width:'50%'}} onClick={()=>{nav("/viewResult", { state: { course: courseData } }) }}>View Result</Button>
                 </CardActions>
 
             </Card>))}
         </>
     )
 }
-export default InsightsCourseCard;
+export default InsightsCard;

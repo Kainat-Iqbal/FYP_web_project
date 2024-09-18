@@ -129,7 +129,7 @@ function HODManageChangeReq() {
         </div>
 
         <div id="HODManageChangeReqBottom">
-          <Table striped bordered hover id="HODManageChangeReqTable">
+          <table id="HODManageChangeReqTable">
             <thead>
               <tr>
                 <th>ID</th>
@@ -143,9 +143,9 @@ function HODManageChangeReq() {
 
             <tbody>
               {Array.isArray(request) && request.length > 0 ?(
-                request.map((result) => (
+                request.map((result,index) => (
                   <tr key={result.requestId}>
-                    <td>{result.requestId}</td>
+                    <td>{index+1}</td>
                     <td>{result.course_code}</td>
                     <td>{result.course_name}</td>
                     <td>{"Ms. " + result.name}</td>
@@ -189,7 +189,7 @@ function HODManageChangeReq() {
                 </tr>
               )}
             </tbody>
-          </Table>
+          </table>
         </div>
 
         <div id="HODManageChangeReqTop">
@@ -197,7 +197,7 @@ function HODManageChangeReq() {
         </div>
 
         <div id="HODManageChangeReqBottom">
-          <Table striped bordered hover id="HODManageChangeReqTable">
+          <table  id="HODManageChangeReqTable">
             <thead>
               <tr>
                 <th>ID</th>
@@ -212,9 +212,9 @@ function HODManageChangeReq() {
 
             <tbody>
               {Array.isArray(disapproveReq) && disapproveReq.length > 0 ?(
-              disapproveReq.map((results) => (
+              disapproveReq.map((results,index) => (
                 <tr key={results.requestId}>
-                  <td>{results.requestId}</td>
+                  <td>{index+1}</td>
                   <td>{results.course_code}</td>
                   <td>{results.course_name}</td>
                   <td>{"Ms. " + results.name}</td>
@@ -236,7 +236,7 @@ function HODManageChangeReq() {
                   </tr>
               )}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
 

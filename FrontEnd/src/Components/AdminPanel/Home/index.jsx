@@ -50,16 +50,15 @@ function Home() {
 
           <div id="PassFail">
             <img
-              src={require("./barGraph.png")}
+              src={require("./graph2.jpg")}
               style={{ width: "100%", height: "100%" }}
             />
           </div>
 
           <div id="homeCourse">
-            <h5>Total Number of Courses</h5>
-            <h1>340</h1>
-            <img src= {require("./course.png")} style={{width:'100%',height:"40vh"}}/>
-          </div>
+          <img src= {require("./course.png")} style={{width:'100%',height:"35vh" ,boxShadow:'2px 2px 15px rgba(0, 0, 0, 0.2)',marginTop:"-6vh"}}/>
+          <img src= {require("./piechart3.jpg")} style={{width:'100%',height:"30vh",boxShadow:'2px 2px 15px rgba(0, 0, 0, 0.2)',marginTop:'2vh'}}/>
+            </div>
         </div>
       </div>
     </>

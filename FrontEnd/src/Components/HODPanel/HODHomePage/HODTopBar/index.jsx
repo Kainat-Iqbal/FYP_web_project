@@ -7,7 +7,7 @@ function TopBar() {
         height: "30vh",
         width: "100vw",
         fontSize: "38px",
-        backgroundColor: "#59A3AC",
+        backgroundColor: "#93C098",
         color: "#fff",
         padding: "100px",
         textAlign: "center",

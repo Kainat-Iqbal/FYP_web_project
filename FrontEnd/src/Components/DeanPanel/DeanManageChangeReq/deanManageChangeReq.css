@@ -33,18 +33,42 @@
 #DeanManageChangeReqTable {
   width: 95%;
   margin-top: 1%;
-  border: 2px solid #00304B;
-}
+  border-collapse: collapse;
+  margin-bottom: 1%;
+  background-color: white;
+  border: 1px solid #00304B; 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+  border-radius: 8px; /* Rounded corners */
 
-#DeanManageChangeReqTable th {
-  background-color: #00304B;
-  color: white;
+}
+#DeanManageChangeReqTable th, 
+#DeanManageChangeReqTable td {
+  padding: 12px 15px; /* More padding for better spacing */
+  text-align: left;
+  border-bottom: 1px solid #dee2e6; /* Light border between rows */
+  font-size: 14px; /* Slightly increase font size */
+  color: #333; /* Darker text for better readability */
   text-align: center;
 }
+#DeanManageChangeReqTable th {
+  background-color:#20796d;
+  color:white;
+  font-weight: bold;
+  text-transform: uppercase; /* Capitalize headers */
+  text-align: center;
+  align-items: center;
+}
+#DeanManageChangeReqTable tbody tr:hover {
+  background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+}
 
-#DeanManageChangeReqTable td {
-  vertical-align: middle;
-  /* text-align: center; */
+
+#DeanManageChangeReqTable tbody tr:nth-child(odd) {
+  background-color: #f2f2f2; /* Light grey for odd rows */
+}
+
+#DeanManageChangeReqTable tbody tr:nth-child(even) {
+  background-color: #ffffff; /* White for even rows */
 }
 
 #DeanManageChangeReqTable button {
@@ -95,4 +119,22 @@
 button{
   width: 8vw;
   color: white;
+}
+#approveButtonDean{
+  border-color: #7ece7e;
+  background-color:#7ece7e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#approveButtonDean:hover{
+box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);}
+#disapproveButtonDean:hover{
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);}
+#disapproveButtonDean{
+  border-color: #cd5c5c;
+  background-color:#cd5c5c;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

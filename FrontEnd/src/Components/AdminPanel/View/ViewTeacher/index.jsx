@@ -48,7 +48,7 @@ function ViewTeacher() {
         // setSelectedHOD(teacherId);
         try {
           const data = { adminId: admin, teacherId: teacherId };
-          console.log("first",data)
+          console.log("first", data)
           const res = await axios.post("http://localhost:8081/hod/Add", data);
           if (res.data === "success") {
             alert("HOD is added successfully");
@@ -61,30 +61,30 @@ function ViewTeacher() {
           console.log("error setting HOD", error);
         }
       }
-    } 
-  };
-  
-// Fetch current HOD
-useEffect(() => {
-  const fetchCurrentHOD = async () => {
-    try {
-      const res = await axios.get("http://localhost:8081/hod/Get");
-      if (res.data && res.data.length > 0) {
-        setSelectedHOD(res.data[0].teacherId);
-        console.log("SD",res.data[0].teacherId)
-      }
-    } catch (error) {
-      console.log("Error fetching current HOD", error);
     }
   };
-  fetchCurrentHOD();
-}, []);
 
-useEffect(() => {
-  console.log("Selected HOD:", selectedHOD);
-}, [selectedHOD]);
+  // Fetch current HOD
+  useEffect(() => {
+    const fetchCurrentHOD = async () => {
+      try {
+        const res = await axios.get("http://localhost:8081/hod/Get");
+        if (res.data && res.data.length > 0) {
+          setSelectedHOD(res.data[0].teacherId);
+          console.log("SD", res.data[0].teacherId)
+        }
+      } catch (error) {
+        console.log("Error fetching current HOD", error);
+      }
+    };
+    fetchCurrentHOD();
+  }, []);
 
- 
+  useEffect(() => {
+    console.log("Selected HOD:", selectedHOD);
+  }, [selectedHOD]);
+
+
   return (
     <div id="mainViewTeacherDiv">
       <div id="viewTeacherSidebar">
@@ -102,7 +102,7 @@ useEffect(() => {
                 placeholder="Search..."
                 style={{ width: "70%" }}
               />
-              <button id="btnsearch" style={{ height: "63%",  color:"black",width:"18%" }}>
+              <button id="btnsearch" style={{ height: "63%", color: "black", width: "18%" }}>
                 <SearchIcon />
               </button>
             </div>
@@ -123,21 +123,11 @@ useEffect(() => {
           <table id="viewTeacherTable">
             <thead>
               <tr>
-                <th>
-                  ID
-                </th>
-                <th >
-                  Name
-                </th>
-                <th >
-                  Email
-                </th>
-                <th >
-                  Department
-                </th>
-                <th  >
-                  Designation
-                </th>
+                <th>S#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Department</th>
+                <th>Designation</th>
                 <th >
                   Qualification
                 </th>
@@ -160,10 +150,10 @@ useEffect(() => {
             </thead>
 
             <tbody>
-              {teacher.map((teacherData,index) => {
+              {teacher.map((teacherData, index) => {
                 return (
                   <tr key={teacherData.id}>
-                    <td>{index+1}</td>
+                    <td>{index + 1}</td>
                     <td>{teacherData.name}</td>
                     <td>{teacherData.email}</td>
                     <td>{teacherData.department}</td>
@@ -173,8 +163,8 @@ useEffect(() => {
                     <td>{teacherData.JoiningDate}</td>
                     <td>{teacherData.status}</td>
                     <td>
-                    <input
-                    id="chk"
+                      <input
+                        id="chk"
                         type="checkbox"
                         checked={selectedHOD === teacherData.teacherId}
                         onChange={(e) =>
@@ -191,11 +181,11 @@ useEffect(() => {
                     </td>
                     <td>
                       <Link to={`/updateTeacher/${teacherData.teacherId}`}
-                       className={
-                        selectedHOD === teacherData.teacherId
-                          ? "disabled-link"
-                          : ""
-                      }>
+                        className={
+                          selectedHOD === teacherData.teacherId
+                            ? "disabled-link"
+                            : ""
+                        }>
                         <Edit />
                       </Link>
                     </td>

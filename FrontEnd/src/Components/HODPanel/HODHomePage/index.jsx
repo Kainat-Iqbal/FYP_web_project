@@ -59,9 +59,9 @@ function HODHomePage() {
           <div id="HODHomePageInfo">
             <h2 style={{ marginTop: "4.5%" }}>Ms. {hodName} </h2>
 
-            <h5 style={{ marginTop: "1%" }}>Head Of Department</h5>
-            <h5 style={{ marginTop: "-2%" }}>Computer Science & Software Engineering</h5>
-            <h5 style={{ marginTop: "-2%" }}>Jinnah University For Women</h5>
+            <h5 style={{ marginTop: "1%" ,fontSize:'1.1rem'}}>Head Of Department</h5>
+            <h5 style={{ marginTop: "-2%" ,fontSize:'1.1rem'}}>Computer Science & Software Engineering</h5>
+            <h5 style={{ marginTop: "-2%" ,fontSize:'1.1rem'}}>Jinnah University For Women</h5>
           </div>
         </div>
 
@@ -93,33 +93,40 @@ function HODHomePage() {
               <img src={require("./passStudent.png")} style={{ width: "6vw", height: "10vh",paddingBottom:'2vh' }} />
             </div>
           </div>
+          <div id="HODHomePageCourse">
+            <h2 style={{ marginTop: "2vh" }} > 4,000 </h2>
+            <div id="HODHomePageNumImage">
+              <h3 style={{marginTop:'-2vh'}}>Courses</h3>
+              <img src={require("./graduation.png")} style={{ width: "5vw", height: "11vh",paddingBottom:'2vh' ,marginLeft:'1vw'}} />
+            </div>
+          </div>
 
           <div id="AssignCourseTable">
-            <Table striped bordered hover id="viewAssignCourseTable">
+            <table id="viewAssignCourseTable">
               <thead>
                 <tr>
-                  <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Course Code</th>
-                  <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Course Name</th>
-                  <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Class</th>
-                  <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Batch</th>
-                  <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Status</th>
-                  <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>Assigned Instrucutor</th>
+                  <th  >Course Code</th>
+                  <th  >Course Name</th>
+                  <th  >Class</th>
+                  <th  >Batch</th>
+                  <th  >Status</th>
+                  <th  >Assigned Instrucutor</th>
                 </tr>
               </thead>
 
               <tbody>
                 {courses.map((result) => (
                   <tr key={result.SNo}>
-                    <td style={{ textAlign: "center" }}>{result.course_code}</td>
-                    <td style={{ textAlign: "center" }}>{result.course_title}</td>
-                    <td style={{ textAlign: "center" }}>{result.class_name}</td>
-                    <td style={{ textAlign: "center" }}>{result.batch_name}</td>
-                    <td style={{ textAlign: "center" }}>{result.assignment_status}</td>
-                    <td style={{ textAlign: "center" }}>{result.teacher_name}</td>
+                    <td   >{result.course_code}</td>
+                    <td   >{result.course_title}</td>
+                    <td   >{result.class_name}</td>
+                    <td   >{result.batch_name}</td>
+                    <td   >{result.assignment_status}</td>
+                    <td   >{result.teacher_name}</td>
                   </tr>
                 ))}
               </tbody>
-            </Table>
+            </table>
 
           </div>
 

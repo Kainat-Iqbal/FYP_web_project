@@ -61,98 +61,8 @@ return(
             <SideBar/>
         </div>
         <div id="viewDegreeWithoutBar">
-        
-        <div id="topheading">
-            <h1>
-              Degree Program's Information
-            </h1>
-          </div>
+
           
-        <div id="viewDegreeBottom">
-          <Table striped bordered hover id="viewDegreeTable">
-            <thead>
-              <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Type
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Degree
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Total Credit Hours
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Edit
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {degree.map((degreeData) => {
-                return (
-                  <tr key={degreeData.id}>
-                    <td>{degreeData.programId}</td>
-                    <td>{degreeData.type}</td>
-                    <td>{degreeData.degree}</td>
-                    <td>{degreeData.total_credit_hours}</td>
-                   
-                    <td>
-                      <Link to={`/updateDegree/${degreeData.programId}`}><Edit /></Link>
-                    </td>
-                  </tr>
-                );
-              })}
-
-            </tbody>
-          </Table>
-        </div>
-
-        <div id="topheading">
-            <h1>
-              Batch's Information
-            </h1>
-          </div>
-          
-        <div id="viewDeanBottom">
-          <Table striped bordered hover id="viewDeanTable">
-            <thead>
-              <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Year
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Session
-                </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  Edit
-                </th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {batch.map((batchData) => {
-                return (
-                  <tr key={batchData.id}>
-                    <td>{batchData.batchId}</td>
-                    <td>{batchData.year}</td>
-                    <td>{batchData.session}</td>
-                    <td>
-                      <Link to={`/updateBatch/${batchData.batchId}`}><Edit /></Link>
-                    </td>
-                  </tr>
-                );
-              })}
-
-            </tbody>
-          </Table>
-        </div>
-
         <div id="topheading">
             <h1>
               Session's Information
@@ -160,35 +70,34 @@ return(
           </div>
 
           <div id="viewExaminationBottom">
-          <Table striped bordered hover id="viewDeanTable">
+          <table id="viewDegreeSessionBatchTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
+                <th  >S#
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Academic Year
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Semester
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Class
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Batch
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Edit
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {session.map((sessionData) => {
+              {session.map((sessionData,index) => {
                 return (
                   <tr key={sessionData.id}>
-                    <td>{sessionData.sessionId}</td>
+                    <td>{index+1}</td>
                     <td>{sessionData.academic_year}</td>
                     <td>{sessionData.semester}</td>
                     <td>{sessionData.type+'('+sessionData.degree+')'}</td>
@@ -201,8 +110,95 @@ return(
               })}
 
             </tbody>
-          </Table>
+          </table>
         </div>
+        
+        <div id="topheading">
+            <h1>
+              Degree Program's Information
+            </h1>
+          </div>
+          
+        <div id="viewDegreeBottom">
+          <table id="viewDegreeSessionBatchTable">
+            <thead>
+              <tr>
+                <th  >
+                  S#
+                </th>
+                <th  >
+                  Type
+                </th>
+                <th  >
+                  Degree
+                </th>
+                <th  >
+                  Edit
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {degree.map((degreeData,index) => {
+                return (
+                  <tr key={degreeData.id}>
+                    <td>{index+1}</td>
+                    <td>{degreeData.type}</td>
+                    <td>{degreeData.degree}</td>                   
+                    <td>
+                      <Link to={`/updateDegree/${degreeData.programId}`}><Edit /></Link>
+                    </td>
+                  </tr>
+                );
+              })}
+
+            </tbody>
+          </table>
+        </div>
+
+        <div id="topheading">
+            <h1>
+              Batch's Information
+            </h1>
+          </div>
+          
+        <div id="viewDeanBottom">
+          <table id="viewDegreeSessionBatchTable">
+            <thead>
+              <tr>
+                <th  >
+                  S#
+                </th>
+                <th  >
+                  Year
+                </th>
+                <th  >
+                  Session
+                </th>
+                <th  >
+                  Edit
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {batch.map((batchData,index) => {
+                return (
+                  <tr key={batchData.id}>
+                    <td>{index+1}</td>
+                    <td>{batchData.year}</td>
+                    <td>{batchData.session}</td>
+                    <td>
+                      <Link to={`/updateBatch/${batchData.batchId}`}><Edit /></Link>
+                    </td>
+                  </tr>
+                );
+              })}
+
+            </tbody>
+          </table>
+        </div>
+
           
         </div>
         

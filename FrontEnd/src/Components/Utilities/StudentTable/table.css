@@ -1,6 +1,7 @@
 table {
   border-collapse: collapse;
-  width: 100%;
+  width: 97.5%;
+  margin-left: 0.7%;  
 }
 
 th,
@@ -56,6 +57,7 @@ tr:hover {
   background-color:lightblue;
   color: black;
   border: 2px lightblue;
+  width: 80px;
   
 }
 
@@ -88,3 +90,4 @@ tr:hover {
 .dialog-content button {
   margin-top: 10px;
 }
+

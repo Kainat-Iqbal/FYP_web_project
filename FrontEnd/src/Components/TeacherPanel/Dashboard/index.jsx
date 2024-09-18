@@ -45,7 +45,7 @@ function Dashboard() {
                                 style={{ height: "90%", width: "90%", borderRadius: "50%" }} />
                         </div>
                         <div id="Tinfo">
-                            <h2 style={{ marginTop: "0%" }}>Ms.{" "+teacherName}</h2>
+                            <h2 style={{ marginTop: "0%" }}>Ms.{teacherName}</h2>
                             <h4  id="deisgnation" style={{ marginTop: "-2%" ,textDecoration:"none"}}> {designation} </h4>
                             <h5 style={{ marginTop: "-2%" }}>Computer Science & Software Engineering Department</h5>
                             <h5 style={{ marginTop: "-2%" }}>Jinnah University For Women</h5>

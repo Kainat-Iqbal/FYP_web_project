@@ -124,20 +124,60 @@
 }
 
 #DeanViewResultTable {
-    width: 100%;
-    padding-top: 1%;
-    border: 2px solid #00304B;
-    /* margin-top: 1%; */
-}
+    width: 95%;
+    margin-top: 1%;
+    border-collapse: collapse;
+    margin-bottom: 1%;
+    background-color: white;
+    border: 1px solid #00304B; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Add a subtle shadow */
+    border-radius: 8px; /* Rounded corners */
+  
+  }
+  #DeanViewResultTable th, 
+  #DeanViewResultTable td {
+    padding: 12px 15px; /* More padding for better spacing */
+    text-align: left;
+    border-bottom: 1px solid #dee2e6; /* Light border between rows */
+    font-size: 14px; /* Slightly increase font size */
+    color: #333; /* Darker text for better readability */
+    text-align: center;
+  }
+  #DeanViewResultTable th {
+    background-color:#20796d;
+    color:white;
+    font-weight: bold;
+    text-transform: uppercase; /* Capitalize headers */
+    text-align: center;
+    align-items: center;
+  }
+  #DeanViewResultTable tbody tr:hover {
+    background-color: #ece6e6 !important; /* Ensure hover effect is applied */
+  }
+  
+  
+  .disabled-link {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  #DeanViewResultTable tbody tr:nth-child(odd) {
+    background-color: #f2f2f2; /* Light grey for odd rows */
+  }
+  
+  #DeanViewResultTable tbody tr:nth-child(even) {
+    background-color: #ffffff; /* White for even rows */
+  }
+  
 
 #DeanViewResultBtnApprove {
     height: 4vw;
     width: 10vw;
     margin-top: 5vh;
     margin-left: 25%;
-    border-color: #04AA6D;
+    border-color:#7ece7e;
     color: white;
-    background-color: #28a745;
+    background-color: #7ece7e
     /* #90ee90 */
 }
 
@@ -146,9 +186,9 @@
     width: 10vw;
     margin-top: 5vh;
     margin-right: 30%;
-    border-color: #dc3545;
+    border-color: #cd5c5c;
     color: white;
-    background-color: #dc3545;
+    background-color: #cd5c5c;
     /*#cd5c5c)*/
 }
 

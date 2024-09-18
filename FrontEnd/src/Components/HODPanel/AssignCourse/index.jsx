@@ -147,18 +147,17 @@ function AssignCourse() {
     <div id="assignCourseMainDiv">
       <SideBar />
       <div id="assignCourseWithoutBar">
-        
-        <div id="assignCourseTop">
-          <h1 style={{ color: "#00304B" }}>Assign Course</h1>
-        </div>
-
         <div id="assignCourseBottom">
+        <div id="assignCourseTop">
+        <h1>A<span className="smaller-text">SSIGN</span> C<span className="smaller-text">OURSE</span></h1>
+        </div>
           <form id="assignCourseForm" action="" onSubmit={handleSubmit}>
 
             <div id="assignCourseField">
-              <div id="fieldContainer">
+              
                 <label>Instructor Name</label>
                 <select
+                 id="assignCourseinp"
                   name="department"
                   style={{ height: "6vh" }}
                   value={selectedTeacher}
@@ -171,27 +170,29 @@ function AssignCourse() {
                     <option key={teacherData.name}>{teacherData.name}</option>
                   ))}
                 </select>
-              </div>
+             
               {errors.teacher && <span className="error">{errors.teacher}</span>}
             </div>
 
             <div id="assignCourseField">
-              <div id="fieldContainer">
+             
                 <label>Department</label>
                 <input
+                 id="assignCourseinp"
                   name="department"
                   style={{ height: "6vh" }}
                   value={selectedDepartment || "Select Instructor Name First"}
                   readOnly
                 />
-              </div>
+             
               {errors.department && <span className="error">{errors.department}</span>}
             </div>
 
             <div id="assignCourseField">
-              <div id="fieldContainer">
+              
                 <label>Course Code</label>
                 <select
+                id="assignCourseinp"
                   name="courseCode"
                   style={{ height: "6vh" }}
                   value={selectedCourseCode}
@@ -206,27 +207,29 @@ function AssignCourse() {
                     </option>
                   ))}
                 </select>
-              </div>
+              
               {errors.course && <span className="error">{errors.course}</span>}
             </div>
 
             <div id="assignCourseField">
-              <div id="fieldContainer">
+              
                 <label>Course Name</label>
                 <input
+                 id="assignCourseinp"
                   name="courseName"
                   style={{ height: "6vh" }}
                   value={selectedTitle || "Select Course Code First"}
                   readOnly
                 />
-              </div>
+              
               {errors.courseName && <span className="error">{errors.courseName}</span>}
             </div>
 
             <div id="assignCourseField">
-              <div id="fieldContainer">
+              
                 <label>Academic Year</label>
                 <select
+                 id="assignCourseinp"
                   name="session"
                   style={{ height: "6vh" }}
                   value={selectedSessionId}
@@ -241,13 +244,13 @@ function AssignCourse() {
                     </option>
                   ))}
                 </select>
-              </div>
+             
               {errors.session && <span className="error">{errors.session}</span>}
             </div>
 
-            <div id="assignButton">
+           
               <button>Assign Course</button>
-            </div>
+            
 
           </form>
         </div>

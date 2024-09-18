@@ -9,6 +9,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
   const [isLocked, setIsLocked] = useState(false);
   const [dataFetched, setDataFetched] = useState(false);
   const [editStudentId, setEditStudentId] = useState(null); // Track the student being edited
+  const [selectedStudents, setSelectedStudents] = useState(new Set()); // Manage selected students
 
   const location = useLocation();
   const courseData = location.state?.course;
@@ -89,6 +90,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
               midMarks: result.midMarks || "",
               terminalMarks: result.terminalMarks || "",
               labMarks: result.labMarks || "0",
+              sessionalMarks: result.sessionalMarks || "",
             };
           });
 
@@ -115,9 +117,16 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     } else if (fieldName === "terminalMarks") {
       value =
         labCreditHours === 1
-          ? Math.min(Math.max(parseInt(value, 10), 0), 50).toString()
-          : Math.min(Math.max(parseInt(value, 10), 0), 80).toString();
-    } else if (fieldName === "labMarks") {
+          ? Math.min(Math.max(parseInt(value, 10), 0), 40).toString()
+          : Math.min(Math.max(parseInt(value, 10), 0), 50).toString();
+    }
+    else if (fieldName === "sessionalMarks") {
+      value =
+        labCreditHours === 1
+          ? Math.min(Math.max(parseInt(value, 10), 0), 10).toString()
+          : Math.min(Math.max(parseInt(value, 10), 0), 30).toString();
+    }
+     else if (fieldName === "labMarks") {
       if (labCreditHours === 0) {
         value = "0";
       } else {
@@ -133,12 +142,13 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     setStudents(updatedStudents);
   };
 
-  const calculateTotalMarks = (midMarks, terminalMarks, labMarks) => {
+  const calculateTotalMarks = (midMarks, terminalMarks, labMarks,sessionalMarks) => {
     const mid = parseFloat(midMarks);
     const terminal = parseFloat(terminalMarks);
     const lab = parseFloat(labMarks);
-    return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab)
-      ? mid + terminal + lab
+    const sessional = parseFloat(sessionalMarks);
+    return !isNaN(mid) && !isNaN(terminal) && !isNaN(lab) && !isNaN(sessional)
+      ? mid + terminal + lab+sessional
       : "";
   };
 
@@ -150,8 +160,8 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     else if (marks >= 70) return "3.00";
     else if (marks >= 65) return "2.66";
     else if (marks >= 60) return "2.22";
-    else if (marks < 60) return "2.00";
-    else return "";
+    else if (marks >= 55) return "2.00";
+    else return "0";
   };
 
   const handleSave = async (student) => {
@@ -159,6 +169,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       student.midMarks,
       student.terminalMarks,
       student.labMarks,
+      student.sessionalMarks
     ].every((mark) => parseInt(mark, 10) === 0)
       ? 0
       : 1;
@@ -169,24 +180,27 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       terminalSessionalMarks: student.terminalMarks,
       midMarks: student.midMarks,
       labMarks: student.labMarks,
+      sessionalMarks:student.sessionalMarks,
       totalMarks: calculateTotalMarks(
         student.midMarks,
         student.terminalMarks,
-        student.labMarks
+        student.labMarks,
+        student.sessionalMarks
       ),
       isAttempt,
       GPA: calculateGPA(
         calculateTotalMarks(
           student.midMarks,
           student.terminalMarks,
-          student.labMarks
+          student.labMarks,
+          student.sessionalMarks
         )
       ),
       examDate,
       submissionDate: " ", // Placeholder, modify as needed
       resultCode: " ", // Placeholder, modify as needed
+      selectedStudent: "False",
     };
-   
 
     try {
       const postRes = await axios.post(
@@ -212,6 +226,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       student.midMarks,
       student.terminalMarks,
       student.labMarks,
+      student.sessionalMarks,
     ].every((mark) => parseInt(mark, 10) === 0)
       ? 0
       : 1;
@@ -221,17 +236,20 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       terminalSessionalMarks: student.terminalMarks,
       midMarks: student.midMarks,
       labMarks: student.labMarks,
+      sessionalMarks:student.sessionalMarks,
       totalMarks: calculateTotalMarks(
         student.midMarks,
         student.terminalMarks,
-        student.labMarks
+        student.labMarks,
+        student.sessionalMarks
       ),
       isAttempt,
       GPA: calculateGPA(
         calculateTotalMarks(
           student.midMarks,
           student.terminalMarks,
-          student.labMarks
+          student.labMarks,
+          student.sessionalMarks,
         )
       ),
       examDate,
@@ -417,147 +435,257 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
 
   console.log("first,,,,,", lockResultAssignId);
 
+  // Function to handle the selection of students
+
+  const handleSelectStudent = async (studentId) => {
+    const isSelected = !selectedStudents.has(studentId); // Determine new selection status
+
+    // Update the local state
+    setSelectedStudents((prev) => {
+      const updatedSelection = new Set(prev);
+      if (isSelected) {
+        updatedSelection.add(studentId);
+      } else {
+        updatedSelection.delete(studentId);
+      }
+      return updatedSelection;
+    });
+
+    // Prepare data to send to the server
+    const selectedStatus = isSelected ? "True" : "False"; // Example: 1 for selected, 0 for not selected
+    const resultData = {
+      studentId: studentId,
+      assignId: assignId,
+      terminalSessionalMarks: "-",
+      midMarks: "-",
+      labMarks: "-",
+      sessionalMarks: "-",
+      totalMarks: "-",
+      isAttempt: "-",
+      GPA: "-",
+      examDate,
+      submissionDate: "-", // Placeholder, modify as needed
+      resultCode: "-", // Placeholder, modify as needed
+      selectedStudent: selectedStatus,
+    };
+    try {
+      const postRes = await axios.post(
+        "http://localhost:8081/result/Add",
+        resultData
+      );
+      console.log("Sending result data:", resultData);
+      // console.log("Response from server:", postRes.data);
+      if (postRes.data === "success") {
+        window.location.reload(); // Refresh the page
+        setIsLocked(true); // Lock fields after saving
+        setEditStudentId(null); // Reset editing state
+      } else {
+        console.log("Error adding result");
+      }
+    } catch (error) {
+      console.log("Error updating student selection status:", error);
+    }
+  };
+
+  const fetchSelectedResults = async (assignId, setSelectedStudents) => {
+    try {
+      const response = await axios.get(`http://localhost:8081/result/GetSelected`, {
+        params: { assignId }
+      });
+
+      if (response.data.success) {
+        const selectedResults = response.data.data;
+        const selectedStudentIds = new Set(selectedResults.map(result => result.studentId));
+        setSelectedStudents(selectedStudentIds);
+      } else {
+        console.log("No results found or error fetching results");
+      }
+    } catch (error) {
+      console.log("Error fetching selected results:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (assignId) {
+      fetchSelectedResults(assignId, setSelectedStudents);
+    }
+  }, [assignId]);
+
+  console.log("DCD CF ", selectedStudents);
+  console.log("first",assignId)
+
   return (
     <div>
-      <table>
+      <table id="createResultTable">
         <thead>
           <tr>
             <th>S#</th>
+            <th>Remove Student</th>
             <th>Seat No.</th>
             <th>Enrollment No.</th>
             <th className="name">Student's Name</th>
             <th className="name">Father's Name</th>
             <th className="marks">Mid (20)</th>
-            <th className="marks">Lab (30)</th>
-            <th className="marks">Assign + Term (50/80)</th>
+            {labCreditHours !== 0 && <th className="marks">Lab (30)</th>}
+            <th className="marks">Sessional ({labCreditHours !== 1 && (30)}{labCreditHours !== 0 && (10)})</th>
+            <th className="marks">Terminal ({labCreditHours !== 1 && (50)}{labCreditHours !== 0 && (40)})</th>
             <th className="marks">Grand Total</th>
             <th className="marks">GP</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {students.map((student) => (
-            <tr key={student.studentId}>
-              <td>{student.studentId}</td>
-              <td>{student.seatNo}</td>
-              <td>{student.enrollment}</td>
-              <td>{student.name}</td>
-              <td>{student.fatherName}</td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max="20"
-                  value={student.midMarks || ""}
-                  onChange={(e) =>
-                    handleMarksChange(e, student.studentId, "midMarks")
-                  }
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max="30"
-                  value={student.labMarks || ""}
-                  onChange={(e) =>
-                    handleMarksChange(e, student.studentId, "labMarks")
-                  }
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max={labCreditHours === 1 ? "50" : "80"}
-                  value={student.terminalMarks || ""}
-                  onChange={(e) =>
-                    handleMarksChange(e, student.studentId, "terminalMarks")
-                  }
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  style={{ width: "70px" }}
-                  min="0"
-                  max="100"
-                  value={
-                    calculateTotalMarks(
-                      student.midMarks,
-                      student.terminalMarks,
-                      student.labMarks
-                    ) || ""
-                  }
-                  readOnly
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                <input
-                  type="text"
-                  style={{ width: "70px" }}
-                  value={
-                    calculateGPA(
+          {students.map((student, index) => {
+            const isRowDisabled = selectedStudents.has(student.studentId);
+            return (
+              <tr key={student.studentId}>
+                <td>{index + 1}</td>
+                <td>
+                  <input
+                    type="checkbox"
+                    checked={selectedStudents.has(student.studentId)}
+                    onChange={() => handleSelectStudent(student.studentId)}
+                    disabled={isLocked || isRowDisabled}
+                  />
+                </td>
+                <td>{student.seatNo}</td>
+                <td>{student.enrollment}</td>
+                <td>{student.name}</td>
+                <td>{student.fatherName}</td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="20"
+                    value={student.midMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "midMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                {labCreditHours !== 0 && (
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="30"
+                    value={student.labMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "labMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>)}
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max="30"
+                    value={student.sessionalMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "sessionalMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "70px" }}
+                    min="0"
+                    max={labCreditHours === 1 ? "40" : "50"}
+                    value={student.terminalMarks || ""}
+                    onChange={(e) =>
+                      handleMarksChange(e, student.studentId, "terminalMarks")
+                    }
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="number"
+                    style={{ width: "60px" }}
+                    min="0"
+                    max="100"
+                    value={
                       calculateTotalMarks(
                         student.midMarks,
                         student.terminalMarks,
-                        student.labMarks
-                      )
-                    ) || ""
-                  }
-                  readOnly
-                  disabled={!!lockResultAssignId}
-                />
-              </td>
-              <td>
-                {student.resultId ? (
-                  <>
-                    {editStudentId === student.studentId ? (
-                      <button
-                        id="buttons123"
-                        onClick={() => handleUpdate(student)}
-                        disabled={isLocked}
-                      >
-                        Update
-                      </button>
-                    ) : (
-                      <button
-                        id="buttons123"
-                        onClick={() => handleEnableEditing(student.studentId)}
-                        disabled={!!lockResultAssignId}
-                        style={{
-                          backgroundColor: !!lockResultAssignId
-                            ? "grey"
-                            : "lightBlue", // Change 'blue' to your desired enabled color
-                          cursor: !!lockResultAssignId
-                            ? "not-allowed"
-                            : "pointer",
-                          color: "black", // Button text color
-                        }}
-                      >
-                        Edit
-                      </button>
-                    )}
-                  </>
-                ) : (
-                  <button
-                    id="buttons123"
-                    onClick={() => handleSave(student)}
-                    disabled={isLocked}
-                  >
-                    Save
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
+                        student.labMarks,
+                        student.sessionalMarks
+                      ) || ""
+                    }
+                    readOnly
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  <input
+                    type="text"
+                    style={{ width: "60px",height:'5vh' }}
+                    value={
+                      calculateGPA(
+                        calculateTotalMarks(
+                          student.midMarks,
+                          student.terminalMarks,
+                          student.labMarks,
+                          student.sessionalMarks
+                        )
+                      ) || ""
+                    }
+                    readOnly
+                    disabled={!!lockResultAssignId || isRowDisabled}
+                  />
+                </td>
+                <td>
+                  {student.resultId ? (
+                    <>
+                      {editStudentId === student.studentId ? (
+                        <button
+                          id="buttons123"
+                          onClick={() => handleUpdate(student)}
+                          disabled={isLocked || isRowDisabled}
+                        >
+                          Update
+                        </button>
+                      ) : (
+                        <button
+                          id="buttons123"
+                          onClick={() => handleEnableEditing(student.studentId)}
+                          disabled={!!lockResultAssignId || isRowDisabled}
+                          style={{
+                            backgroundColor:
+                              !!lockResultAssignId || isRowDisabled
+                                ? "grey"
+                                : "lightBlue",
+                            cursor:
+                              !!lockResultAssignId || isRowDisabled
+                                ? "not-allowed"
+                                : "pointer",
+                            color: "black",
+                          }}
+                        >
+                          Edit
+                        </button>
+                      )}
+                    </>
+                  ) : (
+                    <button
+                      id="buttons123"
+                      onClick={() => handleSave(student)}
+                      disabled={isLocked || isRowDisabled}
+                    >
+                      Save
+                    </button>
+                  )}
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <Dialogue

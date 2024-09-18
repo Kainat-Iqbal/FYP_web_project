@@ -31,21 +31,21 @@ function ViewStudent() {
       </div>
       <div id="viewStudentWithoutBar">
         <div id="viewStudentTop">
-          <div id="topheading">
+          <div id="viewStudentTopheading">
             <h1>Student's Information</h1>
           </div>
-          <div id="topMenu">
-            <div id="leftM">
+          <div id="viewStudentTopMenu">
+            <div id="viewStudentLeftM">
               <input
                 type="text"
                 placeholder="Search..."
                 style={{ width: "70%" }}
               />
-              <button style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%"  }}>
+              <button id="btnsearch" style={{ height: "63%",backgroundColor:"lightBlue", color:"black",width:"18%"  }}>
                 <SearchIcon />
               </button>
             </div>
-            <div id="right">
+            <div id="viewStudentRight">
               {/* Sort By Dropdown */}
               <select style={{ width: "40%" }}>
                 <option value="id">Sort by ID</option>
@@ -59,52 +59,53 @@ function ViewStudent() {
         </div>
 
         <div id="viewStudentBottom">
-          <Table striped bordered hover id="viewStudentTable">
+          <table id="viewStudentTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th>S#</th>
+                <th  >
                   Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Father Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Email
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                  CNIC
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Enrollment
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Seat Number
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                  Phone Number
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Date of admission
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Matric Percentage
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Inter Percentage
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Position
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Status
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Degree Awarded
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                  Transcript Issued
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th  >
                   Edit
                 </th>
 
@@ -112,14 +113,15 @@ function ViewStudent() {
             </thead>
 
             <tbody>
-              {student.map((studentData) => {
+              {student.map((studentData,index) => {
                 return (
                   <tr key={studentData.id}>
+                    <td>{index+1}</td>
                     <td>{studentData.name}</td>
                     <td>{studentData.fatherName}</td>
                     <td>{studentData.email}</td>
                     <td>{studentData.CNIC}</td>
-                    <td>{studentData.th_credit_hr}</td>
+                    <td>{studentData.enrollment}</td>
                     <td>{studentData.lab_credit_hr}</td>
                     <td>{studentData.max_mid_marks}</td>
                     <td>{studentData.min_mid_marks}</td>
@@ -138,7 +140,7 @@ function ViewStudent() {
                 );
               })}
             </tbody>
-          </Table>
+          </table>
         </div>
       </div>
     </div>

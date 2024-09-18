@@ -69,47 +69,47 @@ return(
           </div>
           
         <div id="viewHODBottom">
-          <Table striped bordered hover id="viewDeanTable">
+          <table id="viewDeanHodExaminationTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
+                <th   >
+                 S#
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Email
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Designation
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Department
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   CNIC
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Status
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Qualification
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Joining Date
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Edit
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {hod.map((hodData) => {
+              {hod.map((hodData,index) => {
                 return (
                   <tr key={hodData.id}>
-                    <td>{hodData.HODId}</td>
+                    <td>{index+1}</td>
                     <td>{hodData.name}</td>
                     <td>{hodData.email}</td>
                     <td>{hodData.designation}</td>
@@ -126,7 +126,7 @@ return(
               })}
 
             </tbody>
-          </Table>
+          </table>
         </div>
 
         <div id="topheading">
@@ -136,44 +136,44 @@ return(
           </div>
           
         <div id="viewDeanBottom">
-          <Table striped bordered hover id="viewDeanTable">
+          <table id="viewDeanHodExaminationTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
+                <th   >
+                 S#
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Email
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Faculty
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Qualification
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   CNIC
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Joining Date
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Status
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Edit
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {dean.map((deanData) => {
+              {dean.map((deanData,index) => {
                 return (
                   <tr key={deanData.id}>
-                    <td>{deanData.deanId}</td>
+                    <td>{index+1}</td>
                     <td>{deanData.name}</td>
                     <td>{deanData.email}</td>
                     <td>{deanData.faculty}</td>
@@ -189,7 +189,7 @@ return(
               })}
 
             </tbody>
-          </Table>
+          </table>
         </div>
 
         <div id="topheading">
@@ -199,38 +199,38 @@ return(
           </div>
 
           <div id="viewExaminationBottom">
-          <Table striped bordered hover id="viewDeanTable">
+          <table id="viewDeanHodExaminationTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
-                  ID
+                <th   >
+                  S#
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Email
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   CNIC
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Joining Date
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Status
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white" }}>
+                <th   >
                   Edit
                 </th>
               </tr>
             </thead>
 
             <tbody>
-              {examination.map((examinationData) => {
+              {examination.map((examinationData,index) => {
                 return (
                   <tr key={examinationData.id}>
-                    <td>{examinationData.examinationId}</td>
+                    <td>{index+1}</td>
                     <td>{examinationData.name}</td>
                     <td>{examinationData.email}</td>
                     <td>{examinationData.CNIC}</td>
@@ -244,7 +244,7 @@ return(
               })}
 
             </tbody>
-          </Table>
+          </table>
         </div>
           
         </div>

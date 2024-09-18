@@ -1,157 +1,69 @@
-import React, { useState } from 'react';
+import React from "react";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
+const ViewTable = ({labCreditHours}) => {
+  const location = useLocation();
+  const courseData = location.state?.course;
+  const assignId = courseData?.assignId;
 
-const ViewTable = () => {
   // State for dynamic marks
-  const [students, setStudents] = useState([
-    {
-      id: 1,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 2,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 3,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 4,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 5,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 6,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 7,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 8,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    },
-    {
-      id: 9,
-      seatNo: '7829122',
-      enrollmentNo: '2021/Comp/BSSE/25637',
-      name: 'John Doe',
-      fatherName: 'Michael Doe',
-      midMarks: '18',
-      terminalMarks: '42',
-      labMarks: '26',
-      totalMarks:'86',
-      GP:'4.00',
-    }
-  ]);
+  const [results, setResults] = useState([]);
+
+  useEffect(() => {
+    const fetchResult = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8081/result/GetResult/${assignId}`
+        );
+        setResults(res.data);
+      } catch (error) {
+        console.log("Error fetching requests", error);
+      }
+    };
+
+    fetchResult();
+  }, []);
 
   return (
     <div>
-      <table>
+      <table id="viewResultTable">
         <thead>
           <tr>
             <th>S#</th>
             <th>Seat No.</th>
             <th>Enrollment No.</th>
-            <th className='name'>Student's Name</th>
-            <th className='name'>Father's Name</th>
+            <th className="name">Student's Name</th>
+            <th className="name">Father's Name</th>
             <th className="marks">Mid (20)</th>
-            <th className="marks">Lab (30)</th>
+            {labCreditHours !== 0 && <th className="marks">Lab (30)</th>}
             <th className="marks">Assign + Term (50/80)</th>
             <th className="marks">Grand Total</th>
             <th className="marks">GP</th>
           </tr>
         </thead>
         <tbody>
-          {students.map(student => (
-            <tr /* key={student.id} */>
-              <td>{student.id}</td>
-              <td>{student.seatNo}</td>
-              <td>{student.enrollmentNo}</td>
-              <td>{student.name}</td>
-              <td>{student.fatherName}</td>
-              <td>{student.midMarks} </td>
-              <td>{student.labMarks} </td>
-              <td>{student.terminalMarks}</td>
-              <td>{student.totalMarks} </td>
-              <td>{student.GP}</td>
-           </tr>
-          ))}
+          {Array.isArray(results) && results.length > 0
+            ? results.map((result, index) => (
+                <tr key={result.SNo}>
+                  <td style={{ textAlign: "center" }}>{index + 1}</td>
+                  <td style={{ textAlign: "center" }}>{result.seatNo}</td>
+                  <td style={{ textAlign: "center" }}>{result.enrollment}</td>
+                  <td style={{ textAlign: "center" }}>{result.name}</td>
+                  <td style={{ textAlign: "center" }}>{result.fatherName}</td>
+                  <td style={{ textAlign: "center" }}>{result.midMarks}</td>
+                  {labCreditHours !== 0 && <td style={{ textAlign: "center" }}>{result.labMarks}</td>}
+                  <td style={{ textAlign: "center" }}>
+                    {result.terminalMarks+result.sessionalMarks}
+                  </td>
+                  <td style={{ textAlign: "center" }}>{result.totalMarks}</td>
+                  <td style={{ textAlign: "center" }}>{Number.isInteger(result.GPA) ? `${result.GPA}.00` : result.GPA.toFixed(2)}</td>
+                </tr>
+              ))
+            : null}
         </tbody>
       </table>
-     {/*  <div className="buttonContainer">
-        <button onClick={handleLockResult}>Lock Results</button>
-        <button onClick={handleEnableEditing}>Enable Editing</button>
-      </div> */}
     </div>
   );
 };

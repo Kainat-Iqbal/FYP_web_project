@@ -66,7 +66,7 @@ function LoginPage() {
           <div id="leftSection">
             <div id="logoSection">
               <img src={require("./FYPLogo.png")} alt="logo" id="logo" />
-              <h5>Academic Accelerator</h5>
+              <h5>Academic Accelerator Pro</h5>
             </div>
             <div id="loginSection">
               <div id="loginform">
@@ -75,12 +75,12 @@ function LoginPage() {
                   <div class="inputGroup">
 
                     <input type="email" id="email" name="email"
-            placeholder="Enter your email"
-               onChange={handleInput}  />
+            placeholder="Enter your email" 
+               onChange={handleInput} style={{color:'black !important'}} />
                   </div>
                   <div class="inputGroup">
 
-                    <input type="password" id="password" name="password" placeholder="Enter your password"   onChange={handleInput} />
+                    <input type="password" id="password" name="password" placeholder="Enter your password"   onChange={handleInput} style={{color:'black'}} />
                   </div>
                   <button type="submit">Login</button>
 

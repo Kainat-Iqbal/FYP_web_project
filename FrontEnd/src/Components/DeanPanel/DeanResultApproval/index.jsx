@@ -58,41 +58,41 @@ function DeanResultApproval() {
         </div>
 
         <div id="DeanResultApprovalBottom">
-          <Table striped bordered hover id="DeanResultApprovalTable">
+          <table id="DeanResultApprovalTable">
             <thead>
               <tr>
-                <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
+                <th   >
                   ID
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
+                <th   >
                   Course Number
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
+                <th   >
                   Course Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
+                <th   >
                   Class
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
+                <th   >
                   Instructor Name
                 </th>
-                <th style={{ backgroundColor: "#00304B", color: "white", textAlign: "center" }}>
+                <th   >
                   Action
                 </th>
               </tr>
             </thead>
 
             {Array.isArray(results) && results.length > 0 ?(
-              results.map((result) => (
+              results.map((result,index) => (
                 <tr key={result.assignId}>
-                  <td>{result.assignId}</td>
+                  <td>{index+1}</td>
                   <td>{result.course_code}</td>
                   <td>{result.courseTitle}</td>
                   <td>{result.year+"("+result.session+")"}</td>
                   <td>{result.teacherName}</td>
                   <td>
                   <button
-        style={{ borderColor: "#add8e6", color: "black", backgroundColor: "#add8e6", width: "70%" }}
+        style={{ borderColor: "#add8e6", color: "black",background:'linear-gradient(to right, #93C098, #8CE0DB)', width: "80%" }}
         onClick={() => handleViewResultClick(result.assignId)}
       >
                           View Result
@@ -108,7 +108,7 @@ function DeanResultApproval() {
                 </td>
               </tr>
             )}
-          </Table>
+          </table>
         </div>
 
       </div>
