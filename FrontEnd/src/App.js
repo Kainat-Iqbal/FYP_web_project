@@ -70,6 +70,8 @@ import Insights from './Components/TeacherPanel/Insights';
 import React from 'react'
 import { Helmet } from "react-helmet";
 import Landing from "././screens/Landing.jsx";
+import StudentCard from './Components/StudentPanel/StudentCard/index.js';
+import StudentDetailInsights from './Components/StudentPanel/StudentDetailInsights/index.js';
 
 
 function App() {
@@ -150,6 +152,8 @@ function App() {
           <Route path='/StudentViewCourse' element={<StudentViewCourse/>} />
           <Route path='/StudentViewResult' element={<StudentViewResult/>} />
           <Route path='/StudentViewProforma' element={<StudentViewProforma/>} />
+          <Route path='/StudentCard' element={<StudentCard/>}/>
+          <Route path="/StudentDetailInsights/:studentId" element={<StudentDetailInsights/>} />
 
        
       </Routes>
