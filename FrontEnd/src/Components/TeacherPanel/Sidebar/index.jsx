@@ -187,6 +187,8 @@ function SideBar() {
             onClick={() => {
               nav("/insightCourse");
             }}>Results & Insights</MenuItem>
+          <MenuItem icon={<Insights/>}
+          onClick={()=>{nav("/studentCard")}}>Student's Insights</MenuItem>
           <MenuItem icon={<Notifications />}>Notifications</MenuItem>
         </Menu>
       </Sidebar>

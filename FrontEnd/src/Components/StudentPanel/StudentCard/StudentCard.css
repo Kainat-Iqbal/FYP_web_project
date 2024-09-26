@@ -1,0 +1,50 @@
+#mainStudentCardDiv{
+  height: 100vh;
+  width: 100vw;
+  /* background-color: blue; */
+}
+
+#studentCardSideBar{
+  height: 9%;
+}
+#StudentCardTopHeading{
+  margin-top: 5vh;
+  display: flex;
+  justify-content: center;
+}
+.student-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Reduced space between each card */
+    justify-content: flex-start;
+    margin-top: 5vh;
+    width: 82vw;
+    margin-left: 19.5vw;
+  }
+  
+  .student-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px; /* Reduced padding to make the card smaller */
+    width: 205px; /* Reduced the width of each card */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 300px;
+    text-align: center;
+  }
+  
+  .student-card h3 {
+    margin: 0;
+    font-size: 1.2rem; /* Reduced font size */
+    color: #333;
+  }
+  
+  .student-card p {
+    margin: 8px 0; /* Reduced margin between paragraphs */
+    font-size: 1rem; /* Slightly reduced font size */
+  }
+  
+  .chart-container {
+    margin-top: 10px; /* Reduced space between the name/CGPA and chart */
+  }
+  

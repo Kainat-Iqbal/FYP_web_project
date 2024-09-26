@@ -1,0 +1,60 @@
+/* StudentDetailInsights.css */
+#StudentDetailsMainDiv {
+  width: 100%; /* Adjust width to fit the screen */
+  height: 100vh;
+  margin-left: 0; /* Remove left margin to use full width */
+  padding-left: 18%; /* Add padding to leave space for the sidebar */
+}
+#StudentDetailSideBar {
+  height: 9%;
+}
+.student-detail-insights-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 2%;
+  margin-left: 1vw;
+
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.student-batch-info {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-top: 20px;
+  color: #444;
+  display: flex;
+  justify-content: center;
+}
+
+.student-chart-container {
+  margin-top: 20px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-right: auto; /* Center the container */
+}
+
+@media (max-width: 768px) {
+  .student-detail-insights-container {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+}

@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View ,FlatList} from 'react-native';
+import {Text, View ,FlatList} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
 import {Link} from 'expo-router';
-import Profile from './profile';
+import Profile from './(tabs)/profile';
 
 export default function App() {
-    const [student, setStudent] = useState([]);
+ /*    const [student, setStudent] = useState([]);
     useEffect(() => {
       const fetchStudents = async () => {
         try {
@@ -22,11 +22,17 @@ export default function App() {
       };
       fetchStudents();
     }, []);
-   
+    */
   return (
-    <View style={styles.container}>
-      <Text>Academic Accelerator Pro78s8</Text>
-      <Text>Academic Accelerator Pro788 </Text>
+    <View className="flex-1 items-center justify-center">
+      <Text className="text-2xl font-pblack">Academic Accelerator Pro</Text>
+            
+      <StatusBar style="auto" />
+      <Link href="/home" style={{color:"blue"}}>Go To Home</Link>
+      </View>
+      );
+    }
+      
       
     {/*  <FlatList
         data={student}
@@ -37,14 +43,11 @@ export default function App() {
           </View>
         )}
       /> */}
-           
-      <StatusBar style="auto" />
-      <Link href="/profile" style={{color:"blue"}}>Go To Profile</Link>
-    </View>
-  );
-}
+     
+ 
+  
 
-const styles = StyleSheet.create({
+/* const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -52,4 +55,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     
   },
-});
+}); */

@@ -1,27 +1,23 @@
 table {
   border-collapse: collapse;
-  width: 97.5%;
-  margin-left: 0.7%;  
+  width: 95%; /* Slightly reduce the width */
+  margin: 0 auto; /* Center the table */
 }
 
 th,
 td {
   border: 1px solid #dddddd;
   text-align: left;
-  padding: 8px;
+  padding: 6px; /* Reduce padding for a more compact table */
 }
 
 th {
   background-color: #f2f2f2;
 }
 
-/*  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  } */
 .marks {
-  width: 80px;
+  width: 70px; /* Reduce width of marks column */
 }
-
 
 tr:hover {
   background-color: #ddd;
@@ -39,26 +35,24 @@ tr:hover {
   background-color: #4c90af;
   border: none;
   color: white;
-  padding: 10px 24px;
+  padding: 8px 20px; /* Reduce button size */
   text-align: center;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  font-size: 14px; /* Slightly smaller font */
   border-radius: 5px;
   cursor: pointer;
-  width: 200px;
+  width: 180px; /* Reduce button width */
 }
 
 .buttonContainer button:hover {
   background-color: #215866;
 }
 
-#buttons123{
-  background-color:lightblue;
+#buttons123 {
+  background-color: lightblue;
   color: black;
   border: 2px lightblue;
-  width: 80px;
-  
+  width: 70px; /* Reduce width */
 }
 
 .dialog {
@@ -67,10 +61,11 @@ tr:hover {
   left: 50%;
   transform: translate(-50%, -50%);
   background: white;
-  padding: 20px;
+  padding: 15px; /* Reduce padding */
   border: 1px solid #ccc;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Ensure it is on top of other elements */
+  z-index: 1000;
+  max-width: 90%; /* Ensure dialog doesn't overflow on smaller screens */
 }
 
 .dialog-content {
@@ -79,15 +74,14 @@ tr:hover {
 }
 
 .dialog-content h3 {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .dialog-content textarea {
-  margin-bottom: 10px;
-  height: 100px;
+  margin-bottom: 8px;
+  height: 80px; /* Reduce textarea height */
 }
 
 .dialog-content button {
-  margin-top: 10px;
+  margin-top: 8px;
 }
-

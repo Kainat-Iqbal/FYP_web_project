@@ -102,7 +102,7 @@ function HODHomePage() {
           </div>
 
           <div id="AssignCourseTable">
-            <table id="viewAssignCourseTable">
+            <table id="viewAssignCourseTable" style={{marginLeft:'-1vw'}}>
               <thead>
                 <tr>
                   <th  >Course Code</th>
