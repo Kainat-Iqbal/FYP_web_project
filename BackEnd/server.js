@@ -34,10 +34,17 @@ const { resultApprovalExaminationRouter } = require('./routes/examinationResultA
 app.use(bodyParser.json())
 app.use(express.json());
 app.use(cors({
-    origin: ["http://localhost:3000"],
-    methods: ["POST", "GET", "PUT"],
-    credentials: true
+    origin: ["http://localhost:3000", "http://localhost:8082","http://192.168.100.18:8081"], // Include both React web and React Native origins
+    methods: ["POST", "GET", "PUT", "OPTIONS"], // Add OPTIONS for preflight requests
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow custom headers if you're using any
 }));
+
+// app.use(cors({
+//     origin: ["http://localhost:3000","http://192.168.100.18:8081","http://localhost:8082"],
+//     methods: ["POST", "GET", "PUT"],
+//     credentials: true
+// }));
 app.use(cookieParser());
 app.use(session({
     secret: 'secret',
