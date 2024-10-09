@@ -28,21 +28,13 @@ const Login = () => {
 
   // Function to handle form submission
   const handleSubmit = () => {
-    axios.post('http://192.168.100.18:8081/login', values)
+    axios.post('http://192.168.97.20:8081/login', values)
       .then((res) => {
-        if (res.data === "Admin") {
-          localStorage.setItem("user", "kainat");
-          navigation.navigate("Home"); // React Native navigation
-        } else if (res.data === "HOD") {
-          navigation.navigate("HODHomePage");
-        } else if (res.data === "Dean") {
-          navigation.navigate("DeanHomePage");
-        } else if (res.data === "Examination") {
-          navigation.navigate("ControllerOfExaminationHomePage");
-        } else if (res.data === "Teacher") {
+        console.log("sc",res.data)
+        if (res.data === "Student") {
           router.push('/StudentHome');
         } else if (res.data === "Failed") {
-          Alert.alert("Invalid Login");
+          Alert.alert("Invalid Loginnn");
         }
       })
       .catch((error) => {
