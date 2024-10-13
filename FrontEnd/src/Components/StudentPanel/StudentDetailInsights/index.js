@@ -82,7 +82,7 @@ const StudentDetailInsights = () => {
   
       try {
         const response = await axios({
-          url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyBGPG-OF1jRxO4ICRjQpU7MVGpTSt_D030",
+          url: "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyDlo8e0AWrVdEyy_lKCyq5uoNny0mwcFMc",
           method: "post",
           data: {
             contents: [

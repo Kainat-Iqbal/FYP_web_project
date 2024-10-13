@@ -172,6 +172,100 @@ const viewResultOfSpecificCourse = async (req, res) => {
     });
   };
 
+  const viewResultOfIndividualStudent = async (req, res) => {
+    const student_id = req.params.studentId; // Get studentId from request parameters
+
+    const queryToViewResults = `
+SELECT *
+FROM 
+    result r
+JOIN 
+    student s ON r.studentId = s.studentId
+JOIN 
+    assign_course ac ON r.assignId = ac.assignId
+JOIN 
+    course c ON ac.courseId = c.courseId
+JOIN 
+    batch b ON s.batchId = b.batchId  -- Joining with the batch table
+JOIN 
+    session ses ON ac.sessionId = ses.sessionId  -- Joining with the session table
+JOIN 
+    degree_program dp ON ses.programId = dp.programId  -- Joining with the degree_program table
+WHERE 
+    r.studentId = ?;  -- Replace ? with the provided studentId`;
+
+    // Execute the query
+    DB.query(queryToViewResults, [student_id], (err, results) => {
+        if (err) {
+            console.error("Error fetching results:", err);
+            return res.status(500).json("Failed to fetch results");
+        } else {
+            // If there are results, return them
+            if (results.length > 0) {
+                console.log("Fetched results:", results);
+                return res.json(results);
+            } else {
+                // If no results are found, return an appropriate message
+                return res.json("No results found for this student");
+            }
+        }
+    });
+};
+
+const viewLastSemesterResultOfIndividualStudent = async (req, res) => {
+    const student_id = req.params.studentId; // Get studentId from request parameters
+
+    const queryToViewResults = `
+WITH LatestAcademicYear AS (
+    SELECT 
+        academic_year,
+        MAX(semester) AS latest_semester
+    FROM 
+        session
+    WHERE 
+        sessionId IN (
+            SELECT ac.sessionId 
+            FROM assign_course ac
+            JOIN result r ON ac.assignId = r.assignId
+            WHERE r.studentId = ?
+        )
+    GROUP BY 
+        academic_year
+    ORDER BY 
+        academic_year DESC
+    LIMIT 1
+)
+
+SELECT *
+FROM result r
+JOIN student s ON r.studentId = s.studentId
+JOIN assign_course ac ON r.assignId = ac.assignId
+JOIN course c ON ac.courseId = c.courseId
+JOIN batch b ON s.batchId = b.batchId
+JOIN session ses ON ac.sessionId = ses.sessionId
+JOIN degree_program dp ON ses.programId = dp.programId
+WHERE r.studentId = ?
+AND ses.academic_year = (SELECT academic_year FROM LatestAcademicYear)
+AND ses.semester = (SELECT latest_semester FROM LatestAcademicYear);
+`;
+
+    // Execute the query
+    DB.query(queryToViewResults, [student_id,student_id], (err, results) => {
+        if (err) {
+            console.error("Error fetching results:", err);
+            return res.status(500).json("Failed to fetch results");
+        } else {
+            // If there are results, return them
+            if (results.length > 0) {
+                console.log("Fetched results:", results);
+                return res.json(results);
+            } else {
+                // If no results are found, return an appropriate message
+                return res.json("No results found for this student");
+            }
+        }
+    });
+};
 
 
-module.exports = { addResult, getResult, updateResult,getSelectedResults,getResultForGraph,viewResultOfSpecificCourse};
+module.exports = { addResult, getResult,viewResultOfIndividualStudent, updateResult,getSelectedResults,getResultForGraph,viewLastSemesterResultOfIndividualStudent,viewResultOfSpecificCourse};

@@ -113,7 +113,7 @@ const Login = async (req, res) => {
                       const hashedPassword = data[0].password;
                       if (await verifyPassword(password, hashedPassword)) {
                         req.session.user = data[0].email;
-                        req.session.userId = data[0].juwId;
+                        req.session.userId = data[0].studentId;
                         req.session.userName = data[0].name;
                         loginSuccess = true;
                         console.log("try for student")

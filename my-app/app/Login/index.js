@@ -28,7 +28,7 @@ const Login = () => {
 
   // Function to handle form submission
   const handleSubmit = () => {
-    axios.post('http://192.168.97.20:8081/login', values)
+    axios.post('http://192.168.100.18:8081/login', values)
       .then((res) => {
         console.log("sc",res.data)
         if (res.data === "Student") {
@@ -44,7 +44,7 @@ const Login = () => {
 
   return (
     <ImageBackground
-      source={require('./newlogin4.png')} // Replace with your image path
+      source={require('./BG2.png')} // Replace with your image path
       style={styles.background}
       
     >
@@ -97,12 +97,12 @@ const styles = StyleSheet.create({
   },
   leftSection: {
     flex: 1,
-    justifyContent: "center",
     alignItems: "center",
   },
   logoSection: {
     alignItems: "center",
     marginBottom: 20,
+    marginTop:5,
   },
   logo: {
     width: 100,
@@ -112,8 +112,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     fontWeight: "bold",
-    marginTop: 10,
+    marginTop: 7,
     fontFamily: 'Poppins',
+    color:"#00304B",
   },
   loginSection: {
     width: "100%",
@@ -122,7 +123,9 @@ const styles = StyleSheet.create({
   loginTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    marginBottom: 20,
+    marginBottom: 70,
+    marginTop:30,
+    color:"#00304B",
   },
   input: {
     width: "90%",
@@ -131,17 +134,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 15,
-    marginBottom: 15,
+    marginBottom: 25,
     fontSize: 16,
     color: "#333",
   },
   button: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#93C098",
     width: "90%",
     padding: 15,
     borderRadius: 8,
     alignItems: "center",
-    marginTop: 10,
+    marginTop: 15,
   },
   buttonText: {
     color: "#fff",
