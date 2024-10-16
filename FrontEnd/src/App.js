@@ -72,6 +72,7 @@ import { Helmet } from "react-helmet";
 import Landing from "././screens/Landing.jsx";
 import StudentCard from './Components/StudentPanel/StudentCard/index.js';
 import StudentDetailInsights from './Components/StudentPanel/StudentDetailInsights/index.js';
+import AssignCourseToBatch from './Components/AdminPanel/AssignCourseToBatch/index.js';
 
 
 function App() {
@@ -105,6 +106,7 @@ function App() {
         <Route path='/viewTeacher' element={<Auth>
           <ViewTeacher/>
         </Auth>}/>
+        <Route path='/assignCourseToBatch' element={<AssignCourseToBatch/>}></Route>
         <Route path='/viewCourse' element={<ViewCourse/>}></Route>
         <Route path='/viewDean' element={<ViewDeanHodExam/>}></Route>
         <Route path='/viewDegree' element={<ViewDegree/>}></Route>

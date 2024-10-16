@@ -15,6 +15,8 @@ const { degreeRouter } = require('./routes/degree');
 const { batchRouter } = require('./routes/batch');
 const { SessionRouter } = require('./routes/session');
 const { studentRouter } = require('./routes/student');
+const { parentRouter } = require('./routes/parent');
+
 const { imagesRouter } = require('./routes/images');
 const { requestRouter } = require('./routes/editRequest');
 const {resultRouter}=require('./routes/result')
@@ -33,11 +35,22 @@ const { resultApprovalExaminationRouter } = require('./routes/examinationResultA
 
 app.use(bodyParser.json())
 app.use(express.json());
+// app.use(cors({
+//     origin: ["http://localhost:3000", "http://localhost:8082","http://192.168.100.18:8081"], // Include both React web and React Native origins
+//     methods: ["POST", "GET", "PUT", "OPTIONS"], // Add OPTIONS for preflight requests
+//     credentials: true,
+//     allowedHeaders: ["Content-Type", "Authorization"], // Allow custom headers if you're using any
+// }));
+
 app.use(cors({
-    origin: ["http://localhost:3000"],
-    methods: ["POST", "GET", "PUT"],
-    credentials: true
+    origin: (origin, callback) => {
+        callback(null, true); // Allow all origins dynamically
+    },
+    methods: ["POST", "GET", "PUT", "DELETE", "OPTIONS"],
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
 }));
+
 app.use(cookieParser());
 app.use(session({
     secret: 'secret',
@@ -58,6 +71,7 @@ app.use("/degree",degreeRouter)
 app.use("/batch",batchRouter)
 app.use("/sessionUni",SessionRouter)
 app.use("/student",studentRouter)
+app.use("/parent",parentRouter)
 app.use("/teachercourse",teacherCourseRouter)
 app.use("/images",imagesRouter)
 app.use("/editRequest",requestRouter)

@@ -23,12 +23,14 @@ function LoginPage() {
       [event.target.name]: [event.target.value]
     }));
   };
+  console.log("ccdc",values)
   axios.defaults.withCredentials = true;
   // Function to handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.post('http://localhost:8081/login', values)
       .then(res => {
+        console.log("first",res.data)
         console.log(values)
         if (res.data === "Admin") {
           localStorage.setItem("user", "kainat");
@@ -51,10 +53,15 @@ function LoginPage() {
           console.log("teacher")
           nav("/teacher")
         }
+        else if (res.data === "Student") {
+          console.log("Student")
+          nav("/StudentHomePage")
+        }
         else if (res.data === "Failed") {
           alert("Invalid Login")
         }
       })
+      
 
   };
 

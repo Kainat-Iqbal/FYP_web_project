@@ -6,7 +6,6 @@ const getAll = (req, res) => {
     SELECT c.courseId, c.course_title, c.course_code
     FROM course c
     LEFT JOIN assign_course ac ON c.courseId = ac.courseId
-    WHERE ac.courseId IS NULL;
   `;
     const queryToGetBatch = "SELECT * FROM batch";
     const queryToGetSession = `
