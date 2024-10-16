@@ -140,7 +140,7 @@ const Proforma = () => {
               <Text style={styles.provisionalMarks}>
                 Provisional Marks Proforma
               </Text>
-              <Text style={styles.academicYear}>Academic Year 2021</Text>
+              <Text style={styles.academicYear}>Academic Year 2024</Text>
             </View>
           </View>
         </View>
@@ -162,7 +162,7 @@ const Proforma = () => {
               )}
             </Text>
             <Text style={styles.boldText}>
-              Semester: <Text style={styles.normalText}>Semester II</Text>
+              Semester: <Text style={styles.normalText}>Semester I</Text>
             </Text>
             <Text style={styles.boldText}>
               Department:{" "}
@@ -185,7 +185,7 @@ const Proforma = () => {
               )}
             </Text>
             <Text style={styles.boldText}>
-              Year: <Text style={styles.normalText}>1st Year</Text>
+              Year: <Text style={styles.normalText}>4th Year</Text>
             </Text>
             <Text style={styles.boldText}>
               Enrollment No:{" "}

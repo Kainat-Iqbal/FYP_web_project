@@ -138,21 +138,21 @@ const StudentHome = () => {
                         <View style={styles.table}>
                             <View style={styles.tableRow}>
                                 <Text style={[styles.tableHeaderCell, { width: 50 }]}>S#</Text>
-                                <Text style={[styles.tableHeaderCell, { width: 200 }]}>Course Title</Text>
-                                <Text style={[styles.tableHeaderCell, { width: 80 }]}>Mid</Text>
-                                <Text style={[styles.tableHeaderCell, { width: 80 }]}>Lab</Text>
-                                <Text style={[styles.tableHeaderCell, { width: 120 }]}>Assig + Term</Text>
-                                <Text style={[styles.tableHeaderCell, { width: 100 }]}>Grand Total</Text>
+                                <Text style={[styles.tableHeaderCell, { width: 170 }]}>Course Title</Text>
+                                <Text style={[styles.tableHeaderCell, { width: 80,marginLeft:30 }]}>Mid</Text>
+                                <Text style={[styles.tableHeaderCell, { width: 80 ,marginLeft:-30}]}>Lab</Text>
+                                <Text style={[styles.tableHeaderCell, { width: 120,marginLeft:-30 }]}>Assig + Term</Text>
+                                <Text style={[styles.tableHeaderCell, { width: 100 ,marginLeft:-15}]}>Grand Total</Text>
                                 <Text style={[styles.tableHeaderCell, { width: 50 }]}>GP</Text>
                             </View>
                             {courseData.map((course, index) => (
                                 <View key={index} style={styles.tableRow}>
                                     <Text style={[styles.tableCell, { width: 50 }]}>{index + 1}</Text>
-                                    <Text style={[styles.tableCell, { width: 200 }]}>{course.course_title}</Text>
-                                    <Text style={[styles.tableCell, { width: 80 }]}>{course.midMarks}</Text>
-                                    <Text style={[styles.tableCell, { width: 80 }]}>{course.labMarks}</Text>
-                                    <Text style={[styles.tableCell, { width: 120 }]}>{course.sessionalMarks + course.terminalMarks}</Text>
-                                    <Text style={[styles.tableCell, { width: 100 }]}>{course.totalMarks}</Text>
+                                    <Text style={[styles.tableCell, { width: 170 }]}>{course.course_title}</Text>
+                                    <Text style={[styles.tableCell, { width: 80 ,marginLeft:30}]}>{course.midMarks}</Text>
+                                    <Text style={[styles.tableCell, { width: 80 ,marginLeft:-30}]}>{course.labMarks}</Text>
+                                    <Text style={[styles.tableCell, { width: 120,marginLeft:-30 }]}>{course.sessionalMarks + course.terminalMarks}</Text>
+                                    <Text style={[styles.tableCell, { width: 100,marginLeft:-15 }]}>{course.totalMarks}</Text>
                                     <Text style={[styles.tableCell, { width: 50 }]}>{Number.isInteger(course.GPA) ? `${course.GPA}.00` : course.GPA.toFixed(2)}</Text>
                                 </View>
                             ))}

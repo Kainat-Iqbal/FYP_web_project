@@ -11,6 +11,7 @@ const Layout = () => {
       <Stack.Screen name="StudentHome" options={{ title: 'Teacher Panel' }} /> {/* Teacher Panel */}
       <Stack.Screen name="Proforma" options={{ title: 'Proforma' }}/>
       <Stack.Screen name="SideNavBar" options={{title:'SideNavBar'}}/>
+      <Stack.Screen name="Insights" options={{title:'Insights'}}/>
     </Stack>
     </UserProvider>
   );
