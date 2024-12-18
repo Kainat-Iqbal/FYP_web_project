@@ -8,7 +8,7 @@ import { BarChart, LineChart } from 'react-native-chart-kit';
 
 const screenWidth = Dimensions.get("window").width;
 
-const Insights = () => {
+const Demo = () => {
   const { userId } = useUserContext();
   const [studentResults, setStudentResults] = useState(null);
   const [cgpaData, setCgpaData] = useState(null);
@@ -392,4 +392,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default Insights;
+export default Demo;

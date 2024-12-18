@@ -5,8 +5,8 @@ const bcrypt = require("bcryptjs");
 const verifyPassword = async (password, hashedPassword) => {
   console.log(
     "Verifying password. Types:",
-    typeof password,
-    typeof hashedPassword
+    typeof password, password,
+    typeof hashedPassword,hashedPassword
   );
   if (typeof password !== "string" || typeof hashedPassword !== "string") {
     console.log(
@@ -37,10 +37,12 @@ const Login = async (req, res) => {
     "SELECT * FROM examination_controller WHERE `email` = ?";
   const queryForTeacher = "SELECT * FROM teacher WHERE `email` = ?";
   const queryForStudent = "SELECT * FROM student WHERE `email` = ?"; // New student query
+  const queryForParent = "SELECT * FROM parents WHERE `email` = ?";
 
   let loginSuccess = false;
 
   // Admin login
+  
   DB.query(queryForAdmin, [email], async (err, data) => {
     if (err) {
       return res.status(500).json({ message: "Internal Server Error" });
@@ -137,12 +139,36 @@ const Login = async (req, res) => {
                             loginSuccess = true;
                             return res.json("Teacher");
                           }
-                        } else {
+                        } 
+                        else{
+                          DB.query(queryForParent, [email], async (err, data) => {
+                            if (err) {
+                              return res.status(500).json({ message: "Internal Server Error" });
+                            }
+                            if (data.length > 0) {
+                              const hashedPassword = data[0].password;
+                              console.log(hashedPassword)
+                              if (await verifyPassword(password, hashedPassword)) {
+                                req.session.user = data[0].email;
+                                console.log(req.session.user)
+                                req.session.userId = data[0].studentId; // Assuming parentId exists
+                                req.session.userName = data[0].name;
+
+                                loginSuccess = true;
+                                return res.json("Parent");
+                              }
+                              else {
+                                console.log("Password mismatch"); // Add log for debugging
+                              }
+                            }
+                            else {
                           if (!loginSuccess) {
                             return res.json("Failed");
                           }
                         }
                       });
+                    }
+                  });
                     }
                   });
                 }

@@ -15,6 +15,8 @@ const { degreeRouter } = require('./routes/degree');
 const { batchRouter } = require('./routes/batch');
 const { SessionRouter } = require('./routes/session');
 const { studentRouter } = require('./routes/student');
+const { parentRouter } = require('./routes/parent');
+
 const { imagesRouter } = require('./routes/images');
 const { requestRouter } = require('./routes/editRequest');
 const {resultRouter}=require('./routes/result')
@@ -69,6 +71,7 @@ app.use("/degree",degreeRouter)
 app.use("/batch",batchRouter)
 app.use("/sessionUni",SessionRouter)
 app.use("/student",studentRouter)
+app.use("/parent",parentRouter)
 app.use("/teachercourse",teacherCourseRouter)
 app.use("/images",imagesRouter)
 app.use("/editRequest",requestRouter)

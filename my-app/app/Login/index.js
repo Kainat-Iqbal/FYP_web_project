@@ -7,15 +7,11 @@ import { useRouter } from 'expo-router';
 const Login = () => {
   const navigation = useNavigation();
   const router = useRouter();
-
-
   // State variables to hold the input values
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  console.log("first",values)
-
   // Function to handle changes in input field
   const handleInput = (name, value) => {
     setValues((prev) => ({
@@ -25,7 +21,6 @@ const Login = () => {
   };
 
   axios.defaults.withCredentials = true;
-
   // Function to handle form submission
   const handleSubmit = () => {
     axios.post('http://192.168.100.18:8081/login', values)
@@ -33,13 +28,20 @@ const Login = () => {
         console.log("sc",res.data)
         if (res.data === "Student") {
           router.push('/StudentHome');
-        } else if (res.data === "Failed") {
+        } 
+        else if (res.data === "Parent") {
+          router.push('/StudentHome'); // Redirect to ParentHome
+        }
+        else if (res.data === "Failed") {
           Alert.alert("Invalid Loginnn");
         }
+        console.log("djdjd")
       })
+      
       .catch((error) => {
         console.error("Error during login:", error);
       });
+      console.log("dj7")
   };
 
   return (
@@ -79,6 +81,13 @@ const Login = () => {
             <TouchableOpacity style={styles.button} onPress={handleSubmit}>
               <Text style={styles.buttonText}>Login</Text>
             </TouchableOpacity>
+            {/* "Not signed in?" text and Sign Up link */}
+          <View style={styles.signupContainer}>
+            <Text style={styles.notSignedInText}>New Parent? </Text>
+            <TouchableOpacity onPress={() => router.push('ParentSignup')}>
+              <Text style={styles.signupText}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
           </View>
         </View>
       </View>
@@ -168,6 +177,20 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 10,
     paddingHorizontal: 20,
+  },
+  signupContainer: {
+    flexDirection: 'row',  // Align items in a row
+    justifyContent: 'center',  // Center the content horizontally
+    marginTop: 10,  // Add some space from the login button
+  },
+  notSignedInText: {
+    color: '#999',
+    fontSize: 14,
+  },
+  signupText: {
+    color: '#007bff',
+    fontWeight: 'bold',
+    fontSize: 14,
   },
 });
 

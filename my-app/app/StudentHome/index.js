@@ -231,6 +231,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         borderRadius: 8,
         elevation: 3,
+        marginBottom:10
     },
     tableHeader: {
         fontSize: 20,

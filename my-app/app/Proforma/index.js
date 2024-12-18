@@ -19,9 +19,7 @@ const Proforma = () => {
   const [showPopup, setShowPopup] = useState(true);
   const [isSideNavVisible, setIsSideNavVisible] = useState(false); // State for SideNav visibility
   const [lastSemester, setLastSemester] = useState([]);
-
   const cgpa = 3.51; // Extract CGPA value from the component
-
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
@@ -36,12 +34,10 @@ const Proforma = () => {
         setError("Failed to load data");
       }
     };
-
     if (userId) {
       fetchStudentData();
     }
   }, [userId]); // Depend on userId to re-fetch if it changes
-
   useEffect(() => {
       const fetchDataofLastSemester = async () => {
           try {
