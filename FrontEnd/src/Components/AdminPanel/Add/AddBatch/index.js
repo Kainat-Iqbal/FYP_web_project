@@ -89,7 +89,7 @@ function AddBatch() {
               <select
                 name="type"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray', borderRadius:"4px"}}
               >
                 <option value="" disabled>Select year</option>
                     {years.map((year) => (
@@ -105,7 +105,7 @@ function AddBatch() {
               <select
                 name="session"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray', borderRadius:"4px"}}
               >
                 <option value="Spring">Spring</option>
                 <option value="Fall">Fall</option>

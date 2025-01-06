@@ -19,7 +19,7 @@ const Insights = () => {
   useEffect(() => {
     const fetchStudentDetails = async () => {
       try {
-        const response = await axios.get(`http://172.31.242.169:8081/student/ViewIndividualStudentDetail/${userId}`);
+        const response = await axios.get(`http://192.168.100.9:8081/student/ViewIndividualStudentDetail/${userId}`);
         setStudentResults(response.data);
       } catch (error) {
         console.error('Error fetching student details:', error);
@@ -28,7 +28,7 @@ const Insights = () => {
 
     const fetchCgpaDistribution = async () => {
       try {
-        const response = await axios.get(`http://172.31.242.169:8081/student/ViewStudentDetailWRTSesmester/${userId}`);
+        const response = await axios.get(`http://192.168.100.9:8081/student/ViewStudentDetailWRTSesmester/${userId}`);
         setCgpaData(response.data);
       } catch (error) {
         console.error('Error fetching CGPA distribution:', error);
@@ -127,9 +127,9 @@ const Insights = () => {
     // '#FF5733', // vibrant red-orange
     // '#FFC300', // bright yellow
     // '#DAF7A6', // soft green
-    // '#C70039', // rich crimson
+     '#C70039', // rich crimson
     '#900C3F', // deep purple
-    // '#581845', // dark violet
+     '#581845', // dark violet
     '#3498DB', // bright blue
     '#FF9F00', // sunny orange
 
@@ -258,7 +258,7 @@ const Insights = () => {
       r: "6", // Radius of the dot
       strokeWidth: "2", // Width of the stroke
       stroke: "#fff", // Dot border color
-      fill: generateRandomColor(), // Fill color for the dot
+      fill: "#C70039", // Fill color for the dot
     },
   }}
   bezier
@@ -280,11 +280,11 @@ const Insights = () => {
 
 const chartConfig = {
     backgroundColor: "#f5f5f5",
-    backgroundGradientFrom: "#93C098",
-    backgroundGradientTo: "#8CE0DB",
+    backgroundGradientFrom: "#eaeaea",
+    backgroundGradientTo: "#eaeaea",
     decimalPlaces: 2,
-    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
     barPercentage: 0.6,
     style: {
       borderRadius: 16,

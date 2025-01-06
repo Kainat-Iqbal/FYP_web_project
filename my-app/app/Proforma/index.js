@@ -26,7 +26,7 @@ const Proforma = () => {
     const fetchStudentData = async () => {
       try {
         const response = await axios.get(
-          `http://172.31.242.169:8081/result/GetIndividualStudentResult/${userId}`,
+          `http://192.168.100.9:8081/result/GetIndividualStudentResult/${userId}`,
           {
             withCredentials: true,
           }
@@ -45,7 +45,7 @@ const Proforma = () => {
   useEffect(() => {
       const fetchDataofLastSemester = async () => {
           try {
-              const response = await axios.get(`http://172.31.242.169:8081/result/GetIndividualStudentLastSemesterResult/${userId}`, {
+              const response = await axios.get(`http://192.168.100.9:8081/result/GetIndividualStudentLastSemesterResult/${userId}`, {
                   withCredentials: true,
               });
               setLastSemester(response.data); // Set the fetched data to state

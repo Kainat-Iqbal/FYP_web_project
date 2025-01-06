@@ -14,7 +14,7 @@ const SideNavBar = ({ onClose }) => {
 
     const handleLogout = async () => {
         try {
-            await axios.post("http://172.31.242.169:8081/logout", {}, {
+            await axios.post("http://192.168.100.9:8081/logout", {}, {
                 withCredentials: true,
             });
             // Navigate to Login page after logout

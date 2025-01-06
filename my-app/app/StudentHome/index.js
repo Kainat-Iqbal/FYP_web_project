@@ -22,7 +22,7 @@ const StudentHome = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://172.31.242.169:8081/session", {
+                const response = await axios.get("http://192.168.100.9:8081/session", {
                     withCredentials: true,
                 });
                 setUserId(response.data.userId); // Set userId in context
@@ -40,7 +40,7 @@ const StudentHome = () => {
     useEffect(() => {
         const fetchStudentData = async () => {
             try {
-                const response = await axios.get(`http://172.31.242.169:8081/result/GetIndividualStudentResult/${userId}`, {
+                const response = await axios.get(`http://192.168.100.9:8081/result/GetIndividualStudentResult/${userId}`, {
                     withCredentials: true,
                 });
                 setCourseData(response.data); // Set the fetched data to state

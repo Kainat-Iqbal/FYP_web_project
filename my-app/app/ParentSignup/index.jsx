@@ -32,7 +32,7 @@ const ParentSignup = ({ navigation }) => {
 
     try {
       // Send data to the backend using Axios
-      const response = await axios.post('http://172.31.242.169:8081/parent/Add', {
+      const response = await axios.post('http://192.168.100.9:8081/parent/Add', {
         name: parentName,
         email,
         cnic: parentCNIC,

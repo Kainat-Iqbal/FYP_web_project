@@ -121,9 +121,9 @@ function AssignCourse() {
     event.preventDefault();
     const newErrors = {};
 
-    if (!selectedTeacher) newErrors.teacher = "Instructor Name is required";
-    if (!selectedCourseCode) newErrors.course = "Course Code is required";
-    if (!selectedSessionId) newErrors.session = "Session is required";
+    if (!selectedTeacher) newErrors.teacher = "Please select instructor name";
+    if (!selectedCourseCode) newErrors.course = "Please select course code";
+    if (!selectedSessionId) newErrors.session = "Please select session";
 
     setErrors(newErrors);
 
@@ -153,7 +153,117 @@ function AssignCourse() {
         </div>
           <form id="assignCourseForm" action="" onSubmit={handleSubmit}>
 
-            <div id="assignCourseField">
+
+          <div id="assignCourseField">
+  <label>Instructor Name</label>
+  <div  style={{ width: "49%"}}>
+    <select
+      id="assignCourseinp"
+      name="department"
+      style={{ height: "7vh" }}
+      value={selectedTeacher}
+      onChange={handleTeacherChange}
+    >
+      <option value="" disabled>
+        Select Instructor Name
+      </option>
+      {teacher.map((teacherData) => (
+        <option key={teacherData.name}>{teacherData.name}</option>
+      ))}
+    </select>
+    {errors.teacher && <span className="error">{errors.teacher}</span>}
+  </div>
+</div>
+
+<div id="assignCourseField">
+  <label>Department</label>
+  <div style={{ width: "49%"}}>
+    <input
+      id="assignCourseinp"
+      name="department"
+      style={{ height: "7vh" }}
+      value={selectedDepartment || "Select Instructor Name First"}
+      readOnly
+    />
+    {errors.department && <span className="error">{errors.department}</span>}
+  </div>
+</div>
+
+<div id="assignCourseField">
+  <label>Course Code</label>
+  <div style={{ width: "49%"}}>
+    <select
+      id="assignCourseinp"
+      name="courseCode"
+      style={{ height: "7vh" }}
+      value={selectedCourseCode}
+      onChange={handleCodeChange}
+    >
+      <option value="" disabled>
+        Select Course Code
+      </option>
+      {course.map((courseData) => (
+        <option key={courseData.course_code} value={courseData.course_code}>
+          {courseData.course_code}
+        </option>
+      ))}
+    </select>
+    {errors.course && <span className="error">{errors.course}</span>}
+  </div>
+</div>
+
+<div id="assignCourseField">
+  <label>Course Name</label>
+  <div  style={{ width: "49%"}}>
+    <input
+      id="assignCourseinp"
+      name="courseName"
+      style={{ height: "7vh"}}
+      value={selectedTitle || "Select Course Code First"}
+      readOnly
+    />
+    {errors.courseName && <span className="error">{errors.courseName}</span>}
+  </div>
+</div>
+
+<div id="assignCourseField">
+  <label>Academic Year</label>
+  <div style={{ width: "49%"}}>
+    <select
+      id="assignCourseinp"
+      name="session"
+      style={{ height: "7vh" }}
+      value={selectedSessionId}
+      onChange={handleSessionChange}
+    >
+      <option value="" disabled>
+        Select Session
+      </option>
+      {session.map((sessionData) => (
+        <option key={sessionData.sessionId} value={sessionData.sessionId}>
+          {sessionData.academic_year +
+            "(" +
+            sessionData.semester +
+            ") Class:" +
+            sessionData.type +
+            "(" +
+            sessionData.degree +
+            ") Batch:" +
+            sessionData.year +
+            "(" +
+            sessionData.session +
+            ")"}
+        </option>
+      ))}
+    </select>
+    {errors.session && <span className="error">{errors.session}</span>}
+  </div>
+</div>
+
+
+
+
+            {/* <div id="assignCourseField">
               
                 <label>Instructor Name</label>
                 <select
@@ -246,12 +356,8 @@ function AssignCourse() {
                 </select>
              
               {errors.session && <span className="error">{errors.session}</span>}
-            </div>
-
-           
+            </div> */}
               <button>Assign Course</button>
-            
-
           </form>
         </div>
       </div>

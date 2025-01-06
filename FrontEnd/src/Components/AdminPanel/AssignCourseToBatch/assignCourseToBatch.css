@@ -85,16 +85,23 @@
     /* background-color: aqua; */
 }
 #batchField label{
+    padding: 0.75rem;
     display: flex;
     align-items: center;
 font-weight: 500;
+/* background-color: #93C098; */
 }
 #batchinp{
-    width: 49%;
-    height: 85%;
-    border-radius: 0px;
-    /* border:1px solid lightgray; */
+    width: 100%;
+  padding: 0.75rem;
+  /* Adjusts padding for consistent height */
+  border-radius: 4px;
+  /* Adds slight rounding for a cleaner look */
+  border: 1px solid lightgray;
+  font-size: 0.9rem;
+  /* Adjust font size if needed */
 }
+
 .smaller-text {
     font-size: 0.7em; /* Adjust this value to control the size of the smaller text */
     vertical-align: text-bottom; /* Keeps the smaller text aligned with the top of the larger text */

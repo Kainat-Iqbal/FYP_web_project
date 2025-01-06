@@ -9,13 +9,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "axios";
 
-
-function InsightsCard({ filter,order,searchQuery }) {
+function HomeCourseCard() {
     const nav = useNavigate();
     const [images, setImages] = useState([]);
     const [course, setCourse] = useState([]);
     const [coursesWithImages, setCoursesWithImages] = useState([]);
     const [teacherId, setteacherId] = useState(null);
+    
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -35,13 +35,16 @@ function InsightsCard({ filter,order,searchQuery }) {
         const fetchCourse = async () => {
           try {
             if (teacherId) {
-              const res = await axios.get(`http://localhost:8081/teachercourse/view?teacherId=${teacherId}&filter=${filter}&order=${order}&searchQuery=${searchQuery}`);
+              const res = await axios.get(`http://localhost:8081/teachercourse/view?teacherId=${teacherId}`);
               // Remove duplicates based on courseId
             const uniqueCourses = Array.from(new Map(res.data.map(item => [item.courseId, item])).values());
             setCourse(uniqueCourses);
+            
+
             console.log("Successfully fetched", uniqueCourses);}}
            catch (error) {
             console.log("errordfv", error);
+            
             
           }
         };
@@ -59,7 +62,7 @@ function InsightsCard({ filter,order,searchQuery }) {
         fetchCourse();
     }
       fetchImages();
-      }, [teacherId,filter,order,searchQuery]);
+      }, [teacherId]);
       
       useEffect(() => {
           if (course.length && images.length) {
@@ -85,7 +88,7 @@ function InsightsCard({ filter,order,searchQuery }) {
                     </Typography>
                 </CardContent>
                 <CardActions >
-                    <Button size="small"  style={{width:'50%'}} onClick={()=>{nav("/GPAGraph", { state: { course: courseData } }) }}>View Insights</Button>
+                    <Button size="small"  style={{width:'50%'}} onClick={()=>{nav("/createResult", { state: { course: courseData } }) }}>Create Result</Button>
                     <Button size="small"  style={{width:'50%'}} onClick={()=>{nav("/viewResult", { state: { course: courseData } }) }}>View Result</Button>
                 </CardActions>
 
@@ -93,4 +96,4 @@ function InsightsCard({ filter,order,searchQuery }) {
         </>
     )
 }
-export default InsightsCard;
+export default HomeCourseCard

@@ -28,7 +28,7 @@ const Login = () => {
 
   // Function to handle form submission
   const handleSubmit = () => {
-    axios.post('http://172.31.242.169:8081/login', values)
+    axios.post('http://192.168.100.9:8081/login', values)
       .then((res) => {
         console.log("sc",res.data)
         if (res.data === "Student") {

@@ -1,7 +1,9 @@
 const DB = require("../DB/dbConfig");
 
 const viewTeacherCourse = async (req, res) => {
-    const { teacherId, batchId } = req.query; // Get both query parameters
+    const { teacherId, batchId, filter ,order,searchQuery} = req.query; // Get filter from query parameters
+    const currentYear = new Date().getFullYear(); // Define currentYear for filtering
+// Get both query parameters
     // console.log("teacherId",teacherId)
     // console.log("batchId",batchId)
 
@@ -30,6 +32,24 @@ const viewTeacherCourse = async (req, res) => {
         }
         queryParams.push(batchId);
     }
+    // Filtering based on the selected tab
+    if (filter === "current") {
+        queryToViewCourse += `${queryParams.length ? ' AND' : ' WHERE'} YEAR(STR_TO_DATE(ac.assignDate, '%d-%m-%Y')) = ?`;
+        queryParams.push(currentYear);
+    } else if (filter === "past") {
+        queryToViewCourse += `${queryParams.length ? ' AND' : ' WHERE'} YEAR(STR_TO_DATE(ac.assignDate, '%d-%m-%Y')) < ?`;
+        queryParams.push(currentYear);
+    }
+    if (searchQuery) {
+        queryToViewCourse += `${queryParams.length ? ' AND' : ' WHERE'} c.course_title LIKE ?`;
+        queryParams.push(`%${searchQuery}%`);
+    }// Sort based on the order parameter
+    if (order === "name") {
+        queryToViewCourse += ` ORDER BY c.course_title ASC`;
+    } else if (order === "RecentlyAssigned") {
+        queryToViewCourse += ` ORDER BY STR_TO_DATE(ac.assignDate, '%d-%m-%Y') DESC`; // Assuming last_accessed is a column
+    }
+
     // console.log("Query:", queryToViewCourse);
     // console.log("Query Params:", queryParams);
     DB.query(queryToViewCourse, queryParams, (err, results) => {

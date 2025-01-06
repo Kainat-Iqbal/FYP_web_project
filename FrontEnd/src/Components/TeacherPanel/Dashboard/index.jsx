@@ -4,6 +4,7 @@ import SideBar from "../Sidebar";
 import { useState, useEffect } from "react";
 import CourseCard from "../../Utilities/CourseCard";
 import axios from 'axios';
+import HomeCourseCard from "../../Utilities/HomeCourseCard";
 
 function Dashboard() {
 
@@ -53,7 +54,7 @@ function Dashboard() {
                     </div>
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                            <CourseCard/>
+                            <HomeCourseCard/>
                             </div>
                     </div>
 
