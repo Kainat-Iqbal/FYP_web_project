@@ -2,13 +2,20 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./assignCourse.css";
 import SideBar from "../SideBar";
-
+import Select from "react-select";
 function AssignCourse() {
   const [teacher, setTeacher] = useState([]);
   const [course, setCourse] = useState([]);
   const [session, setSession] = useState([]);
   const [errors, setErrors] = useState({});
   const [hodId, setHodId] = useState(null);
+  const [filters, setFilters] = useState({
+    CSS: false,
+    CSC: false,
+    DS: false,
+    Elective: false,
+    Compulsory: false,
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,7 +31,7 @@ function AssignCourse() {
 
     fetchData();
   }, []);
-  console.log("HOD",hodId)
+  console.log("HOD", hodId)
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -70,38 +77,44 @@ function AssignCourse() {
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [teacherId, setTeacherId] = useState("");
 
-  const handleTeacherChange = (event) => {
-    const teacherName = event.target.value;
-    setSelectedTeacher(teacherName);
+  // Inside the AssignCourse component:
+  const instructorOptions = teacher.map((teacherData) => ({
+    value: teacherData.teacherId, // Use teacherId as value
+    label: teacherData.name, // Display name as label
+  }));
 
-    // Find the department of the selected teacher
-    const teacherObj = teacher.find((t) => t.name === teacherName);
-    if (teacherObj) {
-      setSelectedDepartment(teacherObj.department);
-      setTeacherId(teacherObj.teacherId);
-    }
+  const handleInstructorChange = (selectedOption) => {
+    setSelectedTeacher(selectedOption.label); // Set selected name
+    setSelectedDepartment(
+      teacher.find((t) => t.teacherId === selectedOption.value)?.department || ""
+    );
+    setTeacherId(selectedOption.value); // Set teacherId
   };
-
   const [selectedCourseCode, setSelectedCourseCode] = useState("");
   const [selectedTitle, setSelectedTitle] = useState("");
   const [courseId, setCourseId] = useState("");
 
-  const handleCodeChange = (event) => {
-    const codeName = event.target.value;
-    setSelectedCourseCode(codeName);
+  const courseOptions = course.map((courseData) => ({
+    value: courseData.courseId, // Use courseId as value
+    label: courseData.course_code, // Display course_code as label
+  }));
 
-    // Find the title of the selected course code
-    const courseObj = course.find((c) => c.course_code === codeName);
-    if (courseObj) {
-      setSelectedTitle(courseObj.course_title);
-      setCourseId(courseObj.courseId);
-    }
+  const handleCourseChange = (selectedOption) => {
+    setSelectedCourseCode(selectedOption.label); // Set selected course code
+    const courseObj = course.find((c) => c.courseId === selectedOption.value);
+    setSelectedTitle(courseObj?.course_title || ""); // Set course title
+    setCourseId(selectedOption.value); // Set courseId
   };
 
   const [selectedSessionId, setSelectedSessionId] = useState("");
-  const handleSessionChange = (event) => {
-    const selectedId = event.target.value;
-    setSelectedSessionId(selectedId);
+  // Inside the AssignCourse component:
+  const sessionOptions = session.map((sessionData) => ({
+    value: sessionData.sessionId, // Use sessionId as the value
+    label: `${sessionData.academic_year} (${sessionData.semester}) Class: ${sessionData.type} (${sessionData.degree}) Batch: ${sessionData.year} (${sessionData.session})`, // Concatenate relevant data for the label
+  }));
+
+  const handleSessionChange = (selectedOption) => {
+    setSelectedSessionId(selectedOption.value); // Update sessionId
   };
 
   const getCurrentDate = () => {
@@ -115,7 +128,7 @@ function AssignCourse() {
 
   const date = getCurrentDate();
 
-  const data = { teacherId, courseId, selectedSessionId, date ,hodId};
+  const data = { teacherId, courseId, selectedSessionId, date, hodId };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -142,376 +155,145 @@ function AssignCourse() {
       }
     }
   };
+  const handleFilterChange = (filterName) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [filterName]: !prevFilters[filterName],
+    }));
+  };
+
+  const filteredCourseOptions = course
+    .filter((courseData) => {
+      if (
+        filters.CSS ||
+        filters.CSC ||
+        filters.DS ||
+        filters.Elective ||
+        filters.Compulsory
+      ) {
+        if (filters.CSS && courseData.course_code.startsWith("CSS")) return true;
+        if (filters.CSC && courseData.course_code.startsWith("CSC")) return true;
+        if (filters.DS && courseData.course_code.startsWith("DS")) return true;
+        if (
+          filters.Elective &&
+          courseData.course_type === "Elective"
+        )
+          return true;
+        if (
+          filters.Compulsory &&
+          (courseData.course_type === "Compulsory" || courseData.course_type === "Compulsary")
+        )
+          return true;
+        return false;
+      }
+      return true; // Return all options if no filter is selected
+    })
+    .map((courseData) => ({
+      value: courseData.courseId,
+      label: courseData.course_code,
+    }));
 
   return (
     <div id="assignCourseMainDiv">
       <SideBar />
       <div id="assignCourseWithoutBar">
         <div id="assignCourseBottom">
-        <div id="assignCourseTop">
-        <h1>A<span className="smaller-text">SSIGN</span> C<span className="smaller-text">OURSE</span></h1>
-        </div>
+          <div id="assignCourseTop">
+            <h1>A<span className="smaller-text">SSIGN</span> C<span className="smaller-text">OURSE</span></h1>
+          </div>
           <form id="assignCourseForm" action="" onSubmit={handleSubmit}>
 
 
-          <div id="assignCourseField">
-  <label>Instructor Name</label>
-  <div  style={{ width: "49%"}}>
-    <select
-      id="assignCourseinp"
-      name="department"
-      style={{ height: "7vh" }}
-      value={selectedTeacher}
-      onChange={handleTeacherChange}
-    >
-      <option value="" disabled>
-        Select Instructor Name
-      </option>
-      {teacher.map((teacherData) => (
-        <option key={teacherData.name}>{teacherData.name}</option>
-      ))}
-    </select>
-    {errors.teacher && <span className="error">{errors.teacher}</span>}
-  </div>
-</div>
-
-<div id="assignCourseField">
-  <label>Department</label>
-  <div style={{ width: "49%"}}>
-    <input
-      id="assignCourseinp"
-      name="department"
-      style={{ height: "7vh" }}
-      value={selectedDepartment || "Select Instructor Name First"}
-      readOnly
-    />
-    {errors.department && <span className="error">{errors.department}</span>}
-  </div>
-</div>
-
-<div id="assignCourseField">
-  <label>Course Code</label>
-  <div style={{ width: "49%"}}>
-    <select
-      id="assignCourseinp"
-      name="courseCode"
-      style={{ height: "7vh" }}
-      value={selectedCourseCode}
-      onChange={handleCodeChange}
-    >
-      <option value="" disabled>
-        Select Course Code
-      </option>
-      {course.map((courseData) => (
-        <option key={courseData.course_code} value={courseData.course_code}>
-          {courseData.course_code}
-        </option>
-      ))}
-    </select>
-    {errors.course && <span className="error">{errors.course}</span>}
-  </div>
-</div>
-
-<div id="assignCourseField">
-  <label>Course Name</label>
-  <div  style={{ width: "49%"}}>
-    <input
-      id="assignCourseinp"
-      name="courseName"
-      style={{ height: "7vh"}}
-      value={selectedTitle || "Select Course Code First"}
-      readOnly
-    />
-    {errors.courseName && <span className="error">{errors.courseName}</span>}
-  </div>
-</div>
-
-<div id="assignCourseField">
-  <label>Academic Year</label>
-  <div style={{ width: "49%"}}>
-    <select
-      id="assignCourseinp"
-      name="session"
-      style={{ height: "7vh" }}
-      value={selectedSessionId}
-      onChange={handleSessionChange}
-    >
-      <option value="" disabled>
-        Select Session
-      </option>
-      {session.map((sessionData) => (
-        <option key={sessionData.sessionId} value={sessionData.sessionId}>
-          {sessionData.academic_year +
-            "(" +
-            sessionData.semester +
-            ") Class:" +
-            sessionData.type +
-            "(" +
-            sessionData.degree +
-            ") Batch:" +
-            sessionData.year +
-            "(" +
-            sessionData.session +
-            ")"}
-        </option>
-      ))}
-    </select>
-    {errors.session && <span className="error">{errors.session}</span>}
-  </div>
-</div>
-
-
-
-
-            {/* <div id="assignCourseField">
-              
-                <label>Instructor Name</label>
-                <select
-                 id="assignCourseinp"
-                  name="department"
-                  style={{ height: "6vh" }}
-                  value={selectedTeacher}
-                  onChange={handleTeacherChange}
-                >
-                  <option value="" disabled>
-                    Select Instructor Name
-                  </option>
-                  {teacher.map((teacherData) => (
-                    <option key={teacherData.name}>{teacherData.name}</option>
-                  ))}
-                </select>
-             
-              {errors.teacher && <span className="error">{errors.teacher}</span>}
+            <div id="assignCourseField">
+              <label>Instructor Name</label>
+              <div style={{ width: "49%" }}>
+                <Select
+                  id="selectinput"
+                  options={instructorOptions} // Options from teacher data
+                  value={instructorOptions.find((option) => option.label === selectedTeacher)}
+                  onChange={handleInstructorChange}
+                  placeholder="Select Instructor Name"
+                />
+                {errors.teacher && <span className="error">{errors.teacher}</span>}
+              </div>
             </div>
 
             <div id="assignCourseField">
-             
-                <label>Department</label>
+              <label>Department</label>
+              <div style={{ width: "49%" }}>
                 <input
-                 id="assignCourseinp"
+                  id="assignCourseinp"
                   name="department"
-                  style={{ height: "6vh" }}
+                  style={{ height: "7vh" }}
                   value={selectedDepartment || "Select Instructor Name First"}
                   readOnly
                 />
-             
-              {errors.department && <span className="error">{errors.department}</span>}
+                {errors.department && <span className="error">{errors.department}</span>}
+              </div>
             </div>
 
             <div id="assignCourseField">
-              
-                <label>Course Code</label>
-                <select
-                id="assignCourseinp"
-                  name="courseCode"
-                  style={{ height: "6vh" }}
-                  value={selectedCourseCode}
-                  onChange={handleCodeChange}
-                >
-                  <option value="" disabled>
-                    Select Course Code
-                  </option>
-                  {course.map((courseData) => (
-                    <option key={courseData.course_code} value={courseData.course_code}>
-                      {courseData.course_code}
-                    </option>
-                  ))}
-                </select>
-              
-              {errors.course && <span className="error">{errors.course}</span>}
+              <label>Course Code</label>
+              <div style={{ width: "49%" }}>
+                <Select
+                  id="selectinput"
+                  options={filteredCourseOptions} // Options from course data
+                  value={courseOptions.find((option) => option.label === selectedCourseCode)}
+                  onChange={handleCourseChange}
+                  placeholder="Select Course Code"
+                />
+                {errors.course && <span className="error">{errors.course}</span>}
+              </div>
             </div>
-
             <div id="assignCourseField">
-              
-                <label>Course Name</label>
+            <div style={{ fontSize:"0.9rem",display: 'flex',columnGap:'10px', fontWeight: 'bold',marginLeft:'210px',flexWrap:"wrap" }}>
+                {["CSS", "CSC", "DS", "Elective", "Compulsory"].map((filter) => (
+                  <label key={filter}>
+                    <input
+                      type="checkbox"
+                      checked={filters[filter]}
+                      onChange={() => handleFilterChange(filter)}
+                    />
+                    {filter}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div id="assignCourseField">
+              <label>Course Name</label>
+              <div style={{ width: "49%" }}>
                 <input
-                 id="assignCourseinp"
+                  id="assignCourseinp"
                   name="courseName"
-                  style={{ height: "6vh" }}
+                  style={{ height: "7vh" }}
                   value={selectedTitle || "Select Course Code First"}
                   readOnly
                 />
-              
-              {errors.courseName && <span className="error">{errors.courseName}</span>}
+                {errors.courseName && <span className="error">{errors.courseName}</span>}
+              </div>
             </div>
 
             <div id="assignCourseField">
-              
-                <label>Academic Year</label>
-                <select
-                 id="assignCourseinp"
-                  name="session"
-                  style={{ height: "6vh" }}
-                  value={selectedSessionId}
+              <label>Academic Year</label>
+              <div style={{ width: "49%" }}>
+                <Select
+                  id="selectinput"
+                  options={sessionOptions} // Options from session data
+                  value={sessionOptions.find((option) => option.value === selectedSessionId)}
                   onChange={handleSessionChange}
-                >
-                  <option value="" disabled>
-                    Select Session
-                  </option>
-                  {session.map((sessionData) => (
-                    <option key={sessionData.sessionId} value={sessionData.sessionId}>
-                      {sessionData.academic_year + "(" + sessionData.semester+ ") Class:"+sessionData.type+"("+sessionData.degree+") Batch:"+sessionData.year+"("+sessionData.session+")" }
-                    </option>
-                  ))}
-                </select>
-             
-              {errors.session && <span className="error">{errors.session}</span>}
-            </div> */}
-              <button>Assign Course</button>
+                  placeholder="Select Academic Year"
+                />
+                {errors.session && <span className="error">{errors.session}</span>}
+              </div>
+            </div>
+
+            <button>Assign Course</button>
           </form>
         </div>
       </div>
     </div>
   );
 
-
-
-
-
-
-        //without validation styling
-  //   return (
-  //     <div id="assignCourseMainDiv">
-  //       <SideBar />
-  //       <div id="assignCourseWithoutBar">
-  //         <div id="assignCourseTop">
-  //           <h1 style={{ color: "#00304B" }}>Assign Course</h1>
-  //         </div>
-
-  //         <div id="assignCourseBottom">
-  //           <form id="assignCourseForm" action="" onSubmit={handleSubmit}>
-  //             <div id="assignCourseField">
-  //               <label>Instructor Name</label>
-  //               <select
-  //                 name="department"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={selectedTeacher}
-  //                 onChange={handleTeacherChange}
-  //               >
-  //                 <option value="" disabled>
-  //                   Select Instructor Name
-  //                 </option>
-  //                 {teacher.map((teacherData) => {
-  //                   return <option key={teacherData.name}>{teacherData.name}</option>;
-  //                 })}
-  //               </select>
-  //               {/* here we display error message that field should not be empty */}
-  //               {errors.teacher && <span className="error">{errors.teacher}</span>}
-  //             </div>
-
-  //             <div id="assignCourseField">
-  //               <label>Department</label>
-  //               <input
-  //                 name="department"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={selectedDepartment || "Select Instructor Name First"}
-  //                 readOnly
-  //               ></input>
-  //             </div>
-
-  //             <div id="assignCourseField">
-  //               <label>Course Code</label>
-  //               <select
-  //                 name="courseCode"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={selectedCourseCode}
-  //                 onChange={handleCodeChange}
-  //               >
-  //                 <option value="" disabled>
-  //                   Select Course Code
-  //                 </option>
-  //                 {course.map((courseData) => (
-  //                   <option key={courseData.course_code} value={courseData.course_code}>
-  //                     {courseData.course_code}
-  //                   </option>
-  //                 ))}
-  //               </select>
-  //               {errors.course && <span className="error">{errors.course}</span>}
-  //             </div>
-
-  //             <div id="assignCourseField">
-  //               <label>Course Name</label>
-  //               <input
-  //                 name="courseName"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={selectedTitle || "Select Course Code First"}
-  //                 readOnly
-  //               ></input>
-  //             </div>
-
-  //             <div id="assignCourseField">
-  //               <label>Class</label>
-  //               <select
-  //                 name="department"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={classId}
-  //                 onChange={handleClassChange}
-  //               >
-  //                 <option value="" disabled>
-  //                   Select Class
-  //                 </option>
-  //                 {degree.map((degreeData) => {
-  //                   return (
-  //                     <option key={degreeData.programId} value={degreeData.programId}>
-  //                       {degreeData.type + "(" + degreeData.degree + ")"}
-  //                     </option>
-  //                   );
-  //                 })}
-  //               </select>
-  //               {errors.class && <span className="error">{errors.class}</span>}
-  //             </div>
-
-  //             <div id="assignCourseField">
-  //               <label>Batch</label>
-  //               <select
-  //                 name="designation"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={batchId}
-  //                 onChange={handleBatchChange}
-  //               >
-  //                 <option value="" disabled>
-  //                   Select Batch
-  //                 </option>
-  //                 {batch.map((batchData) => {
-  //                   return (
-  //                     <option key={batchData.batchId} value={batchData.batchId}>
-  //                       {batchData.year + "  " + batchData.session}
-  //                     </option>
-  //                   );
-  //                 })}
-  //               </select>
-  //               {errors.batch && <span className="error">{errors.batch}</span>}
-  //             </div>
-
-  //             <div id="assignCourseField">
-  //               <label>Academic year</label>
-  //               <select
-  //                 name="session"
-  //                 style={{ width: "14.8vw", height: "6vh" }}
-  //                 value={selectedSessionId}
-  //                 onChange={handleSessionChange}
-  //               >
-  //                 <option value="" disabled>
-  //                   Select Session
-  //                 </option>
-  //                 {session.map((sessionData) => {
-  //                   return (
-  //                     <option key={sessionData.sessionId} value={sessionData.sessionId}>
-  //                       {sessionData.academic_year + " " + sessionData.semester}
-  //                     </option>
-  //                   );
-  //                 })}
-  //               </select>
-  //               {errors.session && <span className="error">{errors.session}</span>}
-  //             </div>
-  //             <div id="assignButton">
-  //               <button>Assign Course</button>
-  //             </div>
-  //           </form>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   );
 }
 
 export default AssignCourse;
