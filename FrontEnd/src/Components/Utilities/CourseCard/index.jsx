@@ -9,12 +9,13 @@ import { useNavigate, Link } from "react-router-dom";
 import { useState,useEffect } from "react";
 import axios from "axios";
 
-function CourseCard() {
+function CourseCard({ filter,order,searchQuery }) {
     const nav = useNavigate();
     const [images, setImages] = useState([]);
     const [course, setCourse] = useState([]);
     const [coursesWithImages, setCoursesWithImages] = useState([]);
     const [teacherId, setteacherId] = useState(null);
+    
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,18 +30,21 @@ function CourseCard() {
 
     fetchData();
   }, []);
-  console.log("tt",teacherId)
+  // console.log("tt",teacherId)
     useEffect(() => {
         const fetchCourse = async () => {
           try {
             if (teacherId) {
-              const res = await axios.get(`http://localhost:8081/teachercourse/view?teacherId=${teacherId}`);
+              const res = await axios.get(`http://localhost:8081/teachercourse/view?teacherId=${teacherId}&filter=${filter}&order=${order}&searchQuery=${searchQuery}`);
               // Remove duplicates based on courseId
             const uniqueCourses = Array.from(new Map(res.data.map(item => [item.courseId, item])).values());
             setCourse(uniqueCourses);
+            console.log("Filter being sent:", filter);
+
             console.log("Successfully fetched", uniqueCourses);}}
            catch (error) {
             console.log("errordfv", error);
+            
             
           }
         };
@@ -58,7 +62,7 @@ function CourseCard() {
         fetchCourse();
     }
       fetchImages();
-      }, [teacherId]);
+      }, [teacherId, filter,order,searchQuery]);
       
       useEffect(() => {
           if (course.length && images.length) {

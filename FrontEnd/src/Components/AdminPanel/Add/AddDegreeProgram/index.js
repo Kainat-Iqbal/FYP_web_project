@@ -53,7 +53,7 @@ function AddDegreeProgram() {
       axios.post("http://localhost:8081/degree/Add", values).then((res) => {
         console.log("val",values);
         if (res.data === "success") {
-          alert("DegreeProgram is added successfully");
+          alert("Degree Program is added successfully");
           window.location.reload(); // Refresh the page
         } else {
           console.log("error");
@@ -78,7 +78,7 @@ function AddDegreeProgram() {
               <select
                 name="type"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray'}}
+                style={{ width: "14.8vw", height: "5.8vh" ,border:'1px solid lightgray', borderRadius:"4px"}}
               >
                 <option value="BS">BS</option>
                 <option value="MS">MS</option>
@@ -90,7 +90,7 @@ function AddDegreeProgram() {
               <select
                 name="degree"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray', borderRadius:"4px" }}
               >
                 <option value="SE">Sofware Engineering</option>
                 <option value="CS">Computer Science</option>
@@ -103,7 +103,7 @@ function AddDegreeProgram() {
               <select
                 name="total_credit_hours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray' }}
+                style={{ width: "14.8vw", height: "5.8vh",border:'1px solid lightgray', borderRadius:"4px" }}
               >
                 <option value="128">128</option>
                 <option value="130">130</option>

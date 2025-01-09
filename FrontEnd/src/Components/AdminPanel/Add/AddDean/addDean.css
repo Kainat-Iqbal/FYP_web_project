@@ -1,13 +1,14 @@
-#mainAddDeanDiv{
+#mainAddDeanDiv {
     width: 80vw;
     height: auto;
     margin-left: 18vw;
     /* background-color: aqua; */
     display: flex;
-    flex-direction: column; /* Adjust for better stacking on smaller screens */
+    flex-direction: column;
+    /* Adjust for better stacking on smaller screens */
 }
 
-#deanWithoutBar{
+#deanWithoutBar {
     width: 100%;
     height: 90%;
     /* background-color: brown; */
@@ -19,7 +20,7 @@
     justify-content: space-around;
 }
 
-#deanTop{
+#deanTop {
     width: 100%;
     height: 10%;
     /* background-color: bisque; */
@@ -29,11 +30,11 @@
     margin-bottom: 2%;
 }
 
-#deanTop h1{
+#deanTop h1 {
     color: linear-gradient(to bottom, #93C098, #8CE0DB);
 }
 
-#deanBottom{
+#deanBottom {
     width: 50%;
     height: 80%;
     /* background-color: blueviolet; */
@@ -42,34 +43,39 @@
     justify-content: space-around;
     background-color: white;
     background-image: url('newlogin4.png');
-   background-size: cover;
+    background-size: cover;
     padding-top: 2%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow effect to the form */
-    border-radius: 10px; /* Optional: Add rounded corners to the form */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    /* Add shadow effect to the form */
+    border-radius: 10px;
+    /* Optional: Add rounded corners to the form */
     margin-top: 2%;
     margin-bottom: 2%;
 }
 
-#deanForm{
+#deanForm {
     width: 75%;
     height: 80%;
     /* background-color: green; */
-    display: flex;    
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
 }
 
-#deanForm label{
+#deanForm label {
     color: black;
 }
-#deanField{
+
+/* #deanField{
     margin-bottom: 2%;
-}
-#deanForm button{
+} */
+
+#deanForm button {
     margin-top: 2%;
     margin-bottom: 5%;
-    background:linear-gradient(to right, #93C098, #8CE0DB);;
+    background: linear-gradient(to right, #93C098, #8CE0DB);
+    ;
     border-radius: 50px;
     width: 50%;
     height: 12%;
@@ -77,12 +83,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-#deanField{
+/* #deanField{
     display: flex;
     justify-content: space-between;
-
     width: 100%;
-    /* background-color: aqua; */
 }
 #deanField label{
     display: flex;
@@ -93,9 +97,62 @@ font-weight: 500;
     width: 49%;
     height: 85%;
     border-radius: 0px;
-    /* border:1px solid lightgray; */
-}
+} */
+ 
 .smaller-text {
-    font-size: 0.7em; /* Adjust this value to control the size of the smaller text */
-    vertical-align: text-bottom; /* Keeps the smaller text aligned with the top of the larger text */
+    font-size: 0.7em;
+    /* Adjust this value to control the size of the smaller text */
+    vertical-align: text-bottom;
+    /* Keeps the smaller text aligned with the top of the larger text */
+}
+
+#deanForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: yellow; */
+}
+
+.deanField {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    margin-bottom: 2%;
+    /* Space between each field */
+}
+
+.deanField label {
+    width: 40%;
+    /* Adjust label width as needed */
+    text-align: left;
+    /* Align labels to the left */
+    font-weight: 500;
+    padding-right: 15px;
+    /* Space between label and input field */
+    margin-right: 20px;
+}
+
+.deanInputContainer {
+    width: 55%;
+    /* Width for input container */
+    display: flex;
+    flex-direction: column;
+}
+
+.deanInp,
+.deanSelect {
+    width: 100%;
+    height: 2.5em;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+.error {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 4px;
+    /* Space above error message */
 }

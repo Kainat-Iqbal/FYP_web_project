@@ -7,6 +7,10 @@ const getAll = (req, res) => {
     FROM course c
     LEFT JOIN assign_course ac ON c.courseId = ac.courseId
   `;
+  const queryToGetCoursesAssignToSession = `
+  SELECT courseId, course_title, course_code
+  FROM course 
+`;
     const queryToGetBatch = "SELECT * FROM batch";
     const queryToGetSession = `
     SELECT s.sessionId, s.academic_year, s.semester, s.programId, s.batchId, dp.type,dp.degree, b.year,b.session
@@ -44,6 +48,15 @@ const getAll = (req, res) => {
             results.courses = [];
         } else {
             results.courses = courses;
+        }
+        checkIfComplete();
+    });
+     DB.query(queryToGetCoursesAssignToSession, (err, s_courses) => {
+        if (err) {
+            console.log("Error to get Courses");
+            results.s_courses = [];
+        } else {
+            results.s_courses = s_courses;
         }
         checkIfComplete();
     });
@@ -102,6 +115,27 @@ const addAssignCourse = async (req, res) => {
           }
     });
 };
+const addAssignCourseToSession = async (req, res) => {
+    const queryToAdd = "INSERT INTO `assign_course_to_session`(`courseId`, `sessionId`) VALUES (?)";
+    const VALUES = [
+        req.body.courseId,
+        req.body.selectedSessionId,
+       
+       // req.body.batchId,
+    //req.body.classId,
+      ];
+      console.log(VALUES)
+    // Execute the query
+    DB.query(queryToAdd, [VALUES], (err, data) => {
+        if (err) {
+           console.log("Error",err)
+          } 
+          else {
+            console.log("Course assigned successfully");
+            return res.json("success");
+          }
+    });
+};
 
 const getAllCourses = async (req, res) => {
     // Query to fetch all teachers from the database
@@ -126,4 +160,4 @@ const getAllCourses = async (req, res) => {
     });
   };
 
-module.exports = { getAll,addAssignCourse ,getAllCourses};
+module.exports = { getAll,addAssignCourse ,getAllCourses,addAssignCourseToSession};

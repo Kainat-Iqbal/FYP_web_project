@@ -10,8 +10,22 @@ import InsightsCard from "../../Utilities/InsightsCard";
 
 function Insights() {
     const [value, setValue] = React.useState(0);
+    
+    const [filter, setFilter] = useState("all");
+    const [sortOrder, setSortOrder] = useState("RecentlyAssigned");
+    const [searchQuery, setSearchQuery] = useState(""); // State for search input
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        if (newValue === 0) setFilter("all");
+        if (newValue === 1) setFilter("current");
+        if (newValue === 2) setFilter("past");
+    };
+    const handleSortChange = (event) => {
+        setSortOrder(event.target.value);
+    };
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value); // Update search query on input
     };
     
     return (
@@ -28,14 +42,15 @@ function Insights() {
                     </div>
                     <div id="topMenu">
                         <div id="leftM">
-                            <input id="sinput" type="text" placeholder="Search..." />
+                        <input id="sinput" type="text" placeholder="Search..."  value={searchQuery}
+                                onChange={handleSearchChange}/>
                             <button id="searchbutton" style={{ height: '63%' }}
                             ><SearchIcon />
                             </button>
                         </div>
                         <div id="centerM">
                             <Box sx={{ width: '100%', bgcolor: 'background.paper' }}>
-                                <Tabs value={value} onChange={handleChange} centered>
+                            <Tabs value={value} onChange={handleChange} centered>
                                     <Tab label="All" />
                                     <Tab label="Current" />
                                     <Tab label="Past" />
@@ -44,9 +59,9 @@ function Insights() {
                         </div>
                         <div id="right">
                             {/* Sort By Dropdown */}
-                            <select>
+                            <select onChange={handleSortChange} value={sortOrder}>
                                 <option value="name">Sort by Name</option>
-                                <option value="lastAccessed">Sort by Last Accessed</option>
+                                <option value="RecentlyAssigned">Sort by Recently Assigned</option>
                             </select>
                         </div>
                     </div>
@@ -55,7 +70,7 @@ function Insights() {
                 
                     <div id="carddiv">
                         <div id="cardWrapper" className="card-wrapper">
-                            <InsightsCard/>
+                            <InsightsCard filter={filter} order={sortOrder} searchQuery={searchQuery}/>
                         {/* {coursesWithImages.map((courseData) => (
                                 <CourseCard
                                     key={courseData.courseId}

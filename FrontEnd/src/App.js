@@ -73,27 +73,9 @@ import Landing from "././screens/Landing.jsx";
 import StudentCard from './Components/StudentPanel/StudentCard/index.js';
 import StudentDetailInsights from './Components/StudentPanel/StudentDetailInsights/index.js';
 import AssignCourseToBatch from './Components/AdminPanel/AssignCourseToBatch/index.js';
-import Chatbot from './Components/TeacherPanel/Chatbot/index.js';
 
 
 function App() {
-  useEffect(() => {
-    // Ensure window.botpressWebChat is loaded
-    if (window.botpressWebChat) {
-      window.botpressWebChat.init({
-        botId: '67b739c3-0319-4c10-be52-31a114732702', // Bot ID from the URL
-        hostUrl: 'https://studio.botpress.cloud',        // Server URL for Botpress Cloud
-        botName: 'Your Bot Name',                     // Optional
-        // Additional options: customization options, theme, language, etc.
-        theme: {
-          color: '#1890ff',
-          buttonColor: '#1890ff',
-          textColorOn: '#ffffff'
-        }
-      });
-    }
-  }, []);
-
 
   return (
     <>
@@ -151,7 +133,6 @@ function App() {
         <Route path='/HODHomePage' element={<HODHomePage />} />
         <Route path='/insightCourse' element={<Insights/>}/>
         <Route path='/GPAGraph' element={<GPAGraph/>}/>
-        <Route path='/Chatbot' element={<Chatbot/>}/>
 
           <Route path='/AssignCourse' element={<AssignCourse />} />
           <Route path='/HODResultApproval' element={<HODResultApproval />} />

@@ -12,6 +12,9 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const StudentCard = () => {
   const [value, setValue] = React.useState(0);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState(""); // Manage sorting criteria
   const handleChange = (event, newValue) => {
       setValue(newValue);
   };
@@ -40,6 +43,22 @@ const StudentCard = () => {
   const handleCardClick = (studentId) => {
     navigate(`/StudentDetailInsights/${studentId}`); // Navigate to the student details page
   };
+  // Filter and sort students
+  const filteredAndSortedStudents = students
+    .filter((student) =>
+      student.name.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === "name") {
+        return a.name.localeCompare(b.name);
+      } else if (sortBy === "CGPA") {
+        return b.CGPA - a.CGPA;
+      }
+      else if (sortBy === "batch") {
+        return a.year.localeCompare(b.year); // Compare batch years as strings
+      }
+      return 0; // No sorting
+    });
 
   return (
     <div id="mainStudentCardDiv">
@@ -52,7 +71,9 @@ const StudentCard = () => {
         </div>
         <div id="topMenu">
           <div id="leftM">
-            <input id="sinput" type="text" placeholder="Search..." />
+            <input id="sinput" type="text" placeholder="Search..." value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)} // Update search term
+              />
             <button id="searchbutton" style={{ height: "63%" }}>
               <SearchIcon />
             </button>
@@ -61,17 +82,18 @@ const StudentCard = () => {
           </div>
           <div id="right">
             {/* Sort By Dropdown */}
-            <select>
-              <option value="name">Sort by Batch</option>
-              <option value="lastAccessed">Sort by Last Accessed</option>
+            <select onChange={(e) => setSortBy(e.target.value)} value={sortBy}>
+              <option value="name">Sort by Name</option>
+              <option value="CGPA">Sort by CGPA</option>
+              <option value="batch">Sort by Batch</option>
             </select>
           </div>
         </div>
       </div>
 
       <div className="student-cards-container">
-        {students.length > 0 ? (
-          students.map((student) => (
+      {filteredAndSortedStudents.length > 0 ? (
+          filteredAndSortedStudents.map((student) => (
             <div
               key={student.studentId}
               className="student-card"

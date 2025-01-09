@@ -3,6 +3,146 @@ import "./addCourse.css";
 import SideBar from "../../SideBar";
 import axios from "axios";
 import { useState, useEffect } from "react";
+
+function AddCourse() {
+  const [admin, setAdminId] = useState(null);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8081/session", {
+          withCredentials: true,
+        });
+        setAdminId(response.data.userId);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const [values, setValues] = useState({
+    code: "",
+    title: "",
+    type: "Compulsory",
+    thHours: 0,
+    labHours: 0,
+    totalMid: "",
+    passingMid: "",
+    totalTerminal: "",
+    passingTerminal: "",
+    totalSessional: "",
+    passingSessional: "",
+    totalLab: "",
+    passingLab: "",
+    totalMarks: "",
+  });
+
+  useEffect(() => {
+    if (admin !== null) {
+      setValues((prev) => ({
+        ...prev,
+        adminId: admin,
+      }));
+    }
+  }, [admin]);
+
+  const handleInput = (event) => {
+    const { name, value } = event.target;
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "", // Clear error when user starts typing
+    }));
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!values.code.trim()) newErrors.code = "Please enter course code";
+    if (!values.title.trim()) newErrors.title = "Please enter course title";
+    return newErrors;
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+      return;
+    }
+
+    axios
+      .post("http://localhost:8081/course/Add", values)
+      .then((res) => {
+        if (res.data === "success") {
+          alert("Course is added successfully");
+          window.location.reload(); // Refresh the page
+        } else {
+          console.log("error");
+        }
+      })
+      .catch((error) => console.error("Error:", error));
+  };
+
+  return (
+    <div id="mainAddCourseDiv">
+      <SideBar />
+      <div id="courseWithoutBar">
+        <div id="courseBottom">
+          <div id="courseTop">
+            <h1>
+              A<span className="smaller-text">DD</span> C
+              <span className="smaller-text">OURSE</span>
+            </h1>
+          </div>
+
+          <form id="courseForm" action="" onSubmit={handleSubmit}>
+            <div id="courseField">
+              <label>Course Code</label>
+              <div>
+                <input
+                  id="courseinp"
+                  name="code"
+                  type="text"
+                  placeholder="CSS 1032"
+                  onChange={handleInput}
+                  style={{ width: "14.8vw", height: "5.8vh", borderRadius: "4px" }}
+                />
+                {errors.code && <p className="error-text">{errors.code}</p>}
+              </div>
+            </div>
+
+            <div id="courseField">
+              <label>Course Title</label>
+              <div>
+                <input
+                  id="courseinp"
+                  name="title"
+                  type="text"
+                  placeholder="Programming Fundamental"
+                  onChange={handleInput}
+                  style={{ width: "14.8vw", height: "5.8vh", borderRadius: "4px" }}
+                />
+                {errors.title && <p className="error-text">{errors.title}</p>}
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+{/* import * as React from "react";
+import "./addCourse.css";
+import SideBar from "../../SideBar";
+import axios from "axios";
+import { useState, useEffect } from "react";
 import { Title } from "@mui/icons-material";
 
 function AddCourse() {
@@ -92,7 +232,7 @@ console.log(values)
                 type="text"
                 placeholder="CSS 1032"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -104,9 +244,9 @@ console.log(values)
                 type="text"
                 placeholder="Programming Fundamental"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
-            </div>
+            </div> */}
 
             <div id="courseField">
               <label>Course Type</label>
@@ -114,7 +254,7 @@ console.log(values)
                id="courseinp"
                 name="type"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               >
                 <option value="Compulsory">Compulsory</option>
                 <option value="Elective">Elective</option>
@@ -128,7 +268,7 @@ console.log(values)
                id="courseinp"
                 name="thHours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -146,7 +286,7 @@ console.log(values)
                id="courseinp"
                 name="labHours"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh" , borderRadius:"4px" }}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -166,7 +306,7 @@ console.log(values)
                 min={0}
                 placeholder="20"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -179,7 +319,7 @@ console.log(values)
                 type="number"
                 placeholder="12"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -192,7 +332,7 @@ console.log(values)
                 min={0}
                 placeholder="40"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -205,7 +345,7 @@ console.log(values)
                 type="number"
                 placeholder="24"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -218,7 +358,7 @@ console.log(values)
                 type="number"
                 placeholder="10"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -231,7 +371,7 @@ console.log(values)
                 type="number"
                 placeholder="6"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -244,7 +384,7 @@ console.log(values)
                 min={0}
                 placeholder="30"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -257,7 +397,7 @@ console.log(values)
                 type="number"
                 placeholder="18"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 
@@ -270,7 +410,7 @@ console.log(values)
                 type="number"
                 placeholder="100"
                 onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
+                style={{ width: "14.8vw", height: "5.8vh", borderRadius:"4px" }}
               ></input>
             </div>
 

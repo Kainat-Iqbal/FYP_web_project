@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Bar, Pie, Line } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 import "./GPAGraphStyle.css";
 import {
   Chart as ChartJS,
@@ -10,8 +10,6 @@ import {
   Tooltip,
   Legend,
   ArcElement,
-  LineElement,
-  PointElement,
 } from "chart.js";
 import { useLocation } from "react-router-dom";
 import SideBar from "../Sidebar";
@@ -24,9 +22,7 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  ArcElement, // Register ArcElement for Pie chart
-  LineElement,
-  PointElement
+  ArcElement // Register ArcElement for Pie chart
 );
 
 const NewLineText = ({ text }) => {
@@ -34,7 +30,7 @@ const NewLineText = ({ text }) => {
   const sentences = text.split(". ");
 
   return (
-    <div style={{ color: "black" }}>
+    <div style={{color:'black'}}>
       {sentences.map((sentence, index) => (
         <React.Fragment key={index}>
           {sentence}
@@ -61,8 +57,10 @@ const GPAGraph = () => {
   const [passFailData, setPassFailData] = useState({ pass: 0, fail: 0 });
   const [barSummary, setBarSummary] = useState("");
   const [pieSummary, setPieSummary] = useState("");
-  const [normalDistributionDATA, setNormalDistributionData] = useState({});
 
+  const API_URL =
+    "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"; // Change this to your preferred model
+  const API_TOKEN = `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`; // Replace with your Hugging Face API token
 
   useEffect(() => {
     const fetchGPAData = async () => {
@@ -70,6 +68,7 @@ const GPAGraph = () => {
         const response = await fetch(`http://localhost:8081/result/Get/${ID}`);
         const data = await response.json();
 
+        // Process data to count the number of students in each GPA category
         const gpaCategories = {
           Fail: 0,
           "2.00": 0,
@@ -83,11 +82,9 @@ const GPAGraph = () => {
 
         let passCount = 0;
         let failCount = 0;
-        const gpaValues = [];
 
         data.forEach((student) => {
           const gpa = student.GPA;
-          gpaValues.push(gpa); // Collect GPA values for normal distribution
           if (gpa < 2.0) {
             gpaCategories["Fail"] += 1;
             failCount += 1;
@@ -102,41 +99,19 @@ const GPAGraph = () => {
         setGpaData(gpaCategories);
         setPassFailData({ pass: passCount, fail: failCount });
 
-        // Calculate mean and standard deviation
-        const mean = gpaValues.reduce((sum, value) => sum + value, 0) / gpaValues.length;
-        const stddev = Math.sqrt(gpaValues.reduce((sum, value) => sum + (value - mean) ** 2, 0) / gpaValues.length);
-
-        // Generate normal distribution data
-        const normalData = Array.from({ length: 101 }, (_, i) => {
-          const x = i / 100 * 4; // Adjust x values from 0 to 4
-          return (
-            (1 / (stddev * Math.sqrt(2 * Math.PI))) *
-            Math.exp(-((x - mean) ** 2) / (2 * stddev ** 2))
-          );
-        });
-
-        setNormalDistributionData({
-          labels: Array.from({ length: 101 }, (_, i) => (i / 100 * 4).toFixed(2)), // x values from 0 to 4
-          datasets: [
-            {
-              label: "Normal Distribution",
-              data: normalData,
-              fill: true,
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
-            },
-          ],
-        });
-
         // Generate summaries
         generateSummary(gpaCategories, "bar", data.length);
-        generateSummary({ pass: passCount, fail: failCount }, "pie", data.length);
+        generateSummary(
+          { pass: passCount, fail: failCount },
+          "pie",
+          data.length
+        );
       } catch (error) {
         console.error("Error fetching GPA data:", error);
       }
     };
 
-    const generateSummary = (data, chartType, totalStudents) => {
+    const generateSummary = async (data, chartType, totalStudents) => {
       let summary;
       if (chartType === "bar") {
         summary = `There is a total of ${totalStudents} students' data. From which `;
@@ -154,6 +129,7 @@ const GPAGraph = () => {
           summary += ` No student has failed.`;
         }
         setPieSummary(summary);
+        console.log("Pie Chart Summary:", summary);
       }
     };
 
@@ -216,7 +192,7 @@ const GPAGraph = () => {
     responsive: true,
     plugins: {
       legend: {
-        display: false,
+        display: true,
         position: "top",
         labels: {
           font: {
@@ -225,7 +201,7 @@ const GPAGraph = () => {
             style: "italic",
             weight: "bold",
           },
-          color: "yellow",
+          color: "#333",
         },
       },
       tooltip: {
@@ -274,9 +250,6 @@ const GPAGraph = () => {
             weight: "bold",
           },
         },
-        ticks: {
-          stepSize: 1, // Set the step size on the y-axis to 1
-        },
       },
     },
     layout: {
@@ -312,55 +285,10 @@ const GPAGraph = () => {
     },
   };
 
-  // Normal distribution data
-  const normalDistributionData = {
-    labels: Array.from({ length: 101 }, (_, i) => i / 100), // x values from 0 to 1
-    datasets: [
-      {
-        label: "Normal Distribution",
-        data: Array.from({ length: 101 }, (_, i) => {
-          const x = i / 100;
-          const mean = 0.5; // Adjust mean as needed
-          const stddev = 0.1; // Adjust standard deviation as needed
-          return (
-            (1 / (stddev * Math.sqrt(2 * Math.PI))) *
-            Math.exp(-((x - mean) ** 2) / (2 * stddev ** 2))
-          );
-        }),
-        fill: true,
-        backgroundColor: "rgba(54, 162, 235, 0.2)",
-        borderColor: "rgba(54, 162, 235, 1)",
-      },
-    ],
-  };
-
-  const normalDistributionOptions = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top",
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "GPA",
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: "Probability Density",
-        },
-      },
-    },
-  };
-
   return (
     <div id="mainDivGraph">
       <div id="GraphDivTop">
-        <SideBar />
+        <SideBar/>
       </div>
       <div id="GraphDivBottom">
         <h1 style={{ display: "flex", justifyContent: "center" }}>
@@ -386,44 +314,22 @@ const GPAGraph = () => {
             <h2>GPA Distribution</h2>
             <Bar data={barData} options={barOptions} />
             {/* <p>{barSummary}</p> Display the bar chart summary */}
-            <NewLineText text={barSummary} />
+            <NewLineText text={barSummary}  />
           </div>
           <div
             style={{
               width: "400px",
-              height: "93vh",
+              height: "auto",
               boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
               padding: "20px",
             }}
           >
             <h2>Pass/Fail Distribution</h2>
-            <Pie
-              data={pieData}
-              options={pieOptions}
-              style={{ marginBottom: "5vh" }}
-            />
-            <p style={{ color: "black" }}>{pieSummary}</p>
+            <Pie data={pieData} options={pieOptions} />
+            <p style={{color:'black'}}>{pieSummary}</p>
           </div>
         </div>
       </div>
-      {/* <div
-        className="normal-distribution-container"
-        style={{
-          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.5)",
-          padding: "20px",
-          height: "80vh",
-          marginTop: "20vh",
-          marginLeft: "20vw",
-          width:'77vw'
-        }}
-      >
-        <h2>Normal Distribution of GPA</h2>
-        {normalDistributionDATA.labels && normalDistributionDATA.datasets && (
-            <Line data={normalDistributionDATA} options={{ responsive: true }} style={{width:'80%'}}
-/>
-          )}
-
-      </div> */}
     </div>
   );
 };

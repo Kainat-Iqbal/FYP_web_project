@@ -1,101 +1,105 @@
-#mainAddCourseDiv{
+#mainAddCourseDiv {
     width: 80vw;
     height: auto;
     margin-left: 18vw;
-    /* background-color: aqua; */
     display: flex;
-    flex-direction: column; /* Adjust for better stacking on smaller screens */
-}
-
-#courseWithoutBar{
+    flex-direction: column;
+  }
+  
+  #courseWithoutBar {
     width: 100%;
     height: 90%;
-    /* background-color: brown; */
     display: flex;
     flex-wrap: wrap;
     margin-top: 10vh;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-}
-
-#courseTop{
+  }
+  
+  #courseTop {
     width: 100%;
     height: 10%;
-    /* background-color: bisque; */
     display: flex;
     justify-content: center;
     align-items: flex-end;
     margin-bottom: 2%;
-}
-
-#courseTop h1{
+  }
+  
+  #courseTop h1 {
     color: linear-gradient(to bottom, #93C098, #8CE0DB);
-}
-
-#courseBottom{
+  }
+  
+  #courseBottom {
     width: 50%;
     height: 80%;
-    /* background-color: blueviolet; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     background-color: white;
     background-image: url('formBg.png');
-   background-size: cover;
+    background-size: cover;
     padding-top: 2%;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Add shadow effect to the form */
-    border-radius: 10px; /* Optional: Add rounded corners to the form */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
     margin-top: 2%;
     margin-bottom: 2%;
-}
-
-#courseForm{
+  }
+  
+  #courseForm {
     width: 75%;
     height: 80%;
-    /* background-color: green; */
-    display: flex;    
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-}
-
-#courseForm label{
+  }
+  
+  #courseForm label {
     color: black;
-}
-#courseField{
+  }
+  
+  #courseField {
     margin-bottom: 2%;
-}
-#courseForm button{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  #courseField div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 50%;
+  }
+  
+  #courseField label {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  #courseinp {
+    width: 100%;
+    height: 85%;
+    border-radius: 4px;
+    border: 1px solid lightgray;
+  }
+  
+  .error-text {
+    color: #DC4C64;
+    font-size: 0.9em;
+    margin-top: 2px;
+  }
+  
+  #courseForm button {
     margin-top: 2%;
     margin-bottom: 5%;
-    background:linear-gradient(to right, #93C098, #8CE0DB);;
+    background: linear-gradient(to right, #93C098, #8CE0DB);
     border-radius: 50px;
     width: 50%;
     height: 12%;
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
-
-#courseField{
-    display: flex;
-    justify-content: space-between;
-
-    width: 100%;
-    /* background-color: aqua; */
-}
-#courseField label{
-    display: flex;
-    align-items: center;
-font-weight: 500;
-}
-#courseinp{
-    width: 49%;
-    height: 85%;
-    border-radius: 0px;
-    border:1px solid lightgray;
-}
-.smaller-text {
-    font-size: 0.7em; /* Adjust this value to control the size of the smaller text */
-    vertical-align: text-bottom; /* Keeps the smaller text aligned with the top of the larger text */
-}
+  }
+  
