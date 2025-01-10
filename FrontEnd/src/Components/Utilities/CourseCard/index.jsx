@@ -30,7 +30,7 @@ function CourseCard({ filter,order,searchQuery }) {
 
     fetchData();
   }, []);
-  // console.log("tt",teacherId)
+  console.log("tt",teacherId)
     useEffect(() => {
         const fetchCourse = async () => {
           try {

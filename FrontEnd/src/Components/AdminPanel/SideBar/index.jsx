@@ -196,8 +196,7 @@ function SideBar() {
             <MenuItem onClick={() => nav("/viewCourse")}> View Course </MenuItem>
             <MenuItem onClick={() => nav("/viewDegree")}> View Degree Programs, Sessions, Batches </MenuItem>
           </SubMenu>
-          <MenuItem icon={<HistoryEdu/>} onClick={() => nav("/assignCourseToBatch")}> Assign Course To Batch </MenuItem>
-          
+         
         </Menu>
       </Sidebar>
     </>

@@ -4,7 +4,6 @@ const assignCourseRouter=express.Router();
 
 assignCourseRouter.route('/Get').get(getAll)
 assignCourseRouter.route('/Add').post(addAssignCourse)
-assignCourseRouter.route('/AddCourseToSession').post(addAssignCourseToSession)
 assignCourseRouter.route('/GetAllCourses').get(getAllCourses)
 
 

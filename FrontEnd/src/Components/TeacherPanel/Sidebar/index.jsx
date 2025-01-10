@@ -2,53 +2,17 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import axios from "axios";
-import {
-  AccountCircle,
-  Notifications,
-  Home,
-  School,
-  Insights,
-} from "@mui/icons-material";
+import { AccountCircle, Notifications, Home, School, Insights } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import NotificationPanel from "../NotificationPanel";
 
 function SideBar() {
-  const [teacherId, setTeacherId] = useState(null);
-  const [notifications, setNotifications] = useState([]);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
 
   const nav = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8081/session", {
-          withCredentials: true,
-        });
-        setTeacherId(response.data.userId);
-        console.log("Teacher ID:", response.data.userId);
-      } catch (error) {
-        console.error("Error fetching teacher session data:", error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    if (teacherId) {
-      axios
-        .get(`http://localhost:8081/teacher/Get/Notification/${teacherId}`) // Replace with your API endpoint
-        .then((response) => {
-          setNotifications(response.data); // Assume the API returns an array of notifications
-        })
-        .catch((error) => {
-          console.error("Error fetching notifications:", error);
-        });
-    }
-  }, [teacherId]);
 
   const toggleNotificationPanel = () => {
     setIsNotificationOpen(!isNotificationOpen);
@@ -56,8 +20,8 @@ function SideBar() {
 
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:8081/logout"); // Replace with your actual logout endpoint
-      window.location.href = "/login"; // Redirect to login page
+      await axios.post("http://localhost:8081/logout");
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error logging out:", error);
     }
@@ -127,7 +91,6 @@ function SideBar() {
           {/* Notification Panel */}
           {isNotificationOpen && (
             <NotificationPanel
-              notifications={notifications}
               onClose={() => setIsNotificationOpen(false)}
             />
           )}

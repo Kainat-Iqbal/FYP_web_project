@@ -213,55 +213,8 @@ const updateTeacher = async(req,res) => {
 
 }
 
-
-// const getTeacherNotifications = async (req, res) => {
-//   const teacherId = req.params.teacherId;
-
-//   // Query to fetch course details and related information
-//   const queryToFetchNotifications = `
-//     SELECT 
-//   ac.assignId AS assignCourseId,
-//   c.course_code,
-//   c.course_title,
-//   s.academic_year,
-//   s.semester,
-//   dp.degree,
-//   dp.type,
-//   b.year,
-//   b.session
-// FROM assign_course ac
-// JOIN course c ON ac.courseId = c.courseId
-// JOIN session s ON ac.sessionId = s.sessionId
-// JOIN degree_program dp ON s.programId = dp.programId
-// JOIN batch b ON s.batchId = b.batchId
-// WHERE ac.teacherId = ?
-// ORDER BY ac.assignId DESC
-
-//   `;
-
-//   DB.query(queryToFetchNotifications, [teacherId], (err, results) => {
-//     if (err) {
-//       console.error("Error fetching notifications:", err);
-//       return res.status(500).json({ success: false, message: "Failed to fetch notifications" });
-//     }
-
-//     // Transform the data into notification messages
-//     const notifications = results.map(course => {
-//       const message = `You have been assigned to the course "${course.courseName}" (Code: ${course.courseCode}) for session "${course.sessionName}". Program: "${course.programName}", Batch: "${course.batchName}".`;
-// console.log("first",message)
-//       return {
-//         assignCourseId: course.assignCourseId,
-//         message: message,
-//         updatedAt: course.updatedAt,
-//       };
-//     });
-
-//     return res.json(notifications);
-//   });
-// };
-
 const getTeacherNotifications = (req, res) => {
-  const teacherId = "4";
+  const TeacherID = req.params.teacherID;
 
   // SQL query to get the notifications
   const query = `
@@ -282,16 +235,15 @@ JOIN degree_program dp ON s.programId = dp.programId
 JOIN batch b ON s.batchId = b.batchId
 WHERE ac.teacherId = ?
 ORDER BY ac.assignId DESC
-
   `;
 
   // Execute the query
-  DB.query(query, [teacherId], (err, results) => {
+  DB.query(query, [TeacherID], (err, results) => {
     if (err) {
       console.error('Error fetching course notifications:', err);
       return res.status(500).json({ success: false, message: 'Failed to fetch notifications' });
     }
-console.log("first",results,teacherId)
+console.log("firsthjh",results,TeacherID)
     if (results.length > 0) {
       return res.json(results);  // Send the notifications as response
     } else {

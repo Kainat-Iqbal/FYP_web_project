@@ -106,6 +106,10 @@
   border: 1px solid lightgray;
   font-size: 0.9rem;
   /* Adjust font size if needed */
+  /* background-color: #93C098; */
+}
+#selectinput{
+  font-size: 0.85rem;
 }
 
 /* #assignCourseinp{
