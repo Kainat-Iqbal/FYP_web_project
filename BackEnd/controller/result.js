@@ -266,6 +266,7 @@ AND ses.semester = (SELECT latest_semester FROM LatestAcademicYear);
         }
     });
 };
+  
 
 
-module.exports = { addResult, getResult,viewResultOfIndividualStudent, updateResult,getSelectedResults,getResultForGraph,viewLastSemesterResultOfIndividualStudent,viewResultOfSpecificCourse};
+module.exports = {addResult, getResult,viewResultOfIndividualStudent, updateResult,getSelectedResults,getResultForGraph,viewLastSemesterResultOfIndividualStudent,viewResultOfSpecificCourse};

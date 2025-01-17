@@ -58,7 +58,7 @@ const addDisapprove = async (req, res) => {
     hodId,
     date,
     "HOD", // currentHandle
-    "disapprovedByHod", // status
+    "disapproved By Hod", // status
     reason, // disapproveReason
     id, // requestId
   ];

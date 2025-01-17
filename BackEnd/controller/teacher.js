@@ -214,42 +214,112 @@ const updateTeacher = async(req,res) => {
 }
 
 const getTeacherNotifications = (req, res) => {
-  const TeacherID = req.params.teacherID;
+  const TeacherID = req.params.id;
 
-  // SQL query to get the notifications
-  const query = `
+  // Query to get course notifications
+  const courseNotificationsQuery = `
     SELECT 
-  ac.assignId AS assignCourseId,
-  c.course_code,
-  c.course_title,
-  s.academic_year,
-  s.semester,
-  dp.degree,
-  dp.type,
-  b.year,
-  b.session
-FROM assign_course ac
-JOIN course c ON ac.courseId = c.courseId
-JOIN session s ON ac.sessionId = s.sessionId
-JOIN degree_program dp ON s.programId = dp.programId
-JOIN batch b ON s.batchId = b.batchId
-WHERE ac.teacherId = ?
-ORDER BY ac.assignId DESC
+      CONCAT(
+        c.course_title, 
+        ' (', c.course_code, ') for ', dp.type, 
+        ' (', dp.degree, ') batch ', b.year, 
+        ' (', b.session, '), for Academic year ', 
+        s.academic_year, 
+        ' (', s.semester, ') is assigned to you.'
+      ) AS message,
+      'course' AS type,
+      ac.created_at AS notification_time
+    FROM assign_course ac
+    JOIN course c ON ac.courseId = c.courseId
+    JOIN session s ON ac.sessionId = s.sessionId
+    JOIN degree_program dp ON s.programId = dp.programId
+    JOIN batch b ON s.batchId = b.batchId
+    WHERE ac.teacherId = ?
   `;
 
-  // Execute the query
-  DB.query(query, [TeacherID], (err, results) => {
+  // Query to get status notifications with approval details
+  const statusNotificationsQuery = `
+    SELECT 
+      CASE 
+        WHEN s.examinationId IS NOT NULL AND s.approvedExamination = 'Yes' THEN 
+          CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been approved by the Examination Office.')
+        WHEN s.examinationId IS NOT NULL AND s.approvedExamination = 'No' THEN 
+          CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been disapproved by the Examination Office.')
+        
+        WHEN s.deanId IS NOT NULL AND s.approvedDean = 'Yes' THEN 
+          CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been approved by the Dean.')
+        WHEN s.deanId IS NOT NULL AND s.approvedDean = 'No' THEN 
+          CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been disapproved by the Dean.')
+        
+        WHEN s.HODId IS NOT NULL AND s.approvedHod = 'Yes' THEN 
+          CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been approved by the HOD.')
+        WHEN s.HODId IS NOT NULL AND s.approvedHod = 'No' THEN 
+          CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been disapproved by the HOD.')
+      END AS message,
+      'approved_course' AS type,
+      s.created_at AS notification_time
+    FROM status s
+    JOIN assign_course ac ON s.assignId = ac.assignId
+    JOIN course c ON ac.courseId = c.courseId
+    WHERE ac.teacherId = ? AND 
+          (s.HODId IS NOT NULL OR s.deanId IS NOT NULL OR s.examinationId IS NOT NULL)
+  `;
+
+  // Query to get request notifications (editing requests)
+  const requestNotificationsQuery = `
+    SELECT 
+      CASE 
+        WHEN r.status LIKE '%teacher%' THEN NULL
+        WHEN r.status LIKE '%disapproved%' THEN 
+          CONCAT('Request for editing "', r.course_name, '" is ', r.status, '. Reason: ', r.disapproveReason)
+        ELSE 
+          CONCAT('Request for editing "', r.course_name, '" is ', r.status)
+      END AS message,
+      'requests' AS type,
+      r.created_at AS notification_time
+    FROM requests r
+    WHERE r.teacherId = ? AND 
+          (r.status NOT LIKE '%teacher%' AND r.status NOT LIKE '%disapproved%')
+  `;
+
+  // Execute the course notifications query
+  DB.query(courseNotificationsQuery, [TeacherID], (err, courseResults) => {
     if (err) {
       console.error('Error fetching course notifications:', err);
-      return res.status(500).json({ success: false, message: 'Failed to fetch notifications' });
+      return res.status(500).json({ success: false, message: 'Failed to fetch course notifications' });
     }
-console.log("firsthjh",results,TeacherID)
-    if (results.length > 0) {
-      return res.json(results);  // Send the notifications as response
-    } else {
-      return res.json({ message: 'No notifications found' });
-    }
+
+    // Execute the status notifications query
+    DB.query(statusNotificationsQuery, [TeacherID], (err, statusResults) => {
+      if (err) {
+        console.error('Error fetching status notifications:', err);
+        return res.status(500).json({ success: false, message: 'Failed to fetch status notifications' });
+      }
+
+      // Execute the request notifications query
+      DB.query(requestNotificationsQuery, [TeacherID], (err, requestResults) => {
+        if (err) {
+          console.error('Error fetching request notifications:', err);
+          return res.status(500).json({ success: false, message: 'Failed to fetch request notifications' });
+        }
+
+        // Combine all results
+        const allNotifications = [...courseResults, ...statusResults, ...requestResults];
+
+        // Filter out null messages (from requests where the status includes 'teacher')
+        const filteredNotifications = allNotifications.filter(notification => notification.message !== null);
+
+        // Sort all notifications by created_at (descending) to show the most recent first
+        const sortedNotifications = filteredNotifications.sort(
+          (a, b) => new Date(b.notification_time) - new Date(a.notification_time)
+        );
+
+        // Respond with sorted notifications
+        res.json(sortedNotifications);
+      });
+    });
   });
 };
+
 
 module.exports = { addTeacher,viewTeacher, getTeacher,updateTeacher,getTeacherNotifications};

@@ -25,7 +25,8 @@ JOIN
   batch b ON sess.batchId = b.batchId
 WHERE
   s.lockResult = 'Yes' AND
-  s.approvedHod IS NULL;
+  (s.approvedHod IS NULL OR s.approvedHod = 'No');
+
 `;
   // Execute the query
   DB.query(queryToViewResults, (err, results) => {
@@ -35,7 +36,7 @@ WHERE
     } else {
       // If there are results, return them
       if (results.length > 0) {
-        console.log("dcd", results);
+        console.log("dcd", results.course_title);
         return res.json(results);
       } else {
         // If no teachers are found, return an appropriate message
@@ -105,4 +106,34 @@ const approveResult = async (req, res) => {
   });
 };
 
-module.exports = { viewResultApproval,viewSelectedResult,approveResult };
+const disapproveResult = async (req, res) => {
+  const { id } = req.params;
+  const {hodId} = req.body;
+
+  const queryToUpdateApproveRequest =
+    "UPDATE `status` SET `HODId`=?,`lockResult`=? `approvedHod`=? WHERE assignId = ?";
+
+  // Directly use the values without unnecessary variable assignments
+  const values = [
+    hodId,
+    "No",
+    "No", // currentHandle
+    id, // requestId
+  ];
+
+  DB.query(queryToUpdateApproveRequest, values, (err, results) => {
+    if (err) {
+      console.error("Error updating status:", err);
+      return res.status(500).json("Failed to update status");
+    } else {
+      if (results.affectedRows > 0) {
+        // console.log("approve",id);
+        return res.json({ updated: true });
+      } else {
+        return res.status(404).json("Request not found");
+      }
+    }
+  });
+};
+
+module.exports = { viewResultApproval,viewSelectedResult,approveResult,disapproveResult };

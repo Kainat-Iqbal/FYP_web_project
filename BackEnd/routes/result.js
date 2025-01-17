@@ -1,5 +1,6 @@
 const express=require("express");
-const { addResult, getResult, updateResult, getSelectedResults, getResultForGraph, viewResultOfSpecificCourse, viewResultOfIndividualStudent, viewLastSemesterResultOfIndividualStudent } = require("../controller/result");
+const { addResult, getResult, updateResult, getSelectedResults, getResultForGraph, 
+    viewResultOfSpecificCourse, viewResultOfIndividualStudent, viewLastSemesterResultOfIndividualStudent} = require("../controller/result");
 
 const resultRouter=express.Router();
 

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function NotificationPanel({onClose }) {
+function NotificationPanel({ onClose }) {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
-    const [teacherID, setTeacherId] = useState(null);
-  
+  const [teacherID, setTeacherId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,7 +12,6 @@ function NotificationPanel({onClose }) {
         const response = await axios.get("http://localhost:8081/session", {
           withCredentials: true,
         });
-        console.log("Teacher ID:", response.data.userId);
         setTeacherId(response.data.userId);
       } catch (error) {
         console.error("Error fetching teacher session data:", error);
@@ -22,19 +20,17 @@ function NotificationPanel({onClose }) {
 
     fetchData();
   }, []);
- 
-  console.log("Teacher ID:kjk", teacherID);
-
 
   useEffect(() => {
-    // Function to fetch notifications
+    if (!teacherID) return;
+  
     const fetchNotifications = async () => {
       try {
-        console.log("bjhbjh",teacherID)
+        setLoading(true);
         const response = await axios.get(
           `http://localhost:8081/teacher/Get/Notification/${teacherID}`
         );
-        setNotifications(response.data); // Assume API returns an array of notifications
+        setNotifications(response.data); // Combined notifications
         setLoading(false);
       } catch (error) {
         console.error("Error fetching notifications:", error);
@@ -42,13 +38,9 @@ function NotificationPanel({onClose }) {
       }
     };
   
-    // Only call fetchNotifications when teacherID is not null
-    if (teacherID !== undefined) {
-      fetchNotifications();
-    }
+    fetchNotifications();
   }, [teacherID]);
 
-  
   if (loading) {
     return (
       <div
@@ -57,7 +49,7 @@ function NotificationPanel({onClose }) {
           top: "100%",
           right: "20px",
           width: "300px",
-          maxHeight: "400px",
+          maxHeight: "500px",
           overflowY: "auto",
           backgroundColor: "white",
           boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
@@ -78,8 +70,8 @@ function NotificationPanel({onClose }) {
         top: "100%",
         right: "20px",
         width: "300px",
-        maxHeight: "400px",
-        overflowY: "auto", // Enables scrolling if notifications exceed the height
+        maxHeight: "500px",
+        overflowY: "auto",
         backgroundColor: "white",
         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
         borderRadius: "8px",
@@ -89,9 +81,9 @@ function NotificationPanel({onClose }) {
     >
       {notifications.length > 0 ? (
         <ul style={{ listStyle: "none", padding: "0" }}>
-          {notifications.map((notification) => (
+          {notifications.map((notification, index) => (
             <li
-              key={notification.id}
+              key={index}
               style={{
                 borderBottom: "1px solid #ddd",
                 padding: "10px 0",
@@ -104,7 +96,7 @@ function NotificationPanel({onClose }) {
                   color: "black",
                 }}
               >
-                {`${notification.course_title} (${notification.course_code}) for ${notification.type} (${notification.degree}) batch ${notification.year} (${notification.session}), for Academic year ${notification.academic_year} (${notification.semester}) is assigned to you.`}
+                {notification.message}
               </p>
             </li>
           ))}
