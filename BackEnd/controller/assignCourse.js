@@ -2,12 +2,7 @@ const DB = require("../DB/dbConfig");
 
 const getAll = (req, res) => {
     const queryToGetTeachers = "SELECT * FROM teacher";
-    const queryToGetCourses = `
-    SELECT c.courseId, c.course_title, c.course_code,c.course_type
-    FROM course c
-    LEFT JOIN assign_course ac ON c.courseId = ac.courseId
-  `;
-  
+    const queryToGetCourses = `SELECT * FROM course`;
     const queryToGetBatch = "SELECT * FROM batch";
     const queryToGetSession = `
     SELECT s.sessionId, s.academic_year, s.semester, s.programId, s.batchId, dp.type,dp.degree, b.year,b.session

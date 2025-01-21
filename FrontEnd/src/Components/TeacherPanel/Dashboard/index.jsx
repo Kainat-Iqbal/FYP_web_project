@@ -23,10 +23,10 @@ function Dashboard() {
           setTeacherId(response.data.userId);
           setTeacherName(response.data.userName);
           setDesignation(response.data.userDesignation);
-          console.log("teachetname",teacherName)
+          // console.log("teachetname",teacherName)
          
         } catch (error) {
-          console.error("Error:", error);
+          // console.error("Error:", error);
         }
       };
   

@@ -141,6 +141,79 @@ const viewExamination = async (req, res) => {
     })
   
   }
+  const getExaminationNotifications = (req, res) => {
+    const ExaminationID = req.params.id;
+  
+    // Query to get status notifications (Deans's approvals/disapprovals for results)
+    const statusNotificationsQuery = `
+    SELECT 
+  CASE 
+    WHEN s.deanId IS NOT NULL AND s.approvedDean = 'Yes' THEN 
+      CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been approved by the Dean.')
+    WHEN s.deanId IS NOT NULL AND s.approvedDean = 'No' THEN 
+      CONCAT('The result of "', c.course_title, ' (', c.course_code, ')" has been disapproved by the Dean.')
+  END AS message,
+  'dean_result_approval' AS type,
+  s.created_at AS notification_time
+FROM status s
+JOIN assign_course ac ON s.assignId = ac.assignId
+JOIN course c ON ac.courseId = c.courseId
+WHERE s.deanId IS NOT NULL  -- Ensure dean action exists
+AND s.examinationId IS NULL;  -- Ensure result reached Dean level
+
+    `;
+  
+    // Query to get request notifications (HOD's approvals/disapprovals for editing requests)
+    const requestNotificationsQuery = `
+    SELECT 
+    CASE 
+    WHEN r.deanId IS NOT NULL AND r.status LIKE '%disapprovedByDean%' THEN 
+    CONCAT('Request for editing "', r.course_name, ' (', r.course_code, ')" has been disapproved by the Dean. Reason: ', IFNULL(r.disapproveReason, 'No reason provided.'))
+
+      WHEN r.deanId IS NOT NULL AND r.status LIKE '%approvedByDean%' THEN 
+        CONCAT('Request for editing "', r.course_name, ' (', r.course_code, ')" has been approved by the Dean.')
+     END AS message,
+    'dean_request_approval' AS type,
+    r.created_at AS notification_time
+  FROM requests r
+  WHERE r.deanId IS NOT NULL  -- Ensure HOD action exists
+  AND r.currentHandle LIKE '%Dean%'
+  AND r.examinationId IS NULL  -- Ensure only HOD decisions are shown
+  AND (r.status LIKE '%approved%' OR r.status LIKE '%disapproved%');  
+  
+   `;
+  
+    // Execute the status notifications query
+    DB.query(statusNotificationsQuery, [ExaminationID], (err, statusResults) => {
+      if (err) {
+        console.error('Error fetching status notifications:', err);
+        return res.status(500).json({ success: false, message: 'Failed to fetch status notifications' });
+      }
+  
+      // Execute the request notifications query
+      DB.query(requestNotificationsQuery, [ExaminationID], (err, requestResults) => {
+        if (err) {
+          console.error('Error fetching request notifications:', err);
+          return res.status(500).json({ success: false, message: 'Failed to fetch request notifications' });
+        }
+  
+        // Combine all results
+        const allNotifications = [...statusResults, ...requestResults];
+  
+        // Filter out null messages
+        const filteredNotifications = allNotifications.filter(notification => notification.message !== null);
+  
+        // Sort all notifications by created_at (descending) to show the most recent first
+        const sortedNotifications = filteredNotifications.sort(
+          (a, b) => new Date(b.notification_time) - new Date(a.notification_time)
+        );
+  
+        // Respond with sorted notifications
+        res.json(sortedNotifications);
+      });
+    });
+  };
+  
 
 
-module.exports = {addExamination, viewExamination,getExamination,updateExamination}
+module.exports = {addExamination, viewExamination,getExamination,updateExamination,getExaminationNotifications}

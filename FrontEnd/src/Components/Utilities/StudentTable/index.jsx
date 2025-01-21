@@ -307,7 +307,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
     status: "createdByTeacher",
   });
 
-  console.log("val", values);
+  // console.log("val", values);
 
   useEffect(() => {
     // Update values after admin is set
@@ -351,7 +351,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
         "http://localhost:8081/editRequest/Add",
         { values, reason }
       );
-      console.log("Response from server:", postRes.data);
+      // console.log("Response from server:", postRes.data);
       if (postRes.data === "success") {
         alert("Request for editing sent successfully");
       } else {
@@ -380,6 +380,7 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
       console.log("Response from server:", postRes.data);
       if (postRes.data === "success") {
         alert("Result is locked");
+        console.log("jbsnkejbdcnekdcn jn cjbds nkjcb kjdb kjvdbs ckjb kjcfb kjv",lockResultValues)
         window.location.reload(); // Refresh the page
       } else {
         console.log("Error sending edit request");
@@ -412,11 +413,18 @@ const StudentTable = ({ batchId, labCreditHours, examDate }) => {
           if (matchedResult) {
             console.log(
               "Matched Result:",
+              matchedResult.lockResult,
               matchedResult.assignId,
               matchedResult.teacherId
             );
-            setLockResultAssignId(assignId); // Set assignId if it and teacherId match a locked result
-          } else {
+            if(matchedResult.lockResult=='Yes'){
+              setLockResultAssignId(assignId); // Set assignId if it and teacherId match a locked result  
+            }
+            else if(matchedResult.lockResult=='No'){
+              setLockResultAssignId(null); 
+            }
+          } 
+          else {
             setLockResultAssignId(null); // Clear the state if no match found
           }
         } else {

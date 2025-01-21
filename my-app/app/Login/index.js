@@ -7,15 +7,11 @@ import { useRouter } from 'expo-router';
 const Login = () => {
   const navigation = useNavigation();
   const router = useRouter();
-
-
   // State variables to hold the input values
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
-  console.log("first",values)
-
   // Function to handle changes in input field
   const handleInput = (name, value) => {
     setValues((prev) => ({
@@ -25,7 +21,6 @@ const Login = () => {
   };
 
   axios.defaults.withCredentials = true;
-
   // Function to handle form submission
   const handleSubmit = () => {
     axios.post('http://192.168.100.9:8081/login', values)

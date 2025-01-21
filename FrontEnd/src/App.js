@@ -78,11 +78,11 @@ function App() {
 
   return (
     <>
-    <Helmet>
+    {/* <Helmet>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link href="https://fonts.googleapis.com/css2?family=Khula:wght@400;600;800&display=swap" rel="stylesheet" />
-      </Helmet>
+      </Helmet> */}
       <BrowserRouter>
       <Routes>
 
@@ -105,7 +105,6 @@ function App() {
         <Route path='/viewTeacher' element={<Auth>
           <ViewTeacher/>
         </Auth>}/>
-        
         <Route path='/viewCourse' element={<ViewCourse/>}></Route>
         <Route path='/viewDean' element={<ViewDeanHodExam/>}></Route>
         <Route path='/viewDegree' element={<ViewDegree/>}></Route>

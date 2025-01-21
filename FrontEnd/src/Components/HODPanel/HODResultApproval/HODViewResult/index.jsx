@@ -68,8 +68,23 @@ function HODViewResult() {
       console.log("Error approving request", error);
     }
   };
-  const handleDisapprove = () => {
+
+  const handleDisapprove = async (assignId) => {
     setShowPopup(true);
+    console.log(`DisApproving request ${assignId}`);
+    try {
+      const res = await axios.put(
+        `http://localhost:8081/resultApprovalHod/DisApprove/${assignId}`,
+        { hodId }
+      );
+
+      if (res.data.updated) {
+      } else {
+        console.log("Dis Approval failed:", res.data);
+      }
+    } catch (error) {
+      console.log("Error approving request", error);
+    }
   };
 
   const handleSendDisapprove = () => {
@@ -343,7 +358,7 @@ function HODViewResult() {
           Approve
         </button>
 
-        <button id="HODViewResultBtnDisapprove" onClick={handleDisapprove}>
+        <button id="HODViewResultBtnDisapprove" onClick={() => handleDisapprove(assignId)}>
           {" "}
           Disapprove
         </button>

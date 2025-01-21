@@ -42,10 +42,8 @@ function HODResultApproval() {
           <table id="HODResultApprovalTable">
             <thead>
               <tr>
-                <th
-                  
-                >
-                  ID
+                <th>
+                  S.No.
                 </th>
                 <th
                   
@@ -77,9 +75,9 @@ function HODResultApproval() {
 
             <tbody>
               {Array.isArray(results) && results.length > 0 ? (
-                results.map((result) => (
+                results.map((result,index) => (
                   <tr key={result.assignId}>
-                    <td>{result.assignId}</td>
+                    <td>{index+1}</td>
                     <td>{result.course_code}</td>
                     <td>{result.courseTitle}</td>
                     <td>{result.year + "(" + result.session + ")"}</td>

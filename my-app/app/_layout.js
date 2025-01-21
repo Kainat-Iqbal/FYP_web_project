@@ -12,7 +12,12 @@ const Layout = () => {
       <Stack.Screen name="Proforma" options={{ title: 'Proforma' }}/>
       <Stack.Screen name="SideNavBar" options={{title:'SideNavBar'}}/>
       <Stack.Screen name="Insights" options={{title:'Insights'}}/>
-      <Stack.Screen name="ParentSignup" opptions={{title:'ParentSignup'}} />
+      <Stack.Screen name="Demo" options={{ title: 'Demo' }}/>
+
+      <Stack.Screen name="ParentSignup" options={{title:'ParentSignup'}} />
+      <Stack.Screen name="ChatbotScreen" options={{ title:'ChatbotScreen'}} />
+      <Stack.Screen name="Recommendation" options={{ title:'Recommendation'}} />
+
     </Stack>
     </UserProvider>
   );
