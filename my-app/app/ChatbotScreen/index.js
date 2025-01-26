@@ -18,7 +18,7 @@
 //     const fetchStudentDetails = async () => {
 //       try {
 //         const response = await axios.get(
-//           `http://192.168.100.18:8081/student/ViewIndividualStudentDetail/${userId}`
+//           `http://192.168.100.9:8081/student/ViewIndividualStudentDetail/${userId}`
 //         );
 //         setStudentResults(response.data);
 //       } catch (error) {
@@ -29,7 +29,7 @@
 //     const fetchCgpaDistribution = async () => {
 //       try {
 //         const response = await axios.get(
-//           `http://192.168.100.18:8081/student/ViewStudentDetailWRTSesmester/${userId}`
+//           `http://192.168.100.9:8081/student/ViewStudentDetailWRTSesmester/${userId}`
 //         );
 //         setCgpaData(response.data);
 //       } catch (error) {
@@ -152,25 +152,6 @@
 // });
 
 // export default ChatbotScreen;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 import React, { useState, useEffect } from "react";

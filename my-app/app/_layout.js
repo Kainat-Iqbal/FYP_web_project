@@ -3,6 +3,7 @@ import { Stack } from 'expo-router';
 import { UserProvider } from './UserContext'; // Import the UserProvider
 
 
+
 const Layout = () => {
   return (
     <UserProvider>
@@ -17,7 +18,7 @@ const Layout = () => {
       <Stack.Screen name="ParentSignup" options={{title:'ParentSignup'}} />
       <Stack.Screen name="ChatbotScreen" options={{ title:'ChatbotScreen'}} />
       <Stack.Screen name="Recommendation" options={{ title:'Recommendation'}} />
-
+<Stack.Screen name='Notificatons' options={{title:'Notifications'}}/>
     </Stack>
     </UserProvider>
   );

@@ -51,9 +51,14 @@ console.log("ppp")
         console.log("PP2")
       }
     } catch (error) {
-      console.error('Signup error:', error);
-      Alert.alert('Error', 'Something went wrong. Please try again later.');
-      console.log("PPrr")
+      if (error.response) {
+        console.error("Response Data:", error.response.data);
+        console.error("Status Code:", error.response.status);
+        Alert.alert("Error", error.response.data.message || "Signup failed!");
+      } else {
+        console.error("Signup error:", error);
+        Alert.alert("Error", "Something went wrong. Please try again later.");
+      }
     }
     
   };

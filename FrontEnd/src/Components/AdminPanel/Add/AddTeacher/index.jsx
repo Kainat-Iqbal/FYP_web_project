@@ -51,6 +51,10 @@ function AddTeacher() {
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "", // Clear error when user starts typing
+    }));
   };
 
   const handleSubmit = async (event) => {

@@ -256,6 +256,31 @@ ORDER BY
       }
   });
 };
+const getStudentNotifications = (req, res) => {
+    const studentId = req.params.id;
+    console.log(studentId)
+  
+    const studentNotificationsQuery = `
+    SELECT 
+    CONCAT('"', c.course_title, ' (', c.course_code, ')" result has been uploaded.') AS message,
+    'result_uploaded' AS type,
+    s.created_at AS notification_time
+    FROM status s
+JOIN result r ON s.assignId = r.assignId 
+JOIN assign_course ac ON r.assignId = ac.assignId  
+JOIN course c ON ac.courseId = c.courseId 
+WHERE r.studentId = ? AND s.studentView = 'yes'`;
 
+  
+    DB.query(studentNotificationsQuery, [studentId], (err, results) => {
+      if (err) {
+        console.error("Error fetching student notifications:", err);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+      res.status(200).json(results);
+    });
+  };
+  
+  
 
-module.exports = {addStudent,viewStudent,viewStudentPieChart,viewAllIndividualStudentDetails,viewStudentDetailsAccordingToSemester}
+module.exports = {addStudent,viewStudent,viewStudentPieChart,viewAllIndividualStudentDetails,viewStudentDetailsAccordingToSemester,getStudentNotifications}
