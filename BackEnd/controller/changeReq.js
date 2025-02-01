@@ -22,7 +22,7 @@ const viewChangeReq = async (req, res) => {
 };
 
 const viewDisapproveReq = async (req, res) => {
-    const queryToViewDisapproveReq ="SELECT requests.*, teacher.name FROM requests JOIN teacher ON requests.teacherId = teacher.teacherId WHERE requests.status = 'disapprovedByHod' AND requests.currentHandle = 'HOD'";
+    const queryToViewDisapproveReq ="SELECT requests.*, teacher.name FROM requests JOIN teacher ON requests.teacherId = teacher.teacherId WHERE requests.status = 'disapproved By Hod' AND requests.currentHandle = 'HOD'";
 
     // Execute the query
     DB.query(queryToViewDisapproveReq, (err, results) => {

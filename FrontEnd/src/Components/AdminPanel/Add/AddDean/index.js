@@ -53,8 +53,13 @@ function AddDean() {
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "", // Clear error when user starts typing
+    }));
   };
   console.log(values)
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrors(TeacherValidation(values));

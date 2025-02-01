@@ -111,7 +111,7 @@ const disapproveResult = async (req, res) => {
   const {hodId} = req.body;
 
   const queryToUpdateApproveRequest =
-    "UPDATE `status` SET `HODId`=?,`lockResult`=? `approvedHod`=? WHERE assignId = ?";
+    "UPDATE `status` SET `HODId`=?,`lockResult`=?, `approvedHod`=? WHERE assignId = ?";
 
   // Directly use the values without unnecessary variable assignments
   const values = [

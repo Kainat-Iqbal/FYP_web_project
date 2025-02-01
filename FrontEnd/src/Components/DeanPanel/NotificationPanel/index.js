@@ -4,7 +4,7 @@ import axios from "axios";
 function NotificationPanel({ onClose }) {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [teacherID, setTeacherId] = useState(null);
+  const [deanID, setdeanId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,7 +12,7 @@ function NotificationPanel({ onClose }) {
         const response = await axios.get("http://localhost:8081/session", {
           withCredentials: true,
         });
-        setTeacherId(response.data.userId);
+        setdeanId(response.data.userId);
       } catch (error) {
         console.error("Error fetching teacher session data:", error);
       }
@@ -22,13 +22,13 @@ function NotificationPanel({ onClose }) {
   }, []);
 
   useEffect(() => {
-    if (!teacherID) return;
+    if (!deanID) return;
   
     const fetchNotifications = async () => {
       try {
         setLoading(true);
         const response = await axios.get(
-          `http://localhost:8081/teacher/Get/Notification/${teacherID}`
+          `http://localhost:8081/dean/Get/Notification/${deanID}`
         );
         setNotifications(response.data); // Combined notifications
         setLoading(false);
@@ -40,7 +40,7 @@ function NotificationPanel({ onClose }) {
     };
   
     fetchNotifications();
-  }, [teacherID]);
+  }, [deanID]);
 
   if (loading) {
     return (

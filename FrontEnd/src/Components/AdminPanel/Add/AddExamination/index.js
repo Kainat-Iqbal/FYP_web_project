@@ -23,6 +23,7 @@ function AddExamination() {
   }, []);
 
   console.log("FVFV ", admin);
+
   // State variables to hold the input values
   const [values, setValues] = useState({
     adminId: "",
@@ -50,6 +51,10 @@ function AddExamination() {
     setValues((prev) => ({
       ...prev,
       [name]: value,
+    }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "", // Clear error when user starts typing
     }));
   };
 

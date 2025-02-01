@@ -15,11 +15,13 @@ import { useUserContext } from "../UserContext"; // Import the user context
 
 const Proforma = () => {
   const { userId } = useUserContext(); // Access userId from context
+  const [GPA,setGPA] = useState([]);
+  const [CGPA,setCGPA] = useState(0);
   const [Data, setData] = useState([]); // State to store course data
   const [showPopup, setShowPopup] = useState(true);
   const [isSideNavVisible, setIsSideNavVisible] = useState(false); // State for SideNav visibility
   const [lastSemester, setLastSemester] = useState([]);
-  const cgpa = 3.51; // Extract CGPA value from the component
+  const cgpa = CGPA; // Extract CGPA value from the component
   useEffect(() => {
     const fetchStudentData = async () => {
       try {
@@ -45,6 +47,20 @@ const Proforma = () => {
                   withCredentials: true,
               });
               setLastSemester(response.data); // Set the fetched data to state
+
+              if (Array.isArray(response.data)) {
+                const extractedGPA = response.data.map(item => item.GPA); // Extract names
+                setGPA(extractedGPA); // Store in state
+                console.log("Extracted GPA:", extractedGPA);
+                const totalGPA = extractedGPA.reduce((sum, gpa) => sum + gpa, 0);
+                const averageGPA = extractedGPA.length > 0 ? totalGPA / extractedGPA.length : 0;
+        
+                setCGPA(averageGPA.toFixed(2)); // Store CGPA (rounded to 2 decimal places)
+                console.log("Extracted GPAs:", extractedGPA);
+                console.log("Calculated CGPA:", CGPA);
+              } else {
+                console.log("Unexpected response format:", response.data);
+              }
           } catch (error) {
               console.error("Error:", error);
           }

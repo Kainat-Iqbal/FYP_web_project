@@ -95,13 +95,6 @@ function SideBar() {
         </div>
 
         <div id="topRight" style={{ width: "auto", marginRight: "2vw" }}>
-          <Notifications
-            style={{
-              marginTop: "5px",
-              fontSize: "2.6rem",
-              color: "white",
-              marginRight: "12px"
-            }} />
           <AccountCircle
             style={{
               marginTop: "5px",

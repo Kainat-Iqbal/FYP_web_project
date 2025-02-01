@@ -1,12 +1,39 @@
-import * as React from "react";
+import React, { useState, useEffect } from "react";
 import "./addStudent.css";
 import SideBar from "../../SideBar";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import StudentValidation from "./studentdValidation";
+import { minor } from "@mui/material";
 
 function AddStudent() {
   const [admin, setAdminId] = useState(null);
   const [batch, setBatch] = useState([]);
+
+  const [values, setValues] = useState({
+    batchId: "",
+    name: "",
+    juwId: "",
+    fatherName: "",
+    email: "",
+    password: "User*123",
+    CNIC: "",
+    address: "",
+    enrollment: "",
+    seatNo: "",
+    photo: "",
+    dateOfAdmission: "",
+    date_of_completion: "",
+    matricMarks: "",
+    matricPercentage: "",
+    interMarks: "",
+    interPercentage: "",
+    position: "First",
+    status: "enrolled",
+    degreeAwarded: "yes",
+    transcriptIssued: "yes",
+    phoneNo: "",
+  });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -19,50 +46,41 @@ function AddStudent() {
         console.error("Error:", error);
       }
     };
-
     fetchData();
   }, []);
+
+  // useEffect(() => {
+  //   const fetchBatch = async () => {
+  //     try {
+  //       const res = await axios.get("http://localhost:8081/sessionUni/Get");
+  //       setBatch(res.data.batch);
+  //       console.log("batch", batch);
+  //     } catch (error) {
+  //       console.log("error", error);
+  //     }
+  //   };
+  //   fetchBatch();
+  // }, []);
 
   useEffect(() => {
     const fetchBatch = async () => {
       try {
         const res = await axios.get("http://localhost:8081/sessionUni/Get");
-        setBatch(res.data.batch);
-        console.log("batch", batch);
+        setBatch(
+          res.data.batch.map((batchData) => ({
+            value: batchData.batchId,
+            label: `${batchData.year} ${batchData.session}`,
+          }))
+        );
       } catch (error) {
-        console.log("error", error);
+        console.error("Error fetching batch:", error);
       }
     };
-
     fetchBatch();
   }, []);
 
-   console.log("FVFV ", admin);
-  // State variables to hold the input values
-  const [values, setValues] = useState({
-    batchId: "",
-    name: "",
-    juwId: "",
-    fatherName: "",
-    email: "",
-    password: "User*123",
-    CNIC:"",
-    address: "",
-    enrollment: "",
-    seatNo:"",
-    photo:"",
-    dateOfAdmission: "",
-    date_of_completion:"",
-    matricMarks:"",
-    matricPercentage:"",
-    interMarks:"",
-    interPercentage:"",
-    position:"First",
-    status:"enrolled",
-    degreeAwarded:"yes",
-    transcriptIssued:"yes",
-    phoneNo:"",
-  });
+  console.log("FVFV ", admin);
+  
   useEffect(() => {
     // Update values after admin is set
     if (admin !== null) {
@@ -72,7 +90,7 @@ function AddStudent() {
       }));
     }
   }, [admin]);
-  
+
   // Function to handle changes in input field
   const handleInput = (event) => {
     const { name, value } = event.target;
@@ -80,309 +98,161 @@ function AddStudent() {
       ...prev,
       [name]: value,
     }));
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "", // Clear error when user starts typing
+    }));
   };
-console.log(values)
+  console.log(values)
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-      console.log("nhmbkjbhkbhjuu",values)
-      axios.post("http://localhost:8081/student/Add", values).then((res) => {
-        console.log("val",values);
+    console.log("It is add student page", values)
+
+    const validationErrors = StudentValidation(values);
+    setErrors(validationErrors);
+
+    const hasErrors = Object.values(validationErrors).some(
+      (error) => error !== ""
+    );
+    if (!hasErrors) {
+      try {
+        const res = await axios.post(
+          "http://localhost:8081/student/Add",
+          values
+        );
         if (res.data === "success") {
-          alert("Student is added successfully");
+          alert("Student added successfully");
           window.location.reload(); // Refresh the page
-        } 
-        else if(res.data === "emailAlreadyExist"){
-          alert("This Email already associate with another account")
+        }
+        else if (res.data === "emailAlreadyExist") {
+          alert("This Email is already associate with another account")
         }
         else {
-          console.log("error");
+          console.error("Server error");
         }
-      });
+      } catch (error) {
+        console.error("Error adding student:", error);
+      }
+    }
   };
 
   return (
     <div id="mainAddStudentDiv">
       <SideBar />
       <div id="studentWithoutBar">
-        
-
         <div id="studentBottom">
-        <div id="studentTop">
-        <h1>A<span className="smaller-text">DD</span> S<span className="smaller-text">TUDENT</span></h1>
-        </div>
+          <div id="studentTop">
+            <h1>
+              A<span className="smaller-text">DD</span> S<span className="smaller-text">TUDENT</span>
+              </h1>
+          </div>
           <form id="studentForm" action="" onSubmit={handleSubmit}>
-            <div id="studentField">
-              <label>Name</label>
-              <input
-              id="studentinp"
-                name="name"
-                type="text"
-                placeholder="Sara"
-                onChange={handleInput}
-              ></input>
-            </div>
+            
+          {[
+              { label: "Name", name: "name", type: "text", placeholder: "Sara Ahmed" },
+              { label: "Father Name", name: "fatherName", type: "text", placeholder: "Ahmed" },
+              { label: "Email", name: "email", type: "email", placeholder: "abc@gmail.com" },
+              { label: "CNIC", name: "CNIC", type: "text", placeholder: "42204-3458276-3" },
+              { label: "Phone Number", name: "phoneNo", type: "text", placeholder: "0322-7744342" },
+              { label: "Address", name: "address", type: "text", placeholder: "phase7, defence, karachi"},
 
-            <div id="studentField">
-              <label>Father Name</label>
-              <input
-                id="studentinp"
-                name="fatherName"
-                type="text"
-                placeholder="Ahmed"
-                onChange={handleInput}
-              ></input>
-            </div>
+              {
+                label: "Batch",
+                name: "batchId",
+                type: "select",
+                placeholder: "Select Batch",
+                options: batch,
+              },
 
-            <div id="studentField">
-              <label>Email</label>
-              <input
-               id="studentinp"
-                name="email"
-                type="email"
-                placeholder="sara@gmail.com"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              ></input>
-            </div>
+              { label: "JUW ID", name: "juwId", type: "text", placeholder: "juw11649" },
+              
+              {
+                label: "Password",
+                name: "password",
+                type: "text",
+                value: "User123*",
+                disabled: true,
+              },
+              { label: "Enrollment Number", name: "enrollment", type: "text", placeholder: "2021/Comp/BS(SE)/27039"},
+              { label: "Seat Number", name: "seatNo",min: 0, type: "number", placeholder: "2794611"},
+              
+              { label: "Date of Admission", name: "dateOfAdmission", type: "date"},
+              { label: "Date of Completion", name: "date_of_completion", type: "date"},
 
-            <div id="studentField">
-              <label>CNIC</label>
-              <input
-                id="studentinp"
-                name="CNIC"
-                type="text"
-                placeholder="43301-4521161-6"
-                onChange={handleInput}
-              ></input>
-            </div>
+              { label: "Matric Marks", name: "matricMarks", min: 0, type: "number", placeholder: "618"},
+              { label: "Matric Percentage", name: "matricPercentage", min: 0, type: "number", placeholder: "80"},
+              { label: "Inter Marks", name: "interMarks", min: 0, type: "number", placeholder: "560"},
+              { label: "Inter Percentage", name: "interPercentage", min: 0, type: "number", placeholder: "81"},
+              
+              {
+                label: "Position",
+                name: "possition",
+                type: "select",
+                options: ["First", "Second", "Third"],
+              },
+              {
+                label: "Status",
+                name: "status",
+                type: "select",
+                options: ["Enrolled", "Freeze", "Pass"],
+              },
+              {
+                label: "Degree Awarded",
+                name: "degreeAwarder",
+                type: "select",
+                options: ["Yes", "No"],
+              },
+              {
+                label: "Transcript Issued",
+                name: "transcriptIssued",
+                type: "select",
+                options: ["Yes", "No"],
+              },
+              { label: "Picture", name: "photo", type: "file" },
+            ].map((field, index) => (
+              <div key={index} className="addStudentField">
+                <label>{field.label}</label>
+                <div className="addStudentInputContainer">
+                  {field.type === "select" ? (
+                    <select
+                      className="addStudentSelect"
+                      name={field.name}
+                      onChange={handleInput}
+                      value={values[field.name]}
+                    >
+                      <option value="" disabled>
+                        {field.placeholder || "Select"}
+                      </option>
+                      {field.options.map((option, idx) => (
+                        <option key={idx} value={option.value || option}>
+                          {option.label || option}
+                        </option>
+                      ))}
+                    </select>
 
-            <div id="studentField">
-              <label>Phone Number</label>
-              <input
-                id="studentinp"
-                name="phoneNo"
-                type="text"
-                placeholder="0322-7744342"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Address</label>
-              <input
-                id="studentinp"
-                name="address"
-                type="text"
-                placeholder="phase7, defence, karachi"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Batch</label>
-              <select
-               id="studentinp"
-                name="batchId"
-                onChange={handleInput}
-                value={values.batchId}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              >
-                <option value="" disabled>
-                  Select Batch
-                </option>
-                {batch.map((batchData) => {
-                  return (
-                    <option key={batchData.batchId} value={batchData.batchId}>
-                      {batchData.year + "  " + batchData.session}
-                    </option>
-                  );
-                })}{" "}
-              </select>
-            </div>
-
-            <div id="studentField">
-              <label>JUW ID</label>
-              <input
-                id="studentinp"
-                name="juwId"
-                type="text"
-                placeholder="juw11649"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Password</label>
-              <input
-                id="studentinp"
-                name="password"
-                type="text"
-                value={"User123*"}
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Enrollment Number</label>
-              <input
-                id="studentinp"
-                name="enrollment"
-                type="text"
-                placeholder="2021/comp/BS(SE)/27039"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Seat Number</label>
-              <input
-               id="studentinp"
-                name="seatNo"
-                min={0}
-                type="number"
-                placeholder="27946"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Date of Admission</label>
-              <input
-               id="studentinp"
-              style={{ width: "14.8vw", height: "5.8vh" }}
-                name="dateOfAdmission"
-                type="date"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Date of Completion</label>
-              <input
-               id="studentinp"
-              style={{ width: "14.8vw", height: "5.8vh" }}
-                name="date_of_completion"
-                type="date"
-                onChange={handleInput}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Matric Marks</label>
-              <input
-               id="studentinp"
-                name="matricMarks"
-                min={0}
-                type="number"
-                placeholder="618"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Matric Percentage</label>
-              <input
-               id="studentinp"
-                name="matricPercentage"
-                min={0}
-                type="number"
-                placeholder="80"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Inter Marks</label>
-              <input
-               id="studentinp"
-                name="interMarks"
-                min={0}
-                type="number"
-                placeholder="560"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Inter Percentage</label>
-              <input
-               id="studentinp"
-                name="interPercentage"
-                min={0}
-                type="number"
-                placeholder="81"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              ></input>
-            </div>
-
-            <div id="studentField">
-              <label>Possition</label>
-              <select
-               id="studentinp"
-                name="possition"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              >
-                <option value="1">First</option>
-                <option value="2">Second</option>
-                <option value="3">Third</option>
-              </select>
-            </div>
-
-            <div id="studentField">
-              <label>Status</label>
-              <select
-               id="studentinp"
-                name="status"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              >
-                <option value="enrolled">Enrolled</option>
-                <option value="freeze">Freeze</option>
-                <option value="pass out">Pass Out</option>
-              </select>
-            </div>
-
-            <div id="studentField">
-              <label>Degree Awarded</label>
-              <select
-               id="studentinp"
-                name="degreeAwarder"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              >
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-            </div>
-
-            <div id="studentField">
-              <label>Transcript Issued</label>
-              <select
-               id="studentinp"
-                name="transcriptIssued"
-                onChange={handleInput}
-                style={{ width: "14.8vw", height: "5.8vh" }}
-              >
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
-              </select>
-            </div>
-
-            <div id="studentField">
-              <label>Picture</label>
-              <input
-              style={{ width: "14.8vw", height: "5.8vh" }}
-                name="photo"
-                type="file"
-                onChange={handleInput}
-              ></input>
-            </div>
-            <button>Add Student</button>
+                    //   {field.options.map((option, idx) => (
+                    //     <option key={idx} value={option}>
+                    //       {option}
+                    //     </option>
+                    //   ))}
+                    // </select>
+                  ) : (
+                    <input
+                      className="addStudentInp"
+                      name={field.name}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      value={field.value || values[field.name]}
+                      onChange={handleInput}
+                      disabled={field.disabled || false}
+                    />
+                  )}
+                  {errors[field.name] && <span className="error">{errors[field.name]}</span>}
+                </div>
+              </div>
+            ))}
+            <button type="submit">Add Student</button>
           </form>
         </div>
       </div>

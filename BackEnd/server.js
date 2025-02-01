@@ -103,7 +103,7 @@ DB.connect((err) => {
         console.error('Error connecting to database:', err);
         return;
     }
-    console.log('Connected to database (Academic Accelerator)');
+    console.log('Connected to database');
 });
 app.listen(8081, ()=>{
     console.log("listening")

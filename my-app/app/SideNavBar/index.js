@@ -51,7 +51,7 @@ const SideNavBar = ({ onClose }) => {
                 <Text style={styles.menuText}>Insights</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('/Recommendation')}>
-                <Ionicons name="chatbubble-outline" size={24} color="#333" />
+                <Ionicons name="sparkles-outline" size={24} color="#333" />
                 <Text style={styles.menuText}>Recommendation</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.menuItem} onPress={() => navigateTo('/ChatbotScreen')}>

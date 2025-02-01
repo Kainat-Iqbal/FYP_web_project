@@ -145,4 +145,59 @@ const getAllHod = async (req, res) => {
   });
 };
 
-module.exports = {addHod,getHod,getToUpdateHod,updateHod,getAllHod}
+const getHodNotifications = (req, res) => {
+  const HODId = req.params.id;
+
+  // Query for teacher result lock/upload notifications (includes teacher's name)
+  const resultLockNotificationsQuery = `
+    SELECT 
+      CONCAT('Ms. ', t.name, ' has uploaded the result of "', c.course_title, ' (', c.course_code, ')" ') AS message,
+      'result_locked' AS type,
+      s.created_at AS notification_time
+    FROM status s
+    JOIN assign_course ac ON s.assignId = ac.assignId
+    JOIN course c ON ac.courseId = c.courseId
+    JOIN teacher t ON ac.teacherId = t.teacherId
+    WHERE s.lockResult IS NOT NULL
+  `;
+
+  // Query for teacher editing requests notifications
+  const teacherRequestNotificationsQuery = `
+  SELECT 
+  CONCAT('Ms. ', t.name, ' has requested editing for "', r.course_name, ' (', r.course_code, ')" result. Reason: ', r.description) AS message,
+  'editing_request' AS type,
+  r.created_at AS notification_time
+FROM requests r
+JOIN teacher t ON r.teacherId = t.teacherId
+WHERE 
+r.status IS NOT NULL 
+AND r.status NOT LIKE '%disapproved%' 
+
+  `;
+
+  // Execute the result lock/upload notifications query
+  DB.query(resultLockNotificationsQuery, (err, lockResults) => {
+    if (err) {
+      console.error('Error fetching result lock notifications:', err);
+      return res.status(500).json({ success: false, message: 'Failed to fetch result lock notifications' });
+    }
+
+    // Execute the teacher editing request notifications query
+    DB.query(teacherRequestNotificationsQuery, [HODId], (err, requestResults) => {
+      if (err) {
+        console.error('Error fetching teacher request notifications:', err);
+        return res.status(500).json({ success: false, message: 'Failed to fetch teacher request notifications' });
+      }
+
+      // Combine and sort notifications by time
+      const allNotifications = [...lockResults, ...requestResults];
+      const sortedNotifications = allNotifications.sort(
+        (a, b) => new Date(b.notification_time) - new Date(a.notification_time)
+      );
+
+      res.json(sortedNotifications);
+    });
+  });
+};
+
+module.exports = {addHod,getHod,getToUpdateHod,updateHod,getAllHod,getHodNotifications}

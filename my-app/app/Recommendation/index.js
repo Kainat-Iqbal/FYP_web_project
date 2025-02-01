@@ -125,6 +125,8 @@ const Recommendation = () => {
       )}
 
       <ScrollView contentContainerStyle={styles.contentContainer}>
+              <Text style={styles.header}>Recommendations</Text>
+        
 
         {/* Recommendations List */}
         <View style={styles.recommendationsContainer}>
@@ -225,6 +227,11 @@ const styles = StyleSheet.create({
   notificationText: {
     fontSize: 16,
     color: "#2b7a2b",
+  },
+  header: {
+    fontSize: 22,
+    fontWeight: "bold",
+    marginBottom: 10,
   },
   noRecommendations: {
     fontSize: 16,

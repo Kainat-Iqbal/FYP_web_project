@@ -4,11 +4,15 @@ import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { AccountCircle, AddCircle, Home, MenuOutlined, TableView, Approval, AssignmentInd, ChangeCircle,  Notifications,Equalizer, Insights } from "@mui/icons-material";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import NotificationPanel from "../NotificationPanel";
 
 function SideBar() {
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-
+  const toggleNotificationPanel = () => {
+    setIsNotificationOpen(!isNotificationOpen);
+  };
   useEffect(() => {
     // Function to check if the device width is below a certain threshold (e.g., mobile screen width)
     const handleResize = () => {
@@ -90,13 +94,24 @@ function SideBar() {
         </div>
 
         <div id="COESideBarTopRight" style={{ width: "auto", marginRight: "2vw" }}>
-          <Notifications
+        <Notifications
             style={{
               marginTop: "5px",
               fontSize: "2.6rem",
               color: "white",
-              marginRight: "12px"
-            }} />
+              marginRight: "12px",
+              cursor: "pointer",
+            }}
+            onClick={toggleNotificationPanel}
+          />
+
+          {/* Notification Panel */}
+          {isNotificationOpen && (
+            <NotificationPanel
+              onClose={() => setIsNotificationOpen(false)}
+            />
+          )}
+
           <AccountCircle
             style={{
               marginTop: "5px",

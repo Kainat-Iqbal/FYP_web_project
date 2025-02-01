@@ -72,6 +72,7 @@ import { Helmet } from "react-helmet";
 import Landing from "././screens/Landing.jsx";
 import StudentCard from './Components/StudentPanel/StudentCard/index.js';
 import StudentDetailInsights from './Components/StudentPanel/StudentDetailInsights/index.js';
+import HODStudentCard from './Components/StudentPanel/HODStudentCard/index.js';
 
 
 function App() {
@@ -153,6 +154,7 @@ function App() {
           <Route path='/StudentViewResult' element={<StudentViewResult/>} />
           <Route path='/StudentViewProforma' element={<StudentViewProforma/>} />
           <Route path='/StudentCard' element={<StudentCard/>}/>
+          <Route path='/HodStudentCard' element={<HODStudentCard/>}/>
           <Route path="/StudentDetailInsights/:studentId" element={<StudentDetailInsights/>} />
 
        
